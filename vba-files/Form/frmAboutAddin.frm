@@ -23,7 +23,7 @@ End Sub
 
 
 Private Sub Label1_Click()
-    'call URLLinks
+    Call URLLinks("https://github.com/vbatools/Addin_ExcelTools")
 End Sub
 
 Private Sub UserForm_Initialize()
