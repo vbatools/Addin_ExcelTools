@@ -57,7 +57,7 @@
 
 ## 📝 Лицензия
 
-Apache License
+[Apache License](LICENSE)
 
 ---
 
