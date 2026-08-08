@@ -31,25 +31,18 @@ Public Sub AddBackupFile()
         sExtension = sGetExtensionName(.Name)
         bAddDate = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_DATE_ADD)
         sPath = sPath & Application.PathSeparator
-        If bAddDate Then sPath = sPath & VBA.format$(VBA.Date, "dd_mm_yyyy_")
+        If bAddDate Then sPath = sPath & VBA.format$(VBA.Date(), "yyyy_mm_dd_")
         sVersion = getVersion(sVersion)
         sPath = sPath & sGetBaseName(.Name) & "_v" & sVersion & "." & sExtension
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION, sVersion)
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE, VBA.format$(VBA.Date(), "dd.mm.yyyy"))
         .Save
-        Select Case sExtension
-            Case "xls"
-                .SaveAs sPath, fileFormat:=xlExcel8
-            Case "xlsb"
-                .SaveAs sPath, fileFormat:=xlExcel12
-            Case "xlsm"
-                .SaveAs sPath, fileFormat:=xlOpenXMLWorkbookMacroEnabled
-            Case "xlsx"
-                .SaveAs sPath, xlOpenXMLWorkbook
-        End Select
-        .Close
+        If MoveFile(sOldWB, sPath) <> vbNullString Then
+            Call MsgBox("Не удалось создать резервную копию!", vbExclamation)
+        Else
+            Call MsgBox("Копия создан, версия: " & sVersion, vbInformation)
+        End If
     End With
-    Workbooks.Open sOldWB
     Call RestoreApplicationSettings
 End Sub
 
