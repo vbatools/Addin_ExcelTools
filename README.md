@@ -1,4 +1,7 @@
-﻿# Addin_ExcelTools
+﻿**Русский** | [English](README_ENG.md)
+---
+
+# Addin_ExcelTools
 
 > **Надстройка Excel VBA для профессиональной автоматизации Excel**
 >
