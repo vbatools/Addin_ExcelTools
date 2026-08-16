@@ -6,7 +6,9 @@
 > **Надстройка Excel VBA для профессиональной автоматизации Excel**
 >
 > **Автор:** VBATools
+>
 > **Версия:** 3.0.24
+>
 > **Лицензия:** [Apache License](LICENSE)
 
 > [!IMPORTANT]

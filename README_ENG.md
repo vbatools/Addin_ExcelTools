@@ -6,7 +6,9 @@
 > **Excel VBA Add-in for Professional Excel Automation**
 >
 > **Author:** VBATools
+>
 > **Version:** 3.0.24
+>
 > **License:** [Apache License](LICENSE)
 
 > [!IMPORTANT]
