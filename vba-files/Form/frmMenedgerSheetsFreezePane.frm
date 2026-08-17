@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsFreezePane 
-   Caption         =   "Закрепить область:"
+   Caption         =   "Р—Р°РєСЂРµРїРёС‚СЊ РѕР±Р»Р°СЃС‚СЊ:"
    ClientHeight    =   3735
    ClientLeft      =   120
    ClientTop       =   465
@@ -42,7 +42,7 @@ Private Sub btnOK_Click()
     With frmMenedgerSheets.listSheets
         iCount = .ListCount - 1
         For i = 0 To iCount
-            If .Selected(i) And .List(i, 4) = vbNullString And .List(i, 2) = "лист" Then
+            If .Selected(i) And .List(i, 4) = vbNullString And .List(i, 2) = "Р»РёСЃС‚" Then
                 Set Sh = ActiveWorkbook.Worksheets(.List(i, 1))
                 shVisible = Sh.Visible
                 Sh.Visible = XlSheetVisibility.xlSheetVisible
@@ -91,7 +91,7 @@ Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Sh
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     If TypeName(Selection) = "Range" Then txtInputRng.Value = Selection.Address
     Call ConfigureDropButton(txtInputRng)

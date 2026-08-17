@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataFromWorkBooks 
-   Caption         =   "—обр данных из книг:"
+   Caption         =   "–°–Њ–±—А –і–∞–љ–љ—Л—Е –Є–Ј –Ї–љ–Є–≥:"
    ClientHeight    =   7785
    ClientLeft      =   120
    ClientTop       =   465
@@ -28,7 +28,7 @@ Option Explicit
 
 
 '================================================================================
-' ќЅ–јЅќ“„» »  Ќќѕќ 
+' –Ю–С–†–Р–С–Ю–Ґ–І–Ш–Ъ–Ш –Ъ–Э–Ю–Я–Ю–Ъ
 '================================================================================
 
 Private Sub btnCancel_Click()
@@ -42,7 +42,7 @@ Private Sub btnChoseFiles_Click()
 
     arrFiles = FileDialogFun(ActiveWorkbook.Path, True, , False)
 
-    ' ѕроверка пустого массива
+    ' –Я—А–Њ–≤–µ—А–Ї–∞ –њ—Г—Б—В–Њ–≥–Њ –Љ–∞—Б—Б–Є–≤–∞
     If Not IsArray(arrFiles) Then Exit Sub
     On Error Resume Next
     If UBound(arrFiles) < LBound(arrFiles) Then Exit Sub
@@ -203,11 +203,11 @@ Private Sub btnOK_Click()
     Exit Sub
 
 ErrorHandler:
-    MsgBox "ќшибка: " & Err.Description, vbExclamation
+    MsgBox "–Ю—И–Є–±–Ї–∞: " & Err.Description, vbExclamation
 End Sub
 
 '================================================================================
-' ќЅ–јЅќ“„» » ќѕ÷»… ¬џЅќ–ј
+' –Ю–С–†–Р–С–Ю–Ґ–І–Ш–Ъ–Ш –Ю–Я–¶–Ш–Щ –Т–Ђ–С–Ю–†–Р
 '================================================================================
 
 Private Sub optAllItemsList_Click()
@@ -267,7 +267,7 @@ Private Sub optSheetByNumber_Click()
 End Sub
 
 '================================================================================
-' ¬јЋ»ƒј÷»я ¬¬ќƒј (используетс€ дважды)
+' –Т–Р–Ы–Ш–Ф–Р–¶–Ш–ѓ –Т–Т–Ю–Ф–Р (–Є—Б–њ–Њ–ї—М–Ј—Г–µ—В—Б—П –і–≤–∞–ґ–і—Л)
 '================================================================================
 
 Private Sub txtEndNum_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
@@ -279,7 +279,7 @@ Private Sub txtFerstNum_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 
 '================================================================================
-' ќЅ–јЅќ“„» » ѕќЋя ƒ»јѕј«ќЌј
+' –Ю–С–†–Р–С–Ю–Ґ–І–Ш–Ъ–Ш –Я–Ю–Ы–ѓ –Ф–Ш–Р–Я–Р–Ч–Ю–Э–Р
 '================================================================================
 
 Private Sub txtRng_DropButtonClick()
@@ -293,11 +293,11 @@ Private Sub txtRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift A
 End Sub
 
 '================================================================================
-' »Ќ»÷»јЋ»«ј÷»я
+' –Ш–Э–Ш–¶–Ш–Р–Ы–Ш–Ч–Р–¶–Ш–ѓ
 '================================================================================
 
 Private Sub UserForm_Initialize()
-    ' ÷ентрирование формы
+    ' –¶–µ–љ—В—А–Є—А–Њ–≤–∞–љ–Є–µ —Д–Њ—А–Љ—Л
     Call CenterUserForm(Me)
 
     If TypeName(Selection) = "Range" Then txtRng.Value = Selection.Address

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaCopy 
-   Caption         =   "Точное копирование формул:"
+   Caption         =   "РўРѕС‡РЅРѕРµ РєРѕРїРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјСѓР»:"
    ClientHeight    =   2085
    ClientLeft      =   120
    ClientTop       =   465
@@ -34,14 +34,14 @@ End Sub
 Private Sub btnOK_Click()
 
     If txtFormulsRng.Value = vbNullString Or txtInputRng.Value = vbNullString Then
-        Call MsgBox("Не выбран диапазон!", vbCritical)
+        Call MsgBox("РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ!", vbCritical)
         Exit Sub
     End If
 
     Dim rngPaste    As Range
     Set rngPaste = Range(txtInputRng.Value)
     If rngPaste.Parent.ProtectContents Then
-        Call MsgBox("Лист [" & rngPaste.Parent.Name & "] - защищен от изменений, снимите пароль!", vbCritical)
+        Call MsgBox("Р›РёСЃС‚ [" & rngPaste.Parent.Name & "] - Р·Р°С‰РёС‰РµРЅ РѕС‚ РёР·РјРµРЅРµРЅРёР№, СЃРЅРёРјРёС‚Рµ РїР°СЂРѕР»СЊ!", vbCritical)
         Exit Sub
     End If
 
@@ -77,7 +77,7 @@ Private Sub txtFormulsRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal 
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     If TypeName(Selection) = "Range" Then txtFormulsRng.Value = Selection.Address
     Call ConfigureDropButton(txtFormulsRng)

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMengerShapesTools 
-   Caption         =   "Менеджер фигур:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ С„РёРіСѓСЂ:"
    ClientHeight    =   6120
    ClientLeft      =   120
    ClientTop       =   465
@@ -32,7 +32,7 @@ Private Sub btnAlingHorizont_Click()
     Dim dMaxWidth   As Double
 
     If TypeName(Selection) = "Range" Then
-        Call MsgBox("Пожалуйста, выберите фигуры перед запуском инструмента", vbCritical, "Ошибка:")
+        Call MsgBox("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С„РёРіСѓСЂС‹ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
 
@@ -83,7 +83,7 @@ Private Sub btnAlingVert_Click()
     Dim dMaxHeight  As Double
 
     If TypeName(Selection) = "Range" Then
-        Call MsgBox("Пожалуйста, выберите фигуры перед запуском инструмента", vbCritical, "Ошибка:")
+        Call MsgBox("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С„РёРіСѓСЂС‹ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
 
@@ -134,7 +134,7 @@ End Sub
 
 Private Sub btnCell_Click()
     If TypeName(Selection) = "Range" Then
-        Call MsgBox("Пожалуйста, выберите фигуры перед запуском инструмента", vbCritical, "Выровнять по вертикальной сетке:")
+        Call MsgBox("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С„РёРіСѓСЂС‹ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°", vbCritical, "Р’С‹СЂРѕРІРЅСЏС‚СЊ РїРѕ РІРµСЂС‚РёРєР°Р»СЊРЅРѕР№ СЃРµС‚РєРµ:")
         Exit Sub
     End If
 
@@ -160,7 +160,7 @@ End Sub
 
 Private Sub btnCopyRangeAsLink_Click()
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Выделите диапазон для копирования!", vbCritical, "Ошибка:")
+        Call MsgBox("Р’С‹РґРµР»РёС‚Рµ РґРёР°РїР°Р·РѕРЅ РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ!", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
     Dim coll        As New Collection
@@ -183,7 +183,7 @@ End Sub
 
 Private Sub btnCopyRangeAsShape_Click()
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Выделите диапазон для копирования!", vbCritical, "Ошибка:")
+        Call MsgBox("Р’С‹РґРµР»РёС‚Рµ РґРёР°РїР°Р·РѕРЅ РґР»СЏ РєРѕРїРёСЂРѕРІР°РЅРёСЏ!", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
     Dim i           As Long

@@ -2,7 +2,7 @@ Attribute VB_Name = "modAddinPubFun"
 Option Explicit
 Option Private Module
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Module       :   modAddinPubFun - утилиты для работы с книгами, листами и элементами управления
+'* Module       :   modAddinPubFun - СѓС‚РёР»РёС‚С‹ РґР»СЏ СЂР°Р±РѕС‚С‹ СЃ РєРЅРёРіР°РјРё, Р»РёСЃС‚Р°РјРё Рё СЌР»РµРјРµРЅС‚Р°РјРё СѓРїСЂР°РІР»РµРЅРёСЏ
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   10-06-2026 09:29:15
@@ -49,10 +49,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: WorkbookIsOpen
-' Purpose: Проверяет, открыта ли книга с указанным именем
+' Purpose: РџСЂРѕРІРµСЂСЏРµС‚, РѕС‚РєСЂС‹С‚Р° Р»Рё РєРЅРёРіР° СЃ СѓРєР°Р·Р°РЅРЅС‹Рј РёРјРµРЅРµРј
 ' Parameters:
-'   wbName - Имя книги (без пути)
-' Returns: Boolean - True если книга открыта
+'   wbName - РРјСЏ РєРЅРёРіРё (Р±РµР· РїСѓС‚Рё)
+' Returns: Boolean - True РµСЃР»Рё РєРЅРёРіР° РѕС‚РєСЂС‹С‚Р°
 '--------------------------------------------------------------------------------
 Public Function WorkbookIsOpen(ByVal wbName As String) As Boolean
     Dim wb          As Workbook
@@ -66,11 +66,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: SheetExists
-' Purpose: Проверяет наличие листа в указанной книге
+' Purpose: РџСЂРѕРІРµСЂСЏРµС‚ РЅР°Р»РёС‡РёРµ Р»РёСЃС‚Р° РІ СѓРєР°Р·Р°РЅРЅРѕР№ РєРЅРёРіРµ
 ' Parameters:
-'   wb - Ссылка на книгу
-'   sheetName - Имя листа
-' Returns: Boolean - True если лист существует
+'   wb - РЎСЃС‹Р»РєР° РЅР° РєРЅРёРіСѓ
+'   sheetName - РРјСЏ Р»РёСЃС‚Р°
+' Returns: Boolean - True РµСЃР»Рё Р»РёСЃС‚ СЃСѓС‰РµСЃС‚РІСѓРµС‚
 '--------------------------------------------------------------------------------
 Public Function HaveSheetInFile(ByRef wb As Workbook, ByVal sheetName As String) As Boolean
     Dim ws          As Worksheet
@@ -86,9 +86,9 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Sub: ConfigureDropButton
-' Purpose: Настраивает отображение кнопки выпадающего списка для TextBox
+' Purpose: РќР°СЃС‚СЂР°РёРІР°РµС‚ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ РєРЅРѕРїРєРё РІС‹РїР°РґР°СЋС‰РµРіРѕ СЃРїРёСЃРєР° РґР»СЏ TextBox
 ' Parameters:
-'   txtBox - Ссылка на элемент управления TextBox
+'   txtBox - РЎСЃС‹Р»РєР° РЅР° СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ TextBox
 '--------------------------------------------------------------------------------
 Public Sub ConfigureDropButton(ByRef txtBox As MSForms.TextBox)
     If txtBox Is Nothing Then Exit Sub
@@ -105,7 +105,7 @@ Public Sub CenterUserForm(ByRef frm As Object)
         .Left = Application.Left + (Application.Width - .Width) \ 2
         .Top = Application.Top + (Application.Height - .Height) \ 2
         
-        ' Защита от отрицательных координат
+        ' Р—Р°С‰РёС‚Р° РѕС‚ РѕС‚СЂРёС†Р°С‚РµР»СЊРЅС‹С… РєРѕРѕСЂРґРёРЅР°С‚
         If .Left < 0 Then .Left = 0
         If .Top < 0 Then .Top = 0
     End With
@@ -114,25 +114,25 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: SelectRangeViaDialog
-' Purpose: Открывает диалог выбора диапазона и возвращает адрес
+' Purpose: РћС‚РєСЂС‹РІР°РµС‚ РґРёР°Р»РѕРі РІС‹Р±РѕСЂР° РґРёР°РїР°Р·РѕРЅР° Рё РІРѕР·РІСЂР°С‰Р°РµС‚ Р°РґСЂРµСЃ
 ' Parameters:
-'   promptText - Текст приглашения (по умолчанию "Выберите диапазон")
-' Returns: String - Адрес диапазона в формате "'Лист'!$A$1" или vbNullString
+'   promptText - РўРµРєСЃС‚ РїСЂРёРіР»Р°С€РµРЅРёСЏ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ "Р’С‹Р±РµСЂРёС‚Рµ РґРёР°РїР°Р·РѕРЅ")
+' Returns: String - РђРґСЂРµСЃ РґРёР°РїР°Р·РѕРЅР° РІ С„РѕСЂРјР°С‚Рµ "'Р›РёСЃС‚'!$A$1" РёР»Рё vbNullString
 '--------------------------------------------------------------------------------
-Public Function SelectRangeViaDialog(Optional ByVal promptText As String = "Выберите диапазон", _
+Public Function SelectRangeViaDialog(Optional ByVal promptText As String = "Р’С‹Р±РµСЂРёС‚Рµ РґРёР°РїР°Р·РѕРЅ", _
         Optional bApendSheetName As Boolean = True, Optional bSelectedRng As Boolean = True) As String
     Dim rng         As Range
     Dim defaultAddress As String
 
-    ' Устанавливаем стиль ссылок A1
+    ' РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРј СЃС‚РёР»СЊ СЃСЃС‹Р»РѕРє A1
     Application.ReferenceStyle = xlA1
 
-    ' Формируем адрес по умолчанию из текущего выделения
+    ' Р¤РѕСЂРјРёСЂСѓРµРј Р°РґСЂРµСЃ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ РёР· С‚РµРєСѓС‰РµРіРѕ РІС‹РґРµР»РµРЅРёСЏ
     If TypeName(Selection) = "Range" And bSelectedRng Then
         defaultAddress = Selection.Address
     End If
 
-    ' Получаем диапазон от пользователя
+    ' РџРѕР»СѓС‡Р°РµРј РґРёР°РїР°Р·РѕРЅ РѕС‚ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ
     On Error Resume Next
     Set rng = Application.InputBox( _
             prompt:=promptText & ":", _
@@ -140,11 +140,11 @@ Public Function SelectRangeViaDialog(Optional ByVal promptText As String = "Выбе
             Type:=8)
     On Error GoTo 0
 
-    ' Обрабатаем результат
+    ' РћР±СЂР°Р±Р°С‚Р°РµРј СЂРµР·СѓР»СЊС‚Р°С‚
     If rng Is Nothing Then
         SelectRangeViaDialog = vbNullString
     Else
-        ' Возвращаем адрес первого диапазона (при множественном выборе)
+        ' Р’РѕР·РІСЂР°С‰Р°РµРј Р°РґСЂРµСЃ РїРµСЂРІРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° (РїСЂРё РјРЅРѕР¶РµСЃС‚РІРµРЅРЅРѕРј РІС‹Р±РѕСЂРµ)
         Dim firstPart As String
         firstPart = VBA.Split(rng.Address, ",")(0)
         If bApendSheetName Then firstPart = "'" & rng.Parent.Name & "'!" & firstPart
@@ -154,10 +154,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Sub: RestrictNavigationKeys
-' Purpose: Ограничивает ввод только навигационными клавишами (Tab, Enter, Escape)
+' Purpose: РћРіСЂР°РЅРёС‡РёРІР°РµС‚ РІРІРѕРґ С‚РѕР»СЊРєРѕ РЅР°РІРёРіР°С†РёРѕРЅРЅС‹РјРё РєР»Р°РІРёС€Р°РјРё (Tab, Enter, Escape)
 ' Parameters:
-'   KeyCode - Код нажатой клавиши (передаётся ByRef для модификации)
-'   Shift - Состояние клавиш-модификаторов
+'   KeyCode - РљРѕРґ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё (РїРµСЂРµРґР°С‘С‚СЃСЏ ByRef РґР»СЏ РјРѕРґРёС„РёРєР°С†РёРё)
+'   Shift - РЎРѕСЃС‚РѕСЏРЅРёРµ РєР»Р°РІРёС€-РјРѕРґРёС„РёРєР°С‚РѕСЂРѕРІ
 '--------------------------------------------------------------------------------
 Public Sub RestrictNavigationKeys(ByRef KeyCode As MSForms.ReturnInteger, ByRef Shift As Integer)
     Const KEY_TAB   As Long = 9
@@ -166,7 +166,7 @@ Public Sub RestrictNavigationKeys(ByRef KeyCode As MSForms.ReturnInteger, ByRef 
 
     Select Case KeyCode
         Case KEY_TAB, KEY_ENTER, KEY_ESCAPE
-            ' Разрешённые клавиши - оставляем без изменений
+            ' Р Р°Р·СЂРµС€С‘РЅРЅС‹Рµ РєР»Р°РІРёС€Рё - РѕСЃС‚Р°РІР»СЏРµРј Р±РµР· РёР·РјРµРЅРµРЅРёР№
         Case Else
             KeyCode = 0
     End Select
@@ -178,55 +178,55 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: ValidateRealNumericKey
-' Purpose: Проверяет ввод в текстовое поле, разрешая только цифры,
-'          один десятичный разделитель (точка; запятая конвертируется в точку)
-'          и знак минуса в начале строки.
+' Purpose: РџСЂРѕРІРµСЂСЏРµС‚ РІРІРѕРґ РІ С‚РµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ, СЂР°Р·СЂРµС€Р°СЏ С‚РѕР»СЊРєРѕ С†РёС„СЂС‹,
+'          РѕРґРёРЅ РґРµСЃСЏС‚РёС‡РЅС‹Р№ СЂР°Р·РґРµР»РёС‚РµР»СЊ (С‚РѕС‡РєР°; Р·Р°РїСЏС‚Р°СЏ РєРѕРЅРІРµСЂС‚РёСЂСѓРµС‚СЃСЏ РІ С‚РѕС‡РєСѓ)
+'          Рё Р·РЅР°Рє РјРёРЅСѓСЃР° РІ РЅР°С‡Р°Р»Рµ СЃС‚СЂРѕРєРё.
 ' Parameters:
-' txtBox - Текстовое поле для валидации ввода
-' KeyAscii - Код нажатой клавиши (модифицируется для блокировки или конвертации)
+' txtBox - РўРµРєСЃС‚РѕРІРѕРµ РїРѕР»Рµ РґР»СЏ РІР°Р»РёРґР°С†РёРё РІРІРѕРґР°
+' KeyAscii - РљРѕРґ РЅР°Р¶Р°С‚РѕР№ РєР»Р°РІРёС€Рё (РјРѕРґРёС„РёС†РёСЂСѓРµС‚СЃСЏ РґР»СЏ Р±Р»РѕРєРёСЂРѕРІРєРё РёР»Рё РєРѕРЅРІРµСЂС‚Р°С†РёРё)
 '--------------------------------------------------------------------------------
 Public Sub ValidateRealNumericKey(ByRef txtBox As MSForms.TextBox, ByRef KeyAscii As MSForms.ReturnInteger, ByRef bIsNegative As Boolean)
     Const BACKSPACE As Integer = 8
 
-    ' Пропускаем Backspace
+    ' РџСЂРѕРїСѓСЃРєР°РµРј Backspace
     If KeyAscii = BACKSPACE Then Exit Sub
 
-    ' Пропускаем цифры
+    ' РџСЂРѕРїСѓСЃРєР°РµРј С†РёС„СЂС‹
     If KeyAscii >= 48 And KeyAscii <= 57 Then Exit Sub
 
-    ' Обработка десятичного разделителя
+    ' РћР±СЂР°Р±РѕС‚РєР° РґРµСЃСЏС‚РёС‡РЅРѕРіРѕ СЂР°Р·РґРµР»РёС‚РµР»СЏ
     If KeyAscii = Asc(".") Or KeyAscii = Asc(",") Then
-        ' Если разделитель уже есть или строка пуста - блокируем ввод
+        ' Р•СЃР»Рё СЂР°Р·РґРµР»РёС‚РµР»СЊ СѓР¶Рµ РµСЃС‚СЊ РёР»Рё СЃС‚СЂРѕРєР° РїСѓСЃС‚Р° - Р±Р»РѕРєРёСЂСѓРµРј РІРІРѕРґ
         If InStr(1, txtBox.TEXT, ".") > 0 Or Len(txtBox.TEXT) = 0 Then
             KeyAscii = 0
-            ' Если введена запятая - конвертируем код символа в точку
+            ' Р•СЃР»Рё РІРІРµРґРµРЅР° Р·Р°РїСЏС‚Р°СЏ - РєРѕРЅРІРµСЂС‚РёСЂСѓРµРј РєРѕРґ СЃРёРјРІРѕР»Р° РІ С‚РѕС‡РєСѓ
         ElseIf KeyAscii = Asc(",") Then
             KeyAscii = Asc(".")
         End If
         Exit Sub
     End If
 
-    ' Обработка знака минуса (только в начале строки)
+    ' РћР±СЂР°Р±РѕС‚РєР° Р·РЅР°РєР° РјРёРЅСѓСЃР° (С‚РѕР»СЊРєРѕ РІ РЅР°С‡Р°Р»Рµ СЃС‚СЂРѕРєРё)
     If bIsNegative Then
         If KeyAscii = Asc("-") Then
-            ' Блокируем, если минус уже есть или курсор стоит не в начале
+            ' Р‘Р»РѕРєРёСЂСѓРµРј, РµСЃР»Рё РјРёРЅСѓСЃ СѓР¶Рµ РµСЃС‚СЊ РёР»Рё РєСѓСЂСЃРѕСЂ СЃС‚РѕРёС‚ РЅРµ РІ РЅР°С‡Р°Р»Рµ
             If Left(txtBox.TEXT, 1) <> "-" And txtBox.SelStart = 0 Then Exit Sub
         End If
     End If
 
-    ' Блокируем все остальные символы
+    ' Р‘Р»РѕРєРёСЂСѓРµРј РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹
     KeyAscii = 0
 End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: SanitizeSheetName
-' Purpose: Заменяет недопустимые символы в имени листа на символ подчёркивания
+' Purpose: Р—Р°РјРµРЅСЏРµС‚ РЅРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹ РІ РёРјРµРЅРё Р»РёСЃС‚Р° РЅР° СЃРёРјРІРѕР» РїРѕРґС‡С‘СЂРєРёРІР°РЅРёСЏ
 ' Parameters:
-'   sheetName - Исходное имя листа (String)
-' Returns: String - Очищенное имя листа, пригодное для использования в Excel
+'   sheetName - РСЃС…РѕРґРЅРѕРµ РёРјСЏ Р»РёСЃС‚Р° (String)
+' Returns: String - РћС‡РёС‰РµРЅРЅРѕРµ РёРјСЏ Р»РёСЃС‚Р°, РїСЂРёРіРѕРґРЅРѕРµ РґР»СЏ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёСЏ РІ Excel
 ' Remarks:
-'   Недопустимые символы для имени листа Excel: \ / * ? : [ ]
-'   Также удаляются начальные и конечные пробелы
+'   РќРµРґРѕРїСѓСЃС‚РёРјС‹Рµ СЃРёРјРІРѕР»С‹ РґР»СЏ РёРјРµРЅРё Р»РёСЃС‚Р° Excel: \ / * ? : [ ]
+'   РўР°РєР¶Рµ СѓРґР°Р»СЏСЋС‚СЃСЏ РЅР°С‡Р°Р»СЊРЅС‹Рµ Рё РєРѕРЅРµС‡РЅС‹Рµ РїСЂРѕР±РµР»С‹
 '--------------------------------------------------------------------------------
 Public Function CleanSheetName(ByVal sheetName As String) As String
     Dim invalidChars As Variant
@@ -242,10 +242,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: CleanFileName
-' Purpose: Удаление недопустимых символов из имени файла
+' Purpose: РЈРґР°Р»РµРЅРёРµ РЅРµРґРѕРїСѓСЃС‚РёРјС‹С… СЃРёРјРІРѕР»РѕРІ РёР· РёРјРµРЅРё С„Р°Р№Р»Р°
 ' Parameters:
-'   - fileName (String) - исходное имя файла
-' Returns: String - очищенное имя файла
+'   - fileName (String) - РёСЃС…РѕРґРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°
+' Returns: String - РѕС‡РёС‰РµРЅРЅРѕРµ РёРјСЏ С„Р°Р№Р»Р°
 '--------------------------------------------------------------------------------
 Public Function CleanFileName(ByVal FileName As String) As String
 
@@ -265,8 +265,8 @@ Public Function CleanFileName(ByVal FileName As String) As String
 End Function
 Public Function PathDialogFun(Optional defaultPath As String = vbNullString)
     With Application.FileDialog(msoFileDialogFolderPicker)
-        .ButtonName = "Выбрать"
-        .Title = "Выберите папку:"
+        .ButtonName = "Р’С‹Р±СЂР°С‚СЊ"
+        .Title = "Р’С‹Р±РµСЂРёС‚Рµ РїР°РїРєСѓ:"
         .InitialFileName = defaultPath
         If .Show <> -1 Then Exit Function
         PathDialogFun = .SelectedItems(1)
@@ -283,18 +283,18 @@ Public Function FileDialogFun(ByVal sPath As String, _
     Set oFd = Application.FileDialog(msoFileDialogFilePicker)
     With oFd
         .AllowMultiSelect = bMultiSelect
-        'заголовок окна диалога
-        .Title = "Выбрать файлы:"
-        'очищаем установленные ранее типы файлов
+        'Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР° РґРёР°Р»РѕРіР°
+        .Title = "Р’С‹Р±СЂР°С‚СЊ С„Р°Р№Р»С‹:"
+        'РѕС‡РёС‰Р°РµРј СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅС‹Рµ СЂР°РЅРµРµ С‚РёРїС‹ С„Р°Р№Р»РѕРІ
         .Filters.Clear
-        'устанавливаем возможность выбора только файлов Excel
+        'СѓСЃС‚Р°РЅР°РІР»РёРІР°РµРј РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ РІС‹Р±РѕСЂР° С‚РѕР»СЊРєРѕ С„Р°Р№Р»РѕРІ Excel
         .Filters.Add "Microsoft Excel Files", sExpansion, 1
-        'назначаем папку отображения и имя файла по умолчанию
+        'РЅР°Р·РЅР°С‡Р°РµРј РїР°РїРєСѓ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ Рё РёРјСЏ С„Р°Р№Р»Р° РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
         .InitialFileName = sPath
-        'вид диалогового окна(доступно 9 вариантов)
+        'РІРёРґ РґРёР°Р»РѕРіРѕРІРѕРіРѕ РѕРєРЅР°(РґРѕСЃС‚СѓРїРЅРѕ 9 РІР°СЂРёР°РЅС‚РѕРІ)
         .InitialView = msoFileDialogViewDetails
         If .Show = 0 Then
-            If bShowMsg Then Call MsgBox("Не выбрано ни одного файла!", vbCritical, "Выбор файлов:")
+            If bShowMsg Then Call MsgBox("РќРµ РІС‹Р±СЂР°РЅРѕ РЅРё РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°!", vbCritical, "Р’С‹Р±РѕСЂ С„Р°Р№Р»РѕРІ:")
             Exit Function
         End If
         Dim iCount  As Integer
@@ -309,13 +309,13 @@ Public Function FileDialogFun(ByVal sPath As String, _
     End With
     FileDialogFun = arr
 
-    'Для процедуры
+    'Р”Р»СЏ РїСЂРѕС†РµРґСѓСЂС‹
     'If (Not (Not (v))) = 0 Then Exit Sub
 End Function
 
 Public Function GetBaseName(ByVal sPathFile As String) As String
-    'sPathFile - строка, путь.
-    'возвращает имя (без расширения) последнего компонента в заданном пути.
+    'sPathFile - СЃС‚СЂРѕРєР°, РїСѓС‚СЊ.
+    'РІРѕР·РІСЂР°С‰Р°РµС‚ РёРјСЏ (Р±РµР· СЂР°СЃС€РёСЂРµРЅРёСЏ) РїРѕСЃР»РµРґРЅРµРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р° РІ Р·Р°РґР°РЅРЅРѕРј РїСѓС‚Рё.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
     GetBaseName = FSO.GetBaseName(sPathFile)
@@ -323,8 +323,8 @@ Public Function GetBaseName(ByVal sPathFile As String) As String
 End Function
 
 Public Function GetFileName(ByVal sPathFile As String) As String
-    'sPathFile - строка, путь.
-    'возвращает имя (с расширением) последнего компонента в заданном пути.
+    'sPathFile - СЃС‚СЂРѕРєР°, РїСѓС‚СЊ.
+    'РІРѕР·РІСЂР°С‰Р°РµС‚ РёРјСЏ (СЃ СЂР°СЃС€РёСЂРµРЅРёРµРј) РїРѕСЃР»РµРґРЅРµРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р° РІ Р·Р°РґР°РЅРЅРѕРј РїСѓС‚Рё.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
     GetFileName = FSO.GetFileName(sPathFile)
@@ -332,8 +332,8 @@ Public Function GetFileName(ByVal sPathFile As String) As String
 End Function
 
 Public Function GetParentFolderName(ByVal sPathFile As String) As String
-    'sPathFile - строка, путь.
-    'возвращает путь к последнему компоненту в заданном пути (его каталог).
+    'sPathFile - СЃС‚СЂРѕРєР°, РїСѓС‚СЊ.
+    'РІРѕР·РІСЂР°С‰Р°РµС‚ РїСѓС‚СЊ Рє РїРѕСЃР»РµРґРЅРµРјСѓ РєРѕРјРїРѕРЅРµРЅС‚Сѓ РІ Р·Р°РґР°РЅРЅРѕРј РїСѓС‚Рё (РµРіРѕ РєР°С‚Р°Р»РѕРі).
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
     GetParentFolderName = FSO.GetParentFolderName(sPathFile)
@@ -341,8 +341,8 @@ Public Function GetParentFolderName(ByVal sPathFile As String) As String
 End Function
 
 Public Function GetExtensionName(ByVal sPathFile As String) As String
-    'sPathFile - строка, путь.
-    'возвращает расширение последнего компонента в заданном пути.
+    'sPathFile - СЃС‚СЂРѕРєР°, РїСѓС‚СЊ.
+    'РІРѕР·РІСЂР°С‰Р°РµС‚ СЂР°СЃС€РёСЂРµРЅРёРµ РїРѕСЃР»РµРґРЅРµРіРѕ РєРѕРјРїРѕРЅРµРЅС‚Р° РІ Р·Р°РґР°РЅРЅРѕРј РїСѓС‚Рё.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
     GetExtensionName = FSO.GetExtensionName(sPathFile)
@@ -360,10 +360,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: SelectedItemListSheets
-' Purpose: Выполняет фильтрацию элементов списка listSheets на основе шаблона.
+' Purpose: Р’С‹РїРѕР»РЅСЏРµС‚ С„РёР»СЊС‚СЂР°С†РёСЋ СЌР»РµРјРµРЅС‚РѕРІ СЃРїРёСЃРєР° listSheets РЅР° РѕСЃРЅРѕРІРµ С€Р°Р±Р»РѕРЅР°.
 ' Parameters:
-'   sValue - Шаблон для фильтрации (поддерживает символы подстановки Like).
-'   iCol   - Индекс столбца в списке, по которому производится сравнение.
+'   sValue - РЁР°Р±Р»РѕРЅ РґР»СЏ С„РёР»СЊС‚СЂР°С†РёРё (РїРѕРґРґРµСЂР¶РёРІР°РµС‚ СЃРёРјРІРѕР»С‹ РїРѕРґСЃС‚Р°РЅРѕРІРєРё Like).
+'   iCol   - РРЅРґРµРєСЃ СЃС‚РѕР»Р±С†Р° РІ СЃРїРёСЃРєРµ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РїСЂРѕРёР·РІРѕРґРёС‚СЃСЏ СЃСЂР°РІРЅРµРЅРёРµ.
 '--------------------------------------------------------------------------------
 Public Sub SelectedItemListSheets(ByRef List As MSForms.listBox, ByRef sValue As String, ByRef iCol As Integer)
     
@@ -382,30 +382,30 @@ End Sub
 Public Function FileHave(ByVal Path As String, ByVal fileAttribute As VbFileAttribute) As Boolean
     Dim FSO         As Object
 
-    ' Проверка на пустоту
+    ' РџСЂРѕРІРµСЂРєР° РЅР° РїСѓСЃС‚РѕС‚Сѓ
     If Path = vbNullString Then Exit Function
-    ' Создаем объект FileSystemObject
+    ' РЎРѕР·РґР°РµРј РѕР±СЉРµРєС‚ FileSystemObject
     Set FSO = CreateObject("Scripting.FileSystemObject")
-    ' В зависимости от значения параметра IsFolder выбираем метод проверки
+    ' Р’ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ Р·РЅР°С‡РµРЅРёСЏ РїР°СЂР°РјРµС‚СЂР° IsFolder РІС‹Р±РёСЂР°РµРј РјРµС‚РѕРґ РїСЂРѕРІРµСЂРєРё
     Select Case fileAttribute
         Case VbFileAttribute.vbDirectory
-            ' Ищем папку
+            ' РС‰РµРј РїР°РїРєСѓ
             FileHave = FSO.FolderExists(Path)
         Case VbFileAttribute.vbNormal
-            ' Ищем файл
+            ' РС‰РµРј С„Р°Р№Р»
             FileHave = FSO.FileExists(Path)
     End Select
-    ' Освобождаем память
+    ' РћСЃРІРѕР±РѕР¶РґР°РµРј РїР°РјСЏС‚СЊ
     Set FSO = Nothing
 End Function
 
 '--------------------------------------------------------------------------------
 ' Function: IsArrayDimensioned
-' Purpose: Проверяет, имеет ли массив указанное измерение
+' Purpose: РџСЂРѕРІРµСЂСЏРµС‚, РёРјРµРµС‚ Р»Рё РјР°СЃСЃРёРІ СѓРєР°Р·Р°РЅРЅРѕРµ РёР·РјРµСЂРµРЅРёРµ
 ' Parameters:
-' arr - Проверяемый массив
-' dimension - Номер измерения (по умолчанию 1)
-' Returns: Boolean - True, если измерение существует
+' arr - РџСЂРѕРІРµСЂСЏРµРјС‹Р№ РјР°СЃСЃРёРІ
+' dimension - РќРѕРјРµСЂ РёР·РјРµСЂРµРЅРёСЏ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ 1)
+' Returns: Boolean - True, РµСЃР»Рё РёР·РјРµСЂРµРЅРёРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
 '--------------------------------------------------------------------------------
 Public Function IsArrayDimensioned(ByRef arr As Variant, _
         Optional ByVal dimension As Long = 1) As Boolean
@@ -418,13 +418,13 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: SortArray
-' Purpose: Сортировка двумерного массива по указанному столбцу
+' Purpose: РЎРѕСЂС‚РёСЂРѕРІРєР° РґРІСѓРјРµСЂРЅРѕРіРѕ РјР°СЃСЃРёРІР° РїРѕ СѓРєР°Р·Р°РЅРЅРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ
 ' Parameters:
-' SourceArr - Двумерный массив Variant для сортировки
-' n - Номер столбца для сортировки (Integer)
-' bFlagSortAs - Направление сортировки: True - по возрастанию, False - по убыванию (по умолчанию True)
-' bFlagDigital - Тип данных: True - числовая сортировка, False - строковая (по умолчанию False)
-' Returns: Variant - Отсортированный двумерный массив
+' SourceArr - Р”РІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ Variant РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
+' n - РќРѕРјРµСЂ СЃС‚РѕР»Р±С†Р° РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё (Integer)
+' bFlagSortAs - РќР°РїСЂР°РІР»РµРЅРёРµ СЃРѕСЂС‚РёСЂРѕРІРєРё: True - РїРѕ РІРѕР·СЂР°СЃС‚Р°РЅРёСЋ, False - РїРѕ СѓР±С‹РІР°РЅРёСЋ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ True)
+' bFlagDigital - РўРёРї РґР°РЅРЅС‹С…: True - С‡РёСЃР»РѕРІР°СЏ СЃРѕСЂС‚РёСЂРѕРІРєР°, False - СЃС‚СЂРѕРєРѕРІР°СЏ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ False)
+' Returns: Variant - РћС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Р№ РґРІСѓРјРµСЂРЅС‹Р№ РјР°СЃСЃРёРІ
 '--------------------------------------------------------------------------------
 Public Function SortArray(SourceArr As Variant, ByVal n As Integer, _
         Optional bFlagSortAs As Boolean = True, _
@@ -478,13 +478,13 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Sub: SortColumnList
-' Purpose: Сортировка содержимого ListBox по указанному столбцу с переключением направления
+' Purpose: РЎРѕСЂС‚РёСЂРѕРІРєР° СЃРѕРґРµСЂР¶РёРјРѕРіРѕ ListBox РїРѕ СѓРєР°Р·Р°РЅРЅРѕРјСѓ СЃС‚РѕР»Р±С†Сѓ СЃ РїРµСЂРµРєР»СЋС‡РµРЅРёРµРј РЅР°РїСЂР°РІР»РµРЅРёСЏ
 ' Parameters:
-' lMainList - Ссылка на элемент управления ListBox для сортировки
-' oLabelBtn - Ссылка на элемент Label, используемый для отображения направления сортировки
-' iCol - Номер столбца для сортировки (Integer)
-' bFlagDigital - Тип сортировки: True - числовая, False - строковая (по умолчанию False)
-' Returns: Нет
+' lMainList - РЎСЃС‹Р»РєР° РЅР° СЌР»РµРјРµРЅС‚ СѓРїСЂР°РІР»РµРЅРёСЏ ListBox РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
+' oLabelBtn - РЎСЃС‹Р»РєР° РЅР° СЌР»РµРјРµРЅС‚ Label, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ РЅР°РїСЂР°РІР»РµРЅРёСЏ СЃРѕСЂС‚РёСЂРѕРІРєРё
+' iCol - РќРѕРјРµСЂ СЃС‚РѕР»Р±С†Р° РґР»СЏ СЃРѕСЂС‚РёСЂРѕРІРєРё (Integer)
+' bFlagDigital - РўРёРї СЃРѕСЂС‚РёСЂРѕРІРєРё: True - С‡РёСЃР»РѕРІР°СЏ, False - СЃС‚СЂРѕРєРѕРІР°СЏ (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ False)
+' Returns: РќРµС‚
 '--------------------------------------------------------------------------------
 Public Sub SortColumnList(ByRef lMainList As MSForms.listBox, ByRef oLabelBtn As MSForms.Label, _
         ByVal iCol As Integer, Optional bFlagDigital As Boolean = False, Optional bFlagCase As Boolean = False)
@@ -512,7 +512,7 @@ End Sub
 
 Public Function CheckProtectStructure() As Boolean
     If ActiveWorkbook.ProtectStructure Then
-        Call MsgBox("Установлен пароль на структуру книги, выполнение операции не возножно!", vbCritical)
+        Call MsgBox("РЈСЃС‚Р°РЅРѕРІР»РµРЅ РїР°СЂРѕР»СЊ РЅР° СЃС‚СЂСѓРєС‚СѓСЂСѓ РєРЅРёРіРё, РІС‹РїРѕР»РЅРµРЅРёРµ РѕРїРµСЂР°С†РёРё РЅРµ РІРѕР·РЅРѕР¶РЅРѕ!", vbCritical)
         CheckProtectStructure = True
     End If
 End Function
@@ -539,10 +539,10 @@ Public Function GetColorFromDialog(Optional defaultColor As Long = 255) As Long
 End Function
 
 Public Function MoveFile(OldFile As String, NewPathFile As String) As String
-    'Перемещение файлов
+    'РџРµСЂРµРјРµС‰РµРЅРёРµ С„Р°Р№Р»РѕРІ
     Dim objFSO As Object, objFile As Object
-    If Dir(OldFile, 16) = vbNullString Then MoveFile = "Нет такого файла" & OldFile: Exit Function
-    'перемещаем файл
+    If Dir(OldFile, 16) = vbNullString Then MoveFile = "РќРµС‚ С‚Р°РєРѕРіРѕ С„Р°Р№Р»Р°" & OldFile: Exit Function
+    'РїРµСЂРµРјРµС‰Р°РµРј С„Р°Р№Р»
     Set objFSO = CreateObject("Scripting.FileSystemObject"): Set objFile = objFSO.GetFile(OldFile)
     objFile.Copy NewPathFile
     Set objFile = Nothing: Set objFSO = Nothing
@@ -560,7 +560,7 @@ Public Sub URLLinks(ByVal url_str As String)
 ErrorHandler:
     Select Case Err
         Case Else:
-            Call MsgBox("Произошла ошибка в URLLinks" & vbNewLine & Err.Number & vbNewLine & Err.Description, vbOKOnly + vbCritical, "Ошибка в URLLinks")
+            Call MsgBox("РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР° РІ URLLinks" & vbNewLine & Err.Number & vbNewLine & Err.Description, vbOKOnly + vbCritical, "РћС€РёР±РєР° РІ URLLinks")
     End Select
     Set appEX = Nothing
     Err.Clear
@@ -648,7 +648,7 @@ Private Sub FillFilesTableRecursive(ByVal currentFolder As Object, ByRef tableAr
 End Sub
 
 Public Function SaveTextToFile(ByVal txt As String, ByVal FileName As String, Optional ByVal encoding As String = "windows-1251") As Boolean
-    ' функция сохраняет текст txt в кодировке Charset$ в файл filename$
+    ' С„СѓРЅРєС†РёСЏ СЃРѕС…СЂР°РЅСЏРµС‚ С‚РµРєСЃС‚ txt РІ РєРѕРґРёСЂРѕРІРєРµ Charset$ РІ С„Р°Р№Р» filename$
     ' encoding: koi8-r, ascii, utf-7, utf-8, utf-8noBOM, utf-16, Windows-1251, unicode
     On Error Resume Next: Err.Clear
     Dim FSO         As Object
@@ -684,7 +684,7 @@ Public Function SaveTextToFile(ByVal txt As String, ByVal FileName As String, Op
             With CreateObject("ADODB.Stream")
                 .Type = 2: .Charset = encoding$: .Open
                 .WriteText txt$
-                .SaveToFile FileName$, 2            ' сохраняем файл в заданной кодировке
+                .SaveToFile FileName$, 2            ' СЃРѕС…СЂР°РЅСЏРµРј С„Р°Р№Р» РІ Р·Р°РґР°РЅРЅРѕР№ РєРѕРґРёСЂРѕРІРєРµ
                 .Close
             End With
     End Select

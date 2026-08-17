@@ -30,7 +30,7 @@ CleanUp:
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Произошла ошибка: " & Err.Description, vbCritical
+    MsgBox "РџСЂРѕРёР·РѕС€Р»Р° РѕС€РёР±РєР°: " & Err.Description, vbCritical
     Resume CleanUp
 End Sub
 
@@ -51,7 +51,7 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
         With g_ResultBook.Worksheets.item(1)
             ' Report header
             With .Range("A1:F1")
-                .Value = "Отчет о внешних ссылках"
+                .Value = "РћС‚С‡РµС‚ Рѕ РІРЅРµС€РЅРёС… СЃСЃС‹Р»РєР°С…"
                 .Font.Bold = True
                 .Font.Size = 18
                 .Interior.Color = COLOR_HEADER_BG
@@ -60,12 +60,12 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
             End With
 
             ' Column headers
-            .Range("A2").Value = "Тип"
-            .Range("B2").Value = "Книга"
-            .Range("C2").Value = "Лист"
-            .Range("D2").Value = "Место"
-            .Range("E2").Value = "ссылка/формула"
-            .Range("F2").Value = "Инструкция по исправлению"
+            .Range("A2").Value = "РўРёРї"
+            .Range("B2").Value = "РљРЅРёРіР°"
+            .Range("C2").Value = "Р›РёСЃС‚"
+            .Range("D2").Value = "РњРµСЃС‚Рѕ"
+            .Range("E2").Value = "СЃСЃС‹Р»РєР°/С„РѕСЂРјСѓР»Р°"
+            .Range("F2").Value = "РРЅСЃС‚СЂСѓРєС†РёСЏ РїРѕ РёСЃРїСЂР°РІР»РµРЅРёСЋ"
 
             With .Range("A2:F2")
                 .Interior.Color = COLOR_SUBHEADER_BG
@@ -96,7 +96,7 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
 
         ' Add hyperlink, if possible
         If (Len(adr) > 0) And (Len(Dir(wbk)) > 0) Then
-            .Hyperlinks.Add .Range("D" & resultLn), wbk, "'" & wsh & "'!" & adr, "Перейти:", loc
+            .Hyperlinks.Add .Range("D" & resultLn), wbk, "'" & wsh & "'!" & adr, "РџРµСЂРµР№С‚Рё:", loc
         End If
 
         ' Add apostrophe to display formula as text
@@ -155,15 +155,15 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     Call RestoreApplicationSettings
 
     If numLinks <= 0 Then
-        MsgBox "Проверка завершена:" & vbCrLf & vbCrLf & _
-                "Внешних ссылок не обнаружено: " & Dir(wkbk.FullName), vbInformation
+        MsgBox "РџСЂРѕРІРµСЂРєР° Р·Р°РІРµСЂС€РµРЅР°:" & vbCrLf & vbCrLf & _
+                "Р’РЅРµС€РЅРёС… СЃСЃС‹Р»РѕРє РЅРµ РѕР±РЅР°СЂСѓР¶РµРЅРѕ: " & Dir(wkbk.FullName), vbInformation
     Else
         Dim msg     As String
-        msg = "Проверка завершена:" & vbCrLf & vbCrLf
+        msg = "РџСЂРѕРІРµСЂРєР° Р·Р°РІРµСЂС€РµРЅР°:" & vbCrLf & vbCrLf
         ' If broken links were deleted, numLinks includes the final deletion record,
         ' so we display numLinks - 1 for found links if delCt > 0
         ' In the current logic, deleted links are added to the counter inside CheckNamedRangeLinks
-        MsgBox msg & numLinks & " обнаружены проблемы.", vbExclamation
+        MsgBox msg & numLinks & " РѕР±РЅР°СЂСѓР¶РµРЅС‹ РїСЂРѕР±Р»РµРјС‹.", vbExclamation
     End If
 End Sub
 
@@ -189,13 +189,13 @@ Private Sub CheckCellFormulas(wksht As Worksheet, wkbk As Workbook, ByRef numLin
                 ' Checking for ".xl" helps avoid false positives on text like "[Text]"
                 If InStr(1, fml, ".xl", vbTextCompare) > 0 Then
                     numLinks = numLinks + 1
-                    Call OutputLinkInfo("Формула", _
+                    Call OutputLinkInfo("Р¤РѕСЂРјСѓР»Р°", _
                             wkbk.FullName, _
                             wksht.Name, _
                             "Cell " & foundCell.Address(False, False), _
                             foundCell.Address, _
                             fml, _
-                            "Отредактируйте ссылку на этом листе.")
+                            "РћС‚СЂРµРґР°РєС‚РёСЂСѓР№С‚Рµ СЃСЃС‹Р»РєСѓ РЅР° СЌС‚РѕРј Р»РёСЃС‚Рµ.")
                 End If
             Else
                 Err.Clear
@@ -219,13 +219,13 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
         fml = shp.DrawingObject.formula
         If Err.Number = 0 And InStr(fml, "[") <> 0 Then
             numLinks = numLinks + 1
-            Call OutputLinkInfo("Фигура/объект", _
+            Call OutputLinkInfo("Р¤РёРіСѓСЂР°/РѕР±СЉРµРєС‚", _
                     wkbk.FullName, _
                     wksht.Name, _
                     shp.Name, _
                     shp.TopLeftCell.Address & ":" & shp.BottomRightCell.Address, _
                     fml, _
-                    "Удалить ссылку. Ссылку можно изменить через меню Excel. Удалить объект.")
+                    "РЈРґР°Р»РёС‚СЊ СЃСЃС‹Р»РєСѓ. РЎСЃС‹Р»РєСѓ РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ С‡РµСЂРµР· РјРµРЅСЋ Excel. РЈРґР°Р»РёС‚СЊ РѕР±СЉРµРєС‚.")
         End If
         On Error GoTo 0
 
@@ -236,13 +236,13 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
                 fml = subshp.DrawingObject.formula
                 If Err.Number = 0 And InStr(fml, "[") <> 0 Then
                     numLinks = numLinks + 1
-                    Call OutputLinkInfo("Фигура/объект", _
+                    Call OutputLinkInfo("Р¤РёРіСѓСЂР°/РѕР±СЉРµРєС‚", _
                             wkbk.FullName, _
                             wksht.Name, _
-                            subshp.Name & " (часть группы '" & shp.Name & "')", _
+                            subshp.Name & " (С‡Р°СЃС‚СЊ РіСЂСѓРїРїС‹ '" & shp.Name & "')", _
                             subshp.TopLeftCell.Address & ":" & subshp.BottomRightCell.Address, _
                             fml, _
-                            "Удалить ссылку. Ссылку можно изменить через меню Excel. Удалить объект.")
+                            "РЈРґР°Р»РёС‚СЊ СЃСЃС‹Р»РєСѓ. РЎСЃС‹Р»РєСѓ РјРѕР¶РЅРѕ РёР·РјРµРЅРёС‚СЊ С‡РµСЂРµР· РјРµРЅСЋ Excel. РЈРґР°Р»РёС‚СЊ РѕР±СЉРµРєС‚.")
                 End If
                 On Error GoTo 0
             Next subshp
@@ -259,14 +259,14 @@ Private Sub CheckConditionalFormatting(wksht As Worksheet, wkbk As Workbook, ByR
         fml = cForm.Formula1
         If Err.Number = 0 And InStr(fml, "[") <> 0 Then
             numLinks = numLinks + 1
-            Call OutputLinkInfo("Условное форматирование", _
+            Call OutputLinkInfo("РЈСЃР»РѕРІРЅРѕРµ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ", _
                     wkbk.FullName, _
                     wksht.Name, _
                     "Cell " & cForm.AppliesTo.Address(False, False), _
                     cForm.AppliesTo.Address, _
                     fml, _
-                    "Ссылка найдена в режиме условного форматирования. Excel часто не отображает ее в интерфейсе." & _
-                    "Рекомендуется удалить условное форматирование для этих ячеек или заменить его правилом без ссылок.")
+                    "РЎСЃС‹Р»РєР° РЅР°Р№РґРµРЅР° РІ СЂРµР¶РёРјРµ СѓСЃР»РѕРІРЅРѕРіРѕ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ. Excel С‡Р°СЃС‚Рѕ РЅРµ РѕС‚РѕР±СЂР°Р¶Р°РµС‚ РµРµ РІ РёРЅС‚РµСЂС„РµР№СЃРµ." & _
+                    "Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ СѓРґР°Р»РёС‚СЊ СѓСЃР»РѕРІРЅРѕРµ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ РґР»СЏ СЌС‚РёС… СЏС‡РµРµРє РёР»Рё Р·Р°РјРµРЅРёС‚СЊ РµРіРѕ РїСЂР°РІРёР»РѕРј Р±РµР· СЃСЃС‹Р»РѕРє.")
         End If
         On Error GoTo 0
     Next cForm
@@ -290,13 +290,13 @@ Private Sub CheckChartLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
                     chartName = cht.Chart.Name & " (" & cht.Name & ")"
                 End If
 
-                Call OutputLinkInfo("Диаграмма", _
+                Call OutputLinkInfo("Р”РёР°РіСЂР°РјРјР°", _
                         wkbk.FullName, _
                         wksht.Name, _
                         chartName, _
                         cht.TopLeftCell.Address & ":" & cht.BottomRightCell.Address, _
                         fml, _
-                        "Измените источник данных диаграммы (выберите данные). Найдите ряд с проблемной ссылкой.")
+                        "РР·РјРµРЅРёС‚Рµ РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С… РґРёР°РіСЂР°РјРјС‹ (РІС‹Р±РµСЂРёС‚Рµ РґР°РЅРЅС‹Рµ). РќР°Р№РґРёС‚Рµ СЂСЏРґ СЃ РїСЂРѕР±Р»РµРјРЅРѕР№ СЃСЃС‹Р»РєРѕР№.")
             End If
             On Error GoTo 0
         Next srs
@@ -312,13 +312,13 @@ Private Sub CheckPivotTableLinks(wksht As Worksheet, wkbk As Workbook, ByRef num
         fml = pvt.SourceData
         If Err.Number = 0 And InStr(fml, "[") <> 0 Then
             numLinks = numLinks + 1
-            Call OutputLinkInfo("Сводная таблица", _
+            Call OutputLinkInfo("РЎРІРѕРґРЅР°СЏ С‚Р°Р±Р»РёС†Р°", _
                     wkbk.FullName, _
                     wksht.Name, _
                     pvt.Name, _
                     pvt.TableRange1.Address, _
                     fml, _
-                    "Ссылка на внешнюю рабочую книгу. Измените источник данных сводной таблицы.")
+                    "РЎСЃС‹Р»РєР° РЅР° РІРЅРµС€РЅСЋСЋ СЂР°Р±РѕС‡СѓСЋ РєРЅРёРіСѓ. РР·РјРµРЅРёС‚Рµ РёСЃС‚РѕС‡РЅРёРє РґР°РЅРЅС‹С… СЃРІРѕРґРЅРѕР№ С‚Р°Р±Р»РёС†С‹.")
         End If
         On Error GoTo 0
     Next pvt
@@ -368,13 +368,13 @@ Private Sub CheckDataValidationLinks(wksht As Worksheet, wkbk As Workbook, ByRef
                 place = "Cell " & VBA.Replace(contiguousAddresses(i), "$", "")
             End If
 
-            Call OutputLinkInfo("Проверка данных", _
+            Call OutputLinkInfo("РџСЂРѕРІРµСЂРєР° РґР°РЅРЅС‹С…", _
                     wkbk.FullName, _
                     wksht.Name, _
                     place, _
                     contiguousAddresses(i), _
                     VBA.CStr(key), _
-                    "Ссылка найдена в разделе проверка данных (Data -> Проверка данных). Измените источник.")
+                    "РЎСЃС‹Р»РєР° РЅР°Р№РґРµРЅР° РІ СЂР°Р·РґРµР»Рµ РїСЂРѕРІРµСЂРєР° РґР°РЅРЅС‹С… (Data -> РџСЂРѕРІРµСЂРєР° РґР°РЅРЅС‹С…). РР·РјРµРЅРёС‚Рµ РёСЃС‚РѕС‡РЅРёРє.")
         Next i
     Next key
 
@@ -418,13 +418,13 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
                                 ' File exists, but link is external
                                 wkbk.Names(nameCnt).Visible = True
                                 numLinks = numLinks + 1
-                                Call OutputLinkInfo("Именованный диапазон", _
+                                Call OutputLinkInfo("РРјРµРЅРѕРІР°РЅРЅС‹Р№ РґРёР°РїР°Р·РѕРЅ", _
                                         wkbk.FullName, _
                                         "N/A", _
                                         wkbk.Names(nameCnt).Name, _
                                         "", _
                                         wkbk.Names(nameCnt).RefersTo, _
-                                        "Откройте диспетчер имен (Формулы -> Диспетчер имен). Проверьте путь.")
+                                        "РћС‚РєСЂРѕР№С‚Рµ РґРёСЃРїРµС‚С‡РµСЂ РёРјРµРЅ (Р¤РѕСЂРјСѓР»С‹ -> Р”РёСЃРїРµС‚С‡РµСЂ РёРјРµРЅ). РџСЂРѕРІРµСЂСЊС‚Рµ РїСѓС‚СЊ.")
                             End If
                         End If
                     End If
@@ -438,13 +438,13 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
     ' Report on deleted names
     If delCt > 0 Then
         numLinks = numLinks + 1
-        Call OutputLinkInfo("Именованный диапазон", _
+        Call OutputLinkInfo("РРјРµРЅРѕРІР°РЅРЅС‹Р№ РґРёР°РїР°Р·РѕРЅ", _
                 wkbk.FullName, _
                 "N/A", _
-                "(" & delCt & " удалены имена)", _
+                "(" & delCt & " СѓРґР°Р»РµРЅС‹ РёРјРµРЅР°)", _
                 "", _
-                "Не записано", _
-                "Количество удаленных именованных диапазонов с неработающими ссылками. Файл: " & Dir(wkbk.FullName))
+                "РќРµ Р·Р°РїРёСЃР°РЅРѕ", _
+                "РљРѕР»РёС‡РµСЃС‚РІРѕ СѓРґР°Р»РµРЅРЅС‹С… РёРјРµРЅРѕРІР°РЅРЅС‹С… РґРёР°РїР°Р·РѕРЅРѕРІ СЃ РЅРµСЂР°Р±РѕС‚Р°СЋС‰РёРјРё СЃСЃС‹Р»РєР°РјРё. Р¤Р°Р№Р»: " & Dir(wkbk.FullName))
     End If
 End Sub
 

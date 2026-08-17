@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmAboutAddin 
-   Caption         =   "О надстройке:"
+   Caption         =   "Рћ РЅР°РґСЃС‚СЂРѕР№РєРµ:"
    ClientHeight    =   5745
    ClientLeft      =   120
    ClientTop       =   465
@@ -29,7 +29,7 @@ Private Sub Label1_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     lbAbout.Caption = Version(enAll)
 End Sub

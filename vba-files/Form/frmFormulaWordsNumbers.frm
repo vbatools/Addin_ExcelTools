@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaWordsNumbers 
-   Caption         =   "Создание формулы сумма прописью:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С„РѕСЂРјСѓР»С‹ СЃСѓРјРјР° РїСЂРѕРїРёСЃСЊСЋ:"
    ClientHeight    =   5940
    ClientLeft      =   120
    ClientTop       =   465
@@ -17,9 +17,9 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const SKOBKIVAL1 As String = "(100,01) сто целых 1 сотая"
-Private Const SKOBKIVAL2 As String = "100,01 (сто целых 1 сотая)"
-Private Const MAXLENGS As Integer = 16    '20-триллионы
+Private Const SKOBKIVAL1 As String = "(100,01) СЃС‚Рѕ С†РµР»С‹С… 1 СЃРѕС‚Р°СЏ"
+Private Const SKOBKIVAL2 As String = "100,01 (СЃС‚Рѕ С†РµР»С‹С… 1 СЃРѕС‚Р°СЏ)"
+Private Const MAXLENGS As Integer = 16    '20-С‚СЂРёР»Р»РёРѕРЅС‹
 
 Private Sub btnCancel_Click()
     Unload Me
@@ -49,7 +49,7 @@ Private Sub btnOK_Click()
     txt = VBA.CCur(txt)
     If lbRC.Caption <> vbNullString Then txt = lbRC.Caption
     With activeCell
-        .FormulaR1C1 = "=СУММАПРОПИСЬЮ(" & txt & "," & _
+        .FormulaR1C1 = "=РЎРЈРњРњРђРџР РћРџРРЎР¬Р®(" & txt & "," & _
                 VBA.CInt(cmbCase.ListIndex) & "," & VBA.CInt(cmbTypeDate.ListIndex) & "," & _
                 VBA.CBool(chcDublVal.Value) & "," & VBA.CBool(chcDrobProp.Value) & "," & _
                 VBA.CInt(cmbRegistr.ListIndex) & "," & VBA.CInt(cmbSkobki.ListIndex) & "," & VBA.Chr$(34) & sFormat & VBA.Chr$(34) & ")"
@@ -192,62 +192,62 @@ End Sub
 Private Sub txtValue_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
     On Error Resume Next
     Select Case KeyAscii
-            'цифры 1 - 9 и <Backspace> (эти символы всегда разрешены)
+            'С†РёС„СЂС‹ 1 - 9 Рё <Backspace> (СЌС‚Рё СЃРёРјРІРѕР»С‹ РІСЃРµРіРґР° СЂР°Р·СЂРµС€РµРЅС‹)
         Case 48 To 57, 8
-            'обработка десятичного разделителя (44 - код запятой, 46 - код точки)
+            'РѕР±СЂР°Р±РѕС‚РєР° РґРµСЃСЏС‚РёС‡РЅРѕРіРѕ СЂР°Р·РґРµР»РёС‚РµР»СЏ (44 - РєРѕРґ Р·Р°РїСЏС‚РѕР№, 46 - РєРѕРґ С‚РѕС‡РєРё)
         Case 44, 46
-            'если в поле  введена точка, то заменим ее на запятую
+            'РµСЃР»Рё РІ РїРѕР»Рµ  РІРІРµРґРµРЅР° С‚РѕС‡РєР°, С‚Рѕ Р·Р°РјРµРЅРёРј РµРµ РЅР° Р·Р°РїСЏС‚СѓСЋ
             KeyAscii = 44
             If txtValue.MaxLength = MAXLENGS Or txtValue.MaxLength = MAXLENGS + 1 Then txtValue.MaxLength = MAXLENGS + 5
-            '------------если нужен дефис (минус перед числом), раскоментируйте код---------------
+            '------------РµСЃР»Рё РЅСѓР¶РµРЅ РґРµС„РёСЃ (РјРёРЅСѓСЃ РїРµСЂРµРґ С‡РёСЃР»РѕРј), СЂР°СЃРєРѕРјРµРЅС‚РёСЂСѓР№С‚Рµ РєРѕРґ---------------
         Case 45
-            If InStr(1, txtValue.TEXT, "-") Then KeyAscii = 0    'второй минус нельзя
-            If txtValue.SelStart Then KeyAscii = 0    'минус допустим только перед числом
+            If InStr(1, txtValue.TEXT, "-") Then KeyAscii = 0    'РІС‚РѕСЂРѕР№ РјРёРЅСѓСЃ РЅРµР»СЊР·СЏ
+            If txtValue.SelStart Then KeyAscii = 0    'РјРёРЅСѓСЃ РґРѕРїСѓСЃС‚РёРј С‚РѕР»СЊРєРѕ РїРµСЂРµРґ С‡РёСЃР»РѕРј
             '-------------------------------------------------------------------------------------
         Case Else
-            'остальные символы запрещены
+            'РѕСЃС‚Р°Р»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ Р·Р°РїСЂРµС‰РµРЅС‹
             KeyAscii = 0
     End Select
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     With cmbRegistr
-        .AddItem "все строчные"
-        .AddItem "ВСЕ ПРОПИСНЫЕ"
-        .AddItem "Как в предложениях"
-        .AddItem "Начинать С Прописных"
+        .AddItem "РІСЃРµ СЃС‚СЂРѕС‡РЅС‹Рµ"
+        .AddItem "Р’РЎР• РџР РћРџРРЎРќР«Р•"
+        .AddItem "РљР°Рє РІ РїСЂРµРґР»РѕР¶РµРЅРёСЏС…"
+        .AddItem "РќР°С‡РёРЅР°С‚СЊ РЎ РџСЂРѕРїРёСЃРЅС‹С…"
         .ListIndex = 0
     End With
 
     With cmbCase
-        .AddItem "Именительный"
-        .AddItem "Родительный"
-        .AddItem "Дательный"
-        .AddItem "Винительный"
-        .AddItem "Творительный"
-        .AddItem "Предложный"
+        .AddItem "РРјРµРЅРёС‚РµР»СЊРЅС‹Р№"
+        .AddItem "Р РѕРґРёС‚РµР»СЊРЅС‹Р№"
+        .AddItem "Р”Р°С‚РµР»СЊРЅС‹Р№"
+        .AddItem "Р’РёРЅРёС‚РµР»СЊРЅС‹Р№"
+        .AddItem "РўРІРѕСЂРёС‚РµР»СЊРЅС‹Р№"
+        .AddItem "РџСЂРµРґР»РѕР¶РЅС‹Р№"
         .ListIndex = 0
     End With
 
     With cmbTypeDate
-        .AddItem "Ничего"
-        .AddItem "Рубли"
-        .AddItem "Доллары"
-        .AddItem "Евро"
-        .AddItem "Календарные дни"
-        .AddItem "Рабочие дни"
-        .AddItem "Дни"
-        .AddItem "Штуки"
-        .AddItem "Целое + дробное"
-        .AddItem "Рубли + 00 копейки"
-        '.AddItem "Проценты"
+        .AddItem "РќРёС‡РµРіРѕ"
+        .AddItem "Р СѓР±Р»Рё"
+        .AddItem "Р”РѕР»Р»Р°СЂС‹"
+        .AddItem "Р•РІСЂРѕ"
+        .AddItem "РљР°Р»РµРЅРґР°СЂРЅС‹Рµ РґРЅРё"
+        .AddItem "Р Р°Р±РѕС‡РёРµ РґРЅРё"
+        .AddItem "Р”РЅРё"
+        .AddItem "РЁС‚СѓРєРё"
+        .AddItem "Р¦РµР»РѕРµ + РґСЂРѕР±РЅРѕРµ"
+        .AddItem "Р СѓР±Р»Рё + 00 РєРѕРїРµР№РєРё"
+        '.AddItem "РџСЂРѕС†РµРЅС‚С‹"
         .ListIndex = 0
     End With
     With cmbSkobki
-        .AddItem "НЕТ"
+        .AddItem "РќР•Рў"
         .AddItem SKOBKIVAL1
         .AddItem SKOBKIVAL2
         .ListIndex = 0
@@ -286,7 +286,7 @@ Private Sub addFormula()
         sFormat = "0"
     End If
     If txt = vbNullString Then txt = 0
-    txtPropis.TEXT = СУММАПРОПИСЬЮ(VBA.CCur(txt), cmbCase.ListIndex, _
+    txtPropis.TEXT = РЎРЈРњРњРђРџР РћРџРРЎР¬Р®(VBA.CCur(txt), cmbCase.ListIndex, _
             cmbTypeDate.ListIndex, chcDublVal.Value, chcDrobProp.Value, cmbRegistr.ListIndex, cmbSkobki.ListIndex, sFormat)
 End Sub
 

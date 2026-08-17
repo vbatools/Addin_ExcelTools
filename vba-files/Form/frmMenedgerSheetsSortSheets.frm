@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsSortSheets 
-   Caption         =   "Сортировка листов:"
+   Caption         =   "РЎРѕСЂС‚РёСЂРѕРІРєР° Р»РёСЃС‚РѕРІ:"
    ClientHeight    =   2235
    ClientLeft      =   120
    ClientTop       =   465
@@ -54,7 +54,7 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     Const W         As Byte = 16

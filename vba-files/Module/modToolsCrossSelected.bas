@@ -2,37 +2,37 @@ Attribute VB_Name = "modToolsCrossSelected"
 Option Explicit
 Option Private Module
 '================================================================================
-' МОДУЛЬ: modCrossSelection
-' Purpose: Управление перекрёстным выделением ячеек
+' РњРћР”РЈР›Р¬: modCrossSelection
+' Purpose: РЈРїСЂР°РІР»РµРЅРёРµ РїРµСЂРµРєСЂС‘СЃС‚РЅС‹Рј РІС‹РґРµР»РµРЅРёРµРј СЏС‡РµРµРє
 '================================================================================
 
 Private oCrossSelected As clsCrossSel
 
 '--------------------------------------------------------------------------------
 ' Procedure: CrossSelection
-' Purpose: Включает/выключает режим перекрёстного выделения
+' Purpose: Р’РєР»СЋС‡Р°РµС‚/РІС‹РєР»СЋС‡Р°РµС‚ СЂРµР¶РёРј РїРµСЂРµРєСЂС‘СЃС‚РЅРѕРіРѕ РІС‹РґРµР»РµРЅРёСЏ
 '--------------------------------------------------------------------------------
 Public Sub CrossSelection()
     On Error GoTo ErrorHandler
 
-    ' Проверка версии Excel 2007
+    ' РџСЂРѕРІРµСЂРєР° РІРµСЂСЃРёРё Excel 2007
     If Application.Version = "12.0" Then
-        If MsgBox("Перекрёстное выделение в Excel 2007 не работает совместно с условным форматированием." & vbCrLf & _
-                "Условное форматирование (если используется) будет удалено." & vbCrLf & vbCrLf & _
-                "Продолжить?", vbYesNo Or vbExclamation Or vbDefaultButton2, "Перекрёстное выделение") = vbNo Then
+        If MsgBox("РџРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ РІ Excel 2007 РЅРµ СЂР°Р±РѕС‚Р°РµС‚ СЃРѕРІРјРµСЃС‚РЅРѕ СЃ СѓСЃР»РѕРІРЅС‹Рј С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµРј." & vbCrLf & _
+                "РЈСЃР»РѕРІРЅРѕРµ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ (РµСЃР»Рё РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ) Р±СѓРґРµС‚ СѓРґР°Р»РµРЅРѕ." & vbCrLf & vbCrLf & _
+                "РџСЂРѕРґРѕР»Р¶РёС‚СЊ?", vbYesNo Or vbExclamation Or vbDefaultButton2, "РџРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ") = vbNo Then
             Exit Sub
         End If
     End If
 
-    ' Проверка типа листа
+    ' РџСЂРѕРІРµСЂРєР° С‚РёРїР° Р»РёСЃС‚Р°
     If Not TypeOf ActiveSheet Is Worksheet Then
-        MsgBox "Перекрёстное выделение применяется только к рабочему листу.", vbCritical, "Ошибка"
+        MsgBox "РџРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ РїСЂРёРјРµРЅСЏРµС‚СЃСЏ С‚РѕР»СЊРєРѕ Рє СЂР°Р±РѕС‡РµРјСѓ Р»РёСЃС‚Сѓ.", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
-    ' Проверка защиты листа
+    ' РџСЂРѕРІРµСЂРєР° Р·Р°С‰РёС‚С‹ Р»РёСЃС‚Р°
     If ActiveSheet.ProtectContents Then
-        MsgBox "Активный лист защищён паролем. Перекрёстное выделение невозможно.", vbCritical, "Ошибка"
+        MsgBox "РђРєС‚РёРІРЅС‹Р№ Р»РёСЃС‚ Р·Р°С‰РёС‰С‘РЅ РїР°СЂРѕР»РµРј. РџРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ РЅРµРІРѕР·РјРѕР¶РЅРѕ.", vbCritical, "РћС€РёР±РєР°"
         If Not oCrossSelected Is Nothing Then
             oCrossSelected.IsStateOn = False
             Set oCrossSelected = Nothing
@@ -40,7 +40,7 @@ Public Sub CrossSelection()
         Exit Sub
     End If
 
-    ' Переключение состояния
+    ' РџРµСЂРµРєР»СЋС‡РµРЅРёРµ СЃРѕСЃС‚РѕСЏРЅРёСЏ
     If oCrossSelected Is Nothing Then
         Set oCrossSelected = New clsCrossSel
         oCrossSelected.IsStateOn = True
@@ -52,5 +52,5 @@ Public Sub CrossSelection()
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Ошибка: " & Err.Description, vbCritical, "Перекрёстное выделение"
+    MsgBox "РћС€РёР±РєР°: " & Err.Description, vbCritical, "РџРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
 End Sub

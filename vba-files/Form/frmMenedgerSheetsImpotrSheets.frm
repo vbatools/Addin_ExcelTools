@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsImpotrSheets 
-   Caption         =   "Импорт листов из книг:"
+   Caption         =   "РРјРїРѕСЂС‚ Р»РёСЃС‚РѕРІ РёР· РєРЅРёРі:"
    ClientHeight    =   7785
    ClientLeft      =   120
    ClientTop       =   465
@@ -20,7 +20,7 @@ Option Explicit
 
 
 '================================================================================
-' ОБРАБОТЧИКИ КНОПОК
+' РћР‘Р РђР‘РћРўР§РРљР РљРќРћРџРћРљ
 '================================================================================
 
 Private Sub btnCancel_Click()
@@ -34,7 +34,7 @@ Private Sub btnChoseFiles_Click()
 
     arrFiles = FileDialogFun(ActiveWorkbook.Path, True, , False)
 
-    ' Проверка пустого массива
+    ' РџСЂРѕРІРµСЂРєР° РїСѓСЃС‚РѕРіРѕ РјР°СЃСЃРёРІР°
     If Not IsArray(arrFiles) Then Exit Sub
     On Error Resume Next
     If UBound(arrFiles) < LBound(arrFiles) Then Exit Sub
@@ -171,7 +171,7 @@ Private Sub btnOK_Click()
                 End If
                 If wb.ProtectStructure And Not bFlag Then
                     If sMsg <> vbNullString Then sMsg = sMsg & vbNewLine
-                    sMsg = "Структура книги защищена " & .List(i, 2) & " - импорт не возможен"
+                    sMsg = "РЎС‚СЂСѓРєС‚СѓСЂР° РєРЅРёРіРё Р·Р°С‰РёС‰РµРЅР° " & .List(i, 2) & " - РёРјРїРѕСЂС‚ РЅРµ РІРѕР·РјРѕР¶РµРЅ"
                     bFlag = True
                 Else
                     Set shCurent = wb.Sheets(.List(i, 3))
@@ -192,7 +192,7 @@ Private Sub btnOK_Click()
 End Sub
 
 '================================================================================
-' ОБРАБОТЧИКИ ОПЦИЙ ВЫБОРА
+' РћР‘Р РђР‘РћРўР§РРљР РћРџР¦РР™ Р’Р«Р‘РћР Рђ
 '================================================================================
 
 Private Sub optAllItemsList_Click()
@@ -252,7 +252,7 @@ Private Sub optSheetByNumber_Click()
 End Sub
 
 '================================================================================
-' ВАЛИДАЦИЯ ВВОДА (используется дважды)
+' Р’РђР›РР”РђР¦РРЇ Р’Р’РћР”Рђ (РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ РґРІР°Р¶РґС‹)
 '================================================================================
 
 Private Sub txtEndNum_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
@@ -264,11 +264,11 @@ Private Sub txtFerstNum_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 
 '================================================================================
-' ИНИЦИАЛИЗАЦИЯ
+' РРќРР¦РРђР›РР—РђР¦РРЇ
 '================================================================================
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     lbProgress.Width = 0
 End Sub

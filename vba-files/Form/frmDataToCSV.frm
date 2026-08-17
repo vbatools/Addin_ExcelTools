@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataToCSV 
-   Caption         =   "Создать CSV из диапазона:"
+   Caption         =   "РЎРѕР·РґР°С‚СЊ CSV РёР· РґРёР°РїР°Р·РѕРЅР°:"
    ClientHeight    =   1935
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 '--------------------------------------------------------------------------------
 ' Event: btnCancel_Click
-' Purpose: Обработчик закрытия формы без сохранения изменений
+' Purpose: РћР±СЂР°Р±РѕС‚С‡РёРє Р·Р°РєСЂС‹С‚РёСЏ С„РѕСЂРјС‹ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№
 '--------------------------------------------------------------------------------
 Private Sub btnCancel_Click()
     Unload Me
@@ -27,7 +27,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: btnOK_Click
-' Purpose: Основная процедура формирования CSV из выбранного диапазона с порционной записью в файл
+' Purpose: РћСЃРЅРѕРІРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ CSV РёР· РІС‹Р±СЂР°РЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° СЃ РїРѕСЂС†РёРѕРЅРЅРѕР№ Р·Р°РїРёСЃСЊСЋ РІ С„Р°Р№Р»
 '--------------------------------------------------------------------------------
 Private Sub btnOK_Click()
     Dim arrData     As Variant
@@ -36,28 +36,28 @@ Private Sub btnOK_Click()
     Dim ws          As Worksheet
     Dim rngData     As Range
 
-    ' Проверка и инициализация разделителя
+    ' РџСЂРѕРІРµСЂРєР° Рё РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЂР°Р·РґРµР»РёС‚РµР»СЏ
     sDelimiter = txtDelimiter.Value
     If sDelimiter = vbNullString Then
-        Call MsgBox("Не задан символ разделитель", vbCritical)
+        Call MsgBox("РќРµ Р·Р°РґР°РЅ СЃРёРјРІРѕР» СЂР°Р·РґРµР»РёС‚РµР»СЊ", vbCritical)
         Exit Sub
     End If
 
-    ' Проверка корректности введенного диапазона
+    ' РџСЂРѕРІРµСЂРєР° РєРѕСЂСЂРµРєС‚РЅРѕСЃС‚Рё РІРІРµРґРµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
     On Error Resume Next
     Set ws = ActiveSheet
     Set rngData = ws.Range(txtInputRng.Value)
     On Error GoTo 0
 
     If rngData Is Nothing Then
-        Call MsgBox("Указан некорректный диапазон ячеек", vbCritical)
+        Call MsgBox("РЈРєР°Р·Р°РЅ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РґРёР°РїР°Р·РѕРЅ СЏС‡РµРµРє", vbCritical)
         Exit Sub
     End If
 
     arrData = rngData.Value2
-    ' Если выбрана одна ячейка, Value2 возвращает не массив, а одно значение
+    ' Р•СЃР»Рё РІС‹Р±СЂР°РЅР° РѕРґРЅР° СЏС‡РµР№РєР°, Value2 РІРѕР·РІСЂР°С‰Р°РµС‚ РЅРµ РјР°СЃСЃРёРІ, Р° РѕРґРЅРѕ Р·РЅР°С‡РµРЅРёРµ
     If Not IsArray(arrData) Then
-        Call MsgBox("Выбрана одна ячейка. Укажите диапазон.", vbCritical)
+        Call MsgBox("Р’С‹Р±СЂР°РЅР° РѕРґРЅР° СЏС‡РµР№РєР°. РЈРєР°Р¶РёС‚Рµ РґРёР°РїР°Р·РѕРЅ.", vbCritical)
         Exit Sub
     End If
 
@@ -72,31 +72,31 @@ Private Sub btnOK_Click()
     iCount = UBound(arrData, 1)
     jCount = UBound(arrData, 2)
 
-    ' Формирование пути к файлу
+    ' Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РїСѓС‚Рё Рє С„Р°Р№Р»Сѓ
     sFullNameFile = ActiveWorkbook.Path & Application.PathSeparator & ActiveWorkbook.Name & "_" & ws.Name & ".csv"
 
- ' Удаление старого файла, если он существует
+ ' РЈРґР°Р»РµРЅРёРµ СЃС‚Р°СЂРѕРіРѕ С„Р°Р№Р»Р°, РµСЃР»Рё РѕРЅ СЃСѓС‰РµСЃС‚РІСѓРµС‚
     If Dir(sFullNameFile, vbNormal) <> vbNullString Then
         On Error Resume Next
         Call Kill(sFullNameFile)
         If Err.Number <> 0 Then
-            Call MsgBox("Не удалось удалить старый файл. Возможно, он открыт в другой программе." & vbCrLf & "Ошибка: " & Err.Description, vbCritical)
+            Call MsgBox("РќРµ СѓРґР°Р»РѕСЃСЊ СѓРґР°Р»РёС‚СЊ СЃС‚Р°СЂС‹Р№ С„Р°Р№Р». Р’РѕР·РјРѕР¶РЅРѕ, РѕРЅ РѕС‚РєСЂС‹С‚ РІ РґСЂСѓРіРѕР№ РїСЂРѕРіСЂР°РјРјРµ." & vbCrLf & "РћС€РёР±РєР°: " & Err.Description, vbCritical)
             On Error GoTo 0
             Exit Sub
         End If
         On Error GoTo 0
     End If
 
-    ' Циклическая обработка массива данных
+    ' Р¦РёРєР»РёС‡РµСЃРєР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РјР°СЃСЃРёРІР° РґР°РЅРЅС‹С…
     For i = 1 To iCount
         sLine = vbNullString
         For j = 1 To jCount
             If sLine <> vbNullString Then sLine = sLine & sDelimiter
-            ' Преобразование значения в строку и передача в функцию экранирования
+            ' РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІ СЃС‚СЂРѕРєСѓ Рё РїРµСЂРµРґР°С‡Р° РІ С„СѓРЅРєС†РёСЋ СЌРєСЂР°РЅРёСЂРѕРІР°РЅРёСЏ
             sLine = sLine & EscapeCsvValue(CStr(arrData(i, j)), sDelimiter)
         Next j
 
-        ' Добавление переноса строки перед новой записью (кроме первой)
+        ' Р”РѕР±Р°РІР»РµРЅРёРµ РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё РїРµСЂРµРґ РЅРѕРІРѕР№ Р·Р°РїРёСЃСЊСЋ (РєСЂРѕРјРµ РїРµСЂРІРѕР№)
         If i <> 1 Then
             sCSV = sCSV & vbNewLine
             lCharCount = lCharCount + VBA.Len(vbNewLine)
@@ -105,10 +105,10 @@ Private Sub btnOK_Click()
         sCSV = sCSV & sLine
         lCharCount = lCharCount + VBA.Len(sLine)
 
-        ' Проверка лимита символов и запись в файл
+        ' РџСЂРѕРІРµСЂРєР° Р»РёРјРёС‚Р° СЃРёРјРІРѕР»РѕРІ Рё Р·Р°РїРёСЃСЊ РІ С„Р°Р№Р»
         If lCharCount >= 50000 Then
             If Not TXTAddIntoTXTFile(sFullNameFile, sCSV, True) Then
-                Call MsgBox("Ошибка при записи в файл. Возможно, файл открыт в другой программе.", vbCritical)
+                Call MsgBox("РћС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р». Р’РѕР·РјРѕР¶РЅРѕ, С„Р°Р№Р» РѕС‚РєСЂС‹С‚ РІ РґСЂСѓРіРѕР№ РїСЂРѕРіСЂР°РјРјРµ.", vbCritical)
                 Exit Sub
             End If
             sCSV = vbNullString
@@ -116,37 +116,37 @@ Private Sub btnOK_Click()
         End If
     Next i
 
-    ' Запись остатков данных, если они остались после завершения цикла
+    ' Р—Р°РїРёСЃСЊ РѕСЃС‚Р°С‚РєРѕРІ РґР°РЅРЅС‹С…, РµСЃР»Рё РѕРЅРё РѕСЃС‚Р°Р»РёСЃСЊ РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ С†РёРєР»Р°
     If sCSV <> vbNullString Then
         If Not TXTAddIntoTXTFile(sFullNameFile, sCSV, True) Then
-            Call MsgBox("Ошибка при записи в файл. Возможно, файл открыт в другой программе.", vbCritical)
+            Call MsgBox("РћС€РёР±РєР° РїСЂРё Р·Р°РїРёСЃРё РІ С„Р°Р№Р». Р’РѕР·РјРѕР¶РЅРѕ, С„Р°Р№Р» РѕС‚РєСЂС‹С‚ РІ РґСЂСѓРіРѕР№ РїСЂРѕРіСЂР°РјРјРµ.", vbCritical)
             Exit Sub
         End If
     End If
 
-    ' Очистка памяти
+    ' РћС‡РёСЃС‚РєР° РїР°РјСЏС‚Рё
     Erase arrData
-    Call MsgBox("Сохранено в файл!", vbInformation)
+    Call MsgBox("РЎРѕС…СЂР°РЅРµРЅРѕ РІ С„Р°Р№Р»!", vbInformation)
     Unload Me
 End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: EscapeCsvValue
-' Purpose: Экранирование значения строки для безопасной записи в CSV формат
+' Purpose: Р­РєСЂР°РЅРёСЂРѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёСЏ СЃС‚СЂРѕРєРё РґР»СЏ Р±РµР·РѕРїР°СЃРЅРѕР№ Р·Р°РїРёСЃРё РІ CSV С„РѕСЂРјР°С‚
 ' Parameters:
-' Value - Исходное значение (String)
-' Delimiter - Разделитель, используемый в CSV (String)
-' Returns: String - Экранированное значение, соответствующее стандарту RFC 4180
+' Value - РСЃС…РѕРґРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ (String)
+' Delimiter - Р Р°Р·РґРµР»РёС‚РµР»СЊ, РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РІ CSV (String)
+' Returns: String - Р­РєСЂР°РЅРёСЂРѕРІР°РЅРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ, СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰РµРµ СЃС‚Р°РЅРґР°СЂС‚Сѓ RFC 4180
 '--------------------------------------------------------------------------------
 Private Function EscapeCsvValue(ByVal Value As String, ByVal Delimiter As String) As String
 
-    ' Дублирование двойных кавычек, если они присутствуют в значении
+    ' Р”СѓР±Р»РёСЂРѕРІР°РЅРёРµ РґРІРѕР№РЅС‹С… РєР°РІС‹С‡РµРє, РµСЃР»Рё РѕРЅРё РїСЂРёСЃСѓС‚СЃС‚РІСѓСЋС‚ РІ Р·РЅР°С‡РµРЅРёРё
     If InStr(1, Value, """") > 0 Then
         Value = Replace(Value, """", """""")
     End If
 
-    ' Обертка значения в кавычки, если оно содержит разделитель,
-    ' двойную кавычку или символ переноса строки
+    ' РћР±РµСЂС‚РєР° Р·РЅР°С‡РµРЅРёСЏ РІ РєР°РІС‹С‡РєРё, РµСЃР»Рё РѕРЅРѕ СЃРѕРґРµСЂР¶РёС‚ СЂР°Р·РґРµР»РёС‚РµР»СЊ,
+    ' РґРІРѕР№РЅСѓСЋ РєР°РІС‹С‡РєСѓ РёР»Рё СЃРёРјРІРѕР» РїРµСЂРµРЅРѕСЃР° СЃС‚СЂРѕРєРё
     If InStr(1, Value, Delimiter) > 0 Or InStr(1, Value, """") > 0 Or _
             InStr(1, Value, vbCrLf) > 0 Or InStr(1, Value, vbCr) > 0 Or _
             InStr(1, Value, vbLf) > 0 Then
@@ -157,12 +157,12 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TXTAddIntoTXTFile
-' Purpose: Запись или добавление текста в файл с обработкой ошибок
+' Purpose: Р—Р°РїРёСЃСЊ РёР»Рё РґРѕР±Р°РІР»РµРЅРёРµ С‚РµРєСЃС‚Р° РІ С„Р°Р№Р» СЃ РѕР±СЂР°Р±РѕС‚РєРѕР№ РѕС€РёР±РѕРє
 ' Parameters:
-' FileName - Полный путь к файлу
-' txt - Текст добавляемый в файл
-' AddFile - True (по умолчанию) для создания файла, если он не существует
-' Returns: Boolean - True если запись прошла успешно, False в случае ошибки
+' FileName - РџРѕР»РЅС‹Р№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ
+' txt - РўРµРєСЃС‚ РґРѕР±Р°РІР»СЏРµРјС‹Р№ РІ С„Р°Р№Р»
+' AddFile - True (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ) РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С„Р°Р№Р»Р°, РµСЃР»Рё РѕРЅ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
+' Returns: Boolean - True РµСЃР»Рё Р·Р°РїРёСЃСЊ РїСЂРѕС€Р»Р° СѓСЃРїРµС€РЅРѕ, False РІ СЃР»СѓС‡Р°Рµ РѕС€РёР±РєРё
 '--------------------------------------------------------------------------------
 Public Function TXTAddIntoTXTFile(ByVal FileName As String, ByVal txt As String, Optional AddFile As Boolean = True) As Boolean
     Dim FSO         As Object
@@ -181,8 +181,8 @@ Public Function TXTAddIntoTXTFile(ByVal FileName As String, ByVal txt As String,
 
 ErrorHandler:
     TXTAddIntoTXTFile = False
-    ' Запись ошибки в окно Immediate для отладки
-    Debug.Print "Ошибка TXTAddIntoTXTFile: " & Err.Description
+    ' Р—Р°РїРёСЃСЊ РѕС€РёР±РєРё РІ РѕРєРЅРѕ Immediate РґР»СЏ РѕС‚Р»Р°РґРєРё
+    Debug.Print "РћС€РёР±РєР° TXTAddIntoTXTFile: " & Err.Description
 
 CleanUp:
     If Not ts Is Nothing Then Set ts = Nothing
@@ -191,7 +191,7 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Event: txtInputRng_DropButtonClick
-' Purpose: Скрытие формы, вызов диалога выбора диапазона и повторный показ
+' Purpose: РЎРєСЂС‹С‚РёРµ С„РѕСЂРјС‹, РІС‹Р·РѕРІ РґРёР°Р»РѕРіР° РІС‹Р±РѕСЂР° РґРёР°РїР°Р·РѕРЅР° Рё РїРѕРІС‚РѕСЂРЅС‹Р№ РїРѕРєР°Р·
 '--------------------------------------------------------------------------------
 Private Sub txtInputRng_DropButtonClick()
     Me.Hide
@@ -201,7 +201,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: txtInputRng_KeyDown
-' Purpose: Ограничение навигационных клавиш в поле ввода
+' Purpose: РћРіСЂР°РЅРёС‡РµРЅРёРµ РЅР°РІРёРіР°С†РёРѕРЅРЅС‹С… РєР»Р°РІРёС€ РІ РїРѕР»Рµ РІРІРѕРґР°
 '--------------------------------------------------------------------------------
 Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     Call RestrictNavigationKeys(KeyCode, Shift)
@@ -209,10 +209,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: UserForm_Initialize
-' Purpose: Инициализация формы при запуске (центрирование, заполнение полей)
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ (С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ, Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№)
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
     If TypeName(Selection) = "Range" Then

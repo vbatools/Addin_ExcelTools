@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsProtected 
-   Caption         =   "Защита выделенных листов книги:"
+   Caption         =   "Р—Р°С‰РёС‚Р° РІС‹РґРµР»РµРЅРЅС‹С… Р»РёСЃС‚РѕРІ РєРЅРёРіРё:"
    ClientHeight    =   8880.001
    ClientLeft      =   120
    ClientTop       =   465
@@ -40,8 +40,8 @@ Private Sub btnSetPass_Click()
     With frmMenedgerSheets.listSheets
         iCount = .ListCount - 1
         For i = 0 To iCount
-            If .Selected(i) And .List(i, 4) <> "защита" Then
-                .List(i, 4) = "защита"
+            If .Selected(i) And .List(i, 4) <> "Р·Р°С‰РёС‚Р°" Then
+                .List(i, 4) = "Р·Р°С‰РёС‚Р°"
                 Set Sh = ActiveWorkbook.Sheets(.List(i, 1))
                 Select Case TypeName(Sh)
                     Case "Chart"
@@ -70,16 +70,16 @@ Private Sub btnUnSetPass_Click()
     With frmMenedgerSheets.listSheets
         iCount = .ListCount - 1
         For i = 0 To iCount
-            If .Selected(i) And .List(i, 4) = "защита" Then
+            If .Selected(i) And .List(i, 4) = "Р·Р°С‰РёС‚Р°" Then
                 On Error Resume Next
                 ActiveWorkbook.Sheets(.List(i, 1)).Unprotect Password:=txtPasword.Value
                 Select Case Err.Number
                     Case 0
                     Case 1004
-                        Call MsgBox("Лист: " & ActiveWorkbook.Sheets(.List(i, 1)).Name & vbNewLine & Err.Description, vbCritical, "Ошибка:")
+                        Call MsgBox("Р›РёСЃС‚: " & ActiveWorkbook.Sheets(.List(i, 1)).Name & vbNewLine & Err.Description, vbCritical, "РћС€РёР±РєР°:")
                         Exit Sub
                     Case Else
-                        Call MsgBox(Err.Number & vbNewLine & Err.Description, vbCritical, "Ошибка:")
+                        Call MsgBox(Err.Number & vbNewLine & Err.Description, vbCritical, "РћС€РёР±РєР°:")
                         Exit Sub
                 End Select
                 .List(i, 4) = vbNullString
@@ -102,7 +102,7 @@ Private Sub lbChangeChrPass_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     lbChangeChrPass.Caption = VBA.ChrW$(LOCK_ICON)
     lbChangeChrPass.ForeColor = LOCK_ICON_COLOR

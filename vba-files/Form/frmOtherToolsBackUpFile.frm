@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmOtherToolsBackUpFile 
-   Caption         =   "Резервная копия книги (настройки):"
+   Caption         =   "Р РµР·РµСЂРІРЅР°СЏ РєРѕРїРёСЏ РєРЅРёРіРё (РЅР°СЃС‚СЂРѕР№РєРё):"
    ClientHeight    =   3900
    ClientLeft      =   120
    ClientTop       =   465
@@ -29,7 +29,7 @@ Private Sub btnDeleteSettings_Click()
         txtVersionMain.Value = vbNullString
         txtVersionSub.Value = vbNullString
         chAddDateFileName.Value = False
-        Call MsgBox("Настройки резервного копирования удалены", vbInformation)
+        Call MsgBox("РќР°СЃС‚СЂРѕР№РєРё СЂРµР·РµСЂРІРЅРѕРіРѕ РєРѕРїРёСЂРѕРІР°РЅРёСЏ СѓРґР°Р»РµРЅС‹", vbInformation)
     End If
     Call delFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE)
     Call delFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE_ADD)
@@ -37,7 +37,7 @@ End Sub
 
 Private Sub btnAddSettings_Click()
     If txtPath.Value = vbNullString Then
-        Call MsgBox("Не выбрана папка для резервный копий", vbCritical)
+        Call MsgBox("РќРµ РІС‹Р±СЂР°РЅР° РїР°РїРєР° РґР»СЏ СЂРµР·РµСЂРІРЅС‹Р№ РєРѕРїРёР№", vbCritical)
         Exit Sub
     End If
 
@@ -48,14 +48,14 @@ Private Sub btnAddSettings_Click()
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE, lbDateVersion.Caption)
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE_ADD, chAddDateFileName.Value)
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION, addVersion())
-        Call MsgBox("Настроки для резервного копирования созданы", vbInformation)
+        Call MsgBox("РќР°СЃС‚СЂРѕРєРё РґР»СЏ СЂРµР·РµСЂРІРЅРѕРіРѕ РєРѕРїРёСЂРѕРІР°РЅРёСЏ СЃРѕР·РґР°РЅС‹", vbInformation)
     Else
         If sPath = txtPath.Value Then
-            Call MsgBox("Настроки для резервного копирования были созданы ранее", vbInformation)
+            Call MsgBox("РќР°СЃС‚СЂРѕРєРё РґР»СЏ СЂРµР·РµСЂРІРЅРѕРіРѕ РєРѕРїРёСЂРѕРІР°РЅРёСЏ Р±С‹Р»Рё СЃРѕР·РґР°РЅС‹ СЂР°РЅРµРµ", vbInformation)
         Else
-            If MsgBox("ранее выбраная папка для копий не совпадает с текущей, изменить папку?", vbYesNo + vbQuestion, "") = vbYes Then
+            If MsgBox("СЂР°РЅРµРµ РІС‹Р±СЂР°РЅР°СЏ РїР°РїРєР° РґР»СЏ РєРѕРїРёР№ РЅРµ СЃРѕРІРїР°РґР°РµС‚ СЃ С‚РµРєСѓС‰РµР№, РёР·РјРµРЅРёС‚СЊ РїР°РїРєСѓ?", vbYesNo + vbQuestion, "") = vbYes Then
                 Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_PATH, txtPath.Value)
-                Call MsgBox("Настроки для резервного копирования изменены", vbInformation)
+                Call MsgBox("РќР°СЃС‚СЂРѕРєРё РґР»СЏ СЂРµР·РµСЂРІРЅРѕРіРѕ РєРѕРїРёСЂРѕРІР°РЅРёСЏ РёР·РјРµРЅРµРЅС‹", vbInformation)
             Else
                 txtPath.Value = sPath
             End If
@@ -99,7 +99,7 @@ Private Sub txtVersionSub_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
     Call ConfigureDropButton(txtPath)
@@ -119,7 +119,7 @@ Private Sub UserForm_Initialize()
         End If
     End If
     lbDateVersion.Caption = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_DATE)
-    If lbDateVersion.Caption = vbNullString Then lbDateVersion.Caption = "нет файлов"
+    If lbDateVersion.Caption = vbNullString Then lbDateVersion.Caption = "РЅРµС‚ С„Р°Р№Р»РѕРІ"
     chAddDateFileName.Value = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_DATE_ADD) = "True"
 End Sub
 

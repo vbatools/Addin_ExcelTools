@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataToWorkBooks 
-   Caption         =   "загрузка данных в сквозные книги:"
+   Caption         =   "Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РІ СЃРєРІРѕР·РЅС‹Рµ РєРЅРёРіРё:"
    ClientHeight    =   3000
    ClientLeft      =   120
    ClientTop       =   465
@@ -18,14 +18,14 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataToSheets - Модуль загрузки данных в сквозные листы
+'* UserForm     :   frmDataToSheets - РњРѕРґСѓР»СЊ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… РІ СЃРєРІРѕР·РЅС‹Рµ Р»РёСЃС‚С‹
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   10-06-2026 09:36:16
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 ' ============================================================================
-' КОНСТАНТЫ
+' РљРћРќРЎРўРђРќРўР«
 ' ============================================================================
 Private Const MIN_COLUMNS As Long = 5
 Private Const PATH_COL As Long = 1
@@ -34,7 +34,7 @@ Private Const SHEETNAME_COL As Long = 3
 Private Const TARGET_RANGE_COL As Long = 4
 
 ' ============================================================================
-' ОБРАБОТЧИКИ СОБЫТИЙ
+' РћР‘Р РђР‘РћРўР§РРљР РЎРћР‘Р«РўРР™
 ' ============================================================================
 
 Private Sub btnCancel_Click()
@@ -43,7 +43,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: btnOK_Click
-' Purpose: Главная процедура — валидация, перенос данных в целевые файлы
+' Purpose: Р“Р»Р°РІРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° вЂ” РІР°Р»РёРґР°С†РёСЏ, РїРµСЂРµРЅРѕСЃ РґР°РЅРЅС‹С… РІ С†РµР»РµРІС‹Рµ С„Р°Р№Р»С‹
 '--------------------------------------------------------------------------------
 Private Sub btnOK_Click()
     Dim sAddress    As String
@@ -53,25 +53,25 @@ Private Sub btnOK_Click()
     Dim i As Long, iCount As Long, batchSize As Long
     Dim sPath As String, sFormula As String
 
-    ' --- Валидация ---
+    ' --- Р’Р°Р»РёРґР°С†РёСЏ ---
     sAddress = Trim$(txtInputRng.Value)
     If sAddress = vbNullString Then
-        MsgBox "Не выбран диапазон данных!", vbCritical, "Ошибка"
+        MsgBox "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
     arrData = Range(sAddress).Value2
     If UBound(arrData, 2) < MIN_COLUMNS Then
-        MsgBox "Недостаточно колонок в диапазоне!", vbCritical, "Ошибка"
+        MsgBox "РќРµРґРѕСЃС‚Р°С‚РѕС‡РЅРѕ РєРѕР»РѕРЅРѕРє РІ РґРёР°РїР°Р·РѕРЅРµ!", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
     If Not arrData(1, TARGET_RANGE_COL) Like "$*$*[1-9]:$*$*[1-9]" Then
-        MsgBox "Некорректный формат целевого диапазона!", vbCritical, "Ошибка"
+        MsgBox "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ С„РѕСЂРјР°С‚ С†РµР»РµРІРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°!", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
-    ' --- Инициализация ---
+    ' --- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ ---
     Call DisableApplicationSettings
 
     Set excelApp = New Excel.Application
@@ -83,13 +83,13 @@ Private Sub btnOK_Click()
     sFormula = "='" & ActiveWorkbook.Path & Application.PathSeparator & _
             "[" & ActiveWorkbook.Name & "]" & ActiveSheet.Name & "'!"
 
-    ' --- Основной цикл ---
+    ' --- РћСЃРЅРѕРІРЅРѕР№ С†РёРєР» ---
     For i = 1 To iCount Step batchSize
         sPath = arrData(i, PATH_COL) & arrData(i, FILENAME_COL)
 
-        ' Открываем файл при смене пути
+        ' РћС‚РєСЂС‹РІР°РµРј С„Р°Р№Р» РїСЂРё СЃРјРµРЅРµ РїСѓС‚Рё
         If Not FileHave(sPath, vbNormal) Then
-            ' Файл не существует — пропуск записи
+            ' Р¤Р°Р№Р» РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚ вЂ” РїСЂРѕРїСѓСЃРє Р·Р°РїРёСЃРё
         ElseIf targetBook Is Nothing Then
             Set targetBook = excelApp.Workbooks.Open(sPath, False, False)
         ElseIf targetBook.FullName <> sPath Then
@@ -97,7 +97,7 @@ Private Sub btnOK_Click()
             Set targetBook = excelApp.Workbooks.Open(sPath, False, False)
         End If
 
-        ' Запись данных
+        ' Р—Р°РїРёСЃСЊ РґР°РЅРЅС‹С…
         If Not targetBook Is Nothing Then
             If HaveSheetInFile(targetBook, arrData(i, SHEETNAME_COL)) Then
                 With targetBook.Worksheets(arrData(i, SHEETNAME_COL)).Range(arrData(i, TARGET_RANGE_COL))
@@ -110,7 +110,7 @@ Private Sub btnOK_Click()
         Call UpdateProgress(i / iCount)
     Next i
 
-    ' --- Завершение ---
+    ' --- Р—Р°РІРµСЂС€РµРЅРёРµ ---
     If Not targetBook Is Nothing Then targetBook.Close True
     If Not excelApp Is Nothing Then
         excelApp.Quit
@@ -133,10 +133,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: UserForm_Initialize
-' Purpose: Инициализация формы: центрирование и настройка полей ввода
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹: С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ Рё РЅР°СЃС‚СЂРѕР№РєР° РїРѕР»РµР№ РІРІРѕРґР°
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
     If TypeName(Selection) = "Range" Then
@@ -148,9 +148,9 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: UpdateProgress
-' Purpose: Обновляет индикатор прогресса выполнения
+' Purpose: РћР±РЅРѕРІР»СЏРµС‚ РёРЅРґРёРєР°С‚РѕСЂ РїСЂРѕРіСЂРµСЃСЃР° РІС‹РїРѕР»РЅРµРЅРёСЏ
 ' Parameters:
-' pct - доля выполненной работы (от 0 до 1)
+' pct - РґРѕР»СЏ РІС‹РїРѕР»РЅРµРЅРЅРѕР№ СЂР°Р±РѕС‚С‹ (РѕС‚ 0 РґРѕ 1)
 '--------------------------------------------------------------------------------
 Private Sub UpdateProgress(ByVal pct As Single)
     On Error Resume Next

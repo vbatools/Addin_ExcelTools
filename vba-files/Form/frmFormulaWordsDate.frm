@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaWordsDate 
-   Caption         =   "Создание формулы дата прописью:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С„РѕСЂРјСѓР»С‹ РґР°С‚Р° РїСЂРѕРїРёСЃСЊСЋ:"
    ClientHeight    =   5940
    ClientLeft      =   120
    ClientTop       =   465
@@ -17,10 +17,10 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const SKOBKI_VAL1 As String = "(01.01.2001 первое января две тысячи первого года)"
-Private Const SKOBKI_VAL2 As String = "01.01.2001 (первое января две тысячи первого года)"
-Private Const SKOBKI_VAL3 As String = "(01.01.2001) первое января две тысячи первого года"
-Private Const SKOBKI_VAL4 As String = "(первое января две тысячи первого года)"
+Private Const SKOBKI_VAL1 As String = "(01.01.2001 РїРµСЂРІРѕРµ СЏРЅРІР°СЂСЏ РґРІРµ С‚С‹СЃСЏС‡Рё РїРµСЂРІРѕРіРѕ РіРѕРґР°)"
+Private Const SKOBKI_VAL2 As String = "01.01.2001 (РїРµСЂРІРѕРµ СЏРЅРІР°СЂСЏ РґРІРµ С‚С‹СЃСЏС‡Рё РїРµСЂРІРѕРіРѕ РіРѕРґР°)"
+Private Const SKOBKI_VAL3 As String = "(01.01.2001) РїРµСЂРІРѕРµ СЏРЅРІР°СЂСЏ РґРІРµ С‚С‹СЃСЏС‡Рё РїРµСЂРІРѕРіРѕ РіРѕРґР°"
+Private Const SKOBKI_VAL4 As String = "(РїРµСЂРІРѕРµ СЏРЅРІР°СЂСЏ РґРІРµ С‚С‹СЃСЏС‡Рё РїРµСЂРІРѕРіРѕ РіРѕРґР°)"
 
 Dim clDate          As clsCalendarDate
 
@@ -39,7 +39,7 @@ Private Sub btnOK_Click()
 
     dtDate = VBA.CDate(txtValue.Value)
     With activeCell
-        .FormulaR1C1 = "=ДАТАПРОПИСЬЮ(" & VBA.Chr$(34) & dtDate & VBA.Chr$(34) & "," & cmbCase.ListIndex & "," & _
+        .FormulaR1C1 = "=Р”РђРўРђРџР РћРџРРЎР¬Р®(" & VBA.Chr$(34) & dtDate & VBA.Chr$(34) & "," & cmbCase.ListIndex & "," & _
                 cmbTypeDate.ListIndex & "," & iSkobki & "," & bFlag & "," & _
                 cmbRegistr.ListIndex & "," & VBA.CBool(chcDublVal.Value) & ")"
 
@@ -137,25 +137,25 @@ Private Sub txtValue_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     With cmbRegistr
-        .AddItem "все строчные"
-        .AddItem "ВСЕ ПРОПИСНЫЕ"
-        .AddItem "Как в предложениях"
-        .AddItem "Начинать С Прописных"
+        .AddItem "РІСЃРµ СЃС‚СЂРѕС‡РЅС‹Рµ"
+        .AddItem "Р’РЎР• РџР РћРџРРЎРќР«Р•"
+        .AddItem "РљР°Рє РІ РїСЂРµРґР»РѕР¶РµРЅРёСЏС…"
+        .AddItem "РќР°С‡РёРЅР°С‚СЊ РЎ РџСЂРѕРїРёСЃРЅС‹С…"
         .ListIndex = 0
     End With
 
     With cmbCase
-        .AddItem "Именительный"
-        .AddItem "Родительный"
+        .AddItem "РРјРµРЅРёС‚РµР»СЊРЅС‹Р№"
+        .AddItem "Р РѕРґРёС‚РµР»СЊРЅС‹Р№"
         .ListIndex = 0
     End With
     With cmbTypeDate
-        .AddItem "Все прописью"
-        .AddItem "Месяц прописью"
+        .AddItem "Р’СЃРµ РїСЂРѕРїРёСЃСЊСЋ"
+        .AddItem "РњРµСЃСЏС† РїСЂРѕРїРёСЃСЊСЋ"
         .ListIndex = 0
     End With
     With cmbSkobki
@@ -181,7 +181,7 @@ Private Sub addFormula()
     Dim dtDate      As Date
     dtDate = VBA.CDate(txtValue.TEXT)
 
-    txtPropis.TEXT = ДАТАПРОПИСЬЮ(dtDate, _
+    txtPropis.TEXT = Р”РђРўРђРџР РћРџРРЎР¬Р®(dtDate, _
             cmbCase.ListIndex, _
             cmbTypeDate.ListIndex, _
             cmbSkobki.ListIndex, _

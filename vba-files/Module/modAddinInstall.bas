@@ -19,9 +19,9 @@ Public Sub InstallationAddinExcelTools()
             Application.PathSeparator)
 
     If Dir(addFolder, vbDirectory) = vbNullString Then
-        MsgBox "К сожалению, программа не может установить надстройку на этот компьютер." & vbCrLf & _
-                "Отсутствует каталог надстроек." & vbCrLf & _
-                "Пожалуйста, свяжитесь с разработчиком программы.", vbCritical, "Не удалось установить надстройку:"
+        MsgBox "Рљ СЃРѕР¶Р°Р»РµРЅРёСЋ, РїСЂРѕРіСЂР°РјРјР° РЅРµ РјРѕР¶РµС‚ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°РґСЃС‚СЂРѕР№РєСѓ РЅР° СЌС‚РѕС‚ РєРѕРјРїСЊСЋС‚РµСЂ." & vbCrLf & _
+                "РћС‚СЃСѓС‚СЃС‚РІСѓРµС‚ РєР°С‚Р°Р»РѕРі РЅР°РґСЃС‚СЂРѕРµРє." & vbCrLf & _
+                "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, СЃРІСЏР¶РёС‚РµСЃСЊ СЃ СЂР°Р·СЂР°Р±РѕС‚С‡РёРєРѕРј РїСЂРѕРіСЂР°РјРјС‹.", vbCritical, "РќРµ СѓРґР°Р»РѕСЃСЊ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°РґСЃС‚СЂРѕР№РєСѓ:"
         Exit Sub
     End If
 
@@ -37,8 +37,8 @@ Public Sub InstallationAddinExcelTools()
     End If
 
     If WorkbookIsOpen(modAddinConst.NAME_ADDIN & ".xlam") Then
-        MsgBox "Файл надстройки уже открыт." & vbCrLf & _
-                "Возможно, он был установлен ранее.", vbCritical, "Не удалось установить надстройку:"
+        MsgBox "Р¤Р°Р№Р» РЅР°РґСЃС‚СЂРѕР№РєРё СѓР¶Рµ РѕС‚РєСЂС‹С‚." & vbCrLf & _
+                "Р’РѕР·РјРѕР¶РЅРѕ, РѕРЅ Р±С‹Р» СѓСЃС‚Р°РЅРѕРІР»РµРЅ СЂР°РЅРµРµ.", vbCritical, "РќРµ СѓРґР°Р»РѕСЃСЊ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°РґСЃС‚СЂРѕР№РєСѓ:"
         Exit Sub
     End If
 
@@ -53,9 +53,9 @@ Public Sub InstallationAddinExcelTools()
     Application.EnableEvents = True
     Application.DisplayAlerts = True
 
-    MsgBox "Программа была успешно установлена!" & vbCrLf & _
-            "Пожалуйста, откройте или создайте новый документ.", vbInformation, _
-            "Установка надстройки:" & modAddinConst.NAME_ADDIN
+    MsgBox "РџСЂРѕРіСЂР°РјРјР° Р±С‹Р»Р° СѓСЃРїРµС€РЅРѕ СѓСЃС‚Р°РЅРѕРІР»РµРЅР°!" & vbCrLf & _
+            "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РѕС‚РєСЂРѕР№С‚Рµ РёР»Рё СЃРѕР·РґР°Р№С‚Рµ РЅРѕРІС‹Р№ РґРѕРєСѓРјРµРЅС‚.", vbInformation, _
+            "РЈСЃС‚Р°РЅРѕРІРєР° РЅР°РґСЃС‚СЂРѕР№РєРё:" & modAddinConst.NAME_ADDIN
 
     ThisWorkbook.Close False
     Exit Sub
@@ -65,8 +65,8 @@ InstallationAdd_Err:
     Application.DisplayAlerts = True
 
     If Err.Number = 1004 Then
-        MsgBox "Чтобы установить надстройку, пожалуйста, закройте этот файл и запустите его снова.", _
-                vbCritical, "Установка:"
+        MsgBox "Р§С‚РѕР±С‹ СѓСЃС‚Р°РЅРѕРІРёС‚СЊ РЅР°РґСЃС‚СЂРѕР№РєСѓ, РїРѕР¶Р°Р»СѓР№СЃС‚Р°, Р·Р°РєСЂРѕР№С‚Рµ СЌС‚РѕС‚ С„Р°Р№Р» Рё Р·Р°РїСѓСЃС‚РёС‚Рµ РµРіРѕ СЃРЅРѕРІР°.", _
+                vbCritical, "РЈСЃС‚Р°РЅРѕРІРєР°:"
     Else
         MsgBox Err.Description, vbCritical
     End If

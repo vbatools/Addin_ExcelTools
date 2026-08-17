@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataMergeText 
-   Caption         =   "Объединение ячеек с сохранением текста:"
+   Caption         =   "РћР±СЉРµРґРёРЅРµРЅРёРµ СЏС‡РµРµРє СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј С‚РµРєСЃС‚Р°:"
    ClientHeight    =   4830
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataMergeText - объединение значений ячеек без потери данных
+'* UserForm     :   frmDataMergeText - РѕР±СЉРµРґРёРЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ СЏС‡РµРµРє Р±РµР· РїРѕС‚РµСЂРё РґР°РЅРЅС‹С…
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   11-06-2026 10:14:25
@@ -32,19 +32,19 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: btnOK_Click
-' Purpose: Объединяет ячейки выделенного диапазона с сохранением текста
-'          Текст объединяется через указанный разделитель
-' Parameters: нет
+' Purpose: РћР±СЉРµРґРёРЅСЏРµС‚ СЏС‡РµР№РєРё РІС‹РґРµР»РµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј С‚РµРєСЃС‚Р°
+'          РўРµРєСЃС‚ РѕР±СЉРµРґРёРЅСЏРµС‚СЃСЏ С‡РµСЂРµР· СѓРєР°Р·Р°РЅРЅС‹Р№ СЂР°Р·РґРµР»РёС‚РµР»СЊ
+' Parameters: РЅРµС‚
 '--------------------------------------------------------------------------------
 Private Sub btnOK_Click()
 
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Не выбран диапазон данных!", vbCritical)
+        Call MsgBox("РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical)
         Exit Sub
     End If
 
     If ActiveSheet.ProtectContents Then
-        Call MsgBox("Лист [" & ActiveSheet.Name & "] - защищен от изменений, снимите пароль!", vbCritical)
+        Call MsgBox("Р›РёСЃС‚ [" & ActiveSheet.Name & "] - Р·Р°С‰РёС‰РµРЅ РѕС‚ РёР·РјРµРЅРµРЅРёР№, СЃРЅРёРјРёС‚Рµ РїР°СЂРѕР»СЊ!", vbCritical)
         Exit Sub
     End If
 
@@ -65,7 +65,7 @@ Private Sub btnOK_Click()
     arr = rng.Value2
 
     If Not IsArray(arr) Then
-        Call MsgBox("Выбрана одна ячейка!", vbCritical)
+        Call MsgBox("Р’С‹Р±СЂР°РЅР° РѕРґРЅР° СЏС‡РµР№РєР°!", vbCritical)
         Exit Sub
     End If
 
@@ -132,13 +132,13 @@ Private Sub btnOK_Click()
     rng.Value2 = arrVal
 
     Call RestoreApplicationSettings
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
     Unload Me
     Exit Sub
 
 ErrorHandler:
     Call RestoreApplicationSettings
-    MsgBox "Ошибка: " & Err.Description, vbCritical, "Ошибка"
+    MsgBox "РћС€РёР±РєР°: " & Err.Description, vbCritical, "РћС€РёР±РєР°"
 End Sub
 
 Private Sub txtStepMerge_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
@@ -146,6 +146,6 @@ Private Sub txtStepMerge_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub

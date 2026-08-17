@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaQRCodeAsFile 
-   Caption         =   "Создание файлов QR код:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С„Р°Р№Р»РѕРІ QR РєРѕРґ:"
    ClientHeight    =   4035
    ClientLeft      =   120
    ClientTop       =   465
@@ -26,13 +26,13 @@ Private Sub btnOK_Click()
     Dim errMsg      As String
     Dim sPath       As String
     If txtPath.Value = vbNullString Then
-        errMsg = "Не задана папка для файлов"
+        errMsg = "РќРµ Р·Р°РґР°РЅР° РїР°РїРєР° РґР»СЏ С„Р°Р№Р»РѕРІ"
     End If
     sPath = txtPath.Value & Application.PathSeparator
 
     If txtRange.Value = vbNullString Then
         If errMsg <> vbNullString Then errMsg = errMsg & vbNewLine
-        errMsg = "Не выбран диапазон с данными"
+        errMsg = "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ СЃ РґР°РЅРЅС‹РјРё"
     End If
 
     If errMsg <> vbNullString Then
@@ -55,17 +55,17 @@ Private Sub btnOK_Click()
         bName = True
         If iCount <> UBound(arrName, 1) Then
             If errMsg <> vbNullString Then errMsg = errMsg & vbNewLine
-            errMsg = "Выбраны разные размеры диапазанов"
+            errMsg = "Р’С‹Р±СЂР°РЅС‹ СЂР°Р·РЅС‹Рµ СЂР°Р·РјРµСЂС‹ РґРёР°РїР°Р·Р°РЅРѕРІ"
         End If
     End If
 
     If errMsg <> vbNullString Then
-        Call MsgBox(errMsg, vbCritical, "Создание QR файлов:")
+        Call MsgBox(errMsg, vbCritical, "РЎРѕР·РґР°РЅРёРµ QR С„Р°Р№Р»РѕРІ:")
         Exit Sub
     End If
 
     Dim bType       As Boolean
-    If cmbType.Value = "Квадрат" Then bType = True
+    If cmbType.Value = "РљРІР°РґСЂР°С‚" Then bType = True
     Dim errQR       As QRCodegenEcc
 
     Select Case cmbError.Value
@@ -167,7 +167,7 @@ Private Sub txtRange_DropButtonClick()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     Dim i           As Integer
@@ -183,8 +183,8 @@ Private Sub UserForm_Initialize()
     cmbError.AddItem "M"
     cmbError.AddItem "Q"
     cmbError.AddItem "H"
-    cmbType.AddItem "Квадрат"
-    cmbType.AddItem "Плавно"
+    cmbType.AddItem "РљРІР°РґСЂР°С‚"
+    cmbType.AddItem "РџР»Р°РІРЅРѕ"
 
     cmbType.Value = cmbType.List(1)
     cmbSize.Value = cmbSize.List(1)

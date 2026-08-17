@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsExportSheets 
-   Caption         =   "Экспорт листов как книги:"
+   Caption         =   "Р­РєСЃРїРѕСЂС‚ Р»РёСЃС‚РѕРІ РєР°Рє РєРЅРёРіРё:"
    ClientHeight    =   7080
    ClientLeft      =   120
    ClientTop       =   465
@@ -36,7 +36,7 @@ Private Sub btnOK_Click()
     sPathParent = txtDir.Value & Application.PathSeparator
 
     If Not FileHave(sPathParent, vbDirectory) Then
-        Call MsgBox("Задан не существующий путь к файлу!", vbCritical)
+        Call MsgBox("Р—Р°РґР°РЅ РЅРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РїСѓС‚СЊ Рє С„Р°Р№Р»Сѓ!", vbCritical)
         Exit Sub
     End If
 
@@ -100,7 +100,7 @@ Private Sub btnOK_Click()
         Next i
     End With
     Call RestoreApplicationSettings
-    If iCountFiles > 0 Then Call MsgBox("Выгружено [" & iCountFiles & "] - файлов", vbInformation)
+    If iCountFiles > 0 Then Call MsgBox("Р’С‹РіСЂСѓР¶РµРЅРѕ [" & iCountFiles & "] - С„Р°Р№Р»РѕРІ", vbInformation)
     If chbOpenPath.Value Then Call OpenPath(sPathParent)
     Unload Me
 End Sub
@@ -116,7 +116,7 @@ Private Sub txtDir_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift A
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     txtDir.Value = ThisWorkbook.Path
     Call ConfigureDropButton(txtDir)

@@ -4,9 +4,9 @@ Option Private Module
 
 '--------------------------------------------------------------------------------
 ' Procedure: unmergeCells
-' Purpose: Разъединяет объединённые ячейки и заполняет все ячейки бывшей
-'          объединённой области значением из первой ячейки
-' Parameters: нет
+' Purpose: Р Р°Р·СЉРµРґРёРЅСЏРµС‚ РѕР±СЉРµРґРёРЅС‘РЅРЅС‹Рµ СЏС‡РµР№РєРё Рё Р·Р°РїРѕР»РЅСЏРµС‚ РІСЃРµ СЏС‡РµР№РєРё Р±С‹РІС€РµР№
+'          РѕР±СЉРµРґРёРЅС‘РЅРЅРѕР№ РѕР±Р»Р°СЃС‚Рё Р·РЅР°С‡РµРЅРёРµРј РёР· РїРµСЂРІРѕР№ СЏС‡РµР№РєРё
+' Parameters: РЅРµС‚
 '--------------------------------------------------------------------------------
 Public Sub UnMergeCells()
 
@@ -21,23 +21,23 @@ Public Sub UnMergeCells()
     Dim index       As Long
     Dim sRng        As String
 
-    ' Получаем пересечение используемого диапазона листа и выделенного диапазона
+    ' РџРѕР»СѓС‡Р°РµРј РїРµСЂРµСЃРµС‡РµРЅРёРµ РёСЃРїРѕР»СЊР·СѓРµРјРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° Р»РёСЃС‚Р° Рё РІС‹РґРµР»РµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
     sRng = SelectRangeViaDialog()
     If sRng = vbNullString Then Exit Sub
     Set targetRange = Range(sRng)
     If targetRange Is Nothing Then Exit Sub
 
-    ' Предварительное определение размера массива
+    ' РџСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕРµ РѕРїСЂРµРґРµР»РµРЅРёРµ СЂР°Р·РјРµСЂР° РјР°СЃСЃРёРІР°
     mergedCount = 0
     ReDim mergedAreas(1 To targetRange.Count)
     ReDim mergedValues(1 To targetRange.Count)
 
-    ' Первый проход: сбор данных об объединённых ячейках
+    ' РџРµСЂРІС‹Р№ РїСЂРѕС…РѕРґ: СЃР±РѕСЂ РґР°РЅРЅС‹С… РѕР± РѕР±СЉРµРґРёРЅС‘РЅРЅС‹С… СЏС‡РµР№РєР°С…
     For Each currentArea In targetRange.Areas
         For Each currentCell In currentArea
             If currentCell.MergeCells Then
                 Set mergedArea = currentCell.MergeArea
-                ' Проверяем, что это первая ячейка в объединённой области
+                ' РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СЌС‚Рѕ РїРµСЂРІР°СЏ СЏС‡РµР№РєР° РІ РѕР±СЉРµРґРёРЅС‘РЅРЅРѕР№ РѕР±Р»Р°СЃС‚Рё
                 If currentCell.Address = mergedArea.Cells(1).Address Then
                     mergedCount = mergedCount + 1
                     Set mergedAreas(mergedCount) = mergedArea
@@ -47,18 +47,18 @@ Public Sub UnMergeCells()
         Next currentCell
     Next currentArea
 
-    ' Если нет объединённых ячеек, завершаем
+    ' Р•СЃР»Рё РЅРµС‚ РѕР±СЉРµРґРёРЅС‘РЅРЅС‹С… СЏС‡РµРµРє, Р·Р°РІРµСЂС€Р°РµРј
     If mergedCount = 0 Then Exit Sub
 
-    ' Оптимизация производительности
+    ' РћРїС‚РёРјРёР·Р°С†РёСЏ РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚Рё
     Call DisableApplicationSettings
     Call SaveUndoInfo(targetRange, True, False)
-    ' Второй проход: разъединение и заполнение
+    ' Р’С‚РѕСЂРѕР№ РїСЂРѕС…РѕРґ: СЂР°Р·СЉРµРґРёРЅРµРЅРёРµ Рё Р·Р°РїРѕР»РЅРµРЅРёРµ
     For index = 1 To mergedCount
         mergedAreas(index).UnMerge
         mergedAreas(index).Value = mergedValues(index)
     Next index
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
-    ' Восстановление настроек
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
+    ' Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РЅР°СЃС‚СЂРѕРµРє
     Call RestoreApplicationSettings
 End Sub

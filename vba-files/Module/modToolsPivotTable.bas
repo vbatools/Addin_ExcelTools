@@ -3,21 +3,21 @@ Option Explicit
 Option Private Module
 
 Public Sub DialogPivotFieldProperties()
-    'диалог параметров поля сводной таблицы
+    'РґРёР°Р»РѕРі РїР°СЂР°РјРµС‚СЂРѕРІ РїРѕР»СЏ СЃРІРѕРґРЅРѕР№ С‚Р°Р±Р»РёС†С‹
     On Error Resume Next
     Application.Dialogs(xlDialogPivotFieldProperties).Show
 End Sub
 
 Public Sub DialogPivotShowPages()
-    'диалог разбить сводную по листам фильтра
+    'РґРёР°Р»РѕРі СЂР°Р·Р±РёС‚СЊ СЃРІРѕРґРЅСѓСЋ РїРѕ Р»РёСЃС‚Р°Рј С„РёР»СЊС‚СЂР°
     On Error Resume Next
     Application.Dialogs(xlDialogPivotShowPages).Show
 End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: RefreshPivotCachesClearMissingItems
-' Purpose: Выполняет очистку кэшей сводных таблиц в книге, удаляя устаревшие
-'          элементы из фильтров (устанавливает MissingItemsLimit = None).
+' Purpose: Р’С‹РїРѕР»РЅСЏРµС‚ РѕС‡РёСЃС‚РєСѓ РєСЌС€РµР№ СЃРІРѕРґРЅС‹С… С‚Р°Р±Р»РёС† РІ РєРЅРёРіРµ, СѓРґР°Р»СЏСЏ СѓСЃС‚Р°СЂРµРІС€РёРµ
+'          СЌР»РµРјРµРЅС‚С‹ РёР· С„РёР»СЊС‚СЂРѕРІ (СѓСЃС‚Р°РЅР°РІР»РёРІР°РµС‚ MissingItemsLimit = None).
 '--------------------------------------------------------------------------------
 Public Sub RefreshPivotCachesClearMissingItems()
     Dim ws          As Worksheet
@@ -25,21 +25,21 @@ Public Sub RefreshPivotCachesClearMissingItems()
     Dim lProtectedCount As Long
     Dim lProcessedCount As Long
 
-    ' Инициализация счетчиков состояния
+    ' РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ СЃС‡РµС‚С‡РёРєРѕРІ СЃРѕСЃС‚РѕСЏРЅРёСЏ
     lProtectedCount = 0
     lProcessedCount = 0
 
-    Application.ScreenUpdating = False    ' Блокировка обновления экрана для ускорения
+    Application.ScreenUpdating = False    ' Р‘Р»РѕРєРёСЂРѕРІРєР° РѕР±РЅРѕРІР»РµРЅРёСЏ СЌРєСЂР°РЅР° РґР»СЏ СѓСЃРєРѕСЂРµРЅРёСЏ
 
-    ' Перебор всех листов в активной книге
+    ' РџРµСЂРµР±РѕСЂ РІСЃРµС… Р»РёСЃС‚РѕРІ РІ Р°РєС‚РёРІРЅРѕР№ РєРЅРёРіРµ
     For Each ws In ActiveWorkbook.Worksheets
         If ws.ProtectContents Then
-            ' Фиксация количества защищенных листов для отчета
+            ' Р¤РёРєСЃР°С†РёСЏ РєРѕР»РёС‡РµСЃС‚РІР° Р·Р°С‰РёС‰РµРЅРЅС‹С… Р»РёСЃС‚РѕРІ РґР»СЏ РѕС‚С‡РµС‚Р°
             lProtectedCount = lProtectedCount + 1
         Else
-            ' Обработка сводных таблиц на незащищенном листе
+            ' РћР±СЂР°Р±РѕС‚РєР° СЃРІРѕРґРЅС‹С… С‚Р°Р±Р»РёС† РЅР° РЅРµР·Р°С‰РёС‰РµРЅРЅРѕРј Р»РёСЃС‚Рµ
             For Each pvt In ws.PivotTables
-                ' Локальная обработка ошибок для совместимости с Моделью Данных
+                ' Р›РѕРєР°Р»СЊРЅР°СЏ РѕР±СЂР°Р±РѕС‚РєР° РѕС€РёР±РѕРє РґР»СЏ СЃРѕРІРјРµСЃС‚РёРјРѕСЃС‚Рё СЃ РњРѕРґРµР»СЊСЋ Р”Р°РЅРЅС‹С…
                 On Error Resume Next
                 pvt.PivotCache.MissingItemsLimit = xlMissingItemsNone
 
@@ -53,24 +53,24 @@ Public Sub RefreshPivotCachesClearMissingItems()
 
     ActiveWorkbook.RefreshAll
 
-    Application.ScreenUpdating = True    ' Восстановление обновления экрана
+    Application.ScreenUpdating = True    ' Р’РѕСЃСЃС‚Р°РЅРѕРІР»РµРЅРёРµ РѕР±РЅРѕРІР»РµРЅРёСЏ СЌРєСЂР°РЅР°
 
-    ' Вывод итогового сообщения пользователю
+    ' Р’С‹РІРѕРґ РёС‚РѕРіРѕРІРѕРіРѕ СЃРѕРѕР±С‰РµРЅРёСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЋ
     If lProtectedCount > 0 Then
         MsgBox _
-                "Операция завершена частично." & vbNewLine & vbNewLine & _
-                "Обработано таблиц: " & lProcessedCount & "." & vbNewLine & _
-                "Пропущено защищенных листов: " & lProtectedCount & "." & vbNewLine & vbNewLine & _
-                "Для выполнения очистки на защищенных листах необходимо снять защиту " & _
-                "через меню 'Рецензирование' -> 'Снять защиту листа'.", _
+                "РћРїРµСЂР°С†РёСЏ Р·Р°РІРµСЂС€РµРЅР° С‡Р°СЃС‚РёС‡РЅРѕ." & vbNewLine & vbNewLine & _
+                "РћР±СЂР°Р±РѕС‚Р°РЅРѕ С‚Р°Р±Р»РёС†: " & lProcessedCount & "." & vbNewLine & _
+                "РџСЂРѕРїСѓС‰РµРЅРѕ Р·Р°С‰РёС‰РµРЅРЅС‹С… Р»РёСЃС‚РѕРІ: " & lProtectedCount & "." & vbNewLine & vbNewLine & _
+                "Р”Р»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ РѕС‡РёСЃС‚РєРё РЅР° Р·Р°С‰РёС‰РµРЅРЅС‹С… Р»РёСЃС‚Р°С… РЅРµРѕР±С…РѕРґРёРјРѕ СЃРЅСЏС‚СЊ Р·Р°С‰РёС‚Сѓ " & _
+                "С‡РµСЂРµР· РјРµРЅСЋ 'Р РµС†РµРЅР·РёСЂРѕРІР°РЅРёРµ' -> 'РЎРЅСЏС‚СЊ Р·Р°С‰РёС‚Сѓ Р»РёСЃС‚Р°'.", _
                 vbExclamation, _
-                "Внимание: Ограничение доступа"
+                "Р’РЅРёРјР°РЅРёРµ: РћРіСЂР°РЅРёС‡РµРЅРёРµ РґРѕСЃС‚СѓРїР°"
     Else
         MsgBox _
-                "Кэши всех сводных таблиц (" & lProcessedCount & ") успешно обновлены. " & _
-                "Устаревшие элементы удалены.", _
+                "РљСЌС€Рё РІСЃРµС… СЃРІРѕРґРЅС‹С… С‚Р°Р±Р»РёС† (" & lProcessedCount & ") СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅС‹. " & _
+                "РЈСЃС‚Р°СЂРµРІС€РёРµ СЌР»РµРјРµРЅС‚С‹ СѓРґР°Р»РµРЅС‹.", _
                 vbInformation + vbOKOnly, _
-                "Успешное выполнение"
+                "РЈСЃРїРµС€РЅРѕРµ РІС‹РїРѕР»РЅРµРЅРёРµ"
     End If
 
 End Sub

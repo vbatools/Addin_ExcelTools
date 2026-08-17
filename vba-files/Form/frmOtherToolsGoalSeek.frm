@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmOtherToolsGoalSeek 
-   Caption         =   "Собр данных со сквозных листов:"
+   Caption         =   "РЎРѕР±СЂ РґР°РЅРЅС‹С… СЃРѕ СЃРєРІРѕР·РЅС‹С… Р»РёСЃС‚РѕРІ:"
    ClientHeight    =   2475
    ClientLeft      =   120
    ClientTop       =   465
@@ -24,7 +24,7 @@ End Sub
 
 Private Sub btnOK_Click()
     If txtSetCells.Value = vbNullString Or txtValues.Value = vbNullString Or txtChangeCells.Value = vbNullString Then
-        Call MsgBox("Не все параметры выбраны", vbCritical)
+        Call MsgBox("РќРµ РІСЃРµ РїР°СЂР°РјРµС‚СЂС‹ РІС‹Р±СЂР°РЅС‹", vbCritical)
         Exit Sub
     End If
 
@@ -41,16 +41,16 @@ Private Sub btnOK_Click()
     iCount = rngSetCells.Cells.Count
 
     If iCount <> rngValues.Cells.Count Then
-        errMsg = "значения"
+        errMsg = "Р·РЅР°С‡РµРЅРёСЏ"
     End If
 
     If iCount <> rngChangeCells.Cells.Count Then
         If errMsg <> vbNullString Then errMsg = errMsg & vbNewLine
-        errMsg = errMsg & "изменяемые ячейки"
+        errMsg = errMsg & "РёР·РјРµРЅСЏРµРјС‹Рµ СЏС‡РµР№РєРё"
     End If
 
     If errMsg <> vbNullString Then
-        Call MsgBox("Не равное количество элементов:" & vbNewLine & errMsg, vbCritical)
+        Call MsgBox("РќРµ СЂР°РІРЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ:" & vbNewLine & errMsg, vbCritical)
         Exit Sub
     End If
 
@@ -96,7 +96,7 @@ Private Sub txtValues_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shif
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     Call ConfigureDropButton(txtSetCells)

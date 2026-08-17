@@ -183,7 +183,7 @@ Private Sub UserForm_Activate()
 
     Call SwitchVisibleButton(pickerMode)
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub
 

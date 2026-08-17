@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerNames 
-   Caption         =   "Менеджер имен:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ РёРјРµРЅ:"
    ClientHeight    =   8310.001
    ClientLeft      =   120
    ClientTop       =   465
@@ -18,26 +18,26 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '--------------------------------------------------------------------------------
-' Константы фильтров и отображаемых значений
+' РљРѕРЅСЃС‚Р°РЅС‚С‹ С„РёР»СЊС‚СЂРѕРІ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… Р·РЅР°С‡РµРЅРёР№
 '--------------------------------------------------------------------------------
-' Фильтры списка
-Private Const FILTER_ALL As String = "все"
-Private Const FILTER_NONE As String = "ничего"
-Private Const FILTER_REVERSE As String = "обратное выделение"
-Private Const FILTER_VISIBLE As String = "видимые"
-Private Const FILTER_HIDDEN As String = "скрытые"
-Private Const FILTER_ERROR As String = "с ошибками"
-Private Const FILTER_OUT_ERROR As String = "без ошибок"
-Private Const FILTER_WB As String = "в книге"
-Private Const FILTER_SH As String = "в листе"
+' Р¤РёР»СЊС‚СЂС‹ СЃРїРёСЃРєР°
+Private Const FILTER_ALL As String = "РІСЃРµ"
+Private Const FILTER_NONE As String = "РЅРёС‡РµРіРѕ"
+Private Const FILTER_REVERSE As String = "РѕР±СЂР°С‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
+Private Const FILTER_VISIBLE As String = "РІРёРґРёРјС‹Рµ"
+Private Const FILTER_HIDDEN As String = "СЃРєСЂС‹С‚С‹Рµ"
+Private Const FILTER_ERROR As String = "СЃ РѕС€РёР±РєР°РјРё"
+Private Const FILTER_OUT_ERROR As String = "Р±РµР· РѕС€РёР±РѕРє"
+Private Const FILTER_WB As String = "РІ РєРЅРёРіРµ"
+Private Const FILTER_SH As String = "РІ Р»РёСЃС‚Рµ"
 
-Private Const VALUE_VISIBLE As String = "видимое"
-Private Const VALUE_HIDDEN As String = "скрытое"
-Private Const VALUE_WB As String = "Книга"
+Private Const VALUE_VISIBLE As String = "РІРёРґРёРјРѕРµ"
+Private Const VALUE_HIDDEN As String = "СЃРєСЂС‹С‚РѕРµ"
+Private Const VALUE_WB As String = "РљРЅРёРіР°"
 
 Private Sub btnDelete_Click()
     If listNames.ListCount - 1 < 0 Then Exit Sub
-    If MsgBox("Продолжить, удаление имен листов?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
+    If MsgBox("РџСЂРѕРґРѕР»Р¶РёС‚СЊ, СѓРґР°Р»РµРЅРёРµ РёРјРµРЅ Р»РёСЃС‚РѕРІ?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
     Dim i           As Long
     Dim wb          As Workbook
     Set wb = Workbooks(cmbWB.Value)
@@ -114,7 +114,7 @@ Private Sub cmbFilter_Change()
                 Call SelectedItemListSheets(listNames, "*" & .Value & "*", 1)
             End If
         Else
-            ' Оптимизация: Direct access по имени без необходимости предварительной активации
+            ' РћРїС‚РёРјРёР·Р°С†РёСЏ: Direct access РїРѕ РёРјРµРЅРё Р±РµР· РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕР№ Р°РєС‚РёРІР°С†РёРё
             Call SelectedItemListSheets(listNames, cmbFilter.Value, 1)
         End If
     End With
@@ -126,18 +126,18 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: UserForm_Initialize
-' Purpose: Инициализация формы при запуске. Настраивает расположение, наполняет
-'          списки фильтров и регистров, а также назначает иконки кнопкам из галереи MSO.
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ. РќР°СЃС‚СЂР°РёРІР°РµС‚ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ, РЅР°РїРѕР»РЅСЏРµС‚
+'          СЃРїРёСЃРєРё С„РёР»СЊС‚СЂРѕРІ Рё СЂРµРіРёСЃС‚СЂРѕРІ, Р° С‚Р°РєР¶Рµ РЅР°Р·РЅР°С‡Р°РµС‚ РёРєРѕРЅРєРё РєРЅРѕРїРєР°Рј РёР· РіР°Р»РµСЂРµРё MSO.
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
     Const W         As Byte = 32
     Const h         As Byte = 32
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
 
-    ' Настройка списка фильтров
+    ' РќР°СЃС‚СЂРѕР№РєР° СЃРїРёСЃРєР° С„РёР»СЊС‚СЂРѕРІ
     With listFilters
         .AddItem FILTER_ALL
         .AddItem FILTER_NONE
@@ -158,7 +158,7 @@ Private Sub UserForm_Initialize()
     If Workbooks.Count > 0 Then cmbWB.Value = ActiveWorkbook.Name
 
 
-    ' Назначение иконок кнопкам через CommandBars.GetImageMso
+    ' РќР°Р·РЅР°С‡РµРЅРёРµ РёРєРѕРЅРѕРє РєРЅРѕРїРєР°Рј С‡РµСЂРµР· CommandBars.GetImageMso
     With Application.CommandBars
         Set btnDelete.Picture = .GetImageMso("SketchpadToolDeleteBackground", W, h)
         Set btnShowHide.Picture = .GetImageMso("GroupWindow", W, h)
@@ -220,7 +220,7 @@ Private Sub refreshForm()
             Else
                 On Error Resume Next
                 Select Case .RefersToRange.TEXT
-                    Case "#NAME?", "#ИМЯ?"
+                    Case "#NAME?", "#РРњРЇ?"
                         arrNames(i, 6) = "#NAME?"
                 End Select
 

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataUniqueValues 
-   Caption         =   "Список уникальных значений:"
+   Caption         =   "РЎРїРёСЃРѕРє СѓРЅРёРєР°Р»СЊРЅС‹С… Р·РЅР°С‡РµРЅРёР№:"
    ClientHeight    =   3495
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataUniqueValues - Получение уникальных строк
+'* UserForm     :   frmDataUniqueValues - РџРѕР»СѓС‡РµРЅРёРµ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃС‚СЂРѕРє
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   10-06-2026 09:35:59
@@ -31,7 +31,7 @@ Private Sub btnCancel_Click()
 End Sub
 
 Private Sub btnOK_Click()
-    ' --- Проверка ввода ---
+    ' --- РџСЂРѕРІРµСЂРєР° РІРІРѕРґР° ---
     Dim sAddress    As String
     Dim sAddressInsert As String
     Dim sColumns    As String
@@ -41,18 +41,18 @@ Private Sub btnOK_Click()
     sAddressInsert = Trim$(txtOutputRng.Value)
     sColumns = VBA.Replace(txtNumberColumn.Value, " ", vbNullString)
 
-    ' Накопление ошибок
+    ' РќР°РєРѕРїР»РµРЅРёРµ РѕС€РёР±РѕРє
     If sAddress = vbNullString Then
-        sMessage = "Не выбран диапазон данных!"
+        sMessage = "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!"
     End If
 
     If sAddressInsert = vbNullString Then
         If sMessage <> vbNullString Then sMessage = sMessage & vbCrLf
-        sMessage = sMessage & "Не выбран диапазон вставки данных!"
+        sMessage = sMessage & "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РІСЃС‚Р°РІРєРё РґР°РЅРЅС‹С…!"
     End If
 
     If sMessage <> vbNullString Then
-        MsgBox sMessage, vbCritical, "Ошибка"
+        MsgBox sMessage, vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
@@ -60,11 +60,11 @@ Private Sub btnOK_Click()
     Set rngInsert = Range(sAddressInsert)
 
     If rngInsert.Parent.ProtectContents Then
-        Call MsgBox("Лист [" & rngInsert.Parent.Name & "] - защищен от изменений, снимите пароль!", vbCritical)
+        Call MsgBox("Р›РёСЃС‚ [" & rngInsert.Parent.Name & "] - Р·Р°С‰РёС‰РµРЅ РѕС‚ РёР·РјРµРЅРµРЅРёР№, СЃРЅРёРјРёС‚Рµ РїР°СЂРѕР»СЊ!", vbCritical)
         Exit Sub
     End If
 
-    ' --- Подготовка данных ---
+    ' --- РџРѕРґРіРѕС‚РѕРІРєР° РґР°РЅРЅС‹С… ---
     Dim arrData     As Variant
     Dim arrColumns  As Variant
 
@@ -78,10 +78,10 @@ Private Sub btnOK_Click()
         arrData = arr
     End If
 
-    ' Разбор номеров столбцов
+    ' Р Р°Р·Р±РѕСЂ РЅРѕРјРµСЂРѕРІ СЃС‚РѕР»Р±С†РѕРІ
     arrColumns = VBA.Split(sColumns, ",")
 
-    ' --- Проверка номеров столбцов ---
+    ' --- РџСЂРѕРІРµСЂРєР° РЅРѕРјРµСЂРѕРІ СЃС‚РѕР»Р±С†РѕРІ ---
     Dim lRowCount   As Long
     Dim lColCount   As Long
     Dim i           As Long
@@ -92,13 +92,13 @@ Private Sub btnOK_Click()
     For i = LBound(arrColumns) To UBound(arrColumns)
         If arrColumns(i) <> vbNullString Then
             If lColCount < CLng(arrColumns(i)) Then
-                MsgBox "Номер столбца [" & arrColumns(i) & "] превышает количество столбцов в таблице!", vbCritical, "Ошибка"
+                MsgBox "РќРѕРјРµСЂ СЃС‚РѕР»Р±С†Р° [" & arrColumns(i) & "] РїСЂРµРІС‹С€Р°РµС‚ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃС‚РѕР»Р±С†РѕРІ РІ С‚Р°Р±Р»РёС†Рµ!", vbCritical, "РћС€РёР±РєР°"
                 Exit Sub
             End If
         End If
     Next i
 
-    ' --- Получение уникальных строк ---
+    ' --- РџРѕР»СѓС‡РµРЅРёРµ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃС‚СЂРѕРє ---
     Dim dict        As Object
     Dim arrResult() As Variant
     Dim sKey        As String
@@ -112,7 +112,7 @@ Private Sub btnOK_Click()
     dict.CompareMode = vbTextCompare
 
     For i = 1 To lRowCount
-        ' Формирование составного ключа
+        ' Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ СЃРѕСЃС‚Р°РІРЅРѕРіРѕ РєР»СЋС‡Р°
         sKey = vbNullString
         For lKeyCol = LBound(arrColumns) To UBound(arrColumns)
             If arrColumns(lKeyCol) <> vbNullString Then
@@ -121,12 +121,12 @@ Private Sub btnOK_Click()
             End If
         Next lKeyCol
 
-        ' Проверка уникальности
+        ' РџСЂРѕРІРµСЂРєР° СѓРЅРёРєР°Р»СЊРЅРѕСЃС‚Рё
         If Not dict.Exists(sKey) Then
             lUniqueCount = lUniqueCount + 1
             dict.Add sKey, i
 
-            ' Копирование строки
+            ' РљРѕРїРёСЂРѕРІР°РЅРёРµ СЃС‚СЂРѕРєРё
             For lCol = 1 To lColCount
                 arrResult(lUniqueCount, lCol) = arrData(i, lCol)
             Next lCol
@@ -134,21 +134,21 @@ Private Sub btnOK_Click()
     Next i
 
     Call DisableApplicationSettings
-    ' --- Выделение уникальных строк цветом ---
+    ' --- Р’С‹РґРµР»РµРЅРёРµ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃС‚СЂРѕРє С†РІРµС‚РѕРј ---
     If chbSelectColor.Value And lUniqueCount > 0 Then
         Call HighlightUniqueRows(dict, sAddress)
     End If
 
     Set dict = Nothing
 
-    ' --- Вывод результата ---
+    ' --- Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р° ---
     If lUniqueCount > 0 Then
         Call SaveUndoInfo(rngInsert.Cells(1, 1).Resize(lUniqueCount, lColCount), False, False)
         rngInsert.Cells(1, 1).Resize(lUniqueCount, lColCount).Value2 = arrResult
         rngInsert.Parent.Activate
-        Application.OnUndo "Отменить", "RestoreUndoInfo"
+        Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
     Else
-        MsgBox "Уникальные строки не найдены!", vbExclamation, "Внимание"
+        MsgBox "РЈРЅРёРєР°Р»СЊРЅС‹Рµ СЃС‚СЂРѕРєРё РЅРµ РЅР°Р№РґРµРЅС‹!", vbExclamation, "Р’РЅРёРјР°РЅРёРµ"
     End If
 
     Call RestoreApplicationSettings
@@ -156,7 +156,7 @@ Private Sub btnOK_Click()
 End Sub
 
 ' ============================================
-' Выделение уникальных строк цветом
+' Р’С‹РґРµР»РµРЅРёРµ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃС‚СЂРѕРє С†РІРµС‚РѕРј
 ' ============================================
 Private Sub HighlightUniqueRows(ByRef dict As Object, ByVal sAddress As String)
     Dim rngSource   As Range
@@ -174,10 +174,10 @@ Private Sub HighlightUniqueRows(ByRef dict As Object, ByVal sAddress As String)
         lColCount = .Columns.Count
     End With
 
-    ' Получение номеров уникальных строк
+    ' РџРѕР»СѓС‡РµРЅРёРµ РЅРѕРјРµСЂРѕРІ СѓРЅРёРєР°Р»СЊРЅС‹С… СЃС‚СЂРѕРє
     arrRows = dict.Items
 
-    ' Выделение строк
+    ' Р’С‹РґРµР»РµРЅРёРµ СЃС‚СЂРѕРє
     Call DisableApplicationSettings
 
     For i = LBound(arrRows) To UBound(arrRows)
@@ -209,23 +209,23 @@ Private Sub txtOutputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal S
 End Sub
 
 Private Sub txtNumberColumn_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
-    ' Разрешаем: цифры (48-57), запятую (44), Backspace (8)
-    ' Точка (46) заменяется на запятую
+    ' Р Р°Р·СЂРµС€Р°РµРј: С†РёС„СЂС‹ (48-57), Р·Р°РїСЏС‚СѓСЋ (44), Backspace (8)
+    ' РўРѕС‡РєР° (46) Р·Р°РјРµРЅСЏРµС‚СЃСЏ РЅР° Р·Р°РїСЏС‚СѓСЋ
     Select Case KeyAscii
         Case 48 To 57, 44, 8
-            ' Разрешено
+            ' Р Р°Р·СЂРµС€РµРЅРѕ
         Case 46
-            KeyAscii = 44  ' Замена точки на запятую
+            KeyAscii = 44  ' Р—Р°РјРµРЅР° С‚РѕС‡РєРё РЅР° Р·Р°РїСЏС‚СѓСЋ
         Case Else
             KeyAscii = 0
     End Select
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
-    ' Инициализация поля ввода адресом выделенного диапазона
+    ' РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»СЏ РІРІРѕРґР° Р°РґСЂРµСЃРѕРј РІС‹РґРµР»РµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
     If TypeName(Selection) = "Range" Then
         txtInputRng.Value = Selection.Address
     End If

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataFromSheets 
-   Caption         =   "Собр данных со сквозных листов:"
+   Caption         =   "РЎРѕР±СЂ РґР°РЅРЅС‹С… СЃРѕ СЃРєРІРѕР·РЅС‹С… Р»РёСЃС‚РѕРІ:"
    ClientHeight    =   5745
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataFromSheets - Модуль сбора данных из сквозных листов
+'* UserForm     :   frmDataFromSheets - РњРѕРґСѓР»СЊ СЃР±РѕСЂР° РґР°РЅРЅС‹С… РёР· СЃРєРІРѕР·РЅС‹С… Р»РёСЃС‚РѕРІ
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   10-06-2026 09:37:02
@@ -33,16 +33,16 @@ End Sub
 Private Sub btnOK_Click()
     On Error GoTo ErrorHandler
 
-    ' --- Проверка диапазона ---
+    ' --- РџСЂРѕРІРµСЂРєР° РґРёР°РїР°Р·РѕРЅР° ---
     Dim sAddress    As String
     sAddress = Trim$(txtInputRng.Value)
 
     If sAddress = vbNullString Then
-        MsgBox "Не выбран диапазон данных!", vbCritical, "Ошибка"
+        MsgBox "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
-    ' --- Определение целевого листа ---
+    ' --- РћРїСЂРµРґРµР»РµРЅРёРµ С†РµР»РµРІРѕРіРѕ Р»РёСЃС‚Р° ---
     Dim wsTarget    As Worksheet
 
     If chAddNewSheet.Value Then
@@ -52,7 +52,7 @@ Private Sub btnOK_Click()
         Set wsTarget = ActiveSheet
     End If
 
-    ' --- Подготовка переменных ---
+    ' --- РџРѕРґРіРѕС‚РѕРІРєР° РїРµСЂРµРјРµРЅРЅС‹С… ---
     Call DisableApplicationSettings
 
     Dim wsCurrent   As Worksheet
@@ -65,15 +65,15 @@ Private Sub btnOK_Click()
     lCol = activeCell.Column
     lRowCount = Range(sAddress).Rows.Count
 
-    ' --- Обход листов и сбор данных ---
+    ' --- РћР±С…РѕРґ Р»РёСЃС‚РѕРІ Рё СЃР±РѕСЂ РґР°РЅРЅС‹С… ---
     For Each wsCurrent In ActiveWorkbook.Worksheets
-        ' Пропуск текущего листа
+        ' РџСЂРѕРїСѓСЃРє С‚РµРєСѓС‰РµРіРѕ Р»РёСЃС‚Р°
         If wsCurrent.Name <> ActiveSheet.Name Then
-            ' Проверка скрытых листов
+            ' РџСЂРѕРІРµСЂРєР° СЃРєСЂС‹С‚С‹С… Р»РёСЃС‚РѕРІ
             If chDontLoolHidenSheets.Value And wsCurrent.Visible <> xlSheetVisible Then
-                ' Переход к следующему листу
+                ' РџРµСЂРµС…РѕРґ Рє СЃР»РµРґСѓСЋС‰РµРјСѓ Р»РёСЃС‚Сѓ
             Else
-                ' Запись имени листа и адреса диапазона
+                ' Р—Р°РїРёСЃСЊ РёРјРµРЅРё Р»РёСЃС‚Р° Рё Р°РґСЂРµСЃР° РґРёР°РїР°Р·РѕРЅР°
                 If chAddSheetsNames.Value Then
                     wsTarget.Cells(lRow, lCol).Resize(lRowCount, 1).Value2 = wsCurrent.Name
                     wsTarget.Cells(lRow, lCol + 1).Resize(lRowCount, 1).Value2 = sAddress
@@ -82,14 +82,14 @@ Private Sub btnOK_Click()
                     iShift = 0
                 End If
 
-                ' Копирование данных
+                ' РљРѕРїРёСЂРѕРІР°РЅРёРµ РґР°РЅРЅС‹С…
                 wsCurrent.Activate
                 wsCurrent.Range(sAddress).Copy
 
                 wsTarget.Activate
                 wsTarget.Cells(lRow, lCol + iShift).Select
 
-                ' Выбор метода вставки
+                ' Р’С‹Р±РѕСЂ РјРµС‚РѕРґР° РІСЃС‚Р°РІРєРё
                 If optOnlyValues.Value Then
                     Selection.PasteSpecial Paste:=xlPasteValues
                 ElseIf optOnlyFormuls.Value Then
@@ -98,7 +98,7 @@ Private Sub btnOK_Click()
                     ActiveSheet.Paste link:=True
                 End If
 
-                ' Смещение на следующую позицию
+                ' РЎРјРµС‰РµРЅРёРµ РЅР° СЃР»РµРґСѓСЋС‰СѓСЋ РїРѕР·РёС†РёСЋ
                 lRow = lRow + lRowCount
             End If
         End If
@@ -109,7 +109,7 @@ Private Sub btnOK_Click()
 
 ErrorHandler:
     Call RestoreApplicationSettings
-    MsgBox "Ошибка: " & Err.Description, vbCritical, "Ошибка"
+    MsgBox "РћС€РёР±РєР°: " & Err.Description, vbCritical, "РћС€РёР±РєР°"
 End Sub
 
 Private Sub txtInputRng_DropButtonClick()
@@ -123,7 +123,7 @@ Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Sh
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     If TypeName(Selection) = "Range" Then txtInputRng.Value = Selection.Address
     Call ConfigureDropButton(txtInputRng)

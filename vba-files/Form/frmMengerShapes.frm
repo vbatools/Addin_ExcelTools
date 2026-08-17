@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMengerShapes 
-   Caption         =   "Менеджер фигур:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ С„РёРіСѓСЂ:"
    ClientHeight    =   8685.001
    ClientLeft      =   45
    ClientTop       =   375
@@ -17,14 +17,14 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const FILTER_REVERSE As String = "обратное выделение"
+Private Const FILTER_REVERSE As String = "РѕР±СЂР°С‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
 
 Private Sub btnAddText_Click()
     Dim i           As Integer
     Dim bFlafMsg    As Boolean
     Dim sNewName    As String
 
-    sNewName = Application.InputBox("Введите новый текст!:", "Изменение текста:", Type:=2)
+    sNewName = Application.InputBox("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ С‚РµРєСЃС‚!:", "РР·РјРµРЅРµРЅРёРµ С‚РµРєСЃС‚Р°:", Type:=2)
     If sNewName = vbNullString Or sNewName = "False" Then
         Exit Sub
     End If
@@ -42,7 +42,7 @@ Private Sub btnAddText_Click()
     If bFlafMsg Then
         Call refreshMainList
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 
@@ -51,7 +51,7 @@ Private Sub btnAppendText_Click()
     Dim bFlafMsg    As Boolean
     Dim sNewName    As String
 
-    sNewName = Application.InputBox("Введите новый текст для добовления!:", "Изменение текста:", Type:=2)
+    sNewName = Application.InputBox("Р’РІРµРґРёС‚Рµ РЅРѕРІС‹Р№ С‚РµРєСЃС‚ РґР»СЏ РґРѕР±РѕРІР»РµРЅРёСЏ!:", "РР·РјРµРЅРµРЅРёРµ С‚РµРєСЃС‚Р°:", Type:=2)
     If sNewName = vbNullString Or sNewName = "False" Then
         Exit Sub
     End If
@@ -69,7 +69,7 @@ Private Sub btnAppendText_Click()
     If bFlafMsg Then
         Call refreshMainList
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 
@@ -131,18 +131,18 @@ Private Sub btnExpor_Click()
     Dim sExtFile    As String
     sExtFile = cmbExFile.Value
     If sExtFile = "PDF" Then
-        Call MsgBox("Для PDF выбирите выгрузку диапазонов!", vbCritical, "Ошибка:")
+        Call MsgBox("Р”Р»СЏ PDF РІС‹Р±РёСЂРёС‚Рµ РІС‹РіСЂСѓР·РєСѓ РґРёР°РїР°Р·РѕРЅРѕРІ!", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
     If TypeName(Selection) = "Range" Then
-        Call MsgBox("Пожалуйста, выберите фигуры перед запуском инструмента!", vbCritical, "Ошибка:")
+        Call MsgBox("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹Р±РµСЂРёС‚Рµ С„РёРіСѓСЂС‹ РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РёРЅСЃС‚СЂСѓРјРµРЅС‚Р°!", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
 
     Dim sNewNameFile As String
     Dim sFileName   As String
     sNewNameFile = ActiveWorkbook.Name & "_" & ActiveSheet.Name
-    sFileName = Application.GetSaveAsFilename(Title:="Введите имя файла")
+    sFileName = Application.GetSaveAsFilename(Title:="Р’РІРµРґРёС‚Рµ РёРјСЏ С„Р°Р№Р»Р°")
     If sFileName = vbNullString Or sFileName = "False" Then Exit Sub
 
     Dim cht         As ChartObject
@@ -165,11 +165,11 @@ Private Sub btnExpor_Click()
         cht.Delete
         oShape.Select
     Next oShape
-    Call MsgBox("Выбранные фигуры выгружены!", vbInformation, "Экспорт:")
+    Call MsgBox("Р’С‹Р±СЂР°РЅРЅС‹Рµ С„РёРіСѓСЂС‹ РІС‹РіСЂСѓР¶РµРЅС‹!", vbInformation, "Р­РєСЃРїРѕСЂС‚:")
 End Sub
 
 Private Sub btnImport_Click()
-    If cmbLoadType.Value = "в лист" Then
+    If cmbLoadType.Value = "РІ Р»РёСЃС‚" Then
         Call loadImgInSheet
     Else
         Me.Hide
@@ -179,7 +179,7 @@ Private Sub btnImport_Click()
 End Sub
 Private Sub loadImInComment()
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Выделите начальную ячейку для вставки комментарий", vbCritical, "Ошибка:")
+        Call MsgBox("Р’С‹РґРµР»РёС‚Рµ РЅР°С‡Р°Р»СЊРЅСѓСЋ СЏС‡РµР№РєСѓ РґР»СЏ РІСЃС‚Р°РІРєРё РєРѕРјРјРµРЅС‚Р°СЂРёР№", vbCritical, "РћС€РёР±РєР°:")
         Exit Sub
     End If
 
@@ -195,7 +195,7 @@ Private Sub loadImInComment()
     End With
 
     Dim bFInserAs   As Boolean
-    Select Case MsgBox("Вставлять в столбик или в строчу?" & vbNewLine & "[ДА]   - в столбец" & vbNewLine & "[НЕТ] - в строчку", vbYesNoCancel + vbQuestion, "Вставка картинок:")
+    Select Case MsgBox("Р’СЃС‚Р°РІР»СЏС‚СЊ РІ СЃС‚РѕР»Р±РёРє РёР»Рё РІ СЃС‚СЂРѕС‡Сѓ?" & vbNewLine & "[Р”Рђ]   - РІ СЃС‚РѕР»Р±РµС†" & vbNewLine & "[РќР•Рў] - РІ СЃС‚СЂРѕС‡РєСѓ", vbYesNoCancel + vbQuestion, "Р’СЃС‚Р°РІРєР° РєР°СЂС‚РёРЅРѕРє:")
         Case vbYes
             bFInserAs = True
         Case vbNo
@@ -263,7 +263,7 @@ Private Sub btnRename_Click()
     Dim bFlafMsg    As Boolean
     Dim sNewName    As String
 
-    sNewName = Application.InputBox("Введите новое название!:", "Переименовать фигуры:", Type:=2)
+    sNewName = Application.InputBox("Р’РІРµРґРёС‚Рµ РЅРѕРІРѕРµ РЅР°Р·РІР°РЅРёРµ!:", "РџРµСЂРµРёРјРµРЅРѕРІР°С‚СЊ С„РёРіСѓСЂС‹:", Type:=2)
     If sNewName = vbNullString Or sNewName = "False" Then
         Exit Sub
     End If
@@ -280,7 +280,7 @@ Private Sub btnRename_Click()
     If bFlafMsg Then
         Call refreshMainList
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 Private Sub btnShowHide_Click()
@@ -298,7 +298,7 @@ Private Sub btnShowHide_Click()
     If bFlafMsg Then
         Call refreshMainList
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 
@@ -308,7 +308,7 @@ Private Sub btnCopy_Click()
     If IsArrayDimensioned(arr) Then
         Dim iCopyNumber As Integer
         Dim i       As Integer
-        iCopyNumber = Application.InputBox("Введите количество копий:", "Копирователь листов", Default:=1, Type:=1)
+        iCopyNumber = Application.InputBox("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРїРёР№:", "РљРѕРїРёСЂРѕРІР°С‚РµР»СЊ Р»РёСЃС‚РѕРІ", Default:=1, Type:=1)
         If iCopyNumber <= 0 Or iCopyNumber = False Then
             Exit Sub
         End If
@@ -321,7 +321,7 @@ Private Sub btnCopy_Click()
 
         Call refreshMainList
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 
@@ -329,7 +329,7 @@ Private Sub btnDelete_Click()
     Dim arr()       As String
     arr = getSelectedItemMainList
     If IsArrayDimensioned(arr) Then
-        If MsgBox("Продолжить удаление фигур?" & vbNewLine & "Данную операцию нельзя отменить!", vbYesNo + vbQuestion, "Удаление:") = vbYes Then
+        If MsgBox("РџСЂРѕРґРѕР»Р¶РёС‚СЊ СѓРґР°Р»РµРЅРёРµ С„РёРіСѓСЂ?" & vbNewLine & "Р”Р°РЅРЅСѓСЋ РѕРїРµСЂР°С†РёСЋ РЅРµР»СЊР·СЏ РѕС‚РјРµРЅРёС‚СЊ!", vbYesNo + vbQuestion, "РЈРґР°Р»РµРЅРёРµ:") = vbYes Then
 
             Dim i   As Long
             Dim iCount As Long
@@ -342,7 +342,7 @@ Private Sub btnDelete_Click()
             Call refreshMainList
         End If
     Else
-        Call MsgBox("Ни чего не выбрано в главном списке!", vbCritical, "Удаление:")
+        Call MsgBox("РќРё С‡РµРіРѕ РЅРµ РІС‹Р±СЂР°РЅРѕ РІ РіР»Р°РІРЅРѕРј СЃРїРёСЃРєРµ!", vbCritical, "РЈРґР°Р»РµРЅРёРµ:")
     End If
 End Sub
 
@@ -410,12 +410,12 @@ Private Sub listFilters_Change()
     sFilter = listFilters.List(listFilters.ListIndex, 0)
     byCol = 1
     Select Case sFilter
-        Case "видим": byCol = 2
-        Case "скрыт": byCol = 2
-        Case "с макросом":
+        Case "РІРёРґРёРј": byCol = 2
+        Case "СЃРєСЂС‹С‚": byCol = 2
+        Case "СЃ РјР°РєСЂРѕСЃРѕРј":
             byCol = 10
             sFilter = 1
-        Case "без макроса":
+        Case "Р±РµР· РјР°РєСЂРѕСЃР°":
             byCol = 10
             sFilter = 0
     End Select
@@ -424,7 +424,7 @@ Private Sub listFilters_Change()
         For i = 0 To .ListCount - 1
             .Selected(i) = False
             If .List(i, byCol) = sFilter Then
-                If .List(i, 3) <> "скрыт" And .List(i, 0) = ActiveSheet.Name And .List(i, 2) <> "Comment" Then
+                If .List(i, 3) <> "СЃРєСЂС‹С‚" And .List(i, 0) = ActiveSheet.Name And .List(i, 2) <> "Comment" Then
                     ReDim Preserve arr(0 To j) As String
                     arr(j) = .List(i, 1)
                     j = j + 1
@@ -448,10 +448,10 @@ Private Sub refreshMainList()
 
     ReDim Preserve arrFilter(1 To 2, 1 To 5)
 
-    arrFilter(1, 1) = "видим"
-    arrFilter(1, 2) = "скрыт"
-    arrFilter(1, 3) = "с макросом"
-    arrFilter(1, 4) = "без макроса"
+    arrFilter(1, 1) = "РІРёРґРёРј"
+    arrFilter(1, 2) = "СЃРєСЂС‹С‚"
+    arrFilter(1, 3) = "СЃ РјР°РєСЂРѕСЃРѕРј"
+    arrFilter(1, 4) = "Р±РµР· РјР°РєСЂРѕСЃР°"
     ItemCol = 4
     Set oColl = New Collection
     For Each shp In ActiveSheet.Shapes
@@ -474,10 +474,10 @@ Private Sub refreshMainList()
 
             arr(10, i) = .Visible
             If .Visible Then
-                arr(3, i) = "видим"
+                arr(3, i) = "РІРёРґРёРј"
                 arrFilter(2, 1) = arrFilter(2, 1) + 1
             Else
-                arr(3, i) = "скрыт"
+                arr(3, i) = "СЃРєСЂС‹С‚"
                 arrFilter(2, 2) = arrFilter(2, 2) + 1
             End If
             arr(4, i) = .OnAction
@@ -533,7 +533,7 @@ Private Sub UserForm_Activate()
 End Sub
 Private Sub UserForm_Initialize()
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     With cmbExFile
@@ -545,8 +545,8 @@ Private Sub UserForm_Initialize()
         .ListIndex = 0
     End With
     With cmbLoadType
-        .AddItem "в лист"
-        .AddItem "в коммент."
+        .AddItem "РІ Р»РёСЃС‚"
+        .AddItem "РІ РєРѕРјРјРµРЅС‚."
         .ListIndex = 0
     End With
 
@@ -585,7 +585,7 @@ Private Function getSelectedItemMainList(Optional iCol As Byte = 0, Optional bFl
                     arr(j) = .List(i, iCol)
                     j = j + 1
                 Else
-                    If .List(i, 2) <> "скрыт" And .List(i, 1) <> "Comment" Then
+                    If .List(i, 2) <> "СЃРєСЂС‹С‚" And .List(i, 1) <> "Comment" Then
                         ReDim Preserve arr(0 To j) As String
                         arr(j) = .List(i, iCol)
                         j = j + 1

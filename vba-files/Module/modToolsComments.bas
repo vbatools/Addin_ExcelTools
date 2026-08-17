@@ -5,7 +5,7 @@ Option Private Module
 Public Sub AddSheetsComments()
 
     If ActiveWorkbook.ProtectStructure Then
-        Call MsgBox("Включина защита структуры книги!", vbCritical)
+        Call MsgBox("Р’РєР»СЋС‡РёРЅР° Р·Р°С‰РёС‚Р° СЃС‚СЂСѓРєС‚СѓСЂС‹ РєРЅРёРіРё!", vbCritical)
         Exit Sub
     End If
 
@@ -17,19 +17,19 @@ Public Sub AddSheetsComments()
 
     Call DisableApplicationSettings
 
-    If HaveSheetInFile(ActiveWorkbook, "Комментарии") Then
-        result = MsgBox("Старый лист с комментариями будет удален." _
-                & vbCrLf & "Хотите продолжить?" _
-                , vbYesNo Or vbQuestion Or vbDefaultButton2, "Список комментариев")
+    If HaveSheetInFile(ActiveWorkbook, "РљРѕРјРјРµРЅС‚Р°СЂРёРё") Then
+        result = MsgBox("РЎС‚Р°СЂС‹Р№ Р»РёСЃС‚ СЃ РєРѕРјРјРµРЅС‚Р°СЂРёСЏРјРё Р±СѓРґРµС‚ СѓРґР°Р»РµРЅ." _
+                & vbCrLf & "РҐРѕС‚РёС‚Рµ РїСЂРѕРґРѕР»Р¶РёС‚СЊ?" _
+                , vbYesNo Or vbQuestion Or vbDefaultButton2, "РЎРїРёСЃРѕРє РєРѕРјРјРµРЅС‚Р°СЂРёРµРІ")
         If result = vbNo Then Exit Sub
-        ActiveWorkbook.Sheets("Комментарии").Delete
+        ActiveWorkbook.Sheets("РљРѕРјРјРµРЅС‚Р°СЂРёРё").Delete
     End If
 
     ActiveWorkbook.Sheets.Add After:=ActiveWorkbook.Sheets(ActiveWorkbook.Sheets.Count)
 
     Set ShKomm = ActiveWorkbook.Sheets(ActiveWorkbook.Sheets.Count)
     With ShKomm
-        .Name = "Комментарии"
+        .Name = "РљРѕРјРјРµРЅС‚Р°СЂРёРё"
 
         .Columns("D:D").ColumnWidth = 21.5
         .Columns("E:E").ColumnWidth = 44.5
@@ -42,12 +42,12 @@ Public Sub AddSheetsComments()
         End With
 
         i = 1
-        .Cells(i, 1) = "№"
-        .Cells(i, 2) = "Лист"
-        .Cells(i, 3) = "Адрес"
-        .Cells(i, 4) = "Автор"
-        .Cells(i, 5) = "Комментарий"
-        .Cells(i, 6) = "Ссылка"
+        .Cells(i, 1) = "в„–"
+        .Cells(i, 2) = "Р›РёСЃС‚"
+        .Cells(i, 3) = "РђРґСЂРµСЃ"
+        .Cells(i, 4) = "РђРІС‚РѕСЂ"
+        .Cells(i, 5) = "РљРѕРјРјРµРЅС‚Р°СЂРёР№"
+        .Cells(i, 6) = "РЎСЃС‹Р»РєР°"
 
         i = i + 1
         For Each ShW In ActiveWorkbook.Worksheets
@@ -58,7 +58,7 @@ Public Sub AddSheetsComments()
                     .Cells(i, 3) = Komm.Parent.Address
                     .Cells(i, 4) = Komm.Author
                     .Cells(i, 5) = Komm.Shape.AlternativeText
-                    .Cells(i, 6).FormulaR1C1 = "=HYPERLINK(""[" & ActiveWorkbook.Name & "]'""&RC[-4]&""'!""&RC[-3],""Перейти"")"
+                    .Cells(i, 6).FormulaR1C1 = "=HYPERLINK(""[" & ActiveWorkbook.Name & "]'""&RC[-4]&""'!""&RC[-3],""РџРµСЂРµР№С‚Рё"")"
                     i = i + 1
                 Next
             End If
@@ -67,7 +67,7 @@ Public Sub AddSheetsComments()
         .Range("A1:F1").AutoFilter
 
         If i = 2 Then
-            Call MsgBox("В текущей книге примечаний нет!", vbInformation, "Собщение:")
+            Call MsgBox("Р’ С‚РµРєСѓС‰РµР№ РєРЅРёРіРµ РїСЂРёРјРµС‡Р°РЅРёР№ РЅРµС‚!", vbInformation, "РЎРѕР±С‰РµРЅРёРµ:")
             ShKomm.Delete
         End If
     End With
@@ -77,7 +77,7 @@ End Sub
 
 Public Sub SizeTextComment()
     Dim sinSize     As Single
-    sinSize = Application.InputBox(prompt:="Ведите размер шрифта", Type:=1)
+    sinSize = Application.InputBox(prompt:="Р’РµРґРёС‚Рµ СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р°", Type:=1)
     If sinSize <= 0 Then Exit Sub
     Dim oComm       As Comment
     For Each oComm In ActiveSheet.Comments

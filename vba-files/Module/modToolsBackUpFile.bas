@@ -17,11 +17,11 @@ Public Sub AddBackupFile()
     sPath = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_PATH)
     sVersion = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION)
     If sPath = vbNullString Then
-        Call MsgBox("Не найдены настройки, пути сохранения файлов!", vbCritical)
+        Call MsgBox("РќРµ РЅР°Р№РґРµРЅС‹ РЅР°СЃС‚СЂРѕР№РєРё, РїСѓС‚Рё СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»РѕРІ!", vbCritical)
         Exit Sub
     End If
     If Not FileHave(sPath, vbDirectory) Then
-        Call MsgBox("Задан не существующий путь к папке для сохранения файлов!", vbCritical)
+        Call MsgBox("Р—Р°РґР°РЅ РЅРµ СЃСѓС‰РµСЃС‚РІСѓСЋС‰РёР№ РїСѓС‚СЊ Рє РїР°РїРєРµ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ С„Р°Р№Р»РѕРІ!", vbCritical)
         Exit Sub
     End If
     Dim sExtension  As String
@@ -38,9 +38,9 @@ Public Sub AddBackupFile()
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE, VBA.format$(VBA.Date(), "dd.mm.yyyy"))
         .Save
         If MoveFile(sOldWB, sPath) <> vbNullString Then
-            Call MsgBox("Не удалось создать резервную копию!", vbExclamation)
+            Call MsgBox("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ СЂРµР·РµСЂРІРЅСѓСЋ РєРѕРїРёСЋ!", vbExclamation)
         Else
-            Call MsgBox("Копия создан, версия: " & sVersion, vbInformation)
+            Call MsgBox("РљРѕРїРёСЏ СЃРѕР·РґР°РЅ, РІРµСЂСЃРёСЏ: " & sVersion, vbInformation)
         End If
     End With
     Call RestoreApplicationSettings

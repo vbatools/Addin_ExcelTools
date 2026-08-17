@@ -1,5 +1,9 @@
-# CRLF -> LF by default, but not for modules or classes (especially classes)
+# Базовое правило для всех текстовых файлов
 * text=auto
-*.bas text eol=crlf
-*.cls text eol=crlf
-*.frm text eol=crlf
+
+# Для файлов VBA: 
+# 1. Принудительно CRLF (eol=crlf)
+# 2. Конвертация из Windows-1251 в UTF-8 при коммите (working-tree-encoding)
+*.bas text eol=crlf working-tree-encoding=WINDOWS-1251
+*.cls text eol=crlf working-tree-encoding=WINDOWS-1251
+*.frm text eol=crlf working-tree-encoding=WINDOWS-1251

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsLinks 
-   Caption         =   "Создание оглавления:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ РѕРіР»Р°РІР»РµРЅРёСЏ:"
    ClientHeight    =   1770
    ClientLeft      =   120
    ClientTop       =   465
@@ -32,7 +32,7 @@ Private Sub btnCancel_Click()
 End Sub
 
 Private Sub btnOK_Click()
-    Const SHEET_NAME_OG As String = "ОГЛАВЛЕНИЕ"
+    Const SHEET_NAME_OG As String = "РћР“Р›РђР’Р›Р•РќРР•"
     If HaveSheetInFile(ActiveWorkbook, SHEET_NAME_OG) Then
         Call DisableApplicationSettings
         ActiveWorkbook.Sheets(SHEET_NAME_OG).Delete
@@ -69,7 +69,7 @@ Private Sub btnOK_Click()
         .Name = SHEET_NAME_OG
         .Cells(2, 1).Resize(iCount + 1, 8).Value2 = arrRes
         With .Cells(1, 1).Resize(1, 8)
-            .Value2 = Array("№", "имя листа", "тип листа", "видим/скрыт", "защита", "диапазон", "кол-во ячеек", "ранжирование")
+            .Value2 = Array("в„–", "РёРјСЏ Р»РёСЃС‚Р°", "С‚РёРї Р»РёСЃС‚Р°", "РІРёРґРёРј/СЃРєСЂС‹С‚", "Р·Р°С‰РёС‚Р°", "РґРёР°РїР°Р·РѕРЅ", "РєРѕР»-РІРѕ СЏС‡РµРµРє", "СЂР°РЅР¶РёСЂРѕРІР°РЅРёРµ")
             .AutoFilter
         End With
         .Columns("A:I").EntireColumn.AutoFit
@@ -88,7 +88,7 @@ Private Sub btnOK_Click()
     Dim lColor      As Long
 
     For i = 1 To k
-        If arrRes(i, 3) = "лист" Then
+        If arrRes(i, 3) = "Р»РёСЃС‚" Then
             Sh.Hyperlinks.Add Anchor:=Sh.Cells(i + 1, 2), Address:="", SubAddress:= _
                     "'" & arrRes(i, 2) & "'!A1", TextToDisplay:=arrRes(i, 2)
             If chbAddbBackLinks.Value Then
@@ -125,7 +125,7 @@ Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Sh
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     If TypeName(Selection) = "Range" Then txtInputRng.Value = Selection.Address
     Call ConfigureDropButton(txtInputRng)

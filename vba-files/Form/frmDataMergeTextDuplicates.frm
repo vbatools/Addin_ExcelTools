@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataMergeTextDuplicates 
-   Caption         =   "Объединение ячеек с дублирующим текстом:"
+   Caption         =   "РћР±СЉРµРґРёРЅРµРЅРёРµ СЏС‡РµРµРє СЃ РґСѓР±Р»РёСЂСѓСЋС‰РёРј С‚РµРєСЃС‚РѕРј:"
    ClientHeight    =   2070
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataMergeText - объединение значений ячеек без потери данных
+'* UserForm     :   frmDataMergeText - РѕР±СЉРµРґРёРЅРµРЅРёРµ Р·РЅР°С‡РµРЅРёР№ СЏС‡РµРµРє Р±РµР· РїРѕС‚РµСЂРё РґР°РЅРЅС‹С…
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   11-06-2026 10:14:25
@@ -30,19 +30,19 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: btnOK_Click
-' Purpose: Объединяет ячейки выделенного диапазона с сохранением текста
-'          Текст объединяется через указанный разделитель
-' Parameters: нет
+' Purpose: РћР±СЉРµРґРёРЅСЏРµС‚ СЏС‡РµР№РєРё РІС‹РґРµР»РµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° СЃ СЃРѕС…СЂР°РЅРµРЅРёРµРј С‚РµРєСЃС‚Р°
+'          РўРµРєСЃС‚ РѕР±СЉРµРґРёРЅСЏРµС‚СЃСЏ С‡РµСЂРµР· СѓРєР°Р·Р°РЅРЅС‹Р№ СЂР°Р·РґРµР»РёС‚РµР»СЊ
+' Parameters: РЅРµС‚
 '--------------------------------------------------------------------------------
 Private Sub btnOK_Click()
 
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Не выбран диапазон данных!", vbCritical)
+        Call MsgBox("РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical)
         Exit Sub
     End If
 
     If ActiveSheet.ProtectContents Then
-        Call MsgBox("Лист [" & ActiveSheet.Name & "] - защищен от изменений, снимите пароль!", vbCritical)
+        Call MsgBox("Р›РёСЃС‚ [" & ActiveSheet.Name & "] - Р·Р°С‰РёС‰РµРЅ РѕС‚ РёР·РјРµРЅРµРЅРёР№, СЃРЅРёРјРёС‚Рµ РїР°СЂРѕР»СЊ!", vbCritical)
         Exit Sub
     End If
 
@@ -60,7 +60,7 @@ Private Sub btnOK_Click()
     arr = rng.Value2
 
     If Not IsArray(arr) Then
-        Call MsgBox("Выбрана одна ячейка!", vbCritical)
+        Call MsgBox("Р’С‹Р±СЂР°РЅР° РѕРґРЅР° СЏС‡РµР№РєР°!", vbCritical)
         Exit Sub
     End If
 
@@ -73,14 +73,14 @@ Private Sub btnOK_Click()
     Dim sVal        As String
     
     If optRow.Value Then
-        ' --- ОБЪЕДИНЕНИЕ ПО СТРОКАМ (вниз по столбцам) ---
+        ' --- РћР‘РЄР•Р”РРќР•РќРР• РџРћ РЎРўР РћРљРђРњ (РІРЅРёР· РїРѕ СЃС‚РѕР»Р±С†Р°Рј) ---
         For j = 1 To jCount
-            k = 1    ' Начальная строка группы
+            k = 1    ' РќР°С‡Р°Р»СЊРЅР°СЏ СЃС‚СЂРѕРєР° РіСЂСѓРїРїС‹
             sVal = arr(k, j)
 
             For i = 2 To iCount
                 If arr(i, j) <> sVal Then
-                    ' Значение изменилось, объединяем предыдущую группу
+                    ' Р—РЅР°С‡РµРЅРёРµ РёР·РјРµРЅРёР»РѕСЃСЊ, РѕР±СЉРµРґРёРЅСЏРµРј РїСЂРµРґС‹РґСѓС‰СѓСЋ РіСЂСѓРїРїСѓ
                     If i - 1 > k Then
                         Range(rng.Cells(k, j), rng.Cells(i - 1, j)).Merge
                     End If
@@ -89,21 +89,21 @@ Private Sub btnOK_Click()
                 End If
             Next i
 
-            ' Объединение последней группы в столбце после выхода из цикла
+            ' РћР±СЉРµРґРёРЅРµРЅРёРµ РїРѕСЃР»РµРґРЅРµР№ РіСЂСѓРїРїС‹ РІ СЃС‚РѕР»Р±С†Рµ РїРѕСЃР»Рµ РІС‹С…РѕРґР° РёР· С†РёРєР»Р°
             If iCount > k Then
                 Range(rng.Cells(k, j), rng.Cells(iCount, j)).Merge
             End If
         Next j
         
     Else
-        ' --- ОБЪЕДИНЕНИЕ ПО СТОЛБЦАМ (вправо по строкам) ---
+        ' --- РћР‘РЄР•Р”РРќР•РќРР• РџРћ РЎРўРћР›Р‘Р¦РђРњ (РІРїСЂР°РІРѕ РїРѕ СЃС‚СЂРѕРєР°Рј) ---
         For i = 1 To iCount
-            k = 1    ' Начальный столбец группы
+            k = 1    ' РќР°С‡Р°Р»СЊРЅС‹Р№ СЃС‚РѕР»Р±РµС† РіСЂСѓРїРїС‹
             sVal = arr(i, k)
 
             For j = 2 To jCount
                 If arr(i, j) <> sVal Then
-                    ' Значение изменилось, объединяем предыдущую группу
+                    ' Р—РЅР°С‡РµРЅРёРµ РёР·РјРµРЅРёР»РѕСЃСЊ, РѕР±СЉРµРґРёРЅСЏРµРј РїСЂРµРґС‹РґСѓС‰СѓСЋ РіСЂСѓРїРїСѓ
                     If j - 1 > k Then
                         Range(rng.Cells(i, k), rng.Cells(i, j - 1)).Merge
                     End If
@@ -112,7 +112,7 @@ Private Sub btnOK_Click()
                 End If
             Next j
 
-            ' Объединение последней группы в строке после выхода из цикла
+            ' РћР±СЉРµРґРёРЅРµРЅРёРµ РїРѕСЃР»РµРґРЅРµР№ РіСЂСѓРїРїС‹ РІ СЃС‚СЂРѕРєРµ РїРѕСЃР»Рµ РІС‹С…РѕРґР° РёР· С†РёРєР»Р°
             If jCount > k Then
                 Range(rng.Cells(i, k), rng.Cells(i, jCount)).Merge
             End If
@@ -120,16 +120,16 @@ Private Sub btnOK_Click()
     End If
 
     Call RestoreApplicationSettings
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
     Unload Me
     Exit Sub
 
 ErrorHandler:
     Call RestoreApplicationSettings
-    MsgBox "Ошибка: " & Err.Description, vbCritical, "Ошибка"
+    MsgBox "РћС€РёР±РєР°: " & Err.Description, vbCritical, "РћС€РёР±РєР°"
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub

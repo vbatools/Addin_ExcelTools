@@ -67,7 +67,7 @@ Private Sub btnReferenceStyle(control As IRibbonControl)
 End Sub
 
 Private Sub btnNewStream(control As IRibbonControl)
-    If MsgBox("Запустить в новом потоке?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
+    If MsgBox("Р—Р°РїСѓСЃС‚РёС‚СЊ РІ РЅРѕРІРѕРј РїРѕС‚РѕРєРµ?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
     Dim App         As Application
     Set App = CreateObject("Excel.Application")
     App.Visible = True
@@ -101,7 +101,7 @@ Private Sub btnZeroShowHiden(control As IRibbonControl)
     End With
     Exit Sub
 Zeros_Err:
-    MsgBox Err.Description & vbCrLf & "в VBAProject.D_Macros.Zeros_ " & vbCrLf & "в строке " & Erl, vbExclamation + vbOKOnly, "Ошибка:"
+    MsgBox Err.Description & vbCrLf & "РІ VBAProject.D_Macros.Zeros_ " & vbCrLf & "РІ СЃС‚СЂРѕРєРµ " & Erl, vbExclamation + vbOKOnly, "РћС€РёР±РєР°:"
 End Sub
 
 Private Sub btnSplitPages(control As IRibbonControl)
@@ -250,7 +250,7 @@ Private Sub btnAddIn(control As IRibbonControl)
     Exit Sub
 ErrorHandler:
     Err.Clear
-    Call MsgBox("Нет открытых книг эксель!" & Chr(34) & "Files Excel" & Chr(34) & "!", vbOKOnly + vbExclamation, "Ошибка:")
+    Call MsgBox("РќРµС‚ РѕС‚РєСЂС‹С‚С‹С… РєРЅРёРі СЌРєСЃРµР»СЊ!" & Chr(34) & "Files Excel" & Chr(34) & "!", vbOKOnly + vbExclamation, "РћС€РёР±РєР°:")
 End Sub
 
 Private Sub btnAboutAddin(control As IRibbonControl)
@@ -360,7 +360,7 @@ End Sub
 Public Function IsNotOpenWBooks() As Boolean
     IsNotOpenWBooks = Workbooks.Count = 0
     If IsNotOpenWBooks Then
-        Call MsgBox("Нет открытых книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РѕС‚РєСЂС‹С‚С‹С… РєРЅРёРі!", vbCritical)
     End If
 End Function
 

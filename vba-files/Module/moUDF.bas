@@ -13,7 +13,7 @@ Option Explicit
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
-' Function: REPLACE_CHARS / «¿Ã≈Õ»“‹_—»Ã¬ŒÀ€
+' Function: REPLACE_CHARS / –ó–ê–ú–ï–ù–ò–¢–¨_–°–ò–ú–í–û–õ–´
 ' Purpose: Performs character-by-character replacement in a string
 ' Parameters:
 ' TEXT_STR - Source string for processing
@@ -28,7 +28,7 @@ Public Function REPLACE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_FIND As Stri
     If iLen <> VBA.Len(CHARS_REPLACE) Then
         Select Case Application.International(xlCountrySetting)
             Case 7
-                REPLACE_CHARS = "Œ¯Ë·Í‡: ÕÂ‡‚ÌÓÂ ÍÓÎË˜ÂÒÚ‚Ó ÒËÏ‚ÓÎÓ‚ ÔË ÔÓËÒÍÂ Ë Á‡ÏÂÌÂ"
+                REPLACE_CHARS = "–û—à–∏–±–∫–∞: –ù–µ—Ä–∞–≤–Ω–æ–µ –∫–æ–ª–∏—á–µ—Å—Ç–≤–æ —Å–∏–º–≤–æ–ª–æ–≤ –ø—Ä–∏ –ø–æ–∏—Å–∫–µ –∏ –∑–∞–º–µ–Ω–µ"
             Case Else
                 REPLACE_CHARS = "Error: Unequal number of characters in search and replace"
         End Select
@@ -49,12 +49,12 @@ Public Function REPLACE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_FIND As Stri
     REPLACE_CHARS = sResult
 End Function
 
-Public Function «¿Ã≈Õ»“‹_—»Ã¬ŒÀ€(ByVal —“–Œ ¿ As String, ByVal —»Ã¬ŒÀ€_Õ¿…“» As String, ByVal —»Ã¬ŒÀ€_«¿Ã≈Õ»“‹ As String, Optional ”◊»“¿“‹_–≈√»—“– As Boolean = False) As String
-    «¿Ã≈Õ»“‹_—»Ã¬ŒÀ€ = REPLACE_CHARS(—“–Œ ¿, —»Ã¬ŒÀ€_Õ¿…“», —»Ã¬ŒÀ€_«¿Ã≈Õ»“‹, ”◊»“¿“‹_–≈√»—“–)
+Public Function –ó–ê–ú–ï–ù–ò–¢–¨_–°–ò–ú–í–û–õ–´(ByVal –°–¢–†–û–ö–ê As String, ByVal –°–ò–ú–í–û–õ–´_–ù–ê–ô–¢–ò As String, ByVal –°–ò–ú–í–û–õ–´_–ó–ê–ú–ï–ù–ò–¢–¨ As String, Optional –£–ß–ò–¢–ê–¢–¨_–†–ï–ì–ò–°–¢–† As Boolean = False) As String
+    –ó–ê–ú–ï–ù–ò–¢–¨_–°–ò–ú–í–û–õ–´ = REPLACE_CHARS(–°–¢–†–û–ö–ê, –°–ò–ú–í–û–õ–´_–ù–ê–ô–¢–ò, –°–ò–ú–í–û–õ–´_–ó–ê–ú–ï–ù–ò–¢–¨, –£–ß–ò–¢–ê–¢–¨_–†–ï–ì–ò–°–¢–†)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: TEXT_LEFT / À≈¬Œ_“≈ —“
+' Function: TEXT_LEFT / –õ–ï–í–û_–¢–ï–ö–°–¢
 ' Purpose: Extracts text to the left of the specified delimiter occurrence
 ' Parameters:
 ' TEXT_STR - Source string
@@ -81,12 +81,12 @@ Public Function TEXT_LEFT(ByVal TEXT_STR As String, ByVal Delimiter As String, O
     TEXT_LEFT = sResult
 End Function
 
-Public Function À≈¬Œ_“≈ —“(ByVal —“–Œ ¿ As String, ByVal –¿«ƒ≈À»“≈À‹ As String, Optional ÕŒÃ≈–_–¿«ƒ≈À»“≈Àﬂ As Integer = 1, Optional –≈∆»Ã_—–¿¬Õ≈Õ»ﬂ As Byte = 0) As String
-    À≈¬Œ_“≈ —“ = TEXT_LEFT(—“–Œ ¿, –¿«ƒ≈À»“≈À‹, ÕŒÃ≈–_–¿«ƒ≈À»“≈Àﬂ, –≈∆»Ã_—–¿¬Õ≈Õ»ﬂ)
+Public Function –õ–ï–í–û_–¢–ï–ö–°–¢(ByVal –°–¢–†–û–ö–ê As String, ByVal –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String, Optional –ù–û–ú–ï–†_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–Ø As Integer = 1, Optional –†–ï–ñ–ò–ú_–°–†–ê–í–ù–ï–ù–ò–Ø As Byte = 0) As String
+    –õ–ï–í–û_–¢–ï–ö–°–¢ = TEXT_LEFT(–°–¢–†–û–ö–ê, –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨, –ù–û–ú–ï–†_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–Ø, –†–ï–ñ–ò–ú_–°–†–ê–í–ù–ï–ù–ò–Ø)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: TEXT_BETWEEN / Ã≈∆ƒ”_“≈ —“
+' Function: TEXT_BETWEEN / –ú–ï–ñ–î–£_–¢–ï–ö–°–¢
 ' Purpose: Extracts text between left and right delimiters
 ' Parameters:
 ' TEXT_STR - Source string
@@ -105,12 +105,12 @@ Public Function TEXT_BETWEEN(ByVal TEXT_STR As String, ByVal LEFT_DELIM As Strin
     TEXT_BETWEEN = sResult
 End Function
 
-Public Function Ã≈∆ƒ”_“≈ —“(ByVal —“–Œ ¿ As String, ByVal À≈¬€…_–¿«ƒ≈À»“≈À‹ As String, ByVal œ–¿¬€…_–¿«ƒ≈À»“≈À‹ As String) As String
-    Ã≈∆ƒ”_“≈ —“ = TEXT_BETWEEN(—“–Œ ¿, À≈¬€…_–¿«ƒ≈À»“≈À‹, œ–¿¬€…_–¿«ƒ≈À»“≈À‹)
+Public Function –ú–ï–ñ–î–£_–¢–ï–ö–°–¢(ByVal –°–¢–†–û–ö–ê As String, ByVal –õ–ï–í–´–ô_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String, ByVal –ü–†–ê–í–´–ô_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String) As String
+    –ú–ï–ñ–î–£_–¢–ï–ö–°–¢ = TEXT_BETWEEN(–°–¢–†–û–ö–ê, –õ–ï–í–´–ô_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨, –ü–†–ê–í–´–ô_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: FIND_REPLACE / Õ¿…“»_«¿Ã≈Õ»“‹
+' Function: FIND_REPLACE / –ù–ê–ô–¢–ò_–ó–ê–ú–ï–ù–ò–¢–¨
 ' Purpose: Find and replace text in string
 ' Parameters:
 ' TEXT_STR - Source string
@@ -127,16 +127,16 @@ Public Function FIND_REPLACE(ByVal TEXT_STR As String, _
     FIND_REPLACE = VBA.Replace(TEXT_STR, FIND_STR, REPLACE_STR, , REPLACE_COUNT)
 End Function
 
-Public Function Õ¿…“»_«¿Ã≈Õ»“‹(ByVal “≈ —“ As String, _
-        ByVal Õ¿…“» As String, _
-        ByVal «¿Ã≈Õ»“‹ As String, _
-        Optional  ŒÀ»◊≈—“¬Œ_«¿Ã≈Õ As Integer = -1) As String
+Public Function –ù–ê–ô–¢–ò_–ó–ê–ú–ï–ù–ò–¢–¨(ByVal –¢–ï–ö–°–¢ As String, _
+        ByVal –ù–ê–ô–¢–ò As String, _
+        ByVal –ó–ê–ú–ï–ù–ò–¢–¨ As String, _
+        Optional –ö–û–õ–ò–ß–ï–°–¢–í–û_–ó–ê–ú–ï–ù As Integer = -1) As String
 
-    Õ¿…“»_«¿Ã≈Õ»“‹ = FIND_REPLACE(“≈ —“, Õ¿…“», «¿Ã≈Õ»“‹,  ŒÀ»◊≈—“¬Œ_«¿Ã≈Õ)
+    –ù–ê–ô–¢–ò_–ó–ê–ú–ï–ù–ò–¢–¨ = FIND_REPLACE(–¢–ï–ö–°–¢, –ù–ê–ô–¢–ò, –ó–ê–ú–ï–ù–ò–¢–¨, –ö–û–õ–ò–ß–ï–°–¢–í–û_–ó–ê–ú–ï–ù)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: TEXT_RIGHT / œ–¿¬Œ_“≈ —“
+' Function: TEXT_RIGHT / –ü–†–ê–í–û_–¢–ï–ö–°–¢
 ' Purpose: Extracts text to the right of the specified delimiter occurrence
 '          (search is performed from right to left)
 ' Parameters:
@@ -163,12 +163,12 @@ Public Function TEXT_RIGHT(ByVal TEXT_STR As String, ByVal Delimiter As String, 
     End If
 End Function
 
-Public Function œ–¿¬Œ_“≈ —“(ByVal —“–Œ ¿ As String, ByVal –¿«ƒ≈À»“≈À‹ As String, Optional ÕŒÃ≈–_–¿«ƒ≈À»“≈Àﬂ As Integer = 1, Optional –≈∆»Ã_—–¿¬Õ≈Õ»ﬂ As Byte = 0) As String
-    œ–¿¬Œ_“≈ —“ = TEXT_RIGHT(—“–Œ ¿, –¿«ƒ≈À»“≈À‹, ÕŒÃ≈–_–¿«ƒ≈À»“≈Àﬂ, –≈∆»Ã_—–¿¬Õ≈Õ»ﬂ)
+Public Function –ü–†–ê–í–û_–¢–ï–ö–°–¢(ByVal –°–¢–†–û–ö–ê As String, ByVal –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String, Optional –ù–û–ú–ï–†_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–Ø As Integer = 1, Optional –†–ï–ñ–ò–ú_–°–†–ê–í–ù–ï–ù–ò–Ø As Byte = 0) As String
+    –ü–†–ê–í–û_–¢–ï–ö–°–¢ = TEXT_RIGHT(–°–¢–†–û–ö–ê, –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨, –ù–û–ú–ï–†_–†–ê–ó–î–ï–õ–ò–¢–ï–õ–Ø, –†–ï–ñ–ò–ú_–°–†–ê–í–ù–ï–ù–ò–Ø)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: SPLIT_STRING / –¿«¡»“‹_—“–Œ ”
+' Function: SPLIT_STRING / –†–ê–ó–ë–ò–¢–¨_–°–¢–†–û–ö–£
 ' Purpose: Splits string by delimiter and returns specified element
 ' Parameters:
 ' TEXT_STR - Source string
@@ -185,16 +185,16 @@ Public Function SPLIT_STRING(ByVal TEXT_STR As String, _
     SPLIT_STRING = VBA.Split(TEXT_STR, Delimiter, LIMIT)(ELEMENT_NUM - 1)
 End Function
 
-Public Function –¿«¡»“‹_—“–Œ ”(ByVal “≈ —“ As String, _
-        Optional –¿«ƒ≈À»“≈À‹ As String = " ", _
-        Optional ÕŒÃ≈–_›À≈Ã≈Õ“¿ As Integer = 1, _
-        Optional À»Ã»“ As Integer = -1) As String
+Public Function –†–ê–ó–ë–ò–¢–¨_–°–¢–†–û–ö–£(ByVal –¢–ï–ö–°–¢ As String, _
+        Optional –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String = " ", _
+        Optional –ù–û–ú–ï–†_–≠–õ–ï–ú–ï–ù–¢–ê As Integer = 1, _
+        Optional –õ–ò–ú–ò–¢ As Integer = -1) As String
 
-    –¿«¡»“‹_—“–Œ ” = SPLIT_STRING(“≈ —“, –¿«ƒ≈À»“≈À‹, ÕŒÃ≈–_›À≈Ã≈Õ“¿, À»Ã»“)
+    –†–ê–ó–ë–ò–¢–¨_–°–¢–†–û–ö–£ = SPLIT_STRING(–¢–ï–ö–°–¢, –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨, –ù–û–ú–ï–†_–≠–õ–ï–ú–ï–ù–¢–ê, –õ–ò–ú–ò–¢)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: CONCAT_MULTI / —÷≈œ»“‹_Ã”À‹“»
+' Function: CONCAT_MULTI / –°–¶–ï–ü–ò–¢–¨_–ú–£–õ–¨–¢–ò
 ' Purpose: Combines values from multiple ranges with specified delimiter
 ' Parameters:
 ' DELIMITER - Delimiter character between values
@@ -215,12 +215,12 @@ Public Function CONCAT_MULTI(ByVal Delimiter As String, ParamArray RANGES() As V
     CONCAT_MULTI = sResult
 End Function
 
-Public Function —÷≈œ»“‹_Ã”À‹“»(ByVal –¿«ƒ≈À»“≈À‹ As String, ParamArray ƒ»¿œ¿«ŒÕ€() As Variant) As String
-    —÷≈œ»“‹_Ã”À‹“» = CONCAT_MULTI(–¿«ƒ≈À»“≈À‹, ƒ»¿œ¿«ŒÕ€)
+Public Function –°–¶–ï–ü–ò–¢–¨_–ú–£–õ–¨–¢–ò(ByVal –†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨ As String, ParamArray –î–ò–ê–ü–ê–ó–û–ù–´() As Variant) As String
+    –°–¶–ï–ü–ò–¢–¨_–ú–£–õ–¨–¢–ò = CONCAT_MULTI(–†–ê–ó–î–ï–õ–ò–¢–ï–õ–¨, –î–ò–ê–ü–ê–ó–û–ù–´)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: TEXT_MATCHES_PATTERN / “≈ —“_—ŒŒ“¬≈“—“¬”≈“_ÿ¿¡ÀŒÕ”
+' Function: TEXT_MATCHES_PATTERN / –¢–ï–ö–°–¢_–°–û–û–¢–í–ï–¢–°–¢–í–£–ï–¢_–®–ê–ë–õ–û–ù–£
 ' Purpose: Checks if text matches a pattern (Like operator)
 ' Parameters:
 ' TEXT_STR - Source string
@@ -231,23 +231,23 @@ Public Function TEXT_MATCHES_PATTERN(ByVal TEXT_STR As String, ByVal PATTERN As 
     TEXT_MATCHES_PATTERN = TEXT_STR Like PATTERN
 End Function
 
-Public Function “≈ —“_—ŒŒ“¬≈“—“¬”≈“_ÿ¿¡ÀŒÕ”(ByVal “≈ —“ As String, ByVal ÿ¿¡ÀŒÕ As String) As Boolean
-    “≈ —“_—ŒŒ“¬≈“—“¬”≈“_ÿ¿¡ÀŒÕ” = TEXT_MATCHES_PATTERN(“≈ —“, ÿ¿¡ÀŒÕ)
+Public Function –¢–ï–ö–°–¢_–°–û–û–¢–í–ï–¢–°–¢–í–£–ï–¢_–®–ê–ë–õ–û–ù–£(ByVal –¢–ï–ö–°–¢ As String, ByVal –®–ê–ë–õ–û–ù As String) As Boolean
+    –¢–ï–ö–°–¢_–°–û–û–¢–í–ï–¢–°–¢–í–£–ï–¢_–®–ê–ë–õ–û–ù–£ = TEXT_MATCHES_PATTERN(–¢–ï–ö–°–¢, –®–ê–ë–õ–û–ù)
 End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TRANSLIT
-' Purpose: œÂÓ·‡ÁÛÂÚ ÍËËÎÎË˜ÂÒÍËÈ ÚÂÍÒÚ ‚ Î‡ÚËÌËˆÛ ÒÓ„Î‡ÒÌÓ ‚˚·‡ÌÌÓÏÛ ÒÚ‡Ì‰‡ÚÛ.
-'          œÓ‰‰ÂÊË‚‡ÂÚ Ó·‡·ÓÚÍÛ ÓÍÓÌ˜‡ÌËÈ Ë ÍÓÌÚÂÍÒÚÓÁ‡‚ËÒËÏÛ˛ Á‡ÏÂÌÛ ÒËÏ‚ÓÎÓ‚.
+' Purpose: –ü—Ä–µ–æ–±—Ä–∞–∑—É–µ—Ç –∫–∏—Ä–∏–ª–ª–∏—á–µ—Å–∫–∏–π —Ç–µ–∫—Å—Ç –≤ –ª–∞—Ç–∏–Ω–∏—Ü—É —Å–æ–≥–ª–∞—Å–Ω–æ –≤—ã–±—Ä–∞–Ω–Ω–æ–º—É —Å—Ç–∞–Ω–¥–∞—Ä—Ç—É.
+'          –ü–æ–¥–¥–µ—Ä–∂–∏–≤–∞–µ—Ç –æ–±—Ä–∞–±–æ—Ç–∫—É –æ–∫–æ–Ω—á–∞–Ω–∏–π –∏ –∫–æ–Ω—Ç–µ–∫—Å—Ç–æ–∑–∞–≤–∏—Å–∏–º—É—é –∑–∞–º–µ–Ω—É —Å–∏–º–≤–æ–ª–æ–≤.
 ' Parameters:
-'   sText        - String. »ÒıÓ‰Ì˚È ÚÂÍÒÚ ‰Îˇ ÍÓÌ‚ÂÚ‡ˆËË.
-'   iStandard    - Integer (Optional).  Ó‰ ÒÚ‡Ì‰‡Ú‡ Ú‡ÌÒÎËÚÂ‡ˆËË (ÔÓ ÛÏÓÎ˜‡ÌË˛ 0).
-'                  0 - Œ·˘ÂÔËÌˇÚ˚È ÒÚ‡Ì‰‡Ú (Ò Á‡ÏÂÌÓÈ "˚È" -> "iy").
-'                  1 - » ¿Œ (ICAO Doc 9303, Á‡„‡ÌÔ‡ÒÔÓÚ).
-'                  2 - √Œ—“ 7.79-2000 (ISO 9, Ò ÍÓÌÚÂÍÒÚÌÓÈ Á‡ÏÂÌÓÈ "÷").
+'   sText        - String. –ò—Å—Ö–æ–¥–Ω—ã–π —Ç–µ–∫—Å—Ç –¥–ª—è –∫–æ–Ω–≤–µ—Ä—Ç–∞—Ü–∏–∏.
+'   iStandard    - Integer (Optional). –ö–æ–¥ —Å—Ç–∞–Ω–¥–∞—Ä—Ç–∞ —Ç—Ä–∞–Ω—Å–ª–∏—Ç–µ—Ä–∞—Ü–∏–∏ (–ø–æ —É–º–æ–ª—á–∞–Ω–∏—é 0).
+'                  0 - –û–±—â–µ–ø—Ä–∏–Ω—è—Ç—ã–π —Å—Ç–∞–Ω–¥–∞—Ä—Ç (—Å –∑–∞–º–µ–Ω–æ–π "—ã–π" -> "iy").
+'                  1 - –ò–ö–ê–û (ICAO Doc 9303, –∑–∞–≥—Ä–∞–Ω–ø–∞—Å–ø–æ—Ä—Ç).
+'                  2 - –ì–û–°–¢ 7.79-2000 (ISO 9, —Å –∫–æ–Ω—Ç–µ–∫—Å—Ç–Ω–æ–π –∑–∞–º–µ–Ω–æ–π "–¶").
 '                  3 - BGN/PCGN.
-'                  4 - BGN/PCGN (Ò Á‡ÏÂÌÓÈ ÓÍÓÌ˜‡ÌËÈ "ËÈ"/"˚È" -> "y").
-' Returns: String - —ÚÓÍ‡ Ò ÔÂÓ·‡ÁÓ‚‡ÌÌ˚Ï ÚÂÍÒÚÓÏ.
+'                  4 - BGN/PCGN (—Å –∑–∞–º–µ–Ω–æ–π –æ–∫–æ–Ω—á–∞–Ω–∏–π "–∏–π"/"—ã–π" -> "y").
+' Returns: String - –°—Ç—Ä–æ–∫–∞ —Å –ø—Ä–µ–æ–±—Ä–∞–∑–æ–≤–∞–Ω–Ω—ã–º —Ç–µ–∫—Å—Ç–æ–º.
 '--------------------------------------------------------------------------------
 Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Integer = 0) As String
     Dim sRusAlphabet As String
@@ -258,55 +258,55 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
     Dim sNextChar As String
     Dim bIsUpper As Boolean
     
-    ' ¡‡ÁÓ‚˚È ‡ÎÙ‡‚ËÚ
-    sRusAlphabet = "‡·‚„‰Â∏ÊÁËÈÍÎÏÌÓÔÒÚÛÙıˆ˜¯˘˙˚¸˝˛ˇ"
+    ' –ë–∞–∑–æ–≤—ã–π –∞–ª—Ñ–∞–≤–∏—Ç
+    sRusAlphabet = "–∞–±–≤–≥–¥–µ—ë–∂–∑–∏–π–∫–ª–º–Ω–æ–ø—Ä—Å—Ç—É—Ñ—Ö—Ü—á—à—â—ä—ã—å—ç—é—è"
     
-    ' »ÌËˆË‡ÎËÁ‡ˆËˇ Ï‡ÒÒË‚Ó‚ Á‡ÏÂÌ ‚ Á‡‚ËÒËÏÓÒÚË ÓÚ ÒÚ‡Ì‰‡Ú‡
+    ' –ò–Ω–∏—Ü–∏–∞–ª–∏–∑–∞—Ü–∏—è –º–∞—Å—Å–∏–≤–æ–≤ –∑–∞–º–µ–Ω –≤ –∑–∞–≤–∏—Å–∏–º–æ—Å—Ç–∏ –æ—Ç —Å—Ç–∞–Ω–¥–∞—Ä—Ç–∞
     Select Case iStandard
-        Case 0 ' Œ·˘ÂÔËÌˇÚ˚È
+        Case 0 ' –û–±—â–µ–ø—Ä–∏–Ω—è—Ç—ã–π
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "sch", "", "y", "", "e", "u", "ya")
-        Case 1 ' » ¿Œ (ICAO)
+        Case 1 ' –ò–ö–ê–û (ICAO)
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "ie", "y", "", "e", "iu", "ia")
-        Case 2 ' √Œ—“ 7.79-2000 (ISO 9)
+        Case 2 ' –ì–û–°–¢ 7.79-2000 (ISO 9)
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "x", "cz", "ch", "sh", "shh", """", "y'", "'", "e'", "yu", "ya")
         Case 3 ' BGN/PCGN
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y", "", "e", "yu", "ya")
-        Case 4 ' BGN/PCGN Ò Á‡ÏÂÌÓÈ ÓÍÓÌ˜‡ÌËÈ
+        Case 4 ' BGN/PCGN —Å –∑–∞–º–µ–Ω–æ–π –æ–∫–æ–Ω—á–∞–Ω–∏–π
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y", "", "e", "yu", "ya")
         Case Else
-            ' œÓ ÛÏÓÎ˜‡ÌË˛ Standard 0
+            ' –ü–æ —É–º–æ–ª—á–∞–Ω–∏—é Standard 0
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "sch", "", "y", "", "e", "u", "ya")
     End Select
     
-    ' ŒÒÌÓ‚ÌÓÈ ˆËÍÎ Ó·‡·ÓÚÍË ÒËÏ‚ÓÎÓ‚
+    ' –û—Å–Ω–æ–≤–Ω–æ–π —Ü–∏–∫–ª –æ–±—Ä–∞–±–æ—Ç–∫–∏ —Å–∏–º–≤–æ–ª–æ–≤
     For i = 1 To Len(sText)
         sCharIn = Mid(sText, i, 1)
         
-        ' œÓËÒÍ ÒËÏ‚ÓÎ‡ ‚ ÛÒÒÍÓÏ ‡ÎÙ‡‚ËÚÂ (·ÂÁ Û˜ÂÚ‡ Â„ËÒÚ‡ ‰Îˇ ÔÓËÒÍ‡)
+        ' –ü–æ–∏—Å–∫ —Å–∏–º–≤–æ–ª–∞ –≤ —Ä—É—Å—Å–∫–æ–º –∞–ª—Ñ–∞–≤–∏—Ç–µ (–±–µ–∑ —É—á–µ—Ç–∞ —Ä–µ–≥–∏—Å—Ç—Ä–∞ –¥–ª—è –ø–æ–∏—Å–∫–∞)
         iIndex = InStr(1, sRusAlphabet, sCharIn, vbTextCompare)
         
         If iIndex > 0 Then
-            ' —ËÏ‚ÓÎ Ì‡È‰ÂÌ - ·ÂÂÏ ·‡ÁÓ‚Û˛ Á‡ÏÂÌÛ
+            ' –°–∏–º–≤–æ–ª –Ω–∞–π–¥–µ–Ω - –±–µ—Ä–µ–º –±–∞–∑–æ–≤—É—é –∑–∞–º–µ–Ω—É
             sCharOut = vEngMap(iIndex - 1)
             
-            ' --- —ÔÂˆËÙË˜ÂÒÍ‡ˇ ÎÓ„ËÍ‡ ‰Îˇ —Ú‡Ì‰‡Ú‡ 2 (√Œ—“) ---
+            ' --- –°–ø–µ—Ü–∏—Ñ–∏—á–µ—Å–∫–∞—è –ª–æ–≥–∏–∫–∞ –¥–ª—è –°—Ç–∞–Ω–¥–∞—Ä—Ç–∞ 2 (–ì–û–°–¢) ---
             If iStandard = 2 Then
-                ' ¡ÛÍ‚‡ "ˆ" Á‡ÏÂÌˇÂÚÒˇ Ì‡ "c", ÂÒÎË Á‡ ÌÂÈ ÒÎÂ‰Û˛Ú e, i, y, j. »Ì‡˜Â "cz".
-                If (LCase(sCharIn) = "ˆ") Then
+                ' –ë—É–∫–≤–∞ "—Ü" –∑–∞–º–µ–Ω—è–µ—Ç—Å—è –Ω–∞ "c", –µ—Å–ª–∏ –∑–∞ –Ω–µ–π —Å–ª–µ–¥—É—é—Ç e, i, y, j. –ò–Ω–∞—á–µ "cz".
+                If (LCase(sCharIn) = "—Ü") Then
                     If i < Len(sText) Then
                         sNextChar = LCase(Mid(sText, i + 1, 1))
-                        If InStr(1, "ÂËÈ˛ˇei", sNextChar) > 0 Then
+                        If InStr(1, "–µ–∏–π—é—èei", sNextChar) > 0 Then
                             sCharOut = "c"
                         End If
                     End If
                 End If
             End If
             
-            ' ŒÔÂ‰ÂÎÂÌËÂ Â„ËÒÚ‡ ËÒıÓ‰ÌÓ„Ó ÒËÏ‚ÓÎ‡
+            ' –û–ø—Ä–µ–¥–µ–ª–µ–Ω–∏–µ —Ä–µ–≥–∏—Å—Ç—Ä–∞ –∏—Å—Ö–æ–¥–Ω–æ–≥–æ —Å–∏–º–≤–æ–ª–∞
             bIsUpper = (StrComp(sCharIn, UCase(sCharIn), vbBinaryCompare) = 0) And (StrComp(sCharIn, LCase(sCharIn), vbBinaryCompare) <> 0)
             
             If bIsUpper Then
-                ' ‘ÓÏËÛÂÏ ‚ÂıÌËÈ Â„ËÒÚ ‰Îˇ Á‡ÏÂÌ˚ (“ÓÎ¸ÍÓ ÔÂ‚‡ˇ ·ÛÍ‚‡ Á‡„Î‡‚Ì‡ˇ)
+                ' –§–æ—Ä–º–∏—Ä—É–µ–º –≤–µ—Ä—Ö–Ω–∏–π —Ä–µ–≥–∏—Å—Ç—Ä –¥–ª—è –∑–∞–º–µ–Ω—ã (–¢–æ–ª—å–∫–æ –ø–µ—Ä–≤–∞—è –±—É–∫–≤–∞ –∑–∞–≥–ª–∞–≤–Ω–∞—è)
                 If Len(sCharOut) > 0 Then
                     sCharOut = UCase(Left(sCharOut, 1)) & LCase(Mid(sCharOut, 2))
                 End If
@@ -315,27 +315,27 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
             End If
             
         Else
-            ' —ËÏ‚ÓÎ ÌÂ Ì‡È‰ÂÌ (Î‡ÚËÌËˆ‡, ˆËÙ˚, ÁÌ‡ÍË) - ÓÒÚ‡‚ÎˇÂÏ Í‡Í ÂÒÚ¸
+            ' –°–∏–º–≤–æ–ª –Ω–µ –Ω–∞–π–¥–µ–Ω (–ª–∞—Ç–∏–Ω–∏—Ü–∞, —Ü–∏—Ñ—Ä—ã, –∑–Ω–∞–∫–∏) - –æ—Å—Ç–∞–≤–ª—è–µ–º –∫–∞–∫ –µ—Å—Ç—å
             sCharOut = sCharIn
         End If
         
         sResult = sResult & sCharOut
     Next i
     
-    ' --- œÓÒÚ-Ó·‡·ÓÚÍ‡ ÓÍÓÌ˜‡ÌËÈ (ÒÔÂˆËÙËÍ‡ Standard 0, 4) ---
+    ' --- –ü–æ—Å—Ç-–æ–±—Ä–∞–±–æ—Ç–∫–∞ –æ–∫–æ–Ω—á–∞–Ω–∏–π (—Å–ø–µ—Ü–∏—Ñ–∏–∫–∞ Standard 0, 4) ---
     If iStandard = 0 Then
-        ' «‡ÏÂÌ‡ "˚È" Ì‡ "iy"
+        ' –ó–∞–º–µ–Ω–∞ "—ã–π" –Ω–∞ "iy"
         sResult = Replace(sResult, "yy ", "iy ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi ", "iy ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi.", "iy.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi,", "iy,", 1, -1, vbTextCompare)
         
-        ' œÓ‚ÂÍ‡ ÍÓÌˆ‡ ÒÚÓÍË
+        ' –ü—Ä–æ–≤–µ—Ä–∫–∞ –∫–æ–Ω—Ü–∞ —Å—Ç—Ä–æ–∫–∏
         If Right(sResult, 2) = "yi" Then sResult = Left(sResult, Len(sResult) - 2) & "iy"
         If Right(sResult, 2) = "YI" Then sResult = Left(sResult, Len(sResult) - 2) & "IY"
         
     ElseIf iStandard = 4 Then
-        ' «‡ÏÂÌ‡ "ËÈ" Ë "˚È" Ì‡ "y"
+        ' –ó–∞–º–µ–Ω–∞ "–∏–π" –∏ "—ã–π" –Ω–∞ "y"
         sResult = Replace(sResult, "iy ", "y ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "iy.", "y.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "iy,", "y,", 1, -1, vbTextCompare)
@@ -344,7 +344,7 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
         sResult = Replace(sResult, "yy.", "y.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yy,", "y,", 1, -1, vbTextCompare)
         
-        ' œÓ‚ÂÍ‡ ÍÓÌˆ‡ ÒÚÓÍË
+        ' –ü—Ä–æ–≤–µ—Ä–∫–∞ –∫–æ–Ω—Ü–∞ —Å—Ç—Ä–æ–∫–∏
         If Right(sResult, 2) = "iy" Then sResult = Left(sResult, Len(sResult) - 2) & "y"
         If Right(sResult, 2) = "yy" Then sResult = Left(sResult, Len(sResult) - 2) & "y"
         
@@ -356,12 +356,12 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
 
 End Function
 
-Public Function “–¿Õ—À»“(ByVal “≈ —“ As String, Optional ByVal —“¿Õƒ¿–“ As Integer = 0) As String
-    “–¿Õ—À»“ = TRANSLIT(“≈ —“, —“¿Õƒ¿–“)
+Public Function –¢–†–ê–ù–°–õ–ò–¢(ByVal –¢–ï–ö–°–¢ As String, Optional ByVal –°–¢–ê–ù–î–ê–†–¢ As Integer = 0) As String
+    –¢–†–ê–ù–°–õ–ò–¢ = TRANSLIT(–¢–ï–ö–°–¢, –°–¢–ê–ù–î–ê–†–¢)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: REMOVE_CHARS / ”ƒ¿À»“‹_—»Ã¬ŒÀ€
+' Function: REMOVE_CHARS / –£–î–ê–õ–ò–¢–¨_–°–ò–ú–í–û–õ–´
 ' Purpose: Removes specified characters from a string
 ' Parameters:
 ' TEXT_STR - Source string
@@ -381,8 +381,8 @@ Public Function REMOVE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_REMOVE As Str
     REMOVE_CHARS = sResult
 End Function
 
-Public Function ”ƒ¿À»“‹_—»Ã¬ŒÀ€(ByVal —“–Œ ¿ As String, ByVal —»Ã¬ŒÀ€_”ƒ¿À»“‹ As String, Optional ”◊»“¿“‹_–≈√»—“– As Boolean = False) As String
-    ”ƒ¿À»“‹_—»Ã¬ŒÀ€ = REMOVE_CHARS(—“–Œ ¿, —»Ã¬ŒÀ€_”ƒ¿À»“‹, ”◊»“¿“‹_–≈√»—“–)
+Public Function –£–î–ê–õ–ò–¢–¨_–°–ò–ú–í–û–õ–´(ByVal –°–¢–†–û–ö–ê As String, ByVal –°–ò–ú–í–û–õ–´_–£–î–ê–õ–ò–¢–¨ As String, Optional –£–ß–ò–¢–ê–¢–¨_–†–ï–ì–ò–°–¢–† As Boolean = False) As String
+    –£–î–ê–õ–ò–¢–¨_–°–ò–ú–í–û–õ–´ = REMOVE_CHARS(–°–¢–†–û–ö–ê, –°–ò–ú–í–û–õ–´_–£–î–ê–õ–ò–¢–¨, –£–ß–ò–¢–ê–¢–¨_–†–ï–ì–ò–°–¢–†)
 End Function
 
 ' ============================================================================
@@ -390,7 +390,7 @@ End Function
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
-' Function: GET_COMMENT / œŒÀ”◊ ŒÃÃ≈Õ“
+' Function: GET_COMMENT / –ü–û–õ–£–ß–ö–û–ú–ú–ï–ù–¢
 ' Purpose: Returns comment text from a cell
 ' Parameters:
 ' CELL - Range object (single cell)
@@ -401,12 +401,12 @@ Public Function GET_COMMENT(cell As Range) As String
     GET_COMMENT = cell.Comment.TEXT
 End Function
 
-Public Function œŒÀ”◊ ŒÃÃ≈Õ“(ByVal ﬂ◊≈… ¿ As Range) As String
-    œŒÀ”◊ ŒÃÃ≈Õ“ = GET_COMMENT(ﬂ◊≈… ¿)
+Public Function –ü–û–õ–£–ß–ö–û–ú–ú–ï–ù–¢(ByVal –Ø–ß–ï–ô–ö–ê As Range) As String
+    –ü–û–õ–£–ß–ö–û–ú–ú–ï–ù–¢ = GET_COMMENT(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: GET_TEXT / œŒÀ”◊“≈ —“
+' Function: GET_TEXT / –ü–û–õ–£–ß–¢–ï–ö–°–¢
 ' Purpose: Extracts only text characters (letters) from cell
 ' Parameters:
 ' CELL - Range object (single cell)
@@ -426,12 +426,12 @@ Public Function GET_TEXT(cell As Range) As String
     Next
 End Function
 
-Public Function œŒÀ”◊“≈ —“(ByVal ﬂ◊≈… ¿ As Range) As String
-    œŒÀ”◊“≈ —“ = GET_TEXT(ﬂ◊≈… ¿)
+Public Function –ü–û–õ–£–ß–¢–ï–ö–°–¢(ByVal –Ø–ß–ï–ô–ö–ê As Range) As String
+    –ü–û–õ–£–ß–¢–ï–ö–°–¢ = GET_TEXT(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: GET_NUMBER / œŒÀ”◊◊»—ÀŒ
+' Function: GET_NUMBER / –ü–û–õ–£–ß–ß–ò–°–õ–û
 ' Purpose: Extracts only numeric characters from cell
 ' Parameters:
 ' CELL - Range object (single cell)
@@ -447,12 +447,12 @@ Public Function GET_NUMBER(cell As Range) As String
     Next
 End Function
 
-Public Function œŒÀ”◊◊»—ÀŒ(ByVal ﬂ◊≈… ¿ As Range) As String
-    œŒÀ”◊◊»—ÀŒ = GET_NUMBER(ﬂ◊≈… ¿)
+Public Function –ü–û–õ–£–ß–ß–ò–°–õ–û(ByVal –Ø–ß–ï–ô–ö–ê As Range) As String
+    –ü–û–õ–£–ß–ß–ò–°–õ–û = GET_NUMBER(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: FORMULA_TEXT / “≈ —“‘Œ–Ã”À€
+' Function: FORMULA_TEXT / –¢–ï–ö–°–¢–§–û–†–ú–£–õ–´
 ' Purpose: Returns formula from cell as text
 ' Parameters:
 ' CELL - Range object (single cell)
@@ -462,8 +462,8 @@ Public Function FORMULA_TEXT(cell As Range) As String
     FORMULA_TEXT = cell.formula
 End Function
 
-Public Function “≈ —“‘Œ–Ã”À€(ByVal ﬂ◊≈… ¿ As Range) As String
-    “≈ —“‘Œ–Ã”À€ = FORMULA_TEXT(ﬂ◊≈… ¿)
+Public Function –¢–ï–ö–°–¢–§–û–†–ú–£–õ–´(ByVal –Ø–ß–ï–ô–ö–ê As Range) As String
+    –¢–ï–ö–°–¢–§–û–†–ú–£–õ–´ = FORMULA_TEXT(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 ' ============================================================================
@@ -471,7 +471,7 @@ End Function
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
-' Function: SUM_BY_COLOR / —”ÃÃ«¿À»¬ ¿
+' Function: SUM_BY_COLOR / –°–£–ú–ú–ó–ê–õ–ò–í–ö–ê
 ' Purpose: Sums values in cells with specified fill color
 ' Parameters:
 ' RANGE_DATA - Range to sum
@@ -492,12 +492,12 @@ Public Function SUM_BY_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Doub
     SUM_BY_COLOR = sinSum
 End Function
 
-Public Function —”ÃÃ«¿À»¬ ¿(ByVal ƒ»¿œ¿«ŒÕ As Range, ByVal œ–»Ã≈–_«¿À»¬ » As Range) As Double
-    —”ÃÃ«¿À»¬ ¿ = SUM_BY_COLOR(ƒ»¿œ¿«ŒÕ, œ–»Ã≈–_«¿À»¬ »)
+Public Function –°–£–ú–ú–ó–ê–õ–ò–í–ö–ê(ByVal –î–ò–ê–ü–ê–ó–û–ù As Range, ByVal –ü–†–ò–ú–ï–†_–ó–ê–õ–ò–í–ö–ò As Range) As Double
+    –°–£–ú–ú–ó–ê–õ–ò–í–ö–ê = SUM_BY_COLOR(–î–ò–ê–ü–ê–ó–û–ù, –ü–†–ò–ú–ï–†_–ó–ê–õ–ò–í–ö–ò)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: SUM_BY_FONT_COLOR / —”ÃÃÿ–»‘“
+' Function: SUM_BY_FONT_COLOR / –°–£–ú–ú–®–†–ò–§–¢
 ' Purpose: Sums values in cells with specified font color
 ' Parameters:
 ' RANGE_DATA - Range to sum
@@ -518,12 +518,12 @@ Public Function SUM_BY_FONT_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As
     SUM_BY_FONT_COLOR = sinSum
 End Function
 
-Public Function —”ÃÃÿ–»‘“(ByVal ƒ»¿œ¿«ŒÕ As Range, ByVal œ–»Ã≈–_ÿ–»‘“¿ As Range) As Double
-    —”ÃÃÿ–»‘“ = SUM_BY_FONT_COLOR(ƒ»¿œ¿«ŒÕ, œ–»Ã≈–_ÿ–»‘“¿)
+Public Function –°–£–ú–ú–®–†–ò–§–¢(ByVal –î–ò–ê–ü–ê–ó–û–ù As Range, ByVal –ü–†–ò–ú–ï–†_–®–†–ò–§–¢–ê As Range) As Double
+    –°–£–ú–ú–®–†–ò–§–¢ = SUM_BY_FONT_COLOR(–î–ò–ê–ü–ê–ó–û–ù, –ü–†–ò–ú–ï–†_–®–†–ò–§–¢–ê)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: COUNT_BY_COLOR / —◊≈“«¿À»¬ ¿
+' Function: COUNT_BY_COLOR / –°–ß–ï–¢–ó–ê–õ–ò–í–ö–ê
 ' Purpose: Counts cells with specified fill color
 ' Parameters:
 ' RANGE_DATA - Range to count
@@ -544,12 +544,12 @@ Public Function COUNT_BY_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Lo
     COUNT_BY_COLOR = lResult
 End Function
 
-Public Function —◊≈“«¿À»¬ ¿(ByVal ƒ»¿œ¿«ŒÕ As Range, ByVal œ–»Ã≈–_«¿À»¬ » As Range) As Long
-    —◊≈“«¿À»¬ ¿ = COUNT_BY_COLOR(ƒ»¿œ¿«ŒÕ, œ–»Ã≈–_«¿À»¬ »)
+Public Function –°–ß–ï–¢–ó–ê–õ–ò–í–ö–ê(ByVal –î–ò–ê–ü–ê–ó–û–ù As Range, ByVal –ü–†–ò–ú–ï–†_–ó–ê–õ–ò–í–ö–ò As Range) As Long
+    –°–ß–ï–¢–ó–ê–õ–ò–í–ö–ê = COUNT_BY_COLOR(–î–ò–ê–ü–ê–ó–û–ù, –ü–†–ò–ú–ï–†_–ó–ê–õ–ò–í–ö–ò)
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: COUNT_BY_FONT_COLOR / —◊≈“ÿ–»‘“
+' Function: COUNT_BY_FONT_COLOR / –°–ß–ï–¢–®–†–ò–§–¢
 ' Purpose: Counts cells with specified font color
 ' Parameters:
 ' RANGE_DATA - Range to count
@@ -570,8 +570,8 @@ Public Function COUNT_BY_FONT_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) 
     COUNT_BY_FONT_COLOR = lResult
 End Function
 
-Public Function —◊≈“ÿ–»‘“(ByVal ƒ»¿œ¿«ŒÕ As Range, ByVal œ–»Ã≈–_ÿ–»‘“¿ As Range) As Long
-    —◊≈“ÿ–»‘“ = COUNT_BY_FONT_COLOR(ƒ»¿œ¿«ŒÕ, œ–»Ã≈–_ÿ–»‘“¿)
+Public Function –°–ß–ï–¢–®–†–ò–§–¢(ByVal –î–ò–ê–ü–ê–ó–û–ù As Range, ByVal –ü–†–ò–ú–ï–†_–®–†–ò–§–¢–ê As Range) As Long
+    –°–ß–ï–¢–®–†–ò–§–¢ = COUNT_BY_FONT_COLOR(–î–ò–ê–ü–ê–ó–û–ù, –ü–†–ò–ú–ï–†_–®–†–ò–§–¢–ê)
 End Function
 
 ' ============================================================================
@@ -579,7 +579,7 @@ End Function
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
-' Function: WORKBOOK_NAME / »Ãﬂ Õ»√»
+' Function: WORKBOOK_NAME / –ò–ú–Ø–ö–ù–ò–ì–ò
 ' Purpose: Returns active workbook name
 ' Returns: String - Workbook name
 '--------------------------------------------------------------------------------
@@ -587,12 +587,12 @@ Public Function WORKBOOK_NAME() As String
     WORKBOOK_NAME = ActiveWorkbook.Name
 End Function
 
-Public Function »Ãﬂ Õ»√»() As String
-    »Ãﬂ Õ»√» = WORKBOOK_NAME()
+Public Function –ò–ú–Ø–ö–ù–ò–ì–ò() As String
+    –ò–ú–Ø–ö–ù–ò–ì–ò = WORKBOOK_NAME()
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: SHEET_NAME / »ÃﬂÀ»—“¿
+' Function: SHEET_NAME / –ò–ú–Ø–õ–ò–°–¢–ê
 ' Purpose: Returns active sheet name
 ' Returns: String - Sheet name
 '--------------------------------------------------------------------------------
@@ -600,12 +600,12 @@ Public Function SHEET_NAME() As String
     SHEET_NAME = ActiveSheet.Name
 End Function
 
-Public Function »ÃﬂÀ»—“¿() As String
-    »ÃﬂÀ»—“¿ = SHEET_NAME()
+Public Function –ò–ú–Ø–õ–ò–°–¢–ê() As String
+    –ò–ú–Ø–õ–ò–°–¢–ê = SHEET_NAME()
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: USER_NAME / »ÃﬂœŒÀ‹«Œ¬¿“≈Àﬂ
+' Function: USER_NAME / –ò–ú–Ø–ü–û–õ–¨–ó–û–í–ê–¢–ï–õ–Ø
 ' Purpose: Returns current Windows user name
 ' Returns: String - User name
 '--------------------------------------------------------------------------------
@@ -613,12 +613,12 @@ Public Function USER_NAME() As String
     USER_NAME = Environ("UserName")
 End Function
 
-Public Function »ÃﬂœŒÀ‹«Œ¬¿“≈Àﬂ() As String
-    »ÃﬂœŒÀ‹«Œ¬¿“≈Àﬂ = USER_NAME()
+Public Function –ò–ú–Ø–ü–û–õ–¨–ó–û–í–ê–¢–ï–õ–Ø() As String
+    –ò–ú–Ø–ü–û–õ–¨–ó–û–í–ê–¢–ï–õ–Ø = USER_NAME()
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: WORKBOOK_FULL_PATH / œŒÀÕ€…œ”“‹ Õ»√»
+' Function: WORKBOOK_FULL_PATH / –ü–û–õ–ù–´–ô–ü–£–¢–¨–ö–ù–ò–ì–ò
 ' Purpose: Returns full path to active workbook
 ' Returns: String - Full path
 '--------------------------------------------------------------------------------
@@ -626,8 +626,8 @@ Public Function WORKBOOK_FULL_PATH() As String
     WORKBOOK_FULL_PATH = ActiveWorkbook.FullName
 End Function
 
-Public Function œŒÀÕ€…œ”“‹ Õ»√»() As String
-    œŒÀÕ€…œ”“‹ Õ»√» = WORKBOOK_FULL_PATH()
+Public Function –ü–û–õ–ù–´–ô–ü–£–¢–¨–ö–ù–ò–ì–ò() As String
+    –ü–û–õ–ù–´–ô–ü–£–¢–¨–ö–ù–ò–ì–ò = WORKBOOK_FULL_PATH()
 End Function
 
 ' ============================================================================
@@ -647,7 +647,7 @@ Public Function hasIs(sText As String, ByVal sMaska As String) As Boolean
 End Function
 
 '------------------------------------------------------------------------------
-' Function: HAS_LATIN / ≈À¿“»Õ
+' Function: HAS_LATIN / –ï–õ–ê–¢–ò–ù
 ' Purpose:  Checks if string contains Latin characters
 ' Parameters:
 '   CELL - String to check
@@ -658,24 +658,24 @@ Public Function HAS_LATIN(cell As String) As Boolean
     HAS_LATIN = hasIs(cell, MASKA)
 End Function
 
-Public Function ≈À¿“»Õ(ByVal ﬂ◊≈… ¿ As String) As Boolean
-    ≈À¿“»Õ = HAS_LATIN(ﬂ◊≈… ¿)
+Public Function –ï–õ–ê–¢–ò–ù(ByVal –Ø–ß–ï–ô–ö–ê As String) As Boolean
+    –ï–õ–ê–¢–ò–ù = HAS_LATIN(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 '------------------------------------------------------------------------------
-' Function: HAS_CYRILLIC / ≈ »–»ÀÀ
+' Function: HAS_CYRILLIC / –ï–ö–ò–†–ò–õ–õ
 ' Purpose:  Checks if string contains Cyrillic characters
 ' Parameters:
 '   CELL - String to check
 ' Returns:  Boolean - True if Cyrillic characters found
 '------------------------------------------------------------------------------
 Public Function HAS_CYRILLIC(cell As String) As Boolean
-    Const MASKA     As String = "*[¿¡¬√ƒ≈®∆«»… ÀÃÕŒœ–—“”‘’÷◊ÿŸ⁄€‹›ﬁﬂ]*"
+    Const MASKA     As String = "*[–ê–ë–í–ì–î–ï–Å–ñ–ó–ò–ô–ö–õ–ú–ù–û–ü–†–°–¢–£–§–•–¶–ß–®–©–™–´–¨–≠–Æ–Ø]*"
     HAS_CYRILLIC = hasIs(cell, MASKA)
 End Function
 
-Public Function ≈ »–»ÀÀ(ByVal ﬂ◊≈… ¿ As String) As Boolean
-    ≈ »–»ÀÀ = HAS_CYRILLIC(ﬂ◊≈… ¿)
+Public Function –ï–ö–ò–†–ò–õ–õ(ByVal –Ø–ß–ï–ô–ö–ê As String) As Boolean
+    –ï–ö–ò–†–ò–õ–õ = HAS_CYRILLIC(–Ø–ß–ï–ô–ö–ê)
 End Function
 
 ' ============================================================================
@@ -684,7 +684,7 @@ End Function
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
-' Function: CREATE_QR / —Œ«ƒ¿“‹_QR
+' Function: CREATE_QR / –°–û–ó–î–ê–¢–¨_QR
 ' Purpose: Generates QR code image in cell and returns source text
 ' Dependencies: QRCodegen library (QRCodegenEcc enum, QRCodegenBarcode function)
 ' Parameters:
@@ -720,13 +720,13 @@ Public Function CREATE_QR(ByVal TEXT_STR As String, _
     CREATE_QR = TEXT_STR
 End Function
 
-Public Function —Œ«ƒ¿“‹_QR(ByVal “≈ —“ As String, _
-        Optional ÷¬≈“_QR As OLE_COLOR = vbBlack, _
-        Optional –¿«Ã≈–_QR As Integer = 200, _
-        Optional “»œ_QR As Boolean, _
-        Optional Œÿ»¡ ¿_QR As QRCodegenEcc = QRCodegenEcc_LOW) As String
+Public Function –°–û–ó–î–ê–¢–¨_QR(ByVal –¢–ï–ö–°–¢ As String, _
+        Optional –¶–í–ï–¢_QR As OLE_COLOR = vbBlack, _
+        Optional –†–ê–ó–ú–ï–†_QR As Integer = 200, _
+        Optional –¢–ò–ü_QR As Boolean, _
+        Optional –û–®–ò–ë–ö–ê_QR As QRCodegenEcc = QRCodegenEcc_LOW) As String
 
-    —Œ«ƒ¿“‹_QR = CREATE_QR(“≈ —“, ÷¬≈“_QR, –¿«Ã≈–_QR, “»œ_QR, Œÿ»¡ ¿_QR)
+    –°–û–ó–î–ê–¢–¨_QR = CREATE_QR(–¢–ï–ö–°–¢, –¶–í–ï–¢_QR, –†–ê–ó–ú–ï–†_QR, –¢–ò–ü_QR, –û–®–ò–ë–ö–ê_QR)
 End Function
 
 

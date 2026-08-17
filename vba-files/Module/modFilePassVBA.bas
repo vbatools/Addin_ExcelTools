@@ -23,9 +23,9 @@ Dim Flag            As Boolean
 
 Public Sub unProtectVBA()
     If unProtectVBAProjects Then
-        Call MsgBox("Пароли проекта VBA удалены!", vbInformation)
+        Call MsgBox("РџР°СЂРѕР»Рё РїСЂРѕРµРєС‚Р° VBA СѓРґР°Р»РµРЅС‹!", vbInformation)
     Else
-        Call MsgBox("Не удалось удалить пароли проекта VBA!", vbCritical)
+        Call MsgBox("РќРµ СѓРґР°Р»РѕСЃСЊ СѓРґР°Р»РёС‚СЊ РїР°СЂРѕР»Рё РїСЂРѕРµРєС‚Р° VBA!", vbCritical)
     End If
 End Sub
 

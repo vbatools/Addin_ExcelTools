@@ -10,17 +10,17 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '================================================================================
-' МОДУЛЬ КЛАССА: CrossSelectionManager
-' Purpose: Управление перекрёстным выделением строк/столбцов в Excel
+' РњРћР”РЈР›Р¬ РљР›РђРЎРЎРђ: CrossSelectionManager
+' Purpose: РЈРїСЂР°РІР»РµРЅРёРµ РїРµСЂРµРєСЂС‘СЃС‚РЅС‹Рј РІС‹РґРµР»РµРЅРёРµРј СЃС‚СЂРѕРє/СЃС‚РѕР»Р±С†РѕРІ РІ Excel
 '================================================================================
 
 '--------------------------------------------------------------------------------
-' КОНСТАНТЫ МОДУЛЯ
+' РљРћРќРЎРўРђРќРўР« РњРћР”РЈР›РЇ
 '--------------------------------------------------------------------------------
 Private Const FORMULA_MARKER As String = "=1*1*1*1"
 
 '--------------------------------------------------------------------------------
-' ПЕРЕМЕННЫЕ УРОВНЯ МОДУЛЯ
+' РџР•Р Р•РњР•РќРќР«Р• РЈР РћР’РќРЇ РњРћР”РЈР›РЇ
 '--------------------------------------------------------------------------------
 Private WithEvents AppExc As Excel.Application
 Attribute AppExc.VB_VarHelpID = -1
@@ -32,7 +32,7 @@ Private m_settingsLoaded As Boolean
 
 '--------------------------------------------------------------------------------
 ' Enum: CrossSelectionType
-' Purpose: Определяет тип перекрёстного выделения
+' Purpose: РћРїСЂРµРґРµР»СЏРµС‚ С‚РёРї РїРµСЂРµРєСЂС‘СЃС‚РЅРѕРіРѕ РІС‹РґРµР»РµРЅРёСЏ
 '--------------------------------------------------------------------------------
 Private Enum CrossSelectionType
     cstRowColumn = 0
@@ -61,7 +61,7 @@ End Property
 
 '--------------------------------------------------------------------------------
 ' Procedure: RefreshSettings
-' Purpose: Принудительное обновление настроек из реестра
+' Purpose: РџСЂРёРЅСѓРґРёС‚РµР»СЊРЅРѕРµ РѕР±РЅРѕРІР»РµРЅРёРµ РЅР°СЃС‚СЂРѕРµРє РёР· СЂРµРµСЃС‚СЂР°
 '--------------------------------------------------------------------------------
 Public Sub RefreshSettings()
     m_settingsLoaded = False
@@ -70,7 +70,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: ClearAllSelections
-' Purpose: Удаление всех правил перекрёстного выделения на активном листе
+' Purpose: РЈРґР°Р»РµРЅРёРµ РІСЃРµС… РїСЂР°РІРёР» РїРµСЂРµРєСЂС‘СЃС‚РЅРѕРіРѕ РІС‹РґРµР»РµРЅРёСЏ РЅР° Р°РєС‚РёРІРЅРѕРј Р»РёСЃС‚Рµ
 '--------------------------------------------------------------------------------
 Public Sub ClearAllSelections()
     Call RemoveCrossSelectionsOnly(ActiveSheet)
@@ -98,10 +98,10 @@ End Sub
 Private Sub AppExc_SheetSelectionChange(ByVal Sh As Object, ByVal Target As Range)
     On Error Resume Next
 
-    ' Пропускаем выделение нескольких ячеек
+    ' РџСЂРѕРїСѓСЃРєР°РµРј РІС‹РґРµР»РµРЅРёРµ РЅРµСЃРєРѕР»СЊРєРёС… СЏС‡РµРµРє
     If Target.CountLarge > 1 Then Exit Sub
 
-    ' Проверяем тип листа
+    ' РџСЂРѕРІРµСЂСЏРµРј С‚РёРї Р»РёСЃС‚Р°
     If Not TypeOf Sh Is Worksheet Then Exit Sub
 
     Call ApplyCrossSelection(Sh, Target)
@@ -135,10 +135,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: ApplyCrossSelection
-' Purpose: Применяет перекрёстное выделение для указанного диапазона
+' Purpose: РџСЂРёРјРµРЅСЏРµС‚ РїРµСЂРµРєСЂС‘СЃС‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ РґР»СЏ СѓРєР°Р·Р°РЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
 ' Parameters:
-'   ws     - Рабочий лист
-'   Target - Выбранная ячейка
+'   ws     - Р Р°Р±РѕС‡РёР№ Р»РёСЃС‚
+'   Target - Р’С‹Р±СЂР°РЅРЅР°СЏ СЏС‡РµР№РєР°
 '--------------------------------------------------------------------------------
 Private Sub ApplyCrossSelection(ByVal ws As Worksheet, ByRef Target As Range)
     Dim rngDisplay  As Range
@@ -153,20 +153,20 @@ Private Sub ApplyCrossSelection(ByVal ws As Worksheet, ByRef Target As Range)
     Application.ScreenUpdating = False
     Application.EnableEvents = False
 
-    ' Загружаем настройки при необходимости
+    ' Р—Р°РіСЂСѓР¶Р°РµРј РЅР°СЃС‚СЂРѕР№РєРё РїСЂРё РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё
     Call LoadSettingsIfNeeded
 
-    ' Получаем используемый диапазон
+    ' РџРѕР»СѓС‡Р°РµРј РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґРёР°РїР°Р·РѕРЅ
     Set rngDisplay = GetUsedRange(ws)
     If rngDisplay Is Nothing Then GoTo CleanUp
 
-    ' Удаляем старые правила
+    ' РЈРґР°Р»СЏРµРј СЃС‚Р°СЂС‹Рµ РїСЂР°РІРёР»Р°
     Call RemoveCrossSelectionsOnly(ws)
 
-    ' Определяем диапазон выделения
+    ' РћРїСЂРµРґРµР»СЏРµРј РґРёР°РїР°Р·РѕРЅ РІС‹РґРµР»РµРЅРёСЏ
     Set rngSelection = GetSelectionRange(rngDisplay, Target)
 
-    ' Применяем условное форматирование
+    ' РџСЂРёРјРµРЅСЏРµРј СѓСЃР»РѕРІРЅРѕРµ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ
     If Not rngSelection Is Nothing Then
         Set fc = rngSelection.FormatConditions.Add(Type:=xlExpression, Formula1:=FORMULA_MARKER)
         With fc
@@ -188,11 +188,11 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: GetSelectionRange
-' Purpose: Возвращает диапазон для выделения в зависимости от типа
+' Purpose: Р’РѕР·РІСЂР°С‰Р°РµС‚ РґРёР°РїР°Р·РѕРЅ РґР»СЏ РІС‹РґРµР»РµРЅРёСЏ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ С‚РёРїР°
 ' Parameters:
-'   rngDisplay - Используемый диапазон листа
-'   Target     - Выбранная ячейка
-' Returns: Range - диапазон для применения форматирования
+'   rngDisplay - РСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґРёР°РїР°Р·РѕРЅ Р»РёСЃС‚Р°
+'   Target     - Р’С‹Р±СЂР°РЅРЅР°СЏ СЏС‡РµР№РєР°
+' Returns: Range - РґРёР°РїР°Р·РѕРЅ РґР»СЏ РїСЂРёРјРµРЅРµРЅРёСЏ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ
 '--------------------------------------------------------------------------------
 Private Function GetSelectionRange(ByVal rngDisplay As Range, ByVal Target As Range) As Range
     On Error Resume Next
@@ -209,9 +209,9 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Procedure: RemoveCrossSelectionsOnly
-' Purpose: Удаляет правила условного форматирования, созданные данным модулем
+' Purpose: РЈРґР°Р»СЏРµС‚ РїСЂР°РІРёР»Р° СѓСЃР»РѕРІРЅРѕРіРѕ С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёСЏ, СЃРѕР·РґР°РЅРЅС‹Рµ РґР°РЅРЅС‹Рј РјРѕРґСѓР»РµРј
 ' Parameters:
-'   ws - Рабочий лист
+'   ws - Р Р°Р±РѕС‡РёР№ Р»РёСЃС‚
 '--------------------------------------------------------------------------------
 Private Sub RemoveCrossSelectionsOnly(ByVal ws As Worksheet)
     Dim fc          As FormatCondition
@@ -237,7 +237,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Procedure: LoadSettingsIfNeeded
-' Purpose: Загружает настройки из реестра при первом обращении
+' Purpose: Р—Р°РіСЂСѓР¶Р°РµС‚ РЅР°СЃС‚СЂРѕР№РєРё РёР· СЂРµРµСЃС‚СЂР° РїСЂРё РїРµСЂРІРѕРј РѕР±СЂР°С‰РµРЅРёРё
 '--------------------------------------------------------------------------------
 Private Sub LoadSettingsIfNeeded()
     Dim settingValue As String
@@ -246,7 +246,7 @@ Private Sub LoadSettingsIfNeeded()
 
     On Error Resume Next
 
-    ' Загрузка типа выделения
+    ' Р—Р°РіСЂСѓР·РєР° С‚РёРїР° РІС‹РґРµР»РµРЅРёСЏ
     settingValue = GetSetting(NAME_ADDIN, "AddIn" & NAME_ADDIN, "CrossSelection_Select", "RowColumn")
     Select Case settingValue
         Case "Row": m_selectionType = cstRow
@@ -254,7 +254,7 @@ Private Sub LoadSettingsIfNeeded()
         Case Else: m_selectionType = cstRowColumn
     End Select
 
-    ' Загрузка цветов
+    ' Р—Р°РіСЂСѓР·РєР° С†РІРµС‚РѕРІ
     m_colorInterior = Val(GetSetting(NAME_ADDIN, "AddIn" & NAME_ADDIN, "CrossSelection_ColorInterior", "&HC0FFC0"))
     m_colorFont = Val(GetSetting(NAME_ADDIN, "AddIn" & NAME_ADDIN, "CrossSelection_ColorFont", "0"))
 
@@ -267,10 +267,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: GetUsedRange
-' Purpose: Возвращает используемый диапазон листа с точным определением границ
+' Purpose: Р’РѕР·РІСЂР°С‰Р°РµС‚ РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґРёР°РїР°Р·РѕРЅ Р»РёСЃС‚Р° СЃ С‚РѕС‡РЅС‹Рј РѕРїСЂРµРґРµР»РµРЅРёРµРј РіСЂР°РЅРёС†
 ' Parameters:
-'   ws - Рабочий лист
-' Returns: Range - используемый диапазон от A1 до последней заполнённой ячейки
+'   ws - Р Р°Р±РѕС‡РёР№ Р»РёСЃС‚
+' Returns: Range - РёСЃРїРѕР»СЊР·СѓРµРјС‹Р№ РґРёР°РїР°Р·РѕРЅ РѕС‚ A1 РґРѕ РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїРѕР»РЅС‘РЅРЅРѕР№ СЏС‡РµР№РєРё
 '--------------------------------------------------------------------------------
 Private Function GetUsedRange(ByVal ws As Worksheet) As Range
     Dim LastRow     As Long

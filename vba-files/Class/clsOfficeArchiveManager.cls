@@ -119,13 +119,13 @@ End Function
 ' Initialize class
 Public Function Initialize(ByVal sPathFile As String, ByVal addBackup As Boolean) As Boolean
     If Not FileHave(sPathFile, vbNormal) Then
-        Call MsgBox("файл не найден: " & sPathFile, vbExclamation)
+        Call MsgBox("С„Р°Р№Р» РЅРµ РЅР°Р№РґРµРЅ: " & sPathFile, vbExclamation)
         Exit Function
     End If
 
     Set mFSO = CreateObject("Scripting.FileSystemObject")
     If IsFileLocked(sPathFile) Then
-        Call MsgBox("Файл открыт." & vbNewLine & "Закройте файл для продолжения: " & sPathFile, vbCritical)
+        Call MsgBox("Р¤Р°Р№Р» РѕС‚РєСЂС‹С‚." & vbNewLine & "Р—Р°РєСЂРѕР№С‚Рµ С„Р°Р№Р» РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ: " & sPathFile, vbCritical)
         Set mFSO = Nothing
         Exit Function
     End If
@@ -137,8 +137,8 @@ Public Function Initialize(ByVal sPathFile As String, ByVal addBackup As Boolean
         mFileFolder = .GetParentFolderName(sPathFile)
         mFileExtension = .GetExtensionName(sPathFile)
         mFileName = .GetFileName(sPathFile)
-        If mFileName Like "*—*" Then
-            mFileName = VBA.Replace(mFileName, "—", "-")
+        If mFileName Like "*вЂ”*" Then
+            mFileName = VBA.Replace(mFileName, "вЂ”", "-")
             Name mFileFullName As mFileFolder & Application.PathSeparator & mFileName
             mFileFullName = mFileFolder & Application.PathSeparator & mFileName
         End If
@@ -189,12 +189,12 @@ Public Function ZipFilesInFolder() As Boolean
     On Error GoTo ErrHandler
 
     If Not mFSO.FolderExists(mUnzippedFolderPath) Then
-        Call MsgBox("Архивная папка не найдена: " & mUnzippedFolderPath, vbCritical)
+        Call MsgBox("РђСЂС…РёРІРЅР°СЏ РїР°РїРєР° РЅРµ РЅР°Р№РґРµРЅР°: " & mUnzippedFolderPath, vbCritical)
         Exit Function
     End If
 
     If IsFileLocked(mFileFullName) Then
-        Call MsgBox("Файл открыт. Закройте файл для продолжения: " & mFileFullName, vbCritical)
+        Call MsgBox("Р¤Р°Р№Р» РѕС‚РєСЂС‹С‚. Р—Р°РєСЂРѕР№С‚Рµ С„Р°Р№Р» РґР»СЏ РїСЂРѕРґРѕР»Р¶РµРЅРёСЏ: " & mFileFullName, vbCritical)
         Exit Function
     End If
 
@@ -321,13 +321,13 @@ Public Function delPasswordSheet(ByVal idSheet As String) As Boolean
     Dim newBytes()  As Byte
     Dim i As Long, k As Long
 
-    ' Искомые фрагменты как обычные строки
+    ' РСЃРєРѕРјС‹Рµ С„СЂР°РіРјРµРЅС‚С‹ РєР°Рє РѕР±С‹С‡РЅС‹Рµ СЃС‚СЂРѕРєРё
     Const TARGET_START As String = "<sheetProtection algorithmName="
     Const TARGET_END As String = "/>"
 
     fNum = FreeFile()
 
-    ' 1. Читаем файл как БАЙТЫ (чтобы не испортить кодировку при чтении)
+    ' 1. Р§РёС‚Р°РµРј С„Р°Р№Р» РєР°Рє Р‘РђР™РўР« (С‡С‚РѕР±С‹ РЅРµ РёСЃРїРѕСЂС‚РёС‚СЊ РєРѕРґРёСЂРѕРІРєСѓ РїСЂРё С‡С‚РµРЅРёРё)
     Open sPathXML For Binary Access Read As #fNum
     fileSize = LOF(fNum)
 
@@ -337,37 +337,37 @@ Public Function delPasswordSheet(ByVal idSheet As String) As Boolean
     End If
     Close #fNum
 
-    ' 2. Преобразуем байты в строку ТОЛЬКО для поиска
-    ' StrConv с vbUnicode превратит массив байтов в строку, которую понимает VBA.
-    ' Это работает корректно для поиска ASCII тегов.
+    ' 2. РџСЂРµРѕР±СЂР°Р·СѓРµРј Р±Р°Р№С‚С‹ РІ СЃС‚СЂРѕРєСѓ РўРћР›Р¬РљРћ РґР»СЏ РїРѕРёСЃРєР°
+    ' StrConv СЃ vbUnicode РїСЂРµРІСЂР°С‚РёС‚ РјР°СЃСЃРёРІ Р±Р°Р№С‚РѕРІ РІ СЃС‚СЂРѕРєСѓ, РєРѕС‚РѕСЂСѓСЋ РїРѕРЅРёРјР°РµС‚ VBA.
+    ' Р­С‚Рѕ СЂР°Р±РѕС‚Р°РµС‚ РєРѕСЂСЂРµРєС‚РЅРѕ РґР»СЏ РїРѕРёСЃРєР° ASCII С‚РµРіРѕРІ.
     fileContent = StrConv(fileBytes, vbUnicode)
 
-    ' 3. Ищем теги обычными строковыми функциями
+    ' 3. РС‰РµРј С‚РµРіРё РѕР±С‹С‡РЅС‹РјРё СЃС‚СЂРѕРєРѕРІС‹РјРё С„СѓРЅРєС†РёСЏРјРё
     p1 = InStr(1, fileContent, TARGET_START, vbBinaryCompare)
 
     If p1 > 0 Then
         p2 = InStr(p1, fileContent, TARGET_END, vbBinaryCompare)
 
         If p2 > 0 Then
-            ' 4. Собираем новый массив байтов без тега
-            ' Вычисляем позиции в байтах (индексация в массиве с 0)
+            ' 4. РЎРѕР±РёСЂР°РµРј РЅРѕРІС‹Р№ РјР°СЃСЃРёРІ Р±Р°Р№С‚РѕРІ Р±РµР· С‚РµРіР°
+            ' Р’С‹С‡РёСЃР»СЏРµРј РїРѕР·РёС†РёРё РІ Р±Р°Р№С‚Р°С… (РёРЅРґРµРєСЃР°С†РёСЏ РІ РјР°СЃСЃРёРІРµ СЃ 0)
             Dim headEnd As Long
             Dim tailStart As Long
             Dim tagLen As Long
 
-            headEnd = p1 - 1             ' Индекс последнего байта ДО тега
-            tailStart = p2 + Len(TARGET_END) - 1    ' Индекс первого байта ПОСЛЕ тега
-            tagLen = tailStart - headEnd  ' Длина удаляемого куска
+            headEnd = p1 - 1             ' РРЅРґРµРєСЃ РїРѕСЃР»РµРґРЅРµРіРѕ Р±Р°Р№С‚Р° Р”Рћ С‚РµРіР°
+            tailStart = p2 + Len(TARGET_END) - 1    ' РРЅРґРµРєСЃ РїРµСЂРІРѕРіРѕ Р±Р°Р№С‚Р° РџРћРЎР›Р• С‚РµРіР°
+            tagLen = tailStart - headEnd  ' Р”Р»РёРЅР° СѓРґР°Р»СЏРµРјРѕРіРѕ РєСѓСЃРєР°
 
             ReDim newBytes(0 To fileSize - tagLen - 1)
 
-            ' Копируем "Голову" (все, что до тега)
+            ' РљРѕРїРёСЂСѓРµРј "Р“РѕР»РѕРІСѓ" (РІСЃРµ, С‡С‚Рѕ РґРѕ С‚РµРіР°)
             For i = 0 To headEnd - 1
                 newBytes(i) = fileBytes(i)
             Next i
 
-            ' Копируем "Хвост" (все, что после тега)
-            k = headEnd    ' Текущая позиция записи в новом массиве
+            ' РљРѕРїРёСЂСѓРµРј "РҐРІРѕСЃС‚" (РІСЃРµ, С‡С‚Рѕ РїРѕСЃР»Рµ С‚РµРіР°)
+            k = headEnd    ' РўРµРєСѓС‰Р°СЏ РїРѕР·РёС†РёСЏ Р·Р°РїРёСЃРё РІ РЅРѕРІРѕРј РјР°СЃСЃРёРІРµ
             For i = tailStart To fileSize - 1
                 newBytes(k) = fileBytes(i)
                 k = k + 1
@@ -377,7 +377,7 @@ Public Function delPasswordSheet(ByVal idSheet As String) As Boolean
             Kill sPathXML
             DoEvents
 
-            ' 5. Записываем результат обратно
+            ' 5. Р—Р°РїРёСЃС‹РІР°РµРј СЂРµР·СѓР»СЊС‚Р°С‚ РѕР±СЂР°С‚РЅРѕ
             fNum = FreeFile()
             Open sPathXML For Binary Access Write As #fNum
             Put #fNum, , newBytes

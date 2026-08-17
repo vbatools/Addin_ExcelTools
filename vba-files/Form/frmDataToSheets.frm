@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataToSheets 
-   Caption         =   "загрузка данных в сквозные листы:"
+   Caption         =   "Р·Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РІ СЃРєРІРѕР·РЅС‹Рµ Р»РёСЃС‚С‹:"
    ClientHeight    =   3000
    ClientLeft      =   120
    ClientTop       =   465
@@ -18,7 +18,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmDataToSheets - Модуль загрузки данных в сквозные листы
+'* UserForm     :   frmDataToSheets - РњРѕРґСѓР»СЊ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… РІ СЃРєРІРѕР·РЅС‹Рµ Р»РёСЃС‚С‹
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   10-06-2026 09:36:16
@@ -29,16 +29,16 @@ Private Sub btnCancel_Click()
 End Sub
 
 Private Sub btnOK_Click()
-    ' --- Проверка диапазона ---
+    ' --- РџСЂРѕРІРµСЂРєР° РґРёР°РїР°Р·РѕРЅР° ---
     Dim sAddress    As String
     sAddress = Trim$(txtInputRng.Value)
 
     If sAddress = vbNullString Then
-        MsgBox "Не выбран диапазон данных!", vbCritical, "Ошибка"
+        MsgBox "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical, "РћС€РёР±РєР°"
         Exit Sub
     End If
 
-    ' --- Подготовка переменных ---
+    ' --- РџРѕРґРіРѕС‚РѕРІРєР° РїРµСЂРµРјРµРЅРЅС‹С… ---
     Call DisableApplicationSettings
 
     Dim wsTarget    As Worksheet
@@ -54,23 +54,23 @@ Private Sub btnOK_Click()
 
     Set wsTarget = ActiveSheet
 
-    ' --- Получение исходного диапазона ---
+    ' --- РџРѕР»СѓС‡РµРЅРёРµ РёСЃС…РѕРґРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° ---
     On Error Resume Next
     Set rngSource = Range(sAddress)
     On Error GoTo 0
 
     If rngSource Is Nothing Then
-        MsgBox "Некорректный диапазон!", vbCritical, "Ошибка"
+        MsgBox "РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ РґРёР°РїР°Р·РѕРЅ!", vbCritical, "РћС€РёР±РєР°"
         GoTo CleanUp
     End If
 
-    ' --- Чтение данных ---
+    ' --- Р§С‚РµРЅРёРµ РґР°РЅРЅС‹С… ---
     lRow = rngSource.Row
     lCol = rngSource.Column
     lColCount = rngSource.Columns.Count + lCol - 1
     arrData = rngSource.Value2
 
-    ' --- Проверка целевого диапазона ---
+    ' --- РџСЂРѕРІРµСЂРєР° С†РµР»РµРІРѕРіРѕ РґРёР°РїР°Р·РѕРЅР° ---
     On Error Resume Next
     Set rngTarget = Range(arrData(1, 2))
     On Error GoTo 0
@@ -81,11 +81,11 @@ Private Sub btnOK_Click()
         arrData = arr
     End If
 
-    ' --- Обработка данных ---
+    ' --- РћР±СЂР°Р±РѕС‚РєР° РґР°РЅРЅС‹С… ---
     lRowCount = rngTarget.Rows.Count
 
     For i = 1 To UBound(arrData, 1) Step lRowCount
-        ' Проверка существования листа
+        ' РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ Р»РёСЃС‚Р°
         On Error Resume Next
         Set wsCurrent = Worksheets(arrData(i, 1))
         On Error GoTo 0
@@ -93,11 +93,11 @@ Private Sub btnOK_Click()
         If Not wsCurrent Is Nothing Then
             With wsCurrent.Range(arrData(1, 2))
                 If optOnlyLinks.Value Then
-                    ' Создание ссылок на исходные данные
+                    ' РЎРѕР·РґР°РЅРёРµ СЃСЃС‹Р»РѕРє РЅР° РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ
                     .formula = "='" & wsTarget.Name & "'!" & _
                             wsTarget.Cells(lRow + i - 1, lCol + 2).Address(RowAbsolute:=False, columnAbsolute:=False)
                 Else
-                    ' Копирование значений
+                    ' РљРѕРїРёСЂРѕРІР°РЅРёРµ Р·РЅР°С‡РµРЅРёР№
                     On Error Resume Next
                     .Value2 = wsTarget.Range( _
                             wsTarget.Cells(lRow + i - 1, lCol + 2), _
@@ -132,10 +132,10 @@ Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Sh
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
-    ' Инициализация поля ввода адресом выделенного диапазона
+    ' РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїРѕР»СЏ РІРІРѕРґР° Р°РґСЂРµСЃРѕРј РІС‹РґРµР»РµРЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
     If TypeName(Selection) = "Range" Then
         txtInputRng.Value = Selection.Address
     End If

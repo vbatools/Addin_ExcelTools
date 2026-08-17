@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheets 
-   Caption         =   "Менеджер листов:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ Р»РёСЃС‚РѕРІ:"
    ClientHeight    =   10320
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,47 +19,47 @@ Option Explicit
 
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ' UserForm     :   frmSheetsManager
-' Description  :   Интерфейс для управления, фильтрации и навигации по листам активной книги.
-'                  Поддерживает сортировку, поиск, групповые операции и анализ свойств листов.
+' Description  :   РРЅС‚РµСЂС„РµР№СЃ РґР»СЏ СѓРїСЂР°РІР»РµРЅРёСЏ, С„РёР»СЊС‚СЂР°С†РёРё Рё РЅР°РІРёРіР°С†РёРё РїРѕ Р»РёСЃС‚Р°Рј Р°РєС‚РёРІРЅРѕР№ РєРЅРёРіРё.
+'                  РџРѕРґРґРµСЂР¶РёРІР°РµС‚ СЃРѕСЂС‚РёСЂРѕРІРєСѓ, РїРѕРёСЃРє, РіСЂСѓРїРїРѕРІС‹Рµ РѕРїРµСЂР°С†РёРё Рё Р°РЅР°Р»РёР· СЃРІРѕР№СЃС‚РІ Р»РёСЃС‚РѕРІ.
 ' Author       :   VBATools
 ' Copyright    :   Apache License
 ' Created      :   15-06-2026 15:36:42
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 '--------------------------------------------------------------------------------
-' Константы фильтров и отображаемых значений
+' РљРѕРЅСЃС‚Р°РЅС‚С‹ С„РёР»СЊС‚СЂРѕРІ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… Р·РЅР°С‡РµРЅРёР№
 '--------------------------------------------------------------------------------
-' Фильтры списка
-Private Const FILTER_ALL As String = "все"
-Private Const FILTER_NONE As String = "ничего"
-Private Const FILTER_REVERSE As String = "обратное выделение"
-Private Const FILTER_VISIBLE As String = "видимые"
-Private Const FILTER_HIDDEN As String = "скрытые"
-Private Const FILTER_VERY_HIDDEN As String = "супер скрыт"
-Private Const FILTER_PROTECTED As String = "защищенные"
-Private Const FILTER_UNPROTECTED As String = "не защищенные"
-Private Const FILTER_EMPTY As String = "пустые"
-Private Const FILTER_NOT_EMPTY As String = "не пустые"
-Private Const FILTER_SHEETS As String = "листы"
-Private Const FILTER_CHARTS As String = "диаграммы"
-Private Const FILTER_TAB_COLOR As String = "цветные ярлыки"
-Private Const FILTER_TAB_NOT_COLOR As String = "без цветные ярлыки"
+' Р¤РёР»СЊС‚СЂС‹ СЃРїРёСЃРєР°
+Private Const FILTER_ALL As String = "РІСЃРµ"
+Private Const FILTER_NONE As String = "РЅРёС‡РµРіРѕ"
+Private Const FILTER_REVERSE As String = "РѕР±СЂР°С‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
+Private Const FILTER_VISIBLE As String = "РІРёРґРёРјС‹Рµ"
+Private Const FILTER_HIDDEN As String = "СЃРєСЂС‹С‚С‹Рµ"
+Private Const FILTER_VERY_HIDDEN As String = "СЃСѓРїРµСЂ СЃРєСЂС‹С‚"
+Private Const FILTER_PROTECTED As String = "Р·Р°С‰РёС‰РµРЅРЅС‹Рµ"
+Private Const FILTER_UNPROTECTED As String = "РЅРµ Р·Р°С‰РёС‰РµРЅРЅС‹Рµ"
+Private Const FILTER_EMPTY As String = "РїСѓСЃС‚С‹Рµ"
+Private Const FILTER_NOT_EMPTY As String = "РЅРµ РїСѓСЃС‚С‹Рµ"
+Private Const FILTER_SHEETS As String = "Р»РёСЃС‚С‹"
+Private Const FILTER_CHARTS As String = "РґРёР°РіСЂР°РјРјС‹"
+Private Const FILTER_TAB_COLOR As String = "С†РІРµС‚РЅС‹Рµ СЏСЂР»С‹РєРё"
+Private Const FILTER_TAB_NOT_COLOR As String = "Р±РµР· С†РІРµС‚РЅС‹Рµ СЏСЂР»С‹РєРё"
 
-' Значения свойств листов
-Private Const VALUE_VISIBLE As String = "видим"
-Private Const VALUE_HIDDEN As String = "скрыт"
-Private Const VALUE_VERY_HIDDEN As String = "супер скрыт"
-Private Const VALUE_PROTECTED As String = "защита"
-Private Const VALUE_SHEET_TYPE As String = "лист"
-Private Const VALUE_CHART_TYPE As String = "график"
-Private Const VALUE_DIALOG_TYPE As String = "диалог"
-Private Const VALUE_MACRO_TYPE As String = "макро"
+' Р—РЅР°С‡РµРЅРёСЏ СЃРІРѕР№СЃС‚РІ Р»РёСЃС‚РѕРІ
+Private Const VALUE_VISIBLE As String = "РІРёРґРёРј"
+Private Const VALUE_HIDDEN As String = "СЃРєСЂС‹С‚"
+Private Const VALUE_VERY_HIDDEN As String = "СЃСѓРїРµСЂ СЃРєСЂС‹С‚"
+Private Const VALUE_PROTECTED As String = "Р·Р°С‰РёС‚Р°"
+Private Const VALUE_SHEET_TYPE As String = "Р»РёСЃС‚"
+Private Const VALUE_CHART_TYPE As String = "РіСЂР°С„РёРє"
+Private Const VALUE_DIALOG_TYPE As String = "РґРёР°Р»РѕРі"
+Private Const VALUE_MACRO_TYPE As String = "РјР°РєСЂРѕ"
 
-' Варианты регистра текста
-Private Const CASE_UPPER As String = "ВСЕ ПРОПИСНЫЕ"
-Private Const CASE_LOWER As String = "все строчные"
-Private Const CASE_SENTENCE As String = "Как в предложениях"
-Private Const CASE_TITLE As String = "Начинать С Прописных"
+' Р’Р°СЂРёР°РЅС‚С‹ СЂРµРіРёСЃС‚СЂР° С‚РµРєСЃС‚Р°
+Private Const CASE_UPPER As String = "Р’РЎР• РџР РћРџРРЎРќР«Р•"
+Private Const CASE_LOWER As String = "РІСЃРµ СЃС‚СЂРѕС‡РЅС‹Рµ"
+Private Const CASE_SENTENCE As String = "РљР°Рє РІ РїСЂРµРґР»РѕР¶РµРЅРёСЏС…"
+Private Const CASE_TITLE As String = "РќР°С‡РёРЅР°С‚СЊ РЎ РџСЂРѕРїРёСЃРЅС‹С…"
 
 Private Enum typeMoveItem
     miFerst
@@ -83,7 +83,7 @@ Private Sub btnColors_Click()
 End Sub
 
 '--------------------------------------------------------------------------------
-' кнопки инструментов
+' РєРЅРѕРїРєРё РёРЅСЃС‚СЂСѓРјРµРЅС‚РѕРІ
 '--------------------------------------------------------------------------------
 Private Sub btnContent_Click()
     If CheckProtectStructure() Then Exit Sub
@@ -135,7 +135,7 @@ Private Sub btnSyncSheets_Click()
     Set Sh = ActiveSheet
     Dim shVisible   As XlSheetVisibility
     If TypeName(Sh) <> "Worksheet" Then Exit Sub
-    If MsgBox("Произвести синхронизацию листов?" & vbNewLine & "Выбран лист: " & Sh.Name, vbYesNo + vbQuestion, "Синхрогизация листов:") = vbNo Then Exit Sub
+    If MsgBox("РџСЂРѕРёР·РІРµСЃС‚Рё СЃРёРЅС…СЂРѕРЅРёР·Р°С†РёСЋ Р»РёСЃС‚РѕРІ?" & vbNewLine & "Р’С‹Р±СЂР°РЅ Р»РёСЃС‚: " & Sh.Name, vbYesNo + vbQuestion, "РЎРёРЅС…СЂРѕРіРёР·Р°С†РёСЏ Р»РёСЃС‚РѕРІ:") = vbNo Then Exit Sub
 
     Call DisableApplicationSettings
 
@@ -176,7 +176,7 @@ Private Sub btnSyncSheets_Click()
         Next i
     End With
     Call RestoreApplicationSettings
-    If iSheetCount > 0 Then Call MsgBox("Синхронизировано " & iSheetCount & " листов!", vbInformation)
+    If iSheetCount > 0 Then Call MsgBox("РЎРёРЅС…СЂРѕРЅРёР·РёСЂРѕРІР°РЅРѕ " & iSheetCount & " Р»РёСЃС‚РѕРІ!", vbInformation)
 End Sub
 
 Private Sub btnProtect_Click()
@@ -196,7 +196,7 @@ End Sub
 Private Sub btnCopy_Click()
     If CheckProtectStructure() Then Exit Sub
     Dim iCopyNumber As Integer
-    iCopyNumber = Application.InputBox("Введите количество копий:", "Копирователь листов", Default:=1, Type:=1)
+    iCopyNumber = Application.InputBox("Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕРїРёР№:", "РљРѕРїРёСЂРѕРІР°С‚РµР»СЊ Р»РёСЃС‚РѕРІ", Default:=1, Type:=1)
     If iCopyNumber < 1 Then Exit Sub
 
     Dim i           As Long
@@ -225,7 +225,7 @@ End Sub
 
 Private Sub btnDelete_Click()
     If CheckProtectStructure() Then Exit Sub
-    If MsgBox("Удалить выбранные листы?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
+    If MsgBox("РЈРґР°Р»РёС‚СЊ РІС‹Р±СЂР°РЅРЅС‹Рµ Р»РёСЃС‚С‹?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
     Dim i           As Long
     Call DisableApplicationSettings
     With listSheets
@@ -294,7 +294,7 @@ Private Sub btnMoveAsList_Click()
 End Sub
 
 '--------------------------------------------------------------------------------
-' кнопки перемещения листов
+' РєРЅРѕРїРєРё РїРµСЂРµРјРµС‰РµРЅРёСЏ Р»РёСЃС‚РѕРІ
 '--------------------------------------------------------------------------------
 Private Sub btnFirst_Click()
     Call moveItemList(listSheets, miFerst)
@@ -343,14 +343,14 @@ Private Sub moveItemList(ByRef List As MSForms.listBox, ByVal tpMove As typeMove
             If .Selected(i) Then
                 Set Sh = wb.Sheets(.List(i, 1))
                 index = Sh.index
-                ' Определяем целевой индекс
+                ' РћРїСЂРµРґРµР»СЏРµРј С†РµР»РµРІРѕР№ РёРЅРґРµРєСЃ
                 Select Case tpMove
                     Case typeMoveItem.miFerst, typeMoveItem.miUp
                         If index = 1 Then GoTo SkipItem
                     Case typeMoveItem.miDown, typeMoveItem.miLast
                         If index = wb.Sheets.Count Then GoTo SkipItem
                 End Select
-                ' Выполняем перемещение
+                ' Р’С‹РїРѕР»РЅСЏРµРј РїРµСЂРµРјРµС‰РµРЅРёРµ
                 arr(k) = MoveSheet(wb, Sh, tpMove)
                 k = k + 1
 SkipItem:
@@ -372,7 +372,7 @@ SkipItem:
     Next i
 End Sub
 
-' Вспомогательная процедура перемещения листа
+' Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РїРµСЂРµРјРµС‰РµРЅРёСЏ Р»РёСЃС‚Р°
 Private Function MoveSheet(ByRef wb As Workbook, ByRef Sh As Variant, _
         ByVal moveType As typeMoveItem) As Long
 
@@ -395,10 +395,10 @@ Private Function MoveSheet(ByRef wb As Workbook, ByRef Sh As Variant, _
     targetVisible = targetSheet.Visible
     shVisible = Sh.Visible
 
-    ' Делаем листы видимыми для перемещения
+    ' Р”РµР»Р°РµРј Р»РёСЃС‚С‹ РІРёРґРёРјС‹РјРё РґР»СЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ
     If targetVisible <> xlSheetVisible Then targetSheet.Visible = xlSheetVisible
     If shVisible <> xlSheetVisible Then Sh.Visible = xlSheetVisible
-    ' Перемещаем
+    ' РџРµСЂРµРјРµС‰Р°РµРј
     Select Case moveType
         Case typeMoveItem.miDown
             targetSheet.Move before:=Sh
@@ -409,14 +409,14 @@ Private Function MoveSheet(ByRef wb As Workbook, ByRef Sh As Variant, _
     End Select
     MoveSheet = Sh.index
 
-    ' Восстанавливаем видимость
+    ' Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РІРёРґРёРјРѕСЃС‚СЊ
     Sh.Visible = shVisible
     targetSheet.Visible = targetVisible
 
 End Function
 
 '--------------------------------------------------------------------------------
-' кнопки сортировки
+' РєРЅРѕРїРєРё СЃРѕСЂС‚РёСЂРѕРІРєРё
 '--------------------------------------------------------------------------------
 Private Sub btnSortNum_Click()
     Call SortColumnList(listSheets, btnSortNum, 0, True)
@@ -487,7 +487,7 @@ Private Sub cmbSheets_Change()
                 Call SelectedItemListSheets(listSheets, "*" & .Value & "*", 1)
             End If
         Else
-            ' Оптимизация: Direct access по имени без необходимости предварительной активации
+            ' РћРїС‚РёРјРёР·Р°С†РёСЏ: Direct access РїРѕ РёРјРµРЅРё Р±РµР· РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕР№ Р°РєС‚РёРІР°С†РёРё
             ActiveWorkbook.Sheets(.Value).Activate
             Call SelectedItemListSheets(listSheets, cmbSheets.Value, 1)
         End If
@@ -537,24 +537,24 @@ End Sub
 Private Sub listSheets_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     With listSheets
         If .ListIndex < 0 Then Exit Sub
-        ' Активация выбранного листа (имя хранится во втором столбце с индексом 1)
+        ' РђРєС‚РёРІР°С†РёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ Р»РёСЃС‚Р° (РёРјСЏ С…СЂР°РЅРёС‚СЃСЏ РІРѕ РІС‚РѕСЂРѕРј СЃС‚РѕР»Р±С†Рµ СЃ РёРЅРґРµРєСЃРѕРј 1)
         ActiveWorkbook.Sheets(.List(.ListIndex, 1)).Activate
     End With
 End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: UserForm_Initialize
-' Purpose: Инициализация формы при запуске. Настраивает расположение, наполняет
-'          списки фильтров и регистров, а также назначает иконки кнопкам из галереи MSO.
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ. РќР°СЃС‚СЂР°РёРІР°РµС‚ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ, РЅР°РїРѕР»РЅСЏРµС‚
+'          СЃРїРёСЃРєРё С„РёР»СЊС‚СЂРѕРІ Рё СЂРµРіРёСЃС‚СЂРѕРІ, Р° С‚Р°РєР¶Рµ РЅР°Р·РЅР°С‡Р°РµС‚ РёРєРѕРЅРєРё РєРЅРѕРїРєР°Рј РёР· РіР°Р»РµСЂРµРё MSO.
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
     Const W         As Byte = 32
     Const h         As Byte = 32
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
-    ' Настройка списка регистров (текстовые варианты)
+    ' РќР°СЃС‚СЂРѕР№РєР° СЃРїРёСЃРєР° СЂРµРіРёСЃС‚СЂРѕРІ (С‚РµРєСЃС‚РѕРІС‹Рµ РІР°СЂРёР°РЅС‚С‹)
     With listRegistr
         .AddItem CASE_UPPER
         .AddItem CASE_LOWER
@@ -562,7 +562,7 @@ Private Sub UserForm_Initialize()
         .AddItem CASE_TITLE
     End With
 
-    ' Настройка списка фильтров
+    ' РќР°СЃС‚СЂРѕР№РєР° СЃРїРёСЃРєР° С„РёР»СЊС‚СЂРѕРІ
     With listFilters
         .AddItem FILTER_ALL
         .AddItem FILTER_NONE
@@ -581,7 +581,7 @@ Private Sub UserForm_Initialize()
         .AddItem FILTER_TAB_NOT_COLOR
     End With
 
-    ' Назначение иконок кнопкам через CommandBars.GetImageMso
+    ' РќР°Р·РЅР°С‡РµРЅРёРµ РёРєРѕРЅРѕРє РєРЅРѕРїРєР°Рј С‡РµСЂРµР· CommandBars.GetImageMso
     With Application.CommandBars
         Set btnContent.Picture = .GetImageMso("FunctionsMathTrigInsertGallery", W, h)
         Set btnSort.Picture = .GetImageMso("SortDialog", W, h)
@@ -605,10 +605,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: refreshForm
-' Purpose: Основная процедура обновления данных формы. Сканирует все листы активной
-'          книги, собирает их свойства (имя, тип, видимость, защита, заполненность)
-'          и загружает их в массив listSheets. Также формирует строку визуализации
-'          заполненности листа.
+' Purpose: РћСЃРЅРѕРІРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° РѕР±РЅРѕРІР»РµРЅРёСЏ РґР°РЅРЅС‹С… С„РѕСЂРјС‹. РЎРєР°РЅРёСЂСѓРµС‚ РІСЃРµ Р»РёСЃС‚С‹ Р°РєС‚РёРІРЅРѕР№
+'          РєРЅРёРіРё, СЃРѕР±РёСЂР°РµС‚ РёС… СЃРІРѕР№СЃС‚РІР° (РёРјСЏ, С‚РёРї, РІРёРґРёРјРѕСЃС‚СЊ, Р·Р°С‰РёС‚Р°, Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚СЊ)
+'          Рё Р·Р°РіСЂСѓР¶Р°РµС‚ РёС… РІ РјР°СЃСЃРёРІ listSheets. РўР°РєР¶Рµ С„РѕСЂРјРёСЂСѓРµС‚ СЃС‚СЂРѕРєСѓ РІРёР·СѓР°Р»РёР·Р°С†РёРё
+'          Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚Рё Р»РёСЃС‚Р°.
 '--------------------------------------------------------------------------------
 Private Sub refreshForm()
     If Workbooks.Count = 0 Then Exit Sub
@@ -629,13 +629,13 @@ Private Sub refreshForm()
         Set Sh = ActiveWorkbook.Sheets(i)
 
         With Sh
-            ' Базовая информация
+            ' Р‘Р°Р·РѕРІР°СЏ РёРЅС„РѕСЂРјР°С†РёСЏ
             arrSheets(i, 1) = .Name
             arrSheets(i, 2) = i
             arrListSheets(i, 1) = i
             arrListSheets(i, 2) = arrSheets(i, 1)
 
-            ' Определение типа листа
+            ' РћРїСЂРµРґРµР»РµРЅРёРµ С‚РёРїР° Р»РёСЃС‚Р°
             Select Case TypeName(Sh)
                 Case "DialogSheet"
                     arrListSheets(i, 3) = VALUE_DIALOG_TYPE
@@ -651,9 +651,9 @@ Private Sub refreshForm()
                             arrListSheets(i, 3) = VALUE_MACRO_TYPE
                         Case XlSheetType.xlWorksheet
                             arrListSheets(i, 3) = VALUE_SHEET_TYPE
-                            ' Адрес используемого диапазона
+                            ' РђРґСЂРµСЃ РёСЃРїРѕР»СЊР·СѓРµРјРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
                             arrListSheets(i, 6) = .UsedRange.Address(RowAbsolute:=False, columnAbsolute:=False)
-                            ' Подсчет заполненных ячеек
+                            ' РџРѕРґСЃС‡РµС‚ Р·Р°РїРѕР»РЅРµРЅРЅС‹С… СЏС‡РµРµРє
                             arrListSheets(i, 7) = WorksheetFunction.CountA(.UsedRange)
 
                             If arrListSheets(i, 7) = 0 Then
@@ -664,7 +664,7 @@ Private Sub refreshForm()
                     End Select
             End Select
 
-            ' Определение видимости
+            ' РћРїСЂРµРґРµР»РµРЅРёРµ РІРёРґРёРјРѕСЃС‚Рё
             Select Case .Visible
                 Case XlSheetVisibility.xlSheetHidden
                     arrListSheets(i, 4) = VALUE_HIDDEN
@@ -674,13 +674,13 @@ Private Sub refreshForm()
                     arrListSheets(i, 4) = VALUE_VISIBLE
             End Select
 
-            ' Проверка защиты
+            ' РџСЂРѕРІРµСЂРєР° Р·Р°С‰РёС‚С‹
             If .ProtectContents Then arrListSheets(i, 5) = VALUE_PROTECTED
             arrListSheets(i, 10) = VBA.CLng(.Tab.Color)
         End With
     Next i
 
-    ' Формирование визуальной шкалы заполненности (столбец 8)
+    ' Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РІРёР·СѓР°Р»СЊРЅРѕР№ С€РєР°Р»С‹ Р·Р°РїРѕР»РЅРµРЅРЅРѕСЃС‚Рё (СЃС‚РѕР»Р±РµС† 8)
     If iMax > 0 Then
         For i = 1 To iCount
             If IsNumeric(arrListSheets(i, 7)) Then
@@ -691,7 +691,7 @@ Private Sub refreshForm()
         Next i
     End If
 
-    ' Загрузка данных в контролы
+    ' Р—Р°РіСЂСѓР·РєР° РґР°РЅРЅС‹С… РІ РєРѕРЅС‚СЂРѕР»С‹
     listSheets.List = arrListSheets
     cmbSheets.List = arrSheets
     shActive.Activate

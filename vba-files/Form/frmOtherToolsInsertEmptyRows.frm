@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmOtherToolsInsertEmptyRows 
-   Caption         =   "Вставка данных:"
+   Caption         =   "Р’СЃС‚Р°РІРєР° РґР°РЅРЅС‹С…:"
    ClientHeight    =   4110
    ClientLeft      =   120
    ClientTop       =   465
@@ -34,35 +34,35 @@ Private Sub btnOK_Click()
     Dim k           As Long
     Dim m           As Long
 
-    ' Проверка заполнения параметров
+    ' РџСЂРѕРІРµСЂРєР° Р·Р°РїРѕР»РЅРµРЅРёСЏ РїР°СЂР°РјРµС‚СЂРѕРІ
     If txtInputRng.Value = vbNullString Then
-        errMsg = "Диапазон данных"
+        errMsg = "Р”РёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…"
     End If
 
     If txtCellInsert.Value = vbNullString Then
         If errMsg <> vbNullString Then errMsg = errMsg & vbNewLine
-        errMsg = errMsg & "Ячейка вставки"
+        errMsg = errMsg & "РЇС‡РµР№РєР° РІСЃС‚Р°РІРєРё"
     End If
 
     iStep = VBA.Val(txtStep.Value)
     If iStep < 1 Then
         If errMsg <> vbNullString Then errMsg = errMsg & vbNewLine
-        errMsg = errMsg & "Шаг вставки"
+        errMsg = errMsg & "РЁР°Рі РІСЃС‚Р°РІРєРё"
     End If
 
     If errMsg <> vbNullString Then
-        Call MsgBox("Не заполнены параметры:" & vbNewLine & errMsg, vbCritical)
+        Call MsgBox("РќРµ Р·Р°РїРѕР»РЅРµРЅС‹ РїР°СЂР°РјРµС‚СЂС‹:" & vbNewLine & errMsg, vbCritical)
         Exit Sub
     End If
 
-    ' Безопасное получение ссылок на диапазоны
+    ' Р‘РµР·РѕРїР°СЃРЅРѕРµ РїРѕР»СѓС‡РµРЅРёРµ СЃСЃС‹Р»РѕРє РЅР° РґРёР°РїР°Р·РѕРЅС‹
     On Error Resume Next
     Set rngValue = Range(txtInputRng.Value)
     Set rngCellInsert = Range(txtCellInsert.Value)
     On Error GoTo 0
 
     If rngValue Is Nothing Or rngCellInsert Is Nothing Then
-        MsgBox "Указаны некорректные адреса диапазонов.", vbCritical
+        MsgBox "РЈРєР°Р·Р°РЅС‹ РЅРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ Р°РґСЂРµСЃР° РґРёР°РїР°Р·РѕРЅРѕРІ.", vbCritical
         Exit Sub
     End If
     
@@ -98,7 +98,7 @@ Private Sub btnOK_Click()
             End If
         Next i
     Else
-        ' Реализация для столбцов
+        ' Р РµР°Р»РёР·Р°С†РёСЏ РґР»СЏ СЃС‚РѕР»Р±С†РѕРІ
         iCount = rngValue.Rows.Count
         jCount = rngValue.Columns.Count * iStep
         Set rng = rngCellInsert
@@ -121,7 +121,7 @@ Private Sub btnOK_Click()
     End If
     
     Call RestoreApplicationSettings
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
     Me.Hide
 End Sub
 
@@ -175,7 +175,7 @@ Private Sub msgSecondaryCell()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     If TypeName(Selection) = "Range" Then txtInputRng.Value = Selection.Address

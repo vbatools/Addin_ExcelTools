@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerCharts 
-   Caption         =   "Менеджер диаграмм:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ РґРёР°РіСЂР°РјРј:"
    ClientHeight    =   7635
    ClientLeft      =   120
    ClientTop       =   465
@@ -17,9 +17,9 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const FILTER_ALL As String = "все"
-Private Const FILTER_NONE As String = "ничего"
-Private Const FILTER_REVERSE As String = "обратное выделение"
+Private Const FILTER_ALL As String = "РІСЃРµ"
+Private Const FILTER_NONE As String = "РЅРёС‡РµРіРѕ"
+Private Const FILTER_REVERSE As String = "РѕР±СЂР°С‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
 
 Private Sub btnDown_Click()
     Call moveShape(1, True)
@@ -151,7 +151,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: UserForm_Initialize
-' Purpose: Инициализация формы при запуске (центрирование, заполнение полей)
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ (С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ, Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№)
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
     Call CenterUserForm(Me)
@@ -174,7 +174,7 @@ Private Sub cmbFilter_Change()
                 Call SelectedItemListSheets(listChart, "*" & .Value & "*", 2)
             End If
         Else
-            ' Оптимизация: Direct access по имени без необходимости предварительной активации
+            ' РћРїС‚РёРјРёР·Р°С†РёСЏ: Direct access РїРѕ РёРјРµРЅРё Р±РµР· РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕР№ Р°РєС‚РёРІР°С†РёРё
             Call SelectedItemListSheets(listChart, cmbFilter.Value, 2)
         End If
     End With
@@ -195,9 +195,9 @@ Private Sub refreshList()
 
     cmbFilter.Clear
 
-    ' Перебор всех листов в активной книге
+    ' РџРµСЂРµР±РѕСЂ РІСЃРµС… Р»РёСЃС‚РѕРІ РІ Р°РєС‚РёРІРЅРѕР№ РєРЅРёРіРµ
     With listChart
-        ' Проверка на наличие встроенных диаграмм
+        ' РџСЂРѕРІРµСЂРєР° РЅР° РЅР°Р»РёС‡РёРµ РІСЃС‚СЂРѕРµРЅРЅС‹С… РґРёР°РіСЂР°РјРј
         If ActiveSheet.ChartObjects.Count > 0 Then
             listFilters.AddItem ActiveSheet.Name
             For Each chtObj In ActiveSheet.ChartObjects
@@ -215,69 +215,69 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: GetChartTypeName
-' Purpose: Преобразует числовое значение типа диаграммы в текстовое описание
+' Purpose: РџСЂРµРѕР±СЂР°Р·СѓРµС‚ С‡РёСЃР»РѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ С‚РёРїР° РґРёР°РіСЂР°РјРјС‹ РІ С‚РµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ
 ' Parameters:
-' chartType - XlChartType - числовой тип диаграммы
-' Returns: String - текстовое описание типа диаграммы
+' chartType - XlChartType - С‡РёСЃР»РѕРІРѕР№ С‚РёРї РґРёР°РіСЂР°РјРјС‹
+' Returns: String - С‚РµРєСЃС‚РѕРІРѕРµ РѕРїРёСЃР°РЅРёРµ С‚РёРїР° РґРёР°РіСЂР°РјРјС‹
 '--------------------------------------------------------------------------------
 Private Function GetChartTypeName(ByVal chartType As XlChartType) As String
     Select Case chartType
-        Case xlColumnClustered: GetChartTypeName = "Гистограмма с группировкой"
-        Case xlColumnStacked: GetChartTypeName = "Гистограмма с накоплением"
-        Case xlLine, xlLineStacked: GetChartTypeName = "График"
-        Case xlLineMarkers, xlLineMarkersStacked: GetChartTypeName = "График с маркерами"
-        Case xlPie: GetChartTypeName = "Круговая"
-        Case xlBarClustered: GetChartTypeName = "Линейчатая с группировкой"
-        Case xlArea: GetChartTypeName = "Область"
-        Case xlXYScatter: GetChartTypeName = "Точечная"
-        Case xlRadar: GetChartTypeName = "Лепестковая"
-        Case xlDoughnut: GetChartTypeName = "Кольцевая"
-        Case Else: GetChartTypeName = "Другой тип (" & CStr(chartType) & ")"
+        Case xlColumnClustered: GetChartTypeName = "Р“РёСЃС‚РѕРіСЂР°РјРјР° СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№"
+        Case xlColumnStacked: GetChartTypeName = "Р“РёСЃС‚РѕРіСЂР°РјРјР° СЃ РЅР°РєРѕРїР»РµРЅРёРµРј"
+        Case xlLine, xlLineStacked: GetChartTypeName = "Р“СЂР°С„РёРє"
+        Case xlLineMarkers, xlLineMarkersStacked: GetChartTypeName = "Р“СЂР°С„РёРє СЃ РјР°СЂРєРµСЂР°РјРё"
+        Case xlPie: GetChartTypeName = "РљСЂСѓРіРѕРІР°СЏ"
+        Case xlBarClustered: GetChartTypeName = "Р›РёРЅРµР№С‡Р°С‚Р°СЏ СЃ РіСЂСѓРїРїРёСЂРѕРІРєРѕР№"
+        Case xlArea: GetChartTypeName = "РћР±Р»Р°СЃС‚СЊ"
+        Case xlXYScatter: GetChartTypeName = "РўРѕС‡РµС‡РЅР°СЏ"
+        Case xlRadar: GetChartTypeName = "Р›РµРїРµСЃС‚РєРѕРІР°СЏ"
+        Case xlDoughnut: GetChartTypeName = "РљРѕР»СЊС†РµРІР°СЏ"
+        Case Else: GetChartTypeName = "Р”СЂСѓРіРѕР№ С‚РёРї (" & CStr(chartType) & ")"
     End Select
 End Function
 
 Private Sub ApplyColorsToChart(ByRef oChart As Chart)
 
-    ' Проверка наличия данных на диаграмме
+    ' РџСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ РґР°РЅРЅС‹С… РЅР° РґРёР°РіСЂР°РјРјРµ
     If oChart.SeriesCollection.Count = 0 Then Exit Sub
 
     Dim oSeries     As Series
     Dim iSeries     As Long
 
-    ' Перебор всех серий на диаграмме
+    ' РџРµСЂРµР±РѕСЂ РІСЃРµС… СЃРµСЂРёР№ РЅР° РґРёР°РіСЂР°РјРјРµ
     For iSeries = 1 To oChart.SeriesCollection.Count
         Set oSeries = oChart.SeriesCollection(iSeries)
 
-        ' Безопасное извлечение диапазона значений из формулы серии
-        ' Формула обычно имеет вид: =SERIES(, , "Имя", 1)
-        ' Нам нужен третий аргумент (значения), который находится после второй запятой
+        ' Р‘РµР·РѕРїР°СЃРЅРѕРµ РёР·РІР»РµС‡РµРЅРёРµ РґРёР°РїР°Р·РѕРЅР° Р·РЅР°С‡РµРЅРёР№ РёР· С„РѕСЂРјСѓР»С‹ СЃРµСЂРёРё
+        ' Р¤РѕСЂРјСѓР»Р° РѕР±С‹С‡РЅРѕ РёРјРµРµС‚ РІРёРґ: =SERIES(, , "РРјСЏ", 1)
+        ' РќР°Рј РЅСѓР¶РµРЅ С‚СЂРµС‚РёР№ Р°СЂРіСѓРјРµРЅС‚ (Р·РЅР°С‡РµРЅРёСЏ), РєРѕС‚РѕСЂС‹Р№ РЅР°С…РѕРґРёС‚СЃСЏ РїРѕСЃР»Рµ РІС‚РѕСЂРѕР№ Р·Р°РїСЏС‚РѕР№
         Dim formulaParts() As String
         Dim valueRangeAddress As String
 
-        ' Разделяем формулу по запятым
+        ' Р Р°Р·РґРµР»СЏРµРј С„РѕСЂРјСѓР»Сѓ РїРѕ Р·Р°РїСЏС‚С‹Рј
         formulaParts = Split(oSeries.formula, ",")
 
-        ' Проверяем, что в формуле достаточно частей для извлечения диапазона
+        ' РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ РІ С„РѕСЂРјСѓР»Рµ РґРѕСЃС‚Р°С‚РѕС‡РЅРѕ С‡Р°СЃС‚РµР№ РґР»СЏ РёР·РІР»РµС‡РµРЅРёСЏ РґРёР°РїР°Р·РѕРЅР°
         If UBound(formulaParts) >= 2 Then
-            ' Извлекаем адрес диапазона, удаляя лишние пробелы
+            ' РР·РІР»РµРєР°РµРј Р°РґСЂРµСЃ РґРёР°РїР°Р·РѕРЅР°, СѓРґР°Р»СЏСЏ Р»РёС€РЅРёРµ РїСЂРѕР±РµР»С‹
             valueRangeAddress = Trim(formulaParts(2))
 
-            ' Проверка валидности диапазона
+            ' РџСЂРѕРІРµСЂРєР° РІР°Р»РёРґРЅРѕСЃС‚Рё РґРёР°РїР°Р·РѕРЅР°
             Dim oRng As Range
             On Error Resume Next
             Set oRng = Range(valueRangeAddress)
             On Error GoTo 0
 
-            ' Если диапазон найден, обрабатываем точки
+            ' Р•СЃР»Рё РґРёР°РїР°Р·РѕРЅ РЅР°Р№РґРµРЅ, РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј С‚РѕС‡РєРё
             If Not oRng Is Nothing Then
                 Dim iPoint As Long
                 Dim oPoint As Point
                 Dim lColor As Long
                 Dim bFlag As Boolean
 
-                ' Цикл по точкам текущей серии
+                ' Р¦РёРєР» РїРѕ С‚РѕС‡РєР°Рј С‚РµРєСѓС‰РµР№ СЃРµСЂРёРё
                 For iPoint = 1 To oSeries.Points.Count
-                    ' Проверка, что индекс точки не выходит за границы диапазона
+                    ' РџСЂРѕРІРµСЂРєР°, С‡С‚Рѕ РёРЅРґРµРєСЃ С‚РѕС‡РєРё РЅРµ РІС‹С…РѕРґРёС‚ Р·Р° РіСЂР°РЅРёС†С‹ РґРёР°РїР°Р·РѕРЅР°
                     If iPoint <= oRng.Cells.Count Then
                         Set oPoint = oSeries.Points(iPoint)
                         With oRng.Cells(iPoint).DisplayFormat.Interior
@@ -285,7 +285,7 @@ Private Sub ApplyColorsToChart(ByRef oChart As Chart)
                             bFlag = Not (.ColorIndex = -4142)
                         End With
 
-                        ' Применение цвета из ячейки
+                        ' РџСЂРёРјРµРЅРµРЅРёРµ С†РІРµС‚Р° РёР· СЏС‡РµР№РєРё
                         With oPoint.format
                             .Fill.ForeColor.RGB = lColor
                             .Fill.Visible = bFlag

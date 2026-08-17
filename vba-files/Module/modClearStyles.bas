@@ -3,7 +3,7 @@ Option Explicit
 Option Private Module
 
 Public Sub DeleteHiddenNames()
-    If MsgBox("Вы хотите удалить скрытые имена в файле [" & ActiveWorkbook.Name & "]?" & vbNewLine & "Количество имен: " & ActiveWorkbook.Names.Count, vbYesNo + vbQuestion, "Удаление скрытых имен:") = vbNo Then
+    If MsgBox("Р’С‹ С…РѕС‚РёС‚Рµ СѓРґР°Р»РёС‚СЊ СЃРєСЂС‹С‚С‹Рµ РёРјРµРЅР° РІ С„Р°Р№Р»Рµ [" & ActiveWorkbook.Name & "]?" & vbNewLine & "РљРѕР»РёС‡РµСЃС‚РІРѕ РёРјРµРЅ: " & ActiveWorkbook.Names.Count, vbYesNo + vbQuestion, "РЈРґР°Р»РµРЅРёРµ СЃРєСЂС‹С‚С‹С… РёРјРµРЅ:") = vbNo Then
         Exit Sub
     End If
     Dim n           As Name
@@ -15,5 +15,5 @@ Public Sub DeleteHiddenNames()
             Count = Count + 1
         End If
     Next n
-    MsgBox "Скрытые имена в количестве " & Count & " удалены, из книги: [" & ActiveWorkbook.Name & "]"
+    MsgBox "РЎРєСЂС‹С‚С‹Рµ РёРјРµРЅР° РІ РєРѕР»РёС‡РµСЃС‚РІРµ " & Count & " СѓРґР°Р»РµРЅС‹, РёР· РєРЅРёРіРё: [" & ActiveWorkbook.Name & "]"
 End Sub

@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaQRCode 
-   Caption         =   "Создание формулы QR код:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С„РѕСЂРјСѓР»С‹ QR РєРѕРґ:"
    ClientHeight    =   5220
    ClientLeft      =   120
    ClientTop       =   465
@@ -25,12 +25,12 @@ End Sub
 Private Sub btnOK_Click()
     If txtMain.TEXT = vbNullString Then
         Me.Hide
-        Call MsgBox("Не задан текст для QR кода!", vbCritical, "Ошибка:")
+        Call MsgBox("РќРµ Р·Р°РґР°РЅ С‚РµРєСЃС‚ РґР»СЏ QR РєРѕРґР°!", vbCritical, "РћС€РёР±РєР°:")
         Me.Show
         Exit Sub
     End If
     Dim bType       As Boolean
-    If cmbType.Value = "Квадрат" Then bType = True
+    If cmbType.Value = "РљРІР°РґСЂР°С‚" Then bType = True
     Dim errQR       As QRCodegenEcc
 
     Select Case cmbError.Value
@@ -42,9 +42,9 @@ Private Sub btnOK_Click()
     End Select
 
     If lbAddress.Caption = vbNullString Then
-        activeCell.FormulaR1C1 = "=Создать_QR(" & Chr$(34) & txtMain & Chr$(34) & "," & lbFrontColor.BackColor & "," & cmbSize.Value & "," & bType & "," & errQR & ")"
+        activeCell.FormulaR1C1 = "=РЎРѕР·РґР°С‚СЊ_QR(" & Chr$(34) & txtMain & Chr$(34) & "," & lbFrontColor.BackColor & "," & cmbSize.Value & "," & bType & "," & errQR & ")"
     Else
-        activeCell.FormulaR1C1 = "=Создать_QR(" & lbAddress.Caption & "," & lbFrontColor.BackColor & "," & cmbSize.Value & "," & bType & "," & errQR & ")"
+        activeCell.FormulaR1C1 = "=РЎРѕР·РґР°С‚СЊ_QR(" & lbAddress.Caption & "," & lbFrontColor.BackColor & "," & cmbSize.Value & "," & bType & "," & errQR & ")"
     End If
     Me.Hide
 End Sub
@@ -102,7 +102,7 @@ Private Sub txtMain_DropButtonClick()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     Dim i           As Integer
@@ -118,8 +118,8 @@ Private Sub UserForm_Initialize()
     cmbError.AddItem "M"
     cmbError.AddItem "Q"
     cmbError.AddItem "H"
-    cmbType.AddItem "Квадрат"
-    cmbType.AddItem "Плавно"
+    cmbType.AddItem "РљРІР°РґСЂР°С‚"
+    cmbType.AddItem "РџР»Р°РІРЅРѕ"
     cmbType.Value = cmbType.List(1)
     cmbSize.Value = cmbSize.List(1)
     cmbError.Value = cmbError.List(0)

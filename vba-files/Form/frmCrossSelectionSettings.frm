@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmCrossSelectionSettings 
-   Caption         =   "Настройки перекрестного выделения:"
+   Caption         =   "РќР°СЃС‚СЂРѕР№РєРё РїРµСЂРµРєСЂРµСЃС‚РЅРѕРіРѕ РІС‹РґРµР»РµРЅРёСЏ:"
    ClientHeight    =   4650
    ClientLeft      =   120
    ClientTop       =   465
@@ -41,7 +41,7 @@ Private Sub btnOK_Click()
     Exit Sub
 btnOK_Click_Err:
     Unload Me
-    MsgBox Err.Description & vbCrLf & "в VBAProject.B1_CrossSelectionSet.btnOK_Click " & vbCrLf & "в строке " & Erl, vbExclamation + vbOKOnly, "Ошибка:"
+    MsgBox Err.Description & vbCrLf & "РІ VBAProject.B1_CrossSelectionSet.btnOK_Click " & vbCrLf & "РІ СЃС‚СЂРѕРєРµ " & Erl, vbExclamation + vbOKOnly, "РћС€РёР±РєР°:"
 End Sub
 
 Private Sub lbl_ColorFont_Click()
@@ -59,7 +59,7 @@ Private Sub lbl_ColorInterior_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub
 
@@ -92,5 +92,5 @@ Private Sub UserForm_Activate()
 
     Exit Sub
 UserForm_Activate_Err:
-    MsgBox Err.Description & vbCrLf & "в VBAProject.B1_CrossSelectionSet.UserForm_Activate " & vbCrLf & "в строке " & Erl, vbExclamation + vbOKOnly, "Ошибка:"
+    MsgBox Err.Description & vbCrLf & "РІ VBAProject.B1_CrossSelectionSet.UserForm_Activate " & vbCrLf & "РІ СЃС‚СЂРѕРєРµ " & Erl, vbExclamation + vbOKOnly, "РћС€РёР±РєР°:"
 End Sub

@@ -9,7 +9,7 @@ Option Private Module
 '     \/   |____/_/    \_\_|\___/ \___/|_|___/
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Module     : modAddinConst - глобальные константы надстройки
+'* Module     : modAddinConst - РіР»РѕР±Р°Р»СЊРЅС‹Рµ РєРѕРЅСЃС‚Р°РЅС‚С‹ РЅР°РґСЃС‚СЂРѕР№РєРё
 '* Created    : 15-09-2019 15:48
 '* Author     : VBATools
 '* Copyright  : Apache License

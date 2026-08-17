@@ -16,9 +16,9 @@ End Sub
 '--------------------------------------------------------------------------------
 Private Sub btnCatchError(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
-    ' Проверка типа выделенного объекта
+    ' РџСЂРѕРІРµСЂРєР° С‚РёРїР° РІС‹РґРµР»РµРЅРЅРѕРіРѕ РѕР±СЉРµРєС‚Р°
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Пожалуйста, выделите диапазон ячеек.", vbExclamation, "Внимание")
+        Call MsgBox("РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІС‹РґРµР»РёС‚Рµ РґРёР°РїР°Р·РѕРЅ СЏС‡РµРµРє.", vbExclamation, "Р’РЅРёРјР°РЅРёРµ")
         Exit Sub
     End If
 
@@ -26,10 +26,10 @@ Private Sub btnCatchError(control As IRibbonControl)
     Dim arrResult   As Variant
     Dim sLength     As String
 
-    ' Запрос значения для обработки ошибок
-    sLength = InputBox("Укажите новое значение для замены в формулах:", "Обновление обработки ошибок")
+    ' Р—Р°РїСЂРѕСЃ Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РѕР±СЂР°Р±РѕС‚РєРё РѕС€РёР±РѕРє
+    sLength = InputBox("РЈРєР°Р¶РёС‚Рµ РЅРѕРІРѕРµ Р·РЅР°С‡РµРЅРёРµ РґР»СЏ Р·Р°РјРµРЅС‹ РІ С„РѕСЂРјСѓР»Р°С…:", "РћР±РЅРѕРІР»РµРЅРёРµ РѕР±СЂР°Р±РѕС‚РєРё РѕС€РёР±РѕРє")
 
-    ' Подготовка значения: если это текст, берем в кавычки
+    ' РџРѕРґРіРѕС‚РѕРІРєР° Р·РЅР°С‡РµРЅРёСЏ: РµСЃР»Рё СЌС‚Рѕ С‚РµРєСЃС‚, Р±РµСЂРµРј РІ РєР°РІС‹С‡РєРё
     If Not IsNumeric(sLength) Then
         sLength = """" & sLength & """"
     End If
@@ -37,10 +37,10 @@ Private Sub btnCatchError(control As IRibbonControl)
     Application.ScreenUpdating = False
     On Error GoTo ErrorHandler
 
-    ' Получение данных (в VBA всегда в английском формате)
+    ' РџРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… (РІ VBA РІСЃРµРіРґР° РІ Р°РЅРіР»РёР№СЃРєРѕРј С„РѕСЂРјР°С‚Рµ)
     arrData = Selection.formula
 
-    ' Нормализация массива для одной ячейки
+    ' РќРѕСЂРјР°Р»РёР·Р°С†РёСЏ РјР°СЃСЃРёРІР° РґР»СЏ РѕРґРЅРѕР№ СЏС‡РµР№РєРё
     If Not IsArray(arrData) Then
         Dim arrSingle(1 To 1, 1 To 1) As Variant
         arrSingle(1, 1) = arrData
@@ -58,43 +58,43 @@ Private Sub btnCatchError(control As IRibbonControl)
 
     ReDim arrResult(1 To iCount, 1 To jCount)
 
-    ' Обработка каждой ячейки
+    ' РћР±СЂР°Р±РѕС‚РєР° РєР°Р¶РґРѕР№ СЏС‡РµР№РєРё
     For i = 1 To iCount
         For j = 1 To jCount
             sFormula = arrData(i, j)
 
-            ' Проверяем, является ли содержимое формулой
+            ' РџСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃРѕРґРµСЂР¶РёРјРѕРµ С„РѕСЂРјСѓР»РѕР№
             If Left$(sFormula, 1) = "=" Then
 
                 Dim sNewFormula As String
                 Dim sTempFormula As String
 
-                ' Убираем "="
+                ' РЈР±РёСЂР°РµРј "="
                 sTempFormula = Mid$(sFormula, 2)
 
-                ' Проверяем: начинается ли формула с IFERROR
-                ' В VBA .Formula всегда используется английское имя "IFERROR"
+                ' РџСЂРѕРІРµСЂСЏРµРј: РЅР°С‡РёРЅР°РµС‚СЃСЏ Р»Рё С„РѕСЂРјСѓР»Р° СЃ IFERROR
+                ' Р’ VBA .Formula РІСЃРµРіРґР° РёСЃРїРѕР»СЊР·СѓРµС‚СЃСЏ Р°РЅРіР»РёР№СЃРєРѕРµ РёРјСЏ "IFERROR"
                 If StrComp(Left$(sTempFormula, 8), "IFERROR(", vbTextCompare) = 0 Then
 
-                    ' СЛУЧАЙ А: Формула уже есть (=IFERROR(...))
+                    ' РЎР›РЈР§РђР™ Рђ: Р¤РѕСЂРјСѓР»Р° СѓР¶Рµ РµСЃС‚СЊ (=IFERROR(...))
 
-                    ' Удаляем "IFERROR(" (9 символов)
+                    ' РЈРґР°Р»СЏРµРј "IFERROR(" (9 СЃРёРјРІРѕР»РѕРІ)
                     Dim sBody As String
                     sBody = Mid$(sTempFormula, 9)
 
-                    ' Находим позицию последней запятой
+                    ' РќР°С…РѕРґРёРј РїРѕР·РёС†РёСЋ РїРѕСЃР»РµРґРЅРµР№ Р·Р°РїСЏС‚РѕР№
                     Dim iSepPos As Long
                     iSepPos = InStrRev(sBody, ",")
 
                     If iSepPos > 0 Then
-                        ' Заменяем аргумент после запятой
+                        ' Р—Р°РјРµРЅСЏРµРј Р°СЂРіСѓРјРµРЅС‚ РїРѕСЃР»Рµ Р·Р°РїСЏС‚РѕР№
                         sNewFormula = "=IFERROR(" & Left$(sBody, iSepPos) & sLength & ")"
                     Else
-                        ' Запятой не было, добавляем
+                        ' Р—Р°РїСЏС‚РѕР№ РЅРµ Р±С‹Р»Рѕ, РґРѕР±Р°РІР»СЏРµРј
                         sNewFormula = "=IFERROR(" & sBody & "," & sLength & ")"
                     End If
                 Else
-                    ' СЛУЧАЙ Б: Обычная формула -> Оборачиваем
+                    ' РЎР›РЈР§РђР™ Р‘: РћР±С‹С‡РЅР°СЏ С„РѕСЂРјСѓР»Р° -> РћР±РѕСЂР°С‡РёРІР°РµРј
                     sNewFormula = "=IFERROR(" & sTempFormula & "," & sLength & ")"
                 End If
                 arrResult(i, j) = sNewFormula
@@ -104,10 +104,10 @@ Private Sub btnCatchError(control As IRibbonControl)
         Next j
     Next i
 
-    ' Вывод результата
+    ' Р’С‹РІРѕРґ СЂРµР·СѓР»СЊС‚Р°С‚Р°
     Call SaveUndoInfo(Selection, False, False)
     Selection.formula = arrResult
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
 
 ErrorHandler:
     Application.ScreenUpdating = True

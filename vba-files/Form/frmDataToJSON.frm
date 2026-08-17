@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataToJSON 
-   Caption         =   "Создать JSON из диапазона:"
+   Caption         =   "РЎРѕР·РґР°С‚СЊ JSON РёР· РґРёР°РїР°Р·РѕРЅР°:"
    ClientHeight    =   4650
    ClientLeft      =   120
    ClientTop       =   465
@@ -18,7 +18,7 @@ Attribute VB_Exposed = False
 Option Explicit
 
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-' UserForm     :   frmDataToSheets - Модуль загрузки данных в сквозные листы
+' UserForm     :   frmDataToSheets - РњРѕРґСѓР»СЊ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… РІ СЃРєРІРѕР·РЅС‹Рµ Р»РёСЃС‚С‹
 ' Author       :   VBATools
 ' Copyright    :   Apache License
 ' Created      :   10-06-2026 09:36:16
@@ -29,7 +29,7 @@ Private Const QUOTE_CHAR_CON As String = """: "
 
 '--------------------------------------------------------------------------------
 ' Event: btnCancel_Click
-' Purpose: Обработчик закрытия формы без сохранения изменений
+' Purpose: РћР±СЂР°Р±РѕС‚С‡РёРє Р·Р°РєСЂС‹С‚РёСЏ С„РѕСЂРјС‹ Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ РёР·РјРµРЅРµРЅРёР№
 '--------------------------------------------------------------------------------
 Private Sub btnCancel_Click()
     Unload Me
@@ -37,7 +37,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: btnOK_Click
-' Purpose: Основная процедура формирования JSON из выбранного диапазона
+' Purpose: РћСЃРЅРѕРІРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР° С„РѕСЂРјРёСЂРѕРІР°РЅРёСЏ JSON РёР· РІС‹Р±СЂР°РЅРЅРѕРіРѕ РґРёР°РїР°Р·РѕРЅР°
 '--------------------------------------------------------------------------------
 Private Sub btnOK_Click()
     If txtInputRng.Value = vbNullString Then Exit Sub
@@ -54,13 +54,13 @@ Private Sub btnOK_Click()
     Dim sJSON       As String
     Dim arrVal()    As String
 
-    ' Получение данных из диапазона
+    ' РџРѕР»СѓС‡РµРЅРёРµ РґР°РЅРЅС‹С… РёР· РґРёР°РїР°Р·РѕРЅР°
     arrData = Range(txtInputRng.Value).Value2
 
-    ' Обработка случая одиночной ячейки
+    ' РћР±СЂР°Р±РѕС‚РєР° СЃР»СѓС‡Р°СЏ РѕРґРёРЅРѕС‡РЅРѕР№ СЏС‡РµР№РєРё
     If Not IsArray(arrData) Then
         If arrData = vbNullString Then
-            Call MsgBox("Выбрана пустая ячейка!", vbCritical)
+            Call MsgBox("Р’С‹Р±СЂР°РЅР° РїСѓСЃС‚Р°СЏ СЏС‡РµР№РєР°!", vbCritical)
             Exit Sub
         End If
         ReDim arrData(1 To 1, 1 To 1)
@@ -70,30 +70,30 @@ Private Sub btnOK_Click()
     iCount = UBound(arrData, 1)
     jCount = UBound(arrData, 2)
 
-    ' Формирование заголовков (если есть)
+    ' Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ Р·Р°РіРѕР»РѕРІРєРѕРІ (РµСЃР»Рё РµСЃС‚СЊ)
     If chbHaveTitle.Value Then
         ReDim arrVal(1 To jCount) As String
-        fItem = 2    ' Данные начинаются со второй строки
+        fItem = 2    ' Р”Р°РЅРЅС‹Рµ РЅР°С‡РёРЅР°СЋС‚СЃСЏ СЃРѕ РІС‚РѕСЂРѕР№ СЃС‚СЂРѕРєРё
 
         sHeaders = vbTab & QUOTE_CHAR & "headers" & QUOTE_CHAR_CON & "["
         For j = 1 To jCount
             If VBA.Replace(arrData(1, j), " ", vbNullString) = vbNullString Then
-                Call MsgBox("В заголовке не может быть пустых значений", vbCritical)
+                Call MsgBox("Р’ Р·Р°РіРѕР»РѕРІРєРµ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚С‹С… Р·РЅР°С‡РµРЅРёР№", vbCritical)
                 Exit Sub
             End If
-            ' Экранируем только заголовки
+            ' Р­РєСЂР°РЅРёСЂСѓРµРј С‚РѕР»СЊРєРѕ Р·Р°РіРѕР»РѕРІРєРё
             arrVal(j) = QUOTE_CHAR & EscapeJSON(CStr(arrData(1, j))) & QUOTE_CHAR
         Next j
         sHeaders = sHeaders & VBA.Join(arrVal, ", ")
 
-        ' Пересоздаем массив для строк данных
+        ' РџРµСЂРµСЃРѕР·РґР°РµРј РјР°СЃСЃРёРІ РґР»СЏ СЃС‚СЂРѕРє РґР°РЅРЅС‹С…
         ReDim arrVal(1 To iCount - 1) As String
     Else
-        fItem = 1    ' Данные с первой строки
+        fItem = 1    ' Р”Р°РЅРЅС‹Рµ СЃ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРё
         ReDim arrVal(1 To iCount) As String
     End If
 
-    ' Формирование массива строк данных
+    ' Р¤РѕСЂРјРёСЂРѕРІР°РЅРёРµ РјР°СЃСЃРёРІР° СЃС‚СЂРѕРє РґР°РЅРЅС‹С…
     For i = fItem To iCount
         sItem = vbNullString
 
@@ -101,11 +101,11 @@ Private Sub btnOK_Click()
             If sItem <> vbNullString Then sItem = sItem & ", "
 
             If optTypeJSONObject.Value Then
-                ' Формат: "Ключ": "Значение"
+                ' Р¤РѕСЂРјР°С‚: "РљР»СЋС‡": "Р—РЅР°С‡РµРЅРёРµ"
                 sItem = sItem & QUOTE_CHAR & EscapeJSON(CStr(arrData(1, j))) & QUOTE_CHAR_CON
                 sItem = sItem & GetJSONFormattedValue(arrData(i, j))
             Else
-                ' Формат: ["Значение1", "Значение2"]
+                ' Р¤РѕСЂРјР°С‚: ["Р—РЅР°С‡РµРЅРёРµ1", "Р—РЅР°С‡РµРЅРёРµ2"]
                 sItem = sItem & GetJSONFormattedValue(arrData(i, j))
             End If
         Next j
@@ -118,7 +118,7 @@ Private Sub btnOK_Click()
         End If
     Next i
 
-    ' Сборка итогового JSON
+    ' РЎР±РѕСЂРєР° РёС‚РѕРіРѕРІРѕРіРѕ JSON
     sJSON = "{" & vbNewLine
     sJSON = sJSON & vbTab & QUOTE_CHAR & "title" & QUOTE_CHAR_CON & QUOTE_CHAR & ActiveSheet.Name & QUOTE_CHAR & ", " & vbNewLine
 
@@ -136,12 +136,12 @@ Private Sub btnOK_Click()
             .SetText sJSON
             .PutInClipboard
         End With
-        Call MsgBox("Скопировано в буфер обмена!", vbInformation)
+        Call MsgBox("РЎРєРѕРїРёСЂРѕРІР°РЅРѕ РІ Р±СѓС„РµСЂ РѕР±РјРµРЅР°!", vbInformation)
     Else
         If SaveTextToFile(sJSON, ActiveWorkbook.Path & Application.PathSeparator & ActiveWorkbook.Name & "_" & ActiveSheet.Name & ".json", "utf-8") Then
-            Call MsgBox("Сохранено в файл!", vbInformation)
+            Call MsgBox("РЎРѕС…СЂР°РЅРµРЅРѕ РІ С„Р°Р№Р»!", vbInformation)
         Else
-            Call MsgBox("Не удалось сохранить в файл!", vbCritical)
+            Call MsgBox("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕС…СЂР°РЅРёС‚СЊ РІ С„Р°Р№Р»!", vbCritical)
         End If
     End If
     Unload Me
@@ -149,7 +149,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: txtInputRng_DropButtonClick
-' Purpose: Скрытие формы, вызов диалога выбора диапазона и повторный показ
+' Purpose: РЎРєСЂС‹С‚РёРµ С„РѕСЂРјС‹, РІС‹Р·РѕРІ РґРёР°Р»РѕРіР° РІС‹Р±РѕСЂР° РґРёР°РїР°Р·РѕРЅР° Рё РїРѕРІС‚РѕСЂРЅС‹Р№ РїРѕРєР°Р·
 '--------------------------------------------------------------------------------
 Private Sub txtInputRng_DropButtonClick()
     Me.Hide
@@ -159,7 +159,7 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: txtInputRng_KeyDown
-' Purpose: Ограничение навигационных клавиш в поле ввода
+' Purpose: РћРіСЂР°РЅРёС‡РµРЅРёРµ РЅР°РІРёРіР°С†РёРѕРЅРЅС‹С… РєР»Р°РІРёС€ РІ РїРѕР»Рµ РІРІРѕРґР°
 '--------------------------------------------------------------------------------
 Private Sub txtInputRng_KeyDown(ByVal KeyCode As MSForms.ReturnInteger, ByVal Shift As Integer)
     Call RestrictNavigationKeys(KeyCode, Shift)
@@ -167,10 +167,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Event: UserForm_Initialize
-' Purpose: Инициализация формы при запуске (центрирование, заполнение полей)
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ (С†РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ, Р·Р°РїРѕР»РЅРµРЅРёРµ РїРѕР»РµР№)
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
     If TypeName(Selection) = "Range" Then
@@ -182,10 +182,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: EscapeJSON
-' Purpose: Экранирует специальные символы для корректного представления в JSON
+' Purpose: Р­РєСЂР°РЅРёСЂСѓРµС‚ СЃРїРµС†РёР°Р»СЊРЅС‹Рµ СЃРёРјРІРѕР»С‹ РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РІ JSON
 ' Parameters:
-'   sText - Исходная строка
-' Returns: String - Экранированная строка
+'   sText - РСЃС…РѕРґРЅР°СЏ СЃС‚СЂРѕРєР°
+' Returns: String - Р­РєСЂР°РЅРёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР°
 '--------------------------------------------------------------------------------
 Private Function EscapeJSON(ByVal sText As String) As String
     If Len(Trim$(sText)) = 0 Then
@@ -196,7 +196,7 @@ Private Function EscapeJSON(ByVal sText As String) As String
     Dim sResult     As String
     sResult = sText
 
-    ' Порядок замены важен: сначала обратный слеш, чтобы не экранировать его дважды
+    ' РџРѕСЂСЏРґРѕРє Р·Р°РјРµРЅС‹ РІР°Р¶РµРЅ: СЃРЅР°С‡Р°Р»Р° РѕР±СЂР°С‚РЅС‹Р№ СЃР»РµС€, С‡С‚РѕР±С‹ РЅРµ СЌРєСЂР°РЅРёСЂРѕРІР°С‚СЊ РµРіРѕ РґРІР°Р¶РґС‹
     sResult = Replace(sResult, "\", "\\")
     sResult = Replace(sResult, QUOTE_CHAR, "\" & QUOTE_CHAR)
     sResult = Replace(sResult, vbCr, "\r")
@@ -206,7 +206,7 @@ Private Function EscapeJSON(ByVal sText As String) As String
     sResult = Replace(sResult, vbFormFeed, "\f")
     sResult = Replace(sResult, vbNullChar, "\u0000")
 
-    ' Разделители строк Unicode
+    ' Р Р°Р·РґРµР»РёС‚РµР»Рё СЃС‚СЂРѕРє Unicode
     sResult = Replace(sResult, ChrW(&H2028), "\u2028")
     sResult = Replace(sResult, ChrW(&H2029), "\u2029")
 
@@ -215,10 +215,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: GetJSONFormattedValue
-' Purpose: Возвращает строковое представление значения в формате JSON
+' Purpose: Р’РѕР·РІСЂР°С‰Р°РµС‚ СЃС‚СЂРѕРєРѕРІРѕРµ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РІ С„РѕСЂРјР°С‚Рµ JSON
 ' Parameters:
-'   vValue - Значение ячейки (Variant)
-' Returns: String - Форматированная строка (в кавычках, null, число и т.д.)
+'   vValue - Р—РЅР°С‡РµРЅРёРµ СЏС‡РµР№РєРё (Variant)
+' Returns: String - Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР° (РІ РєР°РІС‹С‡РєР°С…, null, С‡РёСЃР»Рѕ Рё С‚.Рґ.)
 '--------------------------------------------------------------------------------
 Private Function GetJSONFormattedValue(ByVal vValue As Variant) As String
     Select Case TypeName(vValue)
@@ -229,13 +229,13 @@ Private Function GetJSONFormattedValue(ByVal vValue As Variant) As String
         Case "Empty"
             GetJSONFormattedValue = "null"
         Case Else
-            ' Проверка на дату и число выполняется для Variant типа Double/String, содержащего дату/число
+            ' РџСЂРѕРІРµСЂРєР° РЅР° РґР°С‚Сѓ Рё С‡РёСЃР»Рѕ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ РґР»СЏ Variant С‚РёРїР° Double/String, СЃРѕРґРµСЂР¶Р°С‰РµРіРѕ РґР°С‚Сѓ/С‡РёСЃР»Рѕ
             If IsDate(vValue) Then
                 GetJSONFormattedValue = QUOTE_CHAR & vValue & QUOTE_CHAR
             ElseIf IsNumeric(vValue) Then
                 GetJSONFormattedValue = VBA.Replace(vValue, ",", ".")
             Else
-                ' Fallback для прочих типов
+                ' Fallback РґР»СЏ РїСЂРѕС‡РёС… С‚РёРїРѕРІ
                 GetJSONFormattedValue = QUOTE_CHAR & EscapeJSON(CStr(vValue)) & QUOTE_CHAR
             End If
     End Select

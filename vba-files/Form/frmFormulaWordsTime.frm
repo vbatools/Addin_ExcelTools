@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaWordsTime 
-   Caption         =   "Создание формулы время прописью:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С„РѕСЂРјСѓР»С‹ РІСЂРµРјСЏ РїСЂРѕРїРёСЃСЊСЋ:"
    ClientHeight    =   5940
    ClientLeft      =   120
    ClientTop       =   465
@@ -17,10 +17,10 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-Private Const SKOBKI_VAL1 As String = "(01:01:01 один час одна минута одна секунда)"
-Private Const SKOBKI_VAL2 As String = "01:01:01 (один час одна минута одна секунда)"
-Private Const SKOBKI_VAL3 As String = "(01:01:01) один час одна минута одна секунда"
-Private Const SKOBKI_VAL4 As String = "(один час одна минута одна секунда)"
+Private Const SKOBKI_VAL1 As String = "(01:01:01 РѕРґРёРЅ С‡Р°СЃ РѕРґРЅР° РјРёРЅСѓС‚Р° РѕРґРЅР° СЃРµРєСѓРЅРґР°)"
+Private Const SKOBKI_VAL2 As String = "01:01:01 (РѕРґРёРЅ С‡Р°СЃ РѕРґРЅР° РјРёРЅСѓС‚Р° РѕРґРЅР° СЃРµРєСѓРЅРґР°)"
+Private Const SKOBKI_VAL3 As String = "(01:01:01) РѕРґРёРЅ С‡Р°СЃ РѕРґРЅР° РјРёРЅСѓС‚Р° РѕРґРЅР° СЃРµРєСѓРЅРґР°"
+Private Const SKOBKI_VAL4 As String = "(РѕРґРёРЅ С‡Р°СЃ РѕРґРЅР° РјРёРЅСѓС‚Р° РѕРґРЅР° СЃРµРєСѓРЅРґР°)"
 
 Private Sub btnCancel_Click()
     Unload Me
@@ -31,7 +31,7 @@ Private Sub btnOK_Click()
     MayTime = VBA.TimeSerial(txtHour.TEXT, txtMinute.TEXT, txtSecond.TEXT)
 
     With activeCell
-        .FormulaR1C1 = "=ВРЕМЯПРОПИСЬЮ(" & VBA.Chr$(34) & MayTime & VBA.Chr$(34) & "," & cmbTypeDate.ListIndex + 1 & "," & _
+        .FormulaR1C1 = "=Р’Р Р•РњРЇРџР РћРџРРЎР¬Р®(" & VBA.Chr$(34) & MayTime & VBA.Chr$(34) & "," & cmbTypeDate.ListIndex + 1 & "," & _
                 cmbSkobki.ListIndex & "," & VBA.CBool(chcSkobki.Value) & "," & _
                 cmbRegistr.ListIndex & "," & VBA.CBool(chcDublVal.Value) & ")"
 
@@ -122,20 +122,20 @@ Private Sub TogBtnCherta_Change()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     With cmbTypeDate
-        .AddItem "Часы, минуты, секунды"
-        .AddItem "Часы, минуты"
-        .AddItem "Часы"
+        .AddItem "Р§Р°СЃС‹, РјРёРЅСѓС‚С‹, СЃРµРєСѓРЅРґС‹"
+        .AddItem "Р§Р°СЃС‹, РјРёРЅСѓС‚С‹"
+        .AddItem "Р§Р°СЃС‹"
         .ListIndex = 0
     End With
     With cmbRegistr
-        .AddItem "все строчные"
-        .AddItem "ВСЕ ПРОПИСНЫЕ"
-        .AddItem "Как в предложениях"
-        .AddItem "Начинать С Прописных"
+        .AddItem "РІСЃРµ СЃС‚СЂРѕС‡РЅС‹Рµ"
+        .AddItem "Р’РЎР• РџР РћРџРРЎРќР«Р•"
+        .AddItem "РљР°Рє РІ РїСЂРµРґР»РѕР¶РµРЅРёСЏС…"
+        .AddItem "РќР°С‡РёРЅР°С‚СЊ РЎ РџСЂРѕРїРёСЃРЅС‹С…"
         .ListIndex = 0
     End With
     With cmbSkobki
@@ -164,7 +164,7 @@ Private Sub addFormula()
     If txtHour.TEXT = vbNullString Or txtMinute.TEXT = vbNullString Or txtSecond.TEXT = vbNullString Then Exit Sub
     Dim MayTime     As Date
     MayTime = format(TimeSerial(txtHour.TEXT, txtMinute.TEXT, txtSecond.TEXT), "h:m:s")
-    txtPropis.TEXT = ВРЕМЯПРОПИСЬЮ(MayTime, _
+    txtPropis.TEXT = Р’Р Р•РњРЇРџР РћРџРРЎР¬Р®(MayTime, _
             cmbTypeDate.ListIndex + 1, _
             cmbSkobki.ListIndex, _
             chcSkobki.Value, _

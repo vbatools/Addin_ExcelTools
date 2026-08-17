@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerWBooks 
-   Caption         =   "Менеджер книг:"
+   Caption         =   "РњРµРЅРµРґР¶РµСЂ РєРЅРёРі:"
    ClientHeight    =   7800
    ClientLeft      =   120
    ClientTop       =   465
@@ -18,21 +18,21 @@ Attribute VB_Exposed = False
 Option Explicit
 
 '--------------------------------------------------------------------------------
-' Константы фильтров и отображаемых значений
+' РљРѕРЅСЃС‚Р°РЅС‚С‹ С„РёР»СЊС‚СЂРѕРІ Рё РѕС‚РѕР±СЂР°Р¶Р°РµРјС‹С… Р·РЅР°С‡РµРЅРёР№
 '--------------------------------------------------------------------------------
-' Фильтры списка
-Private Const FILTER_ALL As String = "все"
-Private Const FILTER_NONE As String = "ничего"
-Private Const FILTER_REVERSE As String = "обратное выделение"
-Private Const FILTER_SAVE As String = "сохраненые"
-Private Const FILTER_NOT_SAVE As String = "не сохраненые"
-Private Const FILTER_PROTECT As String = "защищенные"
-Private Const FILTER_NOT_PROTECT As String = "не защищенные"
+' Р¤РёР»СЊС‚СЂС‹ СЃРїРёСЃРєР°
+Private Const FILTER_ALL As String = "РІСЃРµ"
+Private Const FILTER_NONE As String = "РЅРёС‡РµРіРѕ"
+Private Const FILTER_REVERSE As String = "РѕР±СЂР°С‚РЅРѕРµ РІС‹РґРµР»РµРЅРёРµ"
+Private Const FILTER_SAVE As String = "СЃРѕС…СЂР°РЅРµРЅС‹Рµ"
+Private Const FILTER_NOT_SAVE As String = "РЅРµ СЃРѕС…СЂР°РЅРµРЅС‹Рµ"
+Private Const FILTER_PROTECT As String = "Р·Р°С‰РёС‰РµРЅРЅС‹Рµ"
+Private Const FILTER_NOT_PROTECT As String = "РЅРµ Р·Р°С‰РёС‰РµРЅРЅС‹Рµ"
 
 
-Private Const VALUE_SAVED As String = "сохранена"
-Private Const VALUE_NOT_SAVED As String = "не сохранена"
-Private Const VALUE_PROTECT As String = "защита книги"
+Private Const VALUE_SAVED As String = "СЃРѕС…СЂР°РЅРµРЅР°"
+Private Const VALUE_NOT_SAVED As String = "РЅРµ СЃРѕС…СЂР°РЅРµРЅР°"
+Private Const VALUE_PROTECT As String = "Р·Р°С‰РёС‚Р° РєРЅРёРіРё"
 
 Private Sub btnClose_Click()
     If listNames.ListCount - 1 < 0 Then Exit Sub
@@ -98,7 +98,7 @@ Private Sub cmbFilter_Change()
                 Call SelectedItemListSheets(listNames, "*" & .Value & "*", 1)
             End If
         Else
-            ' Оптимизация: Direct access по имени без необходимости предварительной активации
+            ' РћРїС‚РёРјРёР·Р°С†РёСЏ: Direct access РїРѕ РёРјРµРЅРё Р±РµР· РЅРµРѕР±С…РѕРґРёРјРѕСЃС‚Рё РїСЂРµРґРІР°СЂРёС‚РµР»СЊРЅРѕР№ Р°РєС‚РёРІР°С†РёРё
             Call SelectedItemListSheets(listNames, cmbFilter.Value, 1)
         End If
     End With
@@ -110,17 +110,17 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Sub: UserForm_Initialize
-' Purpose: Инициализация формы при запуске. Настраивает расположение, наполняет
-'          списки фильтров и регистров, а также назначает иконки кнопкам из галереи MSO.
+' Purpose: РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С„РѕСЂРјС‹ РїСЂРё Р·Р°РїСѓСЃРєРµ. РќР°СЃС‚СЂР°РёРІР°РµС‚ СЂР°СЃРїРѕР»РѕР¶РµРЅРёРµ, РЅР°РїРѕР»РЅСЏРµС‚
+'          СЃРїРёСЃРєРё С„РёР»СЊС‚СЂРѕРІ Рё СЂРµРіРёСЃС‚СЂРѕРІ, Р° С‚Р°РєР¶Рµ РЅР°Р·РЅР°С‡Р°РµС‚ РёРєРѕРЅРєРё РєРЅРѕРїРєР°Рј РёР· РіР°Р»РµСЂРµРё MSO.
 '--------------------------------------------------------------------------------
 Private Sub UserForm_Initialize()
     Const W         As Byte = 32
     Const h         As Byte = 32
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
-    ' Настройка списка фильтров
+    ' РќР°СЃС‚СЂРѕР№РєР° СЃРїРёСЃРєР° С„РёР»СЊС‚СЂРѕРІ
     With listFilters
         .AddItem FILTER_ALL
         .AddItem FILTER_NONE
@@ -132,7 +132,7 @@ Private Sub UserForm_Initialize()
     End With
 
 
-    ' Назначение иконок кнопкам через CommandBars.GetImageMso
+    ' РќР°Р·РЅР°С‡РµРЅРёРµ РёРєРѕРЅРѕРє РєРЅРѕРїРєР°Рј С‡РµСЂРµР· CommandBars.GetImageMso
     With Application.CommandBars
         Set btnSaveWB.Picture = .GetImageMso("SaveAll", W, h)
         Set btnClose.Picture = .GetImageMso("CancelEditing", W, h)

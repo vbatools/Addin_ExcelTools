@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaConvertRC 
-   Caption         =   "Изменение ссылок в формуле:"
+   Caption         =   "РР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РѕРє РІ С„РѕСЂРјСѓР»Рµ:"
    ClientHeight    =   2850
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* UserForm     :   frmFormulaConvertRC - изменение ссылок в формулах
+'* UserForm     :   frmFormulaConvertRC - РёР·РјРµРЅРµРЅРёРµ СЃСЃС‹Р»РѕРє РІ С„РѕСЂРјСѓР»Р°С…
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   11-06-2026 13:00:52
@@ -35,7 +35,7 @@ End Sub
 
 Private Sub btnOK_Click()
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("Не выбран диапазон данных!", vbCritical)
+        Call MsgBox("РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РґР°РЅРЅС‹С…!", vbCritical)
         Exit Sub
     End If
 
@@ -85,6 +85,6 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub

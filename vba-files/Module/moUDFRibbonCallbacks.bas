@@ -3,12 +3,12 @@ Option Explicit
 Option Private Module
 
 ' ============================================================================ '
-' PROCEDURES FOR RIBBON BUTTONS - PROCEDURES ƒÀﬂ  ÕŒœŒ  À≈Õ“€                  '
+' PROCEDURES FOR RIBBON BUTTONS - PROCEDURES –î–õ–Ø –ö–ù–û–ü–û–ö –õ–ï–ù–¢–´                  '
 ' ============================================================================ '
 
 Private Sub FunctionWizardShow()
     If TypeName(Selection) <> "Range" Then
-        Call MsgBox("¬˚·ËÂÚÂ ˇ˜ÂÈÍÛ!", vbExclamation)
+        Call MsgBox("–í—ã–±–∏—Ä–µ—Ç–µ —è—á–µ–π–∫—É!", vbExclamation)
         Exit Sub
     End If
     If Not Application.Dialogs(xlDialogFunctionWizard).Show Then activeCell.Clear
@@ -22,7 +22,7 @@ End Sub
 Private Sub btnReplaceChars(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=«¿Ã≈Õ»“‹_—»Ã¬ŒÀ€()"
+        Case 7: activeCell.FormulaR1C1 = "=–ó–ê–ú–ï–ù–ò–¢–¨_–°–ò–ú–í–û–õ–´()"
         Case Else: activeCell.FormulaR1C1 = "=REPLACE_CHARS()"
     End Select
     Call FunctionWizardShow
@@ -31,7 +31,7 @@ End Sub
 Private Sub btnTextLeft(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=À≈¬Œ_“≈ —“()"
+        Case 7: activeCell.FormulaR1C1 = "=–õ–ï–í–û_–¢–ï–ö–°–¢()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_LEFT()"
     End Select
     Call FunctionWizardShow
@@ -40,7 +40,7 @@ End Sub
 Private Sub btnTextBetween(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=Ã≈∆ƒ”_“≈ —“()"
+        Case 7: activeCell.FormulaR1C1 = "=–ú–ï–ñ–î–£_–¢–ï–ö–°–¢()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_BETWEEN()"
     End Select
     Call FunctionWizardShow
@@ -49,7 +49,7 @@ End Sub
 Private Sub btnFindReplace(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=Õ¿…“»_«¿Ã≈Õ»“‹()"
+        Case 7: activeCell.FormulaR1C1 = "=–ù–ê–ô–¢–ò_–ó–ê–ú–ï–ù–ò–¢–¨()"
         Case Else: activeCell.FormulaR1C1 = "=FIND_REPLACE()"
     End Select
     Call FunctionWizardShow
@@ -58,7 +58,7 @@ End Sub
 Private Sub btnTextRight(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=œ–¿¬Œ_“≈ —“()"
+        Case 7: activeCell.FormulaR1C1 = "=–ü–†–ê–í–û_–¢–ï–ö–°–¢()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_RIGHT()"
     End Select
     Call FunctionWizardShow
@@ -67,7 +67,7 @@ End Sub
 Private Sub btnSplitString(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=–¿«¡»“‹_—“–Œ ”()"
+        Case 7: activeCell.FormulaR1C1 = "=–†–ê–ó–ë–ò–¢–¨_–°–¢–†–û–ö–£()"
         Case Else: activeCell.FormulaR1C1 = "=SPLIT_STRING()"
     End Select
     Call FunctionWizardShow
@@ -76,7 +76,7 @@ End Sub
 Private Sub btnConcatMulti(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—÷≈œ»“‹_Ã”À‹“»()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–¶–ï–ü–ò–¢–¨_–ú–£–õ–¨–¢–ò()"
         Case Else: activeCell.FormulaR1C1 = "=CONCAT_MULTI()"
     End Select
     Call FunctionWizardShow
@@ -85,7 +85,7 @@ End Sub
 Private Sub btnTextMatchesPattern(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=“≈ —“_—ŒŒ“¬≈“—“¬”≈“_ÿ¿¡ÀŒÕ”()"
+        Case 7: activeCell.FormulaR1C1 = "=–¢–ï–ö–°–¢_–°–û–û–¢–í–ï–¢–°–¢–í–£–ï–¢_–®–ê–ë–õ–û–ù–£()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_MATCHES_PATTERN()"
     End Select
     Call FunctionWizardShow
@@ -94,7 +94,7 @@ End Sub
 Private Sub btnTranslit(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=“–¿Õ—À»“()"
+        Case 7: activeCell.FormulaR1C1 = "=–¢–†–ê–ù–°–õ–ò–¢()"
         Case Else: activeCell.FormulaR1C1 = "=TRANSLIT()"
     End Select
     Call FunctionWizardShow
@@ -103,7 +103,7 @@ End Sub
 Private Sub btnRemoveChars(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=”ƒ¿À»“‹_—»Ã¬ŒÀ€()"
+        Case 7: activeCell.FormulaR1C1 = "=–£–î–ê–õ–ò–¢–¨_–°–ò–ú–í–û–õ–´()"
         Case Else: activeCell.FormulaR1C1 = "=REMOVE_CHARS()"
     End Select
     Call FunctionWizardShow
@@ -116,7 +116,7 @@ End Sub
 Private Sub btnGetComment(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊ ŒÃÃ≈Õ“()"
+        Case 7: activeCell.FormulaR1C1 = "=–ü–û–õ–£–ß–ö–û–ú–ú–ï–ù–¢()"
         Case Else: activeCell.FormulaR1C1 = "=GET_COMMENT()"
     End Select
     Call FunctionWizardShow
@@ -125,7 +125,7 @@ End Sub
 Private Sub btnGetText(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊“≈ —“()"
+        Case 7: activeCell.FormulaR1C1 = "=–ü–û–õ–£–ß–¢–ï–ö–°–¢()"
         Case Else: activeCell.FormulaR1C1 = "=GET_TEXT()"
     End Select
     Call FunctionWizardShow
@@ -134,7 +134,7 @@ End Sub
 Private Sub btnGetNumber(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊◊»—ÀŒ()"
+        Case 7: activeCell.FormulaR1C1 = "=–ü–û–õ–£–ß–ß–ò–°–õ–û()"
         Case Else: activeCell.FormulaR1C1 = "=GET_NUMBER()"
     End Select
     Call FunctionWizardShow
@@ -143,7 +143,7 @@ End Sub
 Private Sub btnFormulaText(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=“≈ —“‘Œ–Ã”À€()"
+        Case 7: activeCell.FormulaR1C1 = "=–¢–ï–ö–°–¢–§–û–†–ú–£–õ–´()"
         Case Else: activeCell.FormulaR1C1 = "=FORMULA_TEXT()"
     End Select
     Call FunctionWizardShow
@@ -156,7 +156,7 @@ End Sub
 Private Sub btnSumByColor(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—”ÃÃ«¿À»¬ ¿()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–£–ú–ú–ó–ê–õ–ò–í–ö–ê()"
         Case Else: activeCell.FormulaR1C1 = "=SUM_BY_COLOR()"
     End Select
     Call FunctionWizardShow
@@ -165,7 +165,7 @@ End Sub
 Private Sub btnSumByFontColor(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—”ÃÃÿ–»‘“()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–£–ú–ú–®–†–ò–§–¢()"
         Case Else: activeCell.FormulaR1C1 = "=SUM_BY_FONT_COLOR()"
     End Select
     Call FunctionWizardShow
@@ -174,7 +174,7 @@ End Sub
 Private Sub btnCountByColor(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—◊≈“«¿À»¬ ¿()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–ß–ï–¢–ó–ê–õ–ò–í–ö–ê()"
         Case Else: activeCell.FormulaR1C1 = "=COUNT_BY_COLOR()"
     End Select
     Call FunctionWizardShow
@@ -183,7 +183,7 @@ End Sub
 Private Sub btnCountByFontColor(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—◊≈“ÿ–»‘“()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–ß–ï–¢–®–†–ò–§–¢()"
         Case Else: activeCell.FormulaR1C1 = "=COUNT_BY_FONT_COLOR()"
     End Select
     Call FunctionWizardShow
@@ -196,7 +196,7 @@ End Sub
 Private Sub btnWorkbookName(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=»Ãﬂ Õ»√»()"
+        Case 7: activeCell.FormulaR1C1 = "=–ò–ú–Ø–ö–ù–ò–ì–ò()"
         Case Else: activeCell.FormulaR1C1 = "=WORKBOOK_NAME()"
     End Select
     Call FunctionWizardShow
@@ -205,7 +205,7 @@ End Sub
 Private Sub btnSheetName(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=»ÃﬂÀ»—“¿()"
+        Case 7: activeCell.FormulaR1C1 = "=–ò–ú–Ø–õ–ò–°–¢–ê()"
         Case Else: activeCell.FormulaR1C1 = "=SHEET_NAME()"
     End Select
     Call FunctionWizardShow
@@ -214,7 +214,7 @@ End Sub
 Private Sub btnUserName(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=»ÃﬂœŒÀ‹«Œ¬¿“≈Àﬂ()"
+        Case 7: activeCell.FormulaR1C1 = "=–ò–ú–Ø–ü–û–õ–¨–ó–û–í–ê–¢–ï–õ–Ø()"
         Case Else: activeCell.FormulaR1C1 = "=USER_NAME()"
     End Select
     Call FunctionWizardShow
@@ -223,7 +223,7 @@ End Sub
 Private Sub btnWorkbookFullPath(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=œŒÀÕ€…œ”“‹ Õ»√»()"
+        Case 7: activeCell.FormulaR1C1 = "=–ü–û–õ–ù–´–ô–ü–£–¢–¨–ö–ù–ò–ì–ò()"
         Case Else: activeCell.FormulaR1C1 = "=WORKBOOK_FULL_PATH()"
     End Select
     Call FunctionWizardShow
@@ -236,7 +236,7 @@ End Sub
 Private Sub btnHasLatin(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=≈À¿“»Õ()"
+        Case 7: activeCell.FormulaR1C1 = "=–ï–õ–ê–¢–ò–ù()"
         Case Else: activeCell.FormulaR1C1 = "=HAS_LATIN()"
     End Select
     Call FunctionWizardShow
@@ -245,7 +245,7 @@ End Sub
 Private Sub btnHasCyrillic(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=≈ »–»ÀÀ()"
+        Case 7: activeCell.FormulaR1C1 = "=–ï–ö–ò–†–ò–õ–õ()"
         Case Else: activeCell.FormulaR1C1 = "=HAS_CYRILLIC()"
     End Select
     Call FunctionWizardShow
@@ -259,7 +259,7 @@ End Sub
 Private Sub btnCreateQR(control As IRibbonControl)
     If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
-        Case 7: activeCell.FormulaR1C1 = "=—Œ«ƒ¿“‹_QR()"
+        Case 7: activeCell.FormulaR1C1 = "=–°–û–ó–î–ê–¢–¨_QR()"
         Case Else: activeCell.FormulaR1C1 = "=CREATE_QR()"
     End Select
     Call FunctionWizardShow

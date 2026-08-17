@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmOtherToolsDeletePasswordWB 
-   Caption         =   "Удаление паролей с книги:"
+   Caption         =   "РЈРґР°Р»РµРЅРёРµ РїР°СЂРѕР»РµР№ СЃ РєРЅРёРіРё:"
    ClientHeight    =   7395
    ClientLeft      =   120
    ClientTop       =   465
@@ -28,7 +28,7 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
     Dim wb          As Workbook
@@ -55,9 +55,9 @@ Private Sub loadDataToList()
         .Clear
         For Each Sh In wb.Worksheets
             .AddItem Sh.Name
-            .List(i, 1) = "нет"
+            .List(i, 1) = "РЅРµС‚"
             If Sh.ProtectContents Then
-                .List(i, 1) = "есть"
+                .List(i, 1) = "РµСЃС‚СЊ"
                 bHaveShProtect = True
             End If
 

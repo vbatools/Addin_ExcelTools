@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmDataAddWorkBooks 
-   Caption         =   "Создание шаблонов книг:"
+   Caption         =   "РЎРѕР·РґР°РЅРёРµ С€Р°Р±Р»РѕРЅРѕРІ РєРЅРёРі:"
    ClientHeight    =   6360
    ClientLeft      =   120
    ClientTop       =   465
@@ -19,7 +19,7 @@ Option Explicit
 
 
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-' UserForm     :   frmDataUniqueValues - создание книг Excel
+' UserForm     :   frmDataUniqueValues - СЃРѕР·РґР°РЅРёРµ РєРЅРёРі Excel
 ' Author       :   VBATools
 ' Copyright    :   Apache License
 ' Created      :   10-06-2026 09:35:59
@@ -28,7 +28,7 @@ Option Explicit
 
 
 ' ============================================================================
-' ОБРАБОТЧИКИ СОБЫТИЙ
+' РћР‘Р РђР‘РћРўР§РРљР РЎРћР‘Р«РўРР™
 ' ============================================================================
 
 Private Sub btnCancel_Click()
@@ -51,22 +51,22 @@ Private Sub btnOK_Click()
 
     On Error GoTo ErrorHandler
 
-    ' --- Создание экземпляра Excel ---
+    ' --- РЎРѕР·РґР°РЅРёРµ СЌРєР·РµРјРїР»СЏСЂР° Excel ---
     Set excelApp = New Excel.Application
     excelApp.DisplayAlerts = False
     excelApp.Visible = False
 
 
-    ' --- Открытие шаблона ---
+    ' --- РћС‚РєСЂС‹С‚РёРµ С€Р°Р±Р»РѕРЅР° ---
     Dim templatePath As String
     templatePath = BuildPath(txtPath.Value, txtWBookName.Value)
 
     Set templateBook = excelApp.Workbooks.Open(templatePath, False, False)
 
-    ' --- Создание книг ---
+    ' --- РЎРѕР·РґР°РЅРёРµ РєРЅРёРі ---
     Call CreateWorkbooks(templateBook, arrNames, txtPath.Value, FileExt, fileFormat)
 
-    ' --- Закрытие шаблона без сохранения ---
+    ' --- Р—Р°РєСЂС‹С‚РёРµ С€Р°Р±Р»РѕРЅР° Р±РµР· СЃРѕС…СЂР°РЅРµРЅРёСЏ ---
     templateBook.Close savechanges:=False
 
 CleanUp:
@@ -78,35 +78,35 @@ CleanUp:
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Ошибка: " & Err.Description, vbCritical, "Ошибка выполнения"
+    MsgBox "РћС€РёР±РєР°: " & Err.Description, vbCritical, "РћС€РёР±РєР° РІС‹РїРѕР»РЅРµРЅРёСЏ"
     Resume CleanUp
 
 End Sub
 
 Private Sub UserForm_Initialize()
 
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 
-    ' --- Инициализация диапазона ---
+    ' --- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РґРёР°РїР°Р·РѕРЅР° ---
     If TypeName(Selection) = "Range" Then
         txtListNameWBook.Value = Selection.Address
     End If
 
-    ' --- Инициализация пути и имени файла ---
+    ' --- РРЅРёС†РёР°Р»РёР·Р°С†РёСЏ РїСѓС‚Рё Рё РёРјРµРЅРё С„Р°Р№Р»Р° ---
     txtWBookName.Value = ActiveWorkbook.Name
     txtPath.Value = ActiveWorkbook.Path & Application.PathSeparator
 
-    ' --- Определение типа файла ---
+    ' --- РћРїСЂРµРґРµР»РµРЅРёРµ С‚РёРїР° С„Р°Р№Р»Р° ---
     Call SelectFileTypeByExtension(ActiveWorkbook.Name)
 
-    ' --- Настройка кнопки выбора диапазона ---
+    ' --- РќР°СЃС‚СЂРѕР№РєР° РєРЅРѕРїРєРё РІС‹Р±РѕСЂР° РґРёР°РїР°Р·РѕРЅР° ---
     Call ConfigureDropButton(txtListNameWBook)
 
 End Sub
 
 ' ============================================================================
-' ОБРАБОТЧИКИ ЭЛЕМЕНТОВ УПРАВЛЕНИЯ
+' РћР‘Р РђР‘РћРўР§РРљР Р­Р›Р•РњР•РќРўРћР’ РЈРџР РђР’Р›Р•РќРРЇ
 ' ============================================================================
 
 Private Sub optActWBook_Change()
@@ -131,14 +131,14 @@ Private Sub optChoseWB_MouseDown(ByVal Button As Integer, ByVal Shift As Integer
 
     If IsEmpty(selectedFile) Then Exit Sub
 
-    ' --- Обновление полей ---
+    ' --- РћР±РЅРѕРІР»РµРЅРёРµ РїРѕР»РµР№ ---
     txtWBookName.Value = GetFileName(CStr(selectedFile))
     txtPath.Value = GetParentFolderName(CStr(selectedFile)) & Application.PathSeparator
 
-    ' --- Автовыбор типа файла ---
+    ' --- РђРІС‚РѕРІС‹Р±РѕСЂ С‚РёРїР° С„Р°Р№Р»Р° ---
     Call SelectFileTypeByExtension(CStr(selectedFile))
 
-    ' --- Снятие выбора с опции активной книги ---
+    ' --- РЎРЅСЏС‚РёРµ РІС‹Р±РѕСЂР° СЃ РѕРїС†РёРё Р°РєС‚РёРІРЅРѕР№ РєРЅРёРіРё ---
     If optActWBook.Value Then optActWBook.Value = False
     optChoseWB.Value = True
 
@@ -168,20 +168,20 @@ Private Sub txtListNameWBook_DropButtonClick()
 End Sub
 
 ' ============================================================================
-' БИЗНЕС-ЛОГИКА
+' Р‘РР—РќР•РЎ-Р›РћР“РРљРђ
 ' ============================================================================
 
 Private Function ValidateInput() As Boolean
 
-    ' --- Проверка диапазона ---
+    ' --- РџСЂРѕРІРµСЂРєР° РґРёР°РїР°Р·РѕРЅР° ---
     If Trim$(txtListNameWBook.Value) = vbNullString Then
-        MsgBox "Не выбран диапазон названий книг!", vbCritical, "Ошибка"
+        MsgBox "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РЅР°Р·РІР°РЅРёР№ РєРЅРёРі!", vbCritical, "РћС€РёР±РєР°"
         Exit Function
     End If
 
-    ' --- Проверка имени файла ---
+    ' --- РџСЂРѕРІРµСЂРєР° РёРјРµРЅРё С„Р°Р№Р»Р° ---
     If Trim$(txtWBookName.Value) = vbNullString Then
-        MsgBox "Не указан файл-шаблон!", vbCritical, "Ошибка"
+        MsgBox "РќРµ СѓРєР°Р·Р°РЅ С„Р°Р№Р»-С€Р°Р±Р»РѕРЅ!", vbCritical, "РћС€РёР±РєР°"
         Exit Function
     End If
 
@@ -198,16 +198,16 @@ Private Function GetNamesArray(ByRef arrNames As Variant) As Boolean
     On Error GoTo 0
 
     If IsEmpty(arrNames) Then
-        MsgBox "Не выбран диапазон названий книг!", vbCritical, "Ошибка"
+        MsgBox "РќРµ РІС‹Р±СЂР°РЅ РґРёР°РїР°Р·РѕРЅ РЅР°Р·РІР°РЅРёР№ РєРЅРёРі!", vbCritical, "РћС€РёР±РєР°"
         Exit Function
     End If
 
-    ' --- Нормализация до массива ---
+    ' --- РќРѕСЂРјР°Р»РёР·Р°С†РёСЏ РґРѕ РјР°СЃСЃРёРІР° ---
     If Not IsArray(arrNames) Then
         arrNames = Array(arrNames)
     End If
 
-    ' --- Удаление пустых значений ---
+    ' --- РЈРґР°Р»РµРЅРёРµ РїСѓСЃС‚С‹С… Р·РЅР°С‡РµРЅРёР№ ---
     arrNames = FilterNonEmpty(arrNames)
 
     GetNamesArray = True
@@ -242,7 +242,7 @@ Private Sub CreateWorkbooks(ByVal templateBook As Workbook, _
 End Sub
 
 ' ============================================================================
-' ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ
+' Р’РЎРџРћРњРћР“РђРўР•Р›Р¬РќР«Р• Р¤РЈРќРљР¦РР
 ' ============================================================================
 
 Private Sub GetFileFormatInfo(ByRef extension As String, ByRef format As XlFileFormat)
@@ -293,7 +293,7 @@ End Function
 Private Sub SelectFolderViaDialog()
 
     With Application.FileDialog(msoFileDialogFolderPicker)
-        .ButtonName = "Выбрать"
+        .ButtonName = "Р’С‹Р±СЂР°С‚СЊ"
         .Title = NAME_ADDIN
         .InitialFileName = ActiveWorkbook.Path
 

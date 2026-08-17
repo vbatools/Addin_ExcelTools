@@ -9,7 +9,7 @@ Option Private Module
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 ' ============================================
-' КОНСТАНТЫ СИГНАТУР ФАЙЛОВ
+' РљРћРќРЎРўРђРќРўР« РЎРР“РќРђРўРЈР  Р¤РђР™Р›РћР’
 ' ============================================
 Private Const SIG_PK_ZIP As String = "504B0304"
 Private Const SIG_RAR As String = "52617221"
@@ -21,7 +21,7 @@ Private Const SIG_GIF As String = "47494638"
 Private Const SIG_OLE2 As String = "D0CF11E0"
 
 ' ============================================
-' КОНСТАНТЫ РАСШИРЕНИЙ ФАЙЛОВ
+' РљРћРќРЎРўРђРќРўР« Р РђРЎРЁРР Р•РќРР™ Р¤РђР™Р›РћР’
 ' ============================================
 Private Const EXT_ZIP As String = ".zip"
 Private Const EXT_RAR As String = ".rar"
@@ -40,14 +40,14 @@ Private Const EXT_OLE As String = ".ole"
 Private Const EXT_BIN As String = ".bin"
 
 ' ============================================
-' КОНСТАНТЫ ПОИСКА
+' РљРћРќРЎРўРђРќРўР« РџРћРРЎРљРђ
 ' ============================================
 Private Const MAX_OLE_HEADER_SIZE As Long = 5000
 Private Const MAX_ZIP_TYPE_SEARCH As Long = 2000
 Private Const MAX_OLE_CONTENT_SEARCH As Long = 100000
 
 ' ============================================
-' КОНСТАНТЫ ДЛЯ АРХИВАТОРОВ
+' РљРћРќРЎРўРђРќРўР« Р”Р›РЇ РђР РҐРР’РђРўРћР РћР’
 ' ============================================
 Private Const PATH_7ZIP As String = "C:\Program Files\7-Zip\7z.exe"
 Private Const PATH_7ZIP_X86 As String = "C:\Program Files (x86)\7-Zip\7z.exe"
@@ -55,7 +55,7 @@ Private Const PATH_WINRAR As String = "C:\Program Files\WinRAR\WinRAR.exe"
 Private Const PATH_WINRAR_X86 As String = "C:\Program Files (x86)\WinRAR\WinRAR.exe"
 
 ' ============================================
-' ГЛАВНАЯ ПРОЦЕДУРА ИЗВЛЕЧЕНИЯ ФАЙЛОВ
+' Р“Р›РђР’РќРђРЇ РџР РћР¦Р•Р”РЈР Рђ РР—Р’Р›Р•Р§Р•РќРРЇ Р¤РђР™Р›РћР’
 ' ============================================
 Public Sub FileExtractorFromExcelFile()
     Dim arrFiles()  As String
@@ -69,11 +69,11 @@ Public Sub FileExtractorFromExcelFile()
 
     On Error GoTo ErrorHandler
 
-    ' Получаем список файлов через диалог
+    ' РџРѕР»СѓС‡Р°РµРј СЃРїРёСЃРѕРє С„Р°Р№Р»РѕРІ С‡РµСЂРµР· РґРёР°Р»РѕРі
     arrFiles = FileDialogFun(ActiveWorkbook.Path, False, TYPE_FILES)
     If (Not (Not (arrFiles))) = 0 Then Exit Sub
 
-    ' Инициализируем архивный менеджер
+    ' РРЅРёС†РёР°Р»РёР·РёСЂСѓРµРј Р°СЂС…РёРІРЅС‹Р№ РјРµРЅРµРґР¶РµСЂ
     Set clsZIP = New clsOfficeArchiveManager
 
     With clsZIP
@@ -85,7 +85,7 @@ Public Sub FileExtractorFromExcelFile()
 
             If IsEmpty(arrFilesTable) Then GoTo CleanUp
 
-            ' Создаём папку для извлечённых файлов
+            ' РЎРѕР·РґР°С‘Рј РїР°РїРєСѓ РґР»СЏ РёР·РІР»РµС‡С‘РЅРЅС‹С… С„Р°Р№Р»РѕРІ
             Set oFSO = CreateObject("Scripting.FileSystemObject")
             sPathExtractFiles = BuildExtractPath(GetParentFolderName(arrFiles(1, 1)), GetBaseName(arrFiles(1, 1)))
 
@@ -95,7 +95,7 @@ Public Sub FileExtractorFromExcelFile()
 
             sPathExtractFiles = sPathExtractFiles & Application.PathSeparator
 
-            ' Извлекаем файлы
+            ' РР·РІР»РµРєР°РµРј С„Р°Р№Р»С‹
             For lI = 1 To UBound(arrFilesTable, 1)
                 sFullNameFile = arrFilesTable(lI, 2)
                 If VBA.LCase$(GetExtensionName(sFullNameFile)) = "bin" Then
@@ -113,18 +113,18 @@ Public Sub FileExtractorFromExcelFile()
 CleanUp:
     Set oFSO = Nothing
     Set clsZIP = Nothing
-    If UBound(arrFilesTable) > -1 Then Call MsgBox("Файлы извлечены!", vbInformation)
+    If UBound(arrFilesTable) > -1 Then Call MsgBox("Р¤Р°Р№Р»С‹ РёР·РІР»РµС‡РµРЅС‹!", vbInformation)
     Exit Sub
 
 ErrorHandler:
-    MsgBox "Ошибка при извлечении файлов:" & vbCrLf & _
-            "Номер: " & Err.Number & vbCrLf & _
-            "Описание: " & Err.Description, vbCritical, "FileExtractorFromExcelFile"
+    MsgBox "РћС€РёР±РєР° РїСЂРё РёР·РІР»РµС‡РµРЅРёРё С„Р°Р№Р»РѕРІ:" & vbCrLf & _
+            "РќРѕРјРµСЂ: " & Err.Number & vbCrLf & _
+            "РћРїРёСЃР°РЅРёРµ: " & Err.Description, vbCritical, "FileExtractorFromExcelFile"
     Resume CleanUp
 End Sub
 
 ' ============================================
-' ФОРМИРОВАНИЕ ПУТИ ДЛЯ ИЗВЛЕЧЕНИЯ
+' Р¤РћР РњРР РћР’РђРќРР• РџРЈРўР Р”Р›РЇ РР—Р’Р›Р•Р§Р•РќРРЇ
 ' ============================================
 Private Function BuildExtractPath(ByVal sPath As String, ByVal sFileName As String) As String
     BuildExtractPath = sPath & Application.PathSeparator & _
@@ -132,7 +132,7 @@ Private Function BuildExtractPath(ByVal sPath As String, ByVal sFileName As Stri
 End Function
 
 ' ============================================
-' КОНВЕРТАЦИЯ BIN В ИСХОДНЫЙ ФОРМАТ
+' РљРћРќР’Р•Р РўРђР¦РРЇ BIN Р’ РРЎРҐРћР”РќР«Р™ Р¤РћР РњРђРў
 ' ============================================
 Public Sub ConvertBinToFile(ByVal sBinPath As String, _
         ByVal sDestPath As String, _
@@ -148,10 +148,10 @@ Public Sub ConvertBinToFile(ByVal sBinPath As String, _
 
     On Error GoTo ErrorHandler
 
-    ' Проверка существования исходного файла
+    ' РџСЂРѕРІРµСЂРєР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёСЏ РёСЃС…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
     If Not oFSO.FileExists(sBinPath) Then Exit Sub
 
-    ' Читаем .bin файл в байтовый массив
+    ' Р§РёС‚Р°РµРј .bin С„Р°Р№Р» РІ Р±Р°Р№С‚РѕРІС‹Р№ РјР°СЃСЃРёРІ
     Set oStream = CreateObject("ADODB.Stream")
 
     With oStream
@@ -162,40 +162,40 @@ Public Sub ConvertBinToFile(ByVal sBinPath As String, _
         .Close
     End With
 
-    ' Проверяем, является ли файл OLE-контейнером
+    ' РџСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё С„Р°Р№Р» OLE-РєРѕРЅС‚РµР№РЅРµСЂРѕРј
     bIsOleContainer = CheckSignature(aFileBytes, 0, SIG_OLE2)
 
     If bIsOleContainer Then
-        ' Извлекаем содержимое из OLE-контейнера
+        ' РР·РІР»РµРєР°РµРј СЃРѕРґРµСЂР¶РёРјРѕРµ РёР· OLE-РєРѕРЅС‚РµР№РЅРµСЂР°
         aOutBytes = ExtractFromOleContainer(aFileBytes, sExt)
 
-        ' Если не удалось извлечь - сохраняем как OLE
+        ' Р•СЃР»Рё РЅРµ СѓРґР°Р»РѕСЃСЊ РёР·РІР»РµС‡СЊ - СЃРѕС…СЂР°РЅСЏРµРј РєР°Рє OLE
         If StrPtr(sExt) = 0 Then
             sExt = EXT_OLE
             aOutBytes = aFileBytes
         End If
     Else
-        ' Ищем начало встроенных данных
+        ' РС‰РµРј РЅР°С‡Р°Р»Рѕ РІСЃС‚СЂРѕРµРЅРЅС‹С… РґР°РЅРЅС‹С…
         lStartPos = FindEmbeddedData(aFileBytes)
 
         If lStartPos >= 0 Then
-            ' Определяем расширение по сигнатуре
+            ' РћРїСЂРµРґРµР»СЏРµРј СЂР°СЃС€РёСЂРµРЅРёРµ РїРѕ СЃРёРіРЅР°С‚СѓСЂРµ
             sExt = DetectFileExtension(aFileBytes, lStartPos)
 
-            ' Создаём массив байтов без OLE-заголовка
+            ' РЎРѕР·РґР°С‘Рј РјР°СЃСЃРёРІ Р±Р°Р№С‚РѕРІ Р±РµР· OLE-Р·Р°РіРѕР»РѕРІРєР°
             aOutBytes = ExtractBytes(aFileBytes, lStartPos)
         Else
-            ' Неизвестный формат
+            ' РќРµРёР·РІРµСЃС‚РЅС‹Р№ С„РѕСЂРјР°С‚
             sExt = EXT_BIN
             aOutBytes = aFileBytes
         End If
     End If
 
-    ' Формируем имя выходного файла
+    ' Р¤РѕСЂРјРёСЂСѓРµРј РёРјСЏ РІС‹С…РѕРґРЅРѕРіРѕ С„Р°Р№Р»Р°
     sBaseName = oFSO.GetBaseName(sBinPath)
     sOutPath = BuildOutputPath(sDestPath, sBaseName, sExt, oFSO)
 
-    ' Сохраняем файл
+    ' РЎРѕС…СЂР°РЅСЏРµРј С„Р°Р№Р»
     With oStream
         .Type = 1
         .Open
@@ -216,7 +216,7 @@ ErrorHandler:
 End Sub
 
 ' ============================================
-' ИЗВЛЕЧЕНИЕ ДАННЫХ ИЗ OLE-КОНТЕЙНЕРА
+' РР—Р’Р›Р•Р§Р•РќРР• Р”РђРќРќР«РҐ РР— OLE-РљРћРќРўР•Р™РќР•Р Рђ
 ' ============================================
 Private Function ExtractFromOleContainer(ByRef aBytes() As Byte, ByRef sOutExt As String) As Byte()
     Dim lI          As Long
@@ -229,8 +229,8 @@ Private Function ExtractFromOleContainer(ByRef aBytes() As Byte, ByRef sOutExt A
     lBoundArr = UBound(aBytes)
     lMaxSearch = IIf(lBoundArr > MAX_OLE_CONTENT_SEARCH, MAX_OLE_CONTENT_SEARCH, lBoundArr)
 
-    ' Ищем сигнатуры файлов внутри OLE-контейнера
-    For lI = 512 To lMaxSearch - 4  ' Пропускаем заголовок OLE (минимум 512 байт)
+    ' РС‰РµРј СЃРёРіРЅР°С‚СѓСЂС‹ С„Р°Р№Р»РѕРІ РІРЅСѓС‚СЂРё OLE-РєРѕРЅС‚РµР№РЅРµСЂР°
+    For lI = 512 To lMaxSearch - 4  ' РџСЂРѕРїСѓСЃРєР°РµРј Р·Р°РіРѕР»РѕРІРѕРє OLE (РјРёРЅРёРјСѓРј 512 Р±Р°Р№С‚)
         ' PDF
         If CheckSignature(aBytes, lI, SIG_PDF) Then
             lFoundPos = lI
@@ -281,19 +281,19 @@ Private Function ExtractFromOleContainer(ByRef aBytes() As Byte, ByRef sOutExt A
         End If
     Next lI
 
-    ' Если нашли сигнатуру - извлекаем данные
+    ' Р•СЃР»Рё РЅР°С€Р»Рё СЃРёРіРЅР°С‚СѓСЂСѓ - РёР·РІР»РµРєР°РµРј РґР°РЅРЅС‹Рµ
     If StrPtr(sOutExt) <> 0 And lFoundPos >= 0 Then
         aResult = ExtractBytesFromOle(aBytes, lFoundPos)
         ExtractFromOleContainer = aResult
     Else
-        ' Возвращаем исходные данные
+        ' Р’РѕР·РІСЂР°С‰Р°РµРј РёСЃС…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ
         ExtractFromOleContainer = aBytes
         sOutExt = EXT_OLE
     End If
 End Function
 
 ' ============================================
-' ИЗВЛЕЧЕНИЕ БАЙТОВ ИЗ OLE С УЧЁТОМ РАЗМЕРА
+' РР—Р’Р›Р•Р§Р•РќРР• Р‘РђР™РўРћР’ РР— OLE РЎ РЈР§РЃРўРћРњ Р РђР—РњР•Р Рђ
 ' ============================================
 Private Function ExtractBytesFromOle(ByRef aSource() As Byte, ByVal lStartPos As Long) As Byte()
     Dim lOutSize    As Long
@@ -302,7 +302,7 @@ Private Function ExtractBytesFromOle(ByRef aSource() As Byte, ByVal lStartPos As
     Dim lJ          As Long
     Dim lEndPos     As Long
 
-    ' Пытаемся найти конец данных по сигнатуре или по размеру
+    ' РџС‹С‚Р°РµРјСЃСЏ РЅР°Р№С‚Рё РєРѕРЅРµС† РґР°РЅРЅС‹С… РїРѕ СЃРёРіРЅР°С‚СѓСЂРµ РёР»Рё РїРѕ СЂР°Р·РјРµСЂСѓ
     lEndPos = FindDataEnd(aSource, lStartPos)
 
     If lEndPos > lStartPos Then
@@ -325,7 +325,7 @@ Private Function ExtractBytesFromOle(ByRef aSource() As Byte, ByVal lStartPos As
 End Function
 
 ' ============================================
-' ПОИСК КОНЦА ДАННЫХ В OLE
+' РџРћРРЎРљ РљРћРќР¦Рђ Р”РђРќРќР«РҐ Р’ OLE
 ' ============================================
 Private Function FindDataEnd(ByRef aBytes() As Byte, ByVal lStartPos As Long) As Long
     Dim lI          As Long
@@ -335,11 +335,11 @@ Private Function FindDataEnd(ByRef aBytes() As Byte, ByVal lStartPos As Long) As
     lBoundArr = UBound(aBytes)
     lZeroCount = 0
 
-    ' Ищем серию нулей (признак конца данных)
-    For lI = lStartPos + 100 To lBoundArr  ' Минимум 100 байт данных
+    ' РС‰РµРј СЃРµСЂРёСЋ РЅСѓР»РµР№ (РїСЂРёР·РЅР°Рє РєРѕРЅС†Р° РґР°РЅРЅС‹С…)
+    For lI = lStartPos + 100 To lBoundArr  ' РњРёРЅРёРјСѓРј 100 Р±Р°Р№С‚ РґР°РЅРЅС‹С…
         If aBytes(lI) = 0 Then
             lZeroCount = lZeroCount + 1
-            ' 16 нулей подряд - вероятный конец данных
+            ' 16 РЅСѓР»РµР№ РїРѕРґСЂСЏРґ - РІРµСЂРѕСЏС‚РЅС‹Р№ РєРѕРЅРµС† РґР°РЅРЅС‹С…
             If lZeroCount >= 16 Then
                 FindDataEnd = lI - lZeroCount
                 Exit Function
@@ -353,7 +353,7 @@ Private Function FindDataEnd(ByRef aBytes() As Byte, ByVal lStartPos As Long) As
 End Function
 
 ' ============================================
-' ИЗВЛЕЧЕНИЕ БАЙТОВ БЕЗ OLE-ЗАГОЛОВКА
+' РР—Р’Р›Р•Р§Р•РќРР• Р‘РђР™РўРћР’ Р‘Р•Р— OLE-Р—РђР“РћР›РћР’РљРђ
 ' ============================================
 Private Function ExtractBytes(ByRef aSource() As Byte, ByVal lStartPos As Long) As Byte()
     Dim lOutSize    As Long
@@ -374,7 +374,7 @@ Private Function ExtractBytes(ByRef aSource() As Byte, ByVal lStartPos As Long) 
 End Function
 
 ' ============================================
-' ФОРМИРОВАНИЕ УНИКАЛЬНОГО ПУТИ ВЫХОДНОГО ФАЙЛА
+' Р¤РћР РњРР РћР’РђРќРР• РЈРќРРљРђР›Р¬РќРћР“Рћ РџРЈРўР Р’Р«РҐРћР”РќРћР“Рћ Р¤РђР™Р›Рђ
 ' ============================================
 Private Function BuildOutputPath(ByVal sDestPath As String, _
         ByVal sBaseName As String, _
@@ -392,7 +392,7 @@ Private Function BuildOutputPath(ByVal sDestPath As String, _
 End Function
 
 ' ============================================
-' ПОИСК НАЧАЛА ВСТРОЕННЫХ ДАННЫХ
+' РџРћРРЎРљ РќРђР§РђР›Рђ Р’РЎРўР РћР•РќРќР«РҐ Р”РђРќРќР«РҐ
 ' ============================================
 Private Function FindEmbeddedData(ByRef aBytes() As Byte) As Long
     Dim lI          As Long
@@ -402,7 +402,7 @@ Private Function FindEmbeddedData(ByRef aBytes() As Byte) As Long
     lBoundArr = UBound(aBytes)
     lMaxSearch = IIf(lBoundArr > MAX_OLE_HEADER_SIZE, MAX_OLE_HEADER_SIZE, lBoundArr)
 
-    ' Минимальный размер для проверки сигнатуры
+    ' РњРёРЅРёРјР°Р»СЊРЅС‹Р№ СЂР°Р·РјРµСЂ РґР»СЏ РїСЂРѕРІРµСЂРєРё СЃРёРіРЅР°С‚СѓСЂС‹
     If lMaxSearch < 4 Then
         FindEmbeddedData = -1
         Exit Function
@@ -451,14 +451,14 @@ Private Function FindEmbeddedData(ByRef aBytes() As Byte) As Long
             Exit Function
         End If
 
-        ' OLE2 - пропускаем, обрабатываем отдельно
+        ' OLE2 - РїСЂРѕРїСѓСЃРєР°РµРј, РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј РѕС‚РґРµР»СЊРЅРѕ
     Next lI
 
     FindEmbeddedData = -1
 End Function
 
 ' ============================================
-' ПРОВЕРКА СИГНАТУРЫ ФАЙЛА
+' РџР РћР’Р•Р РљРђ РЎРР“РќРђРўРЈР Р« Р¤РђР™Р›Рђ
 ' ============================================
 Private Function CheckSignature(ByRef aBytes() As Byte, _
         ByVal lPos As Long, _
@@ -480,10 +480,10 @@ Private Function CheckSignature(ByRef aBytes() As Byte, _
 End Function
 
 ' ============================================
-' ОПРЕДЕЛЕНИЕ РАСШИРЕНИЯ ФАЙЛА ПО СИГНАТУРЕ
+' РћРџР Р•Р”Р•Р›Р•РќРР• Р РђРЎРЁРР Р•РќРРЇ Р¤РђР™Р›Рђ РџРћ РЎРР“РќРђРўРЈР Р•
 ' ============================================
 Private Function DetectFileExtension(ByRef aBytes() As Byte, ByVal lStartPos As Long) As String
-    ' ZIP (также DOCX, XLSX, PPTX)
+    ' ZIP (С‚Р°РєР¶Рµ DOCX, XLSX, PPTX)
     If CheckSignature(aBytes, lStartPos, SIG_PK_ZIP) Then
         DetectFileExtension = DetectZipType(aBytes, lStartPos)
         Exit Function
@@ -531,12 +531,12 @@ Private Function DetectFileExtension(ByRef aBytes() As Byte, ByVal lStartPos As 
         Exit Function
     End If
 
-    ' По умолчанию
+    ' РџРѕ СѓРјРѕР»С‡Р°РЅРёСЋ
     DetectFileExtension = EXT_BIN
 End Function
 
 ' ============================================
-' ОПРЕДЕЛЕНИЕ ТИПА OFFICE ВНУТРИ ZIP
+' РћРџР Р•Р”Р•Р›Р•РќРР• РўРРџРђ OFFICE Р’РќРЈРўР Р ZIP
 ' ============================================
 Private Function DetectZipType(ByRef aBytes() As Byte, ByVal lStartPos As Long) As String
     Dim lI          As Long
@@ -572,7 +572,7 @@ Private Function DetectZipType(ByRef aBytes() As Byte, ByVal lStartPos As Long) 
 End Function
 
 ' ============================================
-' ОПРЕДЕЛЕНИЕ ТИПА OLE2 (xls, doc, ppt)
+' РћРџР Р•Р”Р•Р›Р•РќРР• РўРРџРђ OLE2 (xls, doc, ppt)
 ' ============================================
 Private Function DetectOle2Type(ByRef aBytes() As Byte, ByVal lStartPos As Long) As String
     Dim lI          As Long
@@ -615,12 +615,12 @@ Private Function DetectOle2Type(ByRef aBytes() As Byte, ByVal lStartPos As Long)
         End If
     Next lI
 
-    ' Если тип не определён — используем универсальное расширение
+    ' Р•СЃР»Рё С‚РёРї РЅРµ РѕРїСЂРµРґРµР»С‘РЅ вЂ” РёСЃРїРѕР»СЊР·СѓРµРј СѓРЅРёРІРµСЂСЃР°Р»СЊРЅРѕРµ СЂР°СЃС€РёСЂРµРЅРёРµ
     DetectOle2Type = EXT_OLE
 End Function
 
 ' ============================================
-' РАСПАКОВКА ВСЕХ АРХИВОВ В ПАПКЕ
+' Р РђРЎРџРђРљРћР’РљРђ Р’РЎР•РҐ РђР РҐРР’РћР’ Р’ РџРђРџРљР•
 ' ============================================
 Private Sub UnpackAllArchives(ByVal sFolderPath As String, ByRef oFSO As Object)
     Dim oFolder     As Object
@@ -638,7 +638,7 @@ Private Sub UnpackAllArchives(ByVal sFolderPath As String, ByRef oFSO As Object)
 
     Set oFiles = oFolder.Files
 
-    ' Проходим по всем файлам в папке
+    ' РџСЂРѕС…РѕРґРёРј РїРѕ РІСЃРµРј С„Р°Р№Р»Р°Рј РІ РїР°РїРєРµ
     For Each oFile In oFiles
         sExt = LCase$(oFSO.GetExtensionName(oFile.Path))
         sArchivePath = oFile.Path
@@ -656,7 +656,7 @@ Private Sub UnpackAllArchives(ByVal sFolderPath As String, ByRef oFSO As Object)
                 bUnpacked = Unpack7z(sArchivePath, sFolderPath, oFSO)
         End Select
 
-        ' Удаляем архив после успешной распаковки
+        ' РЈРґР°Р»СЏРµРј Р°СЂС…РёРІ РїРѕСЃР»Рµ СѓСЃРїРµС€РЅРѕР№ СЂР°СЃРїР°РєРѕРІРєРё
         If bUnpacked Then
             On Error Resume Next
             oFSO.DeleteFile sArchivePath, True
@@ -664,7 +664,7 @@ Private Sub UnpackAllArchives(ByVal sFolderPath As String, ByRef oFSO As Object)
         End If
     Next oFile
 
-    ' Рекурсивно проверяем подпапки на наличие архивов
+    ' Р РµРєСѓСЂСЃРёРІРЅРѕ РїСЂРѕРІРµСЂСЏРµРј РїРѕРґРїР°РїРєРё РЅР° РЅР°Р»РёС‡РёРµ Р°СЂС…РёРІРѕРІ
     Dim oSubFolder  As Object
     For Each oSubFolder In oFolder.SubFolders
         UnpackAllArchives oSubFolder.Path & Application.PathSeparator, oFSO
@@ -672,7 +672,7 @@ Private Sub UnpackAllArchives(ByVal sFolderPath As String, ByRef oFSO As Object)
 End Sub
 
 ' ============================================
-' РАСПАКОВКА ZIP (через Shell.Application)
+' Р РђРЎРџРђРљРћР’РљРђ ZIP (С‡РµСЂРµР· Shell.Application)
 ' ============================================
 Private Function UnpackZip(ByVal sZipPath As String, _
         ByVal sDestPath As String, _
@@ -688,20 +688,20 @@ Private Function UnpackZip(ByVal sZipPath As String, _
 
     UnpackZip = False
 
-    ' Проверяем существование архива
+    ' РџСЂРѕРІРµСЂСЏРµРј СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Р°СЂС…РёРІР°
     If Not oFSO.FileExists(sZipPath) Then Exit Function
 
-    ' Создаём папку для распаковки
+    ' РЎРѕР·РґР°С‘Рј РїР°РїРєСѓ РґР»СЏ СЂР°СЃРїР°РєРѕРІРєРё
     sDestFolder = sDestPath & oFSO.GetBaseName(sZipPath)
 
     If Not oFSO.FolderExists(sDestFolder) Then
         oFSO.CreateFolder sDestFolder
     End If
 
-    ' Используем Shell.Application для распаковки
+    ' РСЃРїРѕР»СЊР·СѓРµРј Shell.Application РґР»СЏ СЂР°СЃРїР°РєРѕРІРєРё
     Set oShell = CreateObject("Shell.Application")
 
-    ' Ожидание освобождения файла
+    ' РћР¶РёРґР°РЅРёРµ РѕСЃРІРѕР±РѕР¶РґРµРЅРёСЏ С„Р°Р№Р»Р°
     For lRetry = 1 To 10
         On Error Resume Next
         Set oZipFile = oShell.Namespace(sZipPath)
@@ -720,10 +720,10 @@ Private Function UnpackZip(ByVal sZipPath As String, _
     Set oItems = oZipFile.Items
     If oItems.Count = 0 Then Exit Function
 
-    ' Копируем все файлы из архива
-    oDestFolder.CopyHere oItems, 4 + 16    ' Скрытое + Да для всех
+    ' РљРѕРїРёСЂСѓРµРј РІСЃРµ С„Р°Р№Р»С‹ РёР· Р°СЂС…РёРІР°
+    oDestFolder.CopyHere oItems, 4 + 16    ' РЎРєСЂС‹С‚РѕРµ + Р”Р° РґР»СЏ РІСЃРµС…
 
-    ' Ожидание завершения распаковки
+    ' РћР¶РёРґР°РЅРёРµ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°СЃРїР°РєРѕРІРєРё
     Call WaitForExtraction(sDestFolder, oItems.Count, oFSO)
 
     UnpackZip = True
@@ -740,7 +740,7 @@ ErrorHandler:
 End Function
 
 ' ============================================
-' РАСПАКОВКА RAR (через WinRAR или 7-Zip)
+' Р РђРЎРџРђРљРћР’РљРђ RAR (С‡РµСЂРµР· WinRAR РёР»Рё 7-Zip)
 ' ============================================
 Private Function UnpackRar(ByVal sRarPath As String, _
         ByVal sDestPath As String, _
@@ -754,39 +754,39 @@ Private Function UnpackRar(ByVal sRarPath As String, _
 
     UnpackRar = False
 
-    ' Проверяем существование архива
+    ' РџСЂРѕРІРµСЂСЏРµРј СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Р°СЂС…РёРІР°
     If Not oFSO.FileExists(sRarPath) Then Exit Function
 
-    ' Создаём папку для распаковки
+    ' РЎРѕР·РґР°С‘Рј РїР°РїРєСѓ РґР»СЏ СЂР°СЃРїР°РєРѕРІРєРё
     sDestFolder = sDestPath
 
     If Not oFSO.FolderExists(sDestFolder) Then
         oFSO.CreateFolder sDestFolder
     End If
 
-    ' Определяем путь к архиватору
+    ' РћРїСЂРµРґРµР»СЏРµРј РїСѓС‚СЊ Рє Р°СЂС…РёРІР°С‚РѕСЂСѓ
     sExePath = GetArchiverPath("rar")
     If sExePath = vbNullString Then
-        ' Пробуем через 7-Zip
+        ' РџСЂРѕР±СѓРµРј С‡РµСЂРµР· 7-Zip
         sExePath = GetArchiverPath("7z")
     End If
 
     If sExePath = vbNullString Then
-        Debug.Print "Архиватор для RAR не найден"
+        Debug.Print "РђСЂС…РёРІР°С‚РѕСЂ РґР»СЏ RAR РЅРµ РЅР°Р№РґРµРЅ"
         Exit Function
     End If
 
-    ' Формируем командную строку
+    ' Р¤РѕСЂРјРёСЂСѓРµРј РєРѕРјР°РЅРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
     sCmd = """" & sExePath & """ x -y -o+ """ & sRarPath & """ """ & sDestFolder & """"
 
-    ' Выполняем распаковку
+    ' Р’С‹РїРѕР»РЅСЏРµРј СЂР°СЃРїР°РєРѕРІРєСѓ
     lResult = Shell(sCmd, vbHide)
 
-    ' Ожидание завершения (простейший вариант)
+    ' РћР¶РёРґР°РЅРёРµ Р·Р°РІРµСЂС€РµРЅРёСЏ (РїСЂРѕСЃС‚РµР№С€РёР№ РІР°СЂРёР°РЅС‚)
     Call Sleep(500)
     Call WaitForProcess(lResult)
 
-    ' Проверяем результат
+    ' РџСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚
     UnpackRar = True
 
     Exit Function
@@ -796,7 +796,7 @@ ErrorHandler:
 End Function
 
 ' ============================================
-' РАСПАКОВКА 7Z (через 7-Zip)
+' Р РђРЎРџРђРљРћР’РљРђ 7Z (С‡РµСЂРµР· 7-Zip)
 ' ============================================
 Private Function Unpack7z(ByVal s7zPath As String, _
         ByVal sDestPath As String, _
@@ -810,35 +810,35 @@ Private Function Unpack7z(ByVal s7zPath As String, _
 
     Unpack7z = False
 
-    ' Проверяем существование архива
+    ' РџСЂРѕРІРµСЂСЏРµРј СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ Р°СЂС…РёРІР°
     If Not oFSO.FileExists(s7zPath) Then Exit Function
 
-    ' Создаём папку для распаковки
+    ' РЎРѕР·РґР°С‘Рј РїР°РїРєСѓ РґР»СЏ СЂР°СЃРїР°РєРѕРІРєРё
     sDestFolder = sDestPath & oFSO.GetBaseName(s7zPath)
 
     If Not oFSO.FolderExists(sDestFolder) Then
         oFSO.CreateFolder sDestFolder
     End If
 
-    ' Определяем путь к 7-Zip
+    ' РћРїСЂРµРґРµР»СЏРµРј РїСѓС‚СЊ Рє 7-Zip
     sExePath = GetArchiverPath("7z")
 
     If sExePath = vbNullString Then
-        Debug.Print "7-Zip не найден"
+        Debug.Print "7-Zip РЅРµ РЅР°Р№РґРµРЅ"
         Exit Function
     End If
 
-    ' Формируем командную строку
+    ' Р¤РѕСЂРјРёСЂСѓРµРј РєРѕРјР°РЅРґРЅСѓСЋ СЃС‚СЂРѕРєСѓ
     sCmd = """" & sExePath & """ x -y -o""" & sDestFolder & """ """ & s7zPath & """"
 
-    ' Выполняем распаковку
+    ' Р’С‹РїРѕР»РЅСЏРµРј СЂР°СЃРїР°РєРѕРІРєСѓ
     lResult = Shell(sCmd, vbHide)
 
-    ' Ожидание завершения
+    ' РћР¶РёРґР°РЅРёРµ Р·Р°РІРµСЂС€РµРЅРёСЏ
     Call Sleep(500)
     Call WaitForProcess(lResult)
 
-    ' Проверяем результат
+    ' РџСЂРѕРІРµСЂСЏРµРј СЂРµР·СѓР»СЊС‚Р°С‚
     Unpack7z = True
 
     Exit Function
@@ -848,7 +848,7 @@ ErrorHandler:
 End Function
 
 ' ============================================
-' ПОЛУЧЕНИЕ ПУТИ К АРХИВАТОРУ
+' РџРћР›РЈР§Р•РќРР• РџРЈРўР Рљ РђР РҐРР’РђРўРћР РЈ
 ' ============================================
 Private Function GetArchiverPath(ByVal sType As String) As String
     Dim oFSO        As Object
@@ -860,13 +860,13 @@ Private Function GetArchiverPath(ByVal sType As String) As String
 
     Select Case LCase$(sType)
         Case "7z"
-            ' Проверяем разные варианты расположения 7-Zip
+            ' РџСЂРѕРІРµСЂСЏРµРј СЂР°Р·РЅС‹Рµ РІР°СЂРёР°РЅС‚С‹ СЂР°СЃРїРѕР»РѕР¶РµРЅРёСЏ 7-Zip
             If oFSO.FileExists(PATH_7ZIP) Then
                 GetArchiverPath = PATH_7ZIP
             ElseIf oFSO.FileExists(PATH_7ZIP_X86) Then
                 GetArchiverPath = PATH_7ZIP_X86
             Else
-                ' Пробуем найти через PATH
+                ' РџСЂРѕР±СѓРµРј РЅР°Р№С‚Рё С‡РµСЂРµР· PATH
                 sPath = Environ$("ProgramFiles") & "\7-Zip\7z.exe"
                 If oFSO.FileExists(sPath) Then
                     GetArchiverPath = sPath
@@ -874,7 +874,7 @@ Private Function GetArchiverPath(ByVal sType As String) As String
             End If
 
         Case "rar"
-            ' Проверяем WinRAR
+            ' РџСЂРѕРІРµСЂСЏРµРј WinRAR
             If oFSO.FileExists(PATH_WINRAR) Then
                 GetArchiverPath = PATH_WINRAR
             ElseIf oFSO.FileExists(PATH_WINRAR_X86) Then
@@ -891,7 +891,7 @@ Private Function GetArchiverPath(ByVal sType As String) As String
 End Function
 
 ' ============================================
-' ОЖИДАНИЕ ЗАВЕРШЕНИЯ РАСПАКОВКИ (Shell.Application)
+' РћР–РР”РђРќРР• Р—РђР’Р•Р РЁР•РќРРЇ Р РђРЎРџРђРљРћР’РљР (Shell.Application)
 ' ============================================
 Private Sub WaitForExtraction(ByVal sFolderPath As String, _
         ByVal lExpectedCount As Long, _
@@ -902,7 +902,7 @@ Private Sub WaitForExtraction(ByVal sFolderPath As String, _
 
     lTimeout = 0
 
-    Do While lTimeout < 30000    ' Максимум 30 секунд
+    Do While lTimeout < 30000    ' РњР°РєСЃРёРјСѓРј 30 СЃРµРєСѓРЅРґ
         On Error Resume Next
         Set oFolder = oFSO.GetFolder(sFolderPath)
         lFileCount = oFolder.Files.Count
@@ -917,7 +917,7 @@ Private Sub WaitForExtraction(ByVal sFolderPath As String, _
 End Sub
 
 ' ============================================
-' ОЖИДАНИЕ ЗАВЕРШЕНИЯ ВНЕШНЕГО ПРОЦЕССА
+' РћР–РР”РђРќРР• Р—РђР’Р•Р РЁР•РќРРЇ Р’РќР•РЁРќР•Р“Рћ РџР РћР¦Р•РЎРЎРђ
 ' ============================================
 Private Sub WaitForProcess(ByVal lProcessId As Long)
     Dim oWMI        As Object
@@ -931,7 +931,7 @@ Private Sub WaitForProcess(ByVal lProcessId As Long)
 
     lTimeout = 0
 
-    Do While lTimeout < 60000    ' Максимум 60 секунд
+    Do While lTimeout < 60000    ' РњР°РєСЃРёРјСѓРј 60 СЃРµРєСѓРЅРґ
         Set oProcesses = oWMI.ExecQuery( _
                 "SELECT * FROM Win32_Process WHERE ProcessId = " & lProcessId)
 

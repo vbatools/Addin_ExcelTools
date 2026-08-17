@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmMenedgerSheetsZoom 
-   Caption         =   "Установить масштаб:"
+   Caption         =   "РЈСЃС‚Р°РЅРѕРІРёС‚СЊ РјР°СЃС€С‚Р°Р±:"
    ClientHeight    =   7605
    ClientLeft      =   120
    ClientTop       =   465
@@ -64,7 +64,7 @@ End Sub
 Private Sub listSheets_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
     With listSheets
         If .ListIndex < 0 Then Exit Sub
-        ' Активация выбранного листа (имя хранится во втором столбце с индексом 1)
+        ' РђРєС‚РёРІР°С†РёСЏ РІС‹Р±СЂР°РЅРЅРѕРіРѕ Р»РёСЃС‚Р° (РёРјСЏ С…СЂР°РЅРёС‚СЃСЏ РІРѕ РІС‚РѕСЂРѕРј СЃС‚РѕР»Р±С†Рµ СЃ РёРЅРґРµРєСЃРѕРј 1)
         ActiveWorkbook.Sheets(.List(.ListIndex, 1)).Activate
     End With
 End Sub
@@ -78,7 +78,7 @@ Private Sub txtZoom_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     
     txtZoom.Value = ActiveWindow.Zoom

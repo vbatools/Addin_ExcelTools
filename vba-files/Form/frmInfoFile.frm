@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmInfoFile 
-   Caption         =   "Свойства файлов:"
+   Caption         =   "РЎРІРѕР№СЃС‚РІР° С„Р°Р№Р»РѕРІ:"
    ClientHeight    =   7095
    ClientLeft      =   120
    ClientTop       =   465
@@ -50,17 +50,17 @@ End Sub
 
 Private Sub LbDelAllProper_Click()
     If cmbMain.Value = vbNullString Then
-        Call MsgBox("Нет выбранных книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РІС‹Р±СЂР°РЅРЅС‹С… РєРЅРёРі!", vbCritical)
         Exit Sub
     End If
     Dim wb          As Workbook
     Set wb = Workbooks(cmbMain.Value)
 
-    If MsgBox("Удалить все свойства?", vbYesNo + vbQuestion, "Удаление свойств:") = vbYes Then
+    If MsgBox("РЈРґР°Р»РёС‚СЊ РІСЃРµ СЃРІРѕР№СЃС‚РІР°?", vbYesNo + vbQuestion, "РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІ:") = vbYes Then
         Dim iCount  As Byte
         iCount = delFilePropertiesAll(wb)
         Call cmbMain_Change
-        Call MsgBox("Свойств удалено:" & iCount, vbInformation, "Удаление свойств:")
+        Call MsgBox("РЎРІРѕР№СЃС‚РІ СѓРґР°Р»РµРЅРѕ:" & iCount, vbInformation, "РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІ:")
     End If
 End Sub
 Private Sub LbEdit_Click()
@@ -72,7 +72,7 @@ Private Sub ListProp_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
 End Sub
 Private Sub editProperty()
     If cmbMain.Value = vbNullString Then
-        Call MsgBox("Нет выбранных книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РІС‹Р±СЂР°РЅРЅС‹С… РєРЅРёРі!", vbCritical)
         Exit Sub
     End If
     On Error Resume Next
@@ -90,7 +90,7 @@ Private Sub editProperty()
     End With
     Dim sNewValueProp As String
 
-    sNewValueProp = InputBox("Изменить свойство [" & sNameProp & " ] ?", "Изменение свойства:", sValueProp)
+    sNewValueProp = InputBox("РР·РјРµРЅРёС‚СЊ СЃРІРѕР№СЃС‚РІРѕ [" & sNameProp & " ] ?", "РР·РјРµРЅРµРЅРёРµ СЃРІРѕР№СЃС‚РІР°:", sValueProp)
     If sNewValueProp <> sValueProp Then
         If addFileProperty(wb, sNameProp, sNewValueProp) Then Call cmbMain_Change
     End If
@@ -117,7 +117,7 @@ End Sub
 Private Sub lbDelOneCustProp_Click()
 
     If cmbMain.Value = vbNullString Then
-        Call MsgBox("Нет выбранных книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РІС‹Р±СЂР°РЅРЅС‹С… РєРЅРёРі!", vbCritical)
         Exit Sub
     End If
     Dim wb          As Workbook
@@ -130,7 +130,7 @@ Private Sub lbDelOneCustProp_Click()
         Dim sNameProp As String
         sNameProp = .List(i, 1)
     End With
-    If MsgBox("Удаление свойства [" & sNameProp & " ] ?", vbYesNo + vbQuestion, "Удаление свойства:") = vbYes Then
+    If MsgBox("РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІР° [" & sNameProp & " ] ?", vbYesNo + vbQuestion, "РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІР°:") = vbYes Then
         Call delFilePropertyCustom(wb, sNameProp)
         Call cmbMain_Change
     End If
@@ -138,15 +138,15 @@ End Sub
 Private Sub AddCustProp(ByVal txtPropName As String, ByVal txtPropValue As String)
 
     If cmbMain.Value = vbNullString Then
-        Call MsgBox("Нет выбранных книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РІС‹Р±СЂР°РЅРЅС‹С… РєРЅРёРі!", vbCritical)
         Exit Sub
     End If
     Dim wb          As Workbook
     Set wb = Workbooks(cmbMain.Value)
 
-    txtPropName = InputBox("Ведите название свойства", "Создание свойства:", txtPropName)
+    txtPropName = InputBox("Р’РµРґРёС‚Рµ РЅР°Р·РІР°РЅРёРµ СЃРІРѕР№СЃС‚РІР°", "РЎРѕР·РґР°РЅРёРµ СЃРІРѕР№СЃС‚РІР°:", txtPropName)
     If txtPropName <> vbNullString Then
-        txtPropValue = InputBox("Введите значение свойства", "Создание свойства:", txtPropValue)
+        txtPropValue = InputBox("Р’РІРµРґРёС‚Рµ Р·РЅР°С‡РµРЅРёРµ СЃРІРѕР№СЃС‚РІР°", "РЎРѕР·РґР°РЅРёРµ СЃРІРѕР№СЃС‚РІР°:", txtPropValue)
         If txtPropValue <> vbNullString Then
             Call addFilePropertyCustom(wb, txtPropName, txtPropValue)
             Call cmbMain_Change
@@ -156,24 +156,24 @@ End Sub
 
 Private Sub lbDelAllCustomProp_Click()
     If cmbMain.Value = vbNullString Then
-        Call MsgBox("Нет выбранных книг!", vbCritical)
+        Call MsgBox("РќРµС‚ РІС‹Р±СЂР°РЅРЅС‹С… РєРЅРёРі!", vbCritical)
         Exit Sub
     End If
     Dim wb          As Workbook
     Set wb = Workbooks(cmbMain.Value)
 
-    If MsgBox("Удалить все свойсва?", vbYesNo + vbQuestion, "Удаление свойств:") = vbYes Then
+    If MsgBox("РЈРґР°Р»РёС‚СЊ РІСЃРµ СЃРІРѕР№СЃРІР°?", vbYesNo + vbQuestion, "РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІ:") = vbYes Then
         Dim iCount  As Byte
         iCount = delFilePropertiesCustomAll(wb)
         Call cmbMain_Change
-        Call MsgBox("Свойства удалены: " & iCount, vbInformation, "Удаление свойств:")
+        Call MsgBox("РЎРІРѕР№СЃС‚РІР° СѓРґР°Р»РµРЅС‹: " & iCount, vbInformation, "РЈРґР°Р»РµРЅРёРµ СЃРІРѕР№СЃС‚РІ:")
     End If
 End Sub
 
 Private Sub UserForm_Activate()
     If Workbooks.Count = 0 Then
         Unload Me
-        Call MsgBox("Нет открытых" & Chr(34) & "Excel файлов" & Chr(34) & "!", vbOKOnly + vbExclamation)
+        Call MsgBox("РќРµС‚ РѕС‚РєСЂС‹С‚С‹С…" & Chr(34) & "Excel С„Р°Р№Р»РѕРІ" & Chr(34) & "!", vbOKOnly + vbExclamation)
         Exit Sub
     End If
     With Me.cmbMain
@@ -193,6 +193,6 @@ Private Sub btnCancel_Click()
 End Sub
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
 End Sub

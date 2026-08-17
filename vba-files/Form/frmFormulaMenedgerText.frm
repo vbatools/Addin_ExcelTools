@@ -1,6 +1,6 @@
 VERSION 5.00
 Begin {C62A69F0-16DC-11CE-9E98-00AA00574A4F} frmFormulaMenedgerText 
-   Caption         =   "Операции с текстом:"
+   Caption         =   "РћРїРµСЂР°С†РёРё СЃ С‚РµРєСЃС‚РѕРј:"
    ClientHeight    =   8970.001
    ClientLeft      =   120
    ClientTop       =   465
@@ -96,16 +96,16 @@ Private Sub btnOK_Click()
         Case 0
             arrData = RegistrWords(arrData, chbFormulsCells.Value)
         Case 1
-            'удаление
+            'СѓРґР°Р»РµРЅРёРµ
             arrData = deleteCharts(arrData, chbFormulsCells.Value)
         Case 2
-            'вставка
+            'РІСЃС‚Р°РІРєР°
             arrData = insertCharts(arrData, chbFormulsCells.Value)
         Case 3
-            'исправить
+            'РёСЃРїСЂР°РІРёС‚СЊ
             arrData = fixCharts(arrData, chbFormulsCells.Value, typeDataVal)
         Case 4
-            'Прочее
+            'РџСЂРѕС‡РµРµ
             arrData = otherCharts(arrData, chbFormulsCells.Value)
         Case 5
             bFlag = True
@@ -124,7 +124,7 @@ Private Sub btnOK_Click()
             Case (optOtherShowEngLetter.Value And Not chbOtherTranslit.Value)
                 Call showColorLetter(rng, "[A-Za-z]")
             Case (optOtherShowRusLetter.Value And Not chbOtherTranslit.Value)
-                Call showColorLetter(rng, "[А-Яа-яЁё]")
+                Call showColorLetter(rng, "[Рђ-РЇР°-СЏРЃС‘]")
         End Select
     End If
 
@@ -136,7 +136,7 @@ Private Sub btnOK_Click()
         Case TypeData.isNumerType
             rng.NumberFormat = "General"
     End Select
-    Application.OnUndo "Отменить", "RestoreUndoInfo"
+    Application.OnUndo "РћС‚РјРµРЅРёС‚СЊ", "RestoreUndoInfo"
 End Sub
 
 Private Sub findeAndReplaceCharts(ByRef rng As Range)
@@ -266,7 +266,7 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
     Dim sChr        As String * 1
     Dim k           As Integer
 
-    Const RUS       As String = "асекорхуАВСЕНКМОРТХ"
+    Const RUS       As String = "Р°СЃРµРєРѕСЂС…СѓРђР’РЎР•РќРљРњРћР РўРҐ"
     Const ENG = "acekopxyABCEHKMOPTX"
 
 
@@ -290,7 +290,7 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
                         arrRes(i, j) = VBA.Replace(arrRes(i, j), " ", vbNullString)
                         Select Case cmbFixListNumber.ListIndex
                             Case 0
-                                'Авто
+                                'РђРІС‚Рѕ
                             Case 1
                                 '9 876,54
                                 arrRes(i, j) = VBA.Replace(arrRes(i, j), ",", ".")
@@ -324,22 +324,22 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
                         arrDate = VBA.Split(sVal, ".")
                         Select Case cmbFixListDate
                             Case 0
-                                'Д.М.Г
+                                'Р”.Рњ.Р“
                                 arrRes(i, j) = VBA.DateSerial(arrDate(2), arrDate(1), arrDate(0))
                             Case 1
-                                'М.Д.Г
+                                'Рњ.Р”.Р“
                                 arrRes(i, j) = VBA.DateSerial(arrDate(2), arrDate(0), arrDate(1))
                             Case 2
-                                'Г.М.Д
+                                'Р“.Рњ.Р”
                                 arrRes(i, j) = VBA.DateSerial(arrDate(0), arrDate(1), arrDate(2))
                             Case 3
-                                'ГГГГММДД
+                                'Р“Р“Р“Р“РњРњР”Р”
                                 If VBA.Len(sVal) = 8 Then arrRes(i, j) = VBA.DateSerial(VBA.Left$(sVal, 4), VBA.Mid$(sVal, 5, 2), VBA.Right$(sVal, 2))
                             Case 4
-                                'ГГММДД
+                                'Р“Р“РњРњР”Р”
                                 If VBA.Len(sVal) = 6 Then arrRes(i, j) = VBA.DateSerial(VBA.Left$(sVal, 2), VBA.Mid$(sVal, 3, 2), VBA.Right$(sVal, 2))
                             Case 5
-                                'Другой
+                                'Р”СЂСѓРіРѕР№
                                 If IsDate(arrRes(i, j)) Then arrRes(i, j) = VBA.DateValue(arrRes(i, j))
                         End Select
                     Case optFixNumberAsText.Value
@@ -697,7 +697,7 @@ Public Sub replaceFotn(ByRef oCell As Range, ByVal sValFinde As String, ByVal sV
     oCell.Value(xlRangeValueXMLSpreadsheet) = xmlVal
 End Sub
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Function   : findeLastChildNode - поиск самого последнего node
+'* Function   : findeLastChildNode - РїРѕРёСЃРє СЃР°РјРѕРіРѕ РїРѕСЃР»РµРґРЅРµРіРѕ node
 '* Created    : 22-03-2022 10:18
 '* Author     : VBATools
 '* Contacts   : http://vbatools.ru/ https://vk.com/vbatools
@@ -721,19 +721,19 @@ End Function
 
 
 Private Sub UserForm_Initialize()
-    ' Центрирование формы
+    ' Р¦РµРЅС‚СЂРёСЂРѕРІР°РЅРёРµ С„РѕСЂРјС‹
     Call CenterUserForm(Me)
     If TypeName(Selection) = "Range" Then txtInputRng.Value = Selection.Address
     Call ConfigureDropButton(txtInputRng)
 
     With cmbFixListTextAsNumber
-        .AddItem "форматом"
-        .AddItem "добавить апостроф"
+        .AddItem "С„РѕСЂРјР°С‚РѕРј"
+        .AddItem "РґРѕР±Р°РІРёС‚СЊ Р°РїРѕСЃС‚СЂРѕС„"
         .ListIndex = 0
     End With
 
     With cmbFixListNumber
-        .AddItem "Авто"
+        .AddItem "РђРІС‚Рѕ"
         .AddItem "9 876,54"
         .AddItem "9.876,54"
         .AddItem "9,876.54"
@@ -743,12 +743,12 @@ Private Sub UserForm_Initialize()
     End With
 
     With cmbFixListDate
-        .AddItem "Д.М.Г"
-        .AddItem "М.Д.Г"
-        .AddItem "Г.М.Д"
-        .AddItem "ГГГГММДД"
-        .AddItem "ГГММДД"
-        .AddItem "Другой"
+        .AddItem "Р”.Рњ.Р“"
+        .AddItem "Рњ.Р”.Р“"
+        .AddItem "Р“.Рњ.Р”"
+        .AddItem "Р“Р“Р“Р“РњРњР”Р”"
+        .AddItem "Р“Р“РњРњР”Р”"
+        .AddItem "Р”СЂСѓРіРѕР№"
         .ListIndex = 0
     End With
 
