@@ -2,7 +2,7 @@ Attribute VB_Name = "modFilesTools"
 Option Explicit
 Option Private Module
 
-Public Sub addFilesList()
+Public Sub AddFilesList()
     Dim rng         As Range
     Dim arrPath()   As String
     Dim i           As Long
@@ -18,7 +18,7 @@ Public Sub addFilesList()
     'On Error GoTo AddFileNewName_Err
     Call DisableApplicationSettings
 
-    arrPath = fileDialogFun(ActiveWorkbook.Path, True, "*.*")
+    arrPath = FileDialogFun(ActiveWorkbook.Path, True, "*.*")
     If (Not (Not (arrPath))) = 0 Then Exit Sub
     arrVal = Array("Размер файла:", "Тип:", "Дата изменения:", "Дата создания:", "Дата открытия:", "Дата изменения:", "Атрибуты:", "Тип:", "Ключевые слова:", "Оценка:", "Автор:", "Название:", "Тема:", "Категории:", "Комментарий:", "Авторские права:", "Размеры:", "Организация:", "Имя программы:", "Состояние содержимого:", "Язык:")
     arrValNum = Array(1, 2, 3, 4, 5, 128, 6, 11, 18, 19, 20, 21, 22, 23, 24, 25, 31, 33, 35, 126, 185)
@@ -85,7 +85,7 @@ AddFileNewName_Err:
 End Sub
 
 'Переименовывание файлов по списку
-Public Sub moveAndRenameFiles()
+Public Sub MoveAndRenameFiles()
     Dim rng         As Range
     Dim OldFile     As String
     Dim NewPathFile As String

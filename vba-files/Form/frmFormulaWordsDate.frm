@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Const SKOBKI_VAL1 As String = "(01.01.2001 первое €нвар€ две тыс€чи первого года)"
@@ -164,7 +166,7 @@ Private Sub UserForm_Initialize()
     End With
     txtValue.Value = VBA.format(VBA.Date, "dd.mm.yyyy")
     Set clDate = New clsCalendarDate
-    Call clDate.addDatePicker(txtValue, VBA.Date)
+    Call clDate.AddDatePicker(txtValue, VBA.Date)
 
     Call ConfigureDropButton(txtValue)
 
@@ -187,5 +189,4 @@ Private Sub addFormula()
             cmbRegistr.ListIndex, _
             chcDublVal.Value)
 End Sub
-
 

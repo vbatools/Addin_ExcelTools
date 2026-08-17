@@ -14,6 +14,7 @@ Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 
+
 Option Explicit
 
 '--------------------------------------------------------------------------------
@@ -69,36 +70,36 @@ Private Sub btnSaveWB_Click()
 End Sub
 
 Private Sub btnSortNum_Click()
-    Call sortColumnList(listNames, btnSortNum, 0, True)
+    Call SortColumnList(listNames, btnSortNum, 0, True)
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(listNames, btnSortName, 1, False)
+    Call SortColumnList(listNames, btnSortName, 1, False)
 End Sub
 
 Private Sub btnSortFormula_Click()
-    Call sortColumnList(listNames, btnSortFormula, 2, False)
+    Call SortColumnList(listNames, btnSortFormula, 2, False)
 End Sub
 
 Private Sub btnSortVisible_Click()
-    Call sortColumnList(listNames, btnSortVisible, 6, False)
+    Call SortColumnList(listNames, btnSortVisible, 6, False)
 End Sub
 
 Private Sub btnSortParent_Click()
-    Call sortColumnList(listNames, btnSortParent, 4, False)
+    Call SortColumnList(listNames, btnSortParent, 4, False)
 End Sub
 
 Private Sub cmbFilter_Change()
     With cmbFilter
         If .ListIndex < 0 Then
             If .Value = vbNullString Then
-                Call selectedItemListSheets(listNames, vbNullString, 1)
+                Call SelectedItemListSheets(listNames, vbNullString, 1)
             Else
-                Call selectedItemListSheets(listNames, "*" & .Value & "*", 1)
+                Call SelectedItemListSheets(listNames, "*" & .Value & "*", 1)
             End If
         Else
             ' Оптимизация: Direct access по имени без необходимости предварительной активации
-            Call selectedItemListSheets(listNames, cmbFilter.Value, 1)
+            Call SelectedItemListSheets(listNames, cmbFilter.Value, 1)
         End If
     End With
 End Sub
@@ -180,13 +181,13 @@ Private Sub listFilters_Change()
     With listFilters
         If .ListIndex < 0 Then Exit Sub
         Select Case .Value
-            Case FILTER_ALL: Call selectedItemListSheets(listNames, "*", 1)
-            Case FILTER_NONE: Call selectedItemListSheets(listNames, vbNullString, 1)
+            Case FILTER_ALL: Call SelectedItemListSheets(listNames, "*", 1)
+            Case FILTER_NONE: Call SelectedItemListSheets(listNames, vbNullString, 1)
             Case FILTER_REVERSE: Call reversSelected
-            Case FILTER_SAVE: Call selectedItemListSheets(listNames, VALUE_SAVED, 3)
-            Case FILTER_NOT_SAVE: Call selectedItemListSheets(listNames, VALUE_NOT_SAVED, 3)
-            Case FILTER_PROTECT: Call selectedItemListSheets(listNames, VALUE_PROTECT, 4)
-            Case FILTER_NOT_PROTECT: Call selectedItemListSheets(listNames, vbNullString, 4)
+            Case FILTER_SAVE: Call SelectedItemListSheets(listNames, VALUE_SAVED, 3)
+            Case FILTER_NOT_SAVE: Call SelectedItemListSheets(listNames, VALUE_NOT_SAVED, 3)
+            Case FILTER_PROTECT: Call SelectedItemListSheets(listNames, VALUE_PROTECT, 4)
+            Case FILTER_NOT_PROTECT: Call SelectedItemListSheets(listNames, vbNullString, 4)
         End Select
     End With
 End Sub

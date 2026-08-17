@@ -28,12 +28,12 @@ Public Sub AddBackupFile()
     Call DisableApplicationSettings
     With ActiveWorkbook
         sOldWB = .FullName
-        sExtension = sGetExtensionName(.Name)
+        sExtension = GetExtensionName(.Name)
         bAddDate = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_DATE_ADD)
         sPath = sPath & Application.PathSeparator
         If bAddDate Then sPath = sPath & VBA.format$(VBA.Date(), "yyyy_mm_dd_")
-        sVersion = getVersion(sVersion)
-        sPath = sPath & sGetBaseName(.Name) & "_v" & sVersion & "." & sExtension
+        sVersion = GetVersion(sVersion)
+        sPath = sPath & GetBaseName(.Name) & "_v" & sVersion & "." & sExtension
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION, sVersion)
         Call addFilePropertyCustom(ActiveWorkbook, NAME_PROP_VERSION_DATE, VBA.format$(VBA.Date(), "dd.mm.yyyy"))
         .Save
@@ -46,12 +46,12 @@ Public Sub AddBackupFile()
     Call RestoreApplicationSettings
 End Sub
 
-Private Function getVersion(ByVal sVal As String) As String
+Private Function GetVersion(ByVal sVal As String) As String
     Dim i           As Integer
     i = VBA.InStrRev(sVal, ".")
     If i > 0 Then
-        getVersion = VBA.Left$(sVal, i) & VBA.Val(VBA.Right(sVal, VBA.Len(sVal) - i)) + 1
+        GetVersion = VBA.Left$(sVal, i) & VBA.Val(VBA.Right(sVal, VBA.Len(sVal) - i)) + 1
     Else
-        getVersion = VBA.Val(sVal) + 1
+        GetVersion = VBA.Val(sVal) + 1
     End If
 End Function

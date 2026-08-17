@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Sub btnCancel_Click()
@@ -65,12 +67,15 @@ Private Sub btnOpentPath_Click()
     Dim sPath       As String
     sPath = GetOneCustomProp(ActiveWorkbook, NAME_PROP_VERSION_PATH)
     If sPath = vbNullString Then Exit Sub
-    Call openPath(sPath)
+    Call OpenPath(sPath)
 End Sub
 
 Private Sub txtPath_DropButtonClick()
     Me.Hide
-    txtPath.Value = pathDialogFun(txtPath.Value)
+    Dim sPath As String
+    sPath = txtPath.Value
+    If sPath = vbNullString Then sPath = ActiveWorkbook.Path
+    txtPath.Value = PathDialogFun(sPath)
     Me.Show
 End Sub
 
@@ -126,8 +131,4 @@ Private Function addVersion() As String
         If txtVersionFix.Value <> vbNullString Then addVersion = addVersion & "." & txtVersionFix.Value
     End If
 End Function
-
-
-
-
 

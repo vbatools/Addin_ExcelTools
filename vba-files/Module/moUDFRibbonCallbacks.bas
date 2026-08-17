@@ -20,7 +20,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnReplaceChars(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=«¿Ã≈Õ»“‹_—»Ã¬ŒÀ€()"
         Case Else: activeCell.FormulaR1C1 = "=REPLACE_CHARS()"
@@ -29,7 +29,7 @@ Private Sub btnReplaceChars(control As IRibbonControl)
 End Sub
 
 Private Sub btnTextLeft(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=À≈¬Œ_“≈ —“()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_LEFT()"
@@ -38,7 +38,7 @@ Private Sub btnTextLeft(control As IRibbonControl)
 End Sub
 
 Private Sub btnTextBetween(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=Ã≈∆ƒ”_“≈ —“()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_BETWEEN()"
@@ -47,7 +47,7 @@ Private Sub btnTextBetween(control As IRibbonControl)
 End Sub
 
 Private Sub btnFindReplace(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=Õ¿…“»_«¿Ã≈Õ»“‹()"
         Case Else: activeCell.FormulaR1C1 = "=FIND_REPLACE()"
@@ -56,7 +56,7 @@ Private Sub btnFindReplace(control As IRibbonControl)
 End Sub
 
 Private Sub btnTextRight(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=œ–¿¬Œ_“≈ —“()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_RIGHT()"
@@ -65,7 +65,7 @@ Private Sub btnTextRight(control As IRibbonControl)
 End Sub
 
 Private Sub btnSplitString(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=–¿«¡»“‹_—“–Œ ”()"
         Case Else: activeCell.FormulaR1C1 = "=SPLIT_STRING()"
@@ -74,7 +74,7 @@ Private Sub btnSplitString(control As IRibbonControl)
 End Sub
 
 Private Sub btnConcatMulti(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—÷≈œ»“‹_Ã”À‹“»()"
         Case Else: activeCell.FormulaR1C1 = "=CONCAT_MULTI()"
@@ -83,7 +83,7 @@ Private Sub btnConcatMulti(control As IRibbonControl)
 End Sub
 
 Private Sub btnTextMatchesPattern(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=“≈ —“_—ŒŒ“¬≈“—“¬”≈“_ÿ¿¡ÀŒÕ”()"
         Case Else: activeCell.FormulaR1C1 = "=TEXT_MATCHES_PATTERN()"
@@ -92,7 +92,7 @@ Private Sub btnTextMatchesPattern(control As IRibbonControl)
 End Sub
 
 Private Sub btnTranslit(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=“–¿Õ—À»“()"
         Case Else: activeCell.FormulaR1C1 = "=TRANSLIT()"
@@ -101,7 +101,7 @@ Private Sub btnTranslit(control As IRibbonControl)
 End Sub
 
 Private Sub btnRemoveChars(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=”ƒ¿À»“‹_—»Ã¬ŒÀ€()"
         Case Else: activeCell.FormulaR1C1 = "=REMOVE_CHARS()"
@@ -114,7 +114,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnGetComment(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊ ŒÃÃ≈Õ“()"
         Case Else: activeCell.FormulaR1C1 = "=GET_COMMENT()"
@@ -123,7 +123,7 @@ Private Sub btnGetComment(control As IRibbonControl)
 End Sub
 
 Private Sub btnGetText(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊“≈ —“()"
         Case Else: activeCell.FormulaR1C1 = "=GET_TEXT()"
@@ -132,7 +132,7 @@ Private Sub btnGetText(control As IRibbonControl)
 End Sub
 
 Private Sub btnGetNumber(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=œŒÀ”◊◊»—ÀŒ()"
         Case Else: activeCell.FormulaR1C1 = "=GET_NUMBER()"
@@ -141,7 +141,7 @@ Private Sub btnGetNumber(control As IRibbonControl)
 End Sub
 
 Private Sub btnFormulaText(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=“≈ —“‘Œ–Ã”À€()"
         Case Else: activeCell.FormulaR1C1 = "=FORMULA_TEXT()"
@@ -154,7 +154,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnSumByColor(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—”ÃÃ«¿À»¬ ¿()"
         Case Else: activeCell.FormulaR1C1 = "=SUM_BY_COLOR()"
@@ -163,7 +163,7 @@ Private Sub btnSumByColor(control As IRibbonControl)
 End Sub
 
 Private Sub btnSumByFontColor(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—”ÃÃÿ–»‘“()"
         Case Else: activeCell.FormulaR1C1 = "=SUM_BY_FONT_COLOR()"
@@ -172,7 +172,7 @@ Private Sub btnSumByFontColor(control As IRibbonControl)
 End Sub
 
 Private Sub btnCountByColor(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—◊≈“«¿À»¬ ¿()"
         Case Else: activeCell.FormulaR1C1 = "=COUNT_BY_COLOR()"
@@ -181,7 +181,7 @@ Private Sub btnCountByColor(control As IRibbonControl)
 End Sub
 
 Private Sub btnCountByFontColor(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—◊≈“ÿ–»‘“()"
         Case Else: activeCell.FormulaR1C1 = "=COUNT_BY_FONT_COLOR()"
@@ -194,7 +194,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnWorkbookName(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=»Ãﬂ Õ»√»()"
         Case Else: activeCell.FormulaR1C1 = "=WORKBOOK_NAME()"
@@ -203,7 +203,7 @@ Private Sub btnWorkbookName(control As IRibbonControl)
 End Sub
 
 Private Sub btnSheetName(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=»ÃﬂÀ»—“¿()"
         Case Else: activeCell.FormulaR1C1 = "=SHEET_NAME()"
@@ -212,7 +212,7 @@ Private Sub btnSheetName(control As IRibbonControl)
 End Sub
 
 Private Sub btnUserName(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=»ÃﬂœŒÀ‹«Œ¬¿“≈Àﬂ()"
         Case Else: activeCell.FormulaR1C1 = "=USER_NAME()"
@@ -221,7 +221,7 @@ Private Sub btnUserName(control As IRibbonControl)
 End Sub
 
 Private Sub btnWorkbookFullPath(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=œŒÀÕ€…œ”“‹ Õ»√»()"
         Case Else: activeCell.FormulaR1C1 = "=WORKBOOK_FULL_PATH()"
@@ -234,7 +234,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnHasLatin(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=≈À¿“»Õ()"
         Case Else: activeCell.FormulaR1C1 = "=HAS_LATIN()"
@@ -243,7 +243,7 @@ Private Sub btnHasLatin(control As IRibbonControl)
 End Sub
 
 Private Sub btnHasCyrillic(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=≈ »–»ÀÀ()"
         Case Else: activeCell.FormulaR1C1 = "=HAS_CYRILLIC()"
@@ -257,7 +257,7 @@ End Sub
 ' ============================================================================ '
 
 Private Sub btnCreateQR(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Select Case Application.International(xlCountryCode)
         Case 7: activeCell.FormulaR1C1 = "=—Œ«ƒ¿“‹_QR()"
         Case Else: activeCell.FormulaR1C1 = "=CREATE_QR()"

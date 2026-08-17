@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -64,4 +66,3 @@ Private Sub loadDataToList()
     End With
     btnOK.Enabled = (bHaveShProtect Or lbMsg.Visible)
 End Sub
-

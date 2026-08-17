@@ -85,7 +85,7 @@ Public Property Get ForeColorDayNo() As XlRgbColor
 End Property
 
 Public Property Let ForeColorDayNo(ByVal Color As XlRgbColor)
-    ForeColorDayNo = Color
+    mForeColorDayNo = Color
 End Property
 
 Public Property Get ForeColorDayYes() As XlRgbColor
@@ -165,7 +165,7 @@ Public Property Let RightBtn(ByVal RightBtn As Boolean)
     End If
 End Property
 
-Public Sub addDatePicker(ByRef TextBox As MSForms.TextBox, _
+Public Sub AddDatePicker(ByRef TextBox As MSForms.TextBox, _
         Optional SetDate As Date = 0, _
         Optional minDate As Date = 0, _
         Optional maxDate As Date = 0, _
@@ -182,7 +182,7 @@ Public Sub addDatePicker(ByRef TextBox As MSForms.TextBox, _
         Optional ForeColorDayNo As XlRgbColor = 8421504)
 
     If minDate > maxDate Then
-        Call Err.Raise(vbObjectError + 101, "clsCalendarDate", "the minimum date:[ & MinDate & ] is greater than the maximum:[ & MaxDate & ]")
+        Call Err.Raise(vbObjectError + 101, "clsCalendarDate", "the minimum date:[" & minDate & "] is greater than the maximum:[" & maxDate & "]")
         Exit Sub
     End If
 

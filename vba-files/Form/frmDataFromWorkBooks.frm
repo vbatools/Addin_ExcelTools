@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -38,7 +40,7 @@ Private Sub btnChoseFiles_Click()
     Dim i As Long, iCount As Long
     Dim arrVal()    As String
 
-    arrFiles = fileDialogFun(ActiveWorkbook.Path, True, , False)
+    arrFiles = FileDialogFun(ActiveWorkbook.Path, True, , False)
 
     ' Проверка пустого массива
     If Not IsArray(arrFiles) Then Exit Sub
@@ -67,11 +69,11 @@ Private Sub btnClearListFiles_Click()
 End Sub
 
 Private Sub btnDelItemListFiles_Click()
-    Call deleteItemInListBox(listWBooks)
+    Call DeleteItemInListBox(listWBooks)
 End Sub
 
 Private Sub btnDelItemListSheets_Click()
-    Call deleteItemInListBox(listSheets)
+    Call DeleteItemInListBox(listSheets)
 End Sub
 
 Private Sub btnGetSheetsNameFiles_Click()
@@ -120,9 +122,9 @@ Private Sub btnGetSheetsNameFiles_Click()
                 sheetName = Replace(sheetName, "#", ".")
 
                 With listSheets
-                    .AddItem sGetParentFolderName(arr(i, 0)) & Application.PathSeparator
+                    .AddItem GetParentFolderName(arr(i, 0)) & Application.PathSeparator
                     .List(item, 1) = itemSheet
-                    .List(item, 2) = sGetFileName(arr(i, 0))
+                    .List(item, 2) = GetFileName(arr(i, 0))
                     .List(item, 3) = sheetName
                     .Selected(item) = True
                     If Not dict.Exists(sheetName) Then
@@ -301,6 +303,4 @@ Private Sub UserForm_Initialize()
     If TypeName(Selection) = "Range" Then txtRng.Value = Selection.Address
     Call ConfigureDropButton(txtRng)
 End Sub
-
-
 

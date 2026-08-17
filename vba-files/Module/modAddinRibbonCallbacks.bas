@@ -3,37 +3,37 @@ Option Explicit
 Option Private Module
 
 Private Sub btnDataFromSheets(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     frmDataFromSheets.Show
 End Sub
 
 Private Sub btnDataToSheets(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     frmDataToSheets.Show
 End Sub
 
 Private Sub btnDataFromWBooks(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataFromWorkBooks.Show
 End Sub
 
 Private Sub btnDataToWBooks(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataToWorkBooks.Show
 End Sub
 
 Private Sub btnAddWorkBooks(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataAddWorkBooks.Show
 End Sub
 
 Private Sub btnUniqeValue(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataUniqueValues.Show
 End Sub
 
 Private Sub btnMergeValue(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataMergeText.Show
 End Sub
 
@@ -42,17 +42,17 @@ Private Sub btnMergeDuplicatesValue(control As IRibbonControl)
 End Sub
 
 Private Sub btnUnMergeValue(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call unMergeCells
+    If IsNotOpenWBooks Then Exit Sub
+    Call UnMergeCells
 End Sub
 
 Private Sub btnCrossSelectionOn(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call CrossSelection
 End Sub
 
 Private Sub btnCrossSelectionSettings(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmCrossSelectionSettings.Show
 End Sub
 
@@ -75,12 +75,12 @@ Private Sub btnNewStream(control As IRibbonControl)
 End Sub
 
 Private Sub btnOpenFolder(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call openPath(ActiveWorkbook.Path)
+    If IsNotOpenWBooks Then Exit Sub
+    Call OpenPath(ActiveWorkbook.Path)
 End Sub
 
 Private Sub btnCopyFullNameFile(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     On Error GoTo CopyFullWay
 
     Dim ClipBoard   As New DataObject
@@ -94,7 +94,7 @@ CopyFullWay:
 End Sub
 
 Private Sub btnZeroShowHiden(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     On Error GoTo Zeros_Err
     With ActiveWindow
         .DisplayZeros = Not .DisplayZeros
@@ -105,12 +105,12 @@ Zeros_Err:
 End Sub
 
 Private Sub btnSplitPages(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     ActiveSheet.DisplayPageBreaks = Not ActiveSheet.DisplayPageBreaks
 End Sub
 
 Private Sub btnDisplayOutTop(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     With ActiveSheet.Outline
         .AutomaticStyles = False
         If .SummaryRow = xlBelow Then
@@ -122,7 +122,7 @@ Private Sub btnDisplayOutTop(control As IRibbonControl)
 End Sub
 
 Private Sub btnDisplayOutLeft(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     With ActiveSheet.Outline
         .AutomaticStyles = False
         If .SummaryColumn = xlLeft Then
@@ -134,7 +134,7 @@ Private Sub btnDisplayOutLeft(control As IRibbonControl)
 End Sub
 
 Private Sub btnDisplayOutline(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     ActiveWindow.DisplayOutline = Not ActiveWindow.DisplayOutline
 End Sub
 
@@ -144,103 +144,103 @@ End Sub
 'End Sub
 
 Private Sub btnCopyFormuls(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaCopy.Show
 End Sub
 
 Private Sub btnConvertRC(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaConvertRC.Show
 End Sub
 
 Private Sub btnMenedgerText(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     frmFormulaMenedgerText.Show
 End Sub
 
 Private Sub btnMenegerSheets(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMenedgerSheets.Show
 End Sub
 
 Private Sub btnMenegerWBook(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     frmMenedgerWBooks.Show
 End Sub
 
 Private Sub btnMenegerNames(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMenedgerNames.Show
 End Sub
 
 Private Sub btnMenegerStyles(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMenedgerStyle.Show
 End Sub
 
 Private Sub btnMenegerCharts(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMenedgerCharts.Show
 End Sub
 
 
 Private Sub btnAddSheets(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call getSheetsLists
+    If IsNotOpenWBooks Then Exit Sub
+    Call GetSheetsLists
 End Sub
 
 Private Sub btnRenameSheets(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call RenameSheets
 End Sub
 
 Private Sub btnAddSheetsFromList(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call AddSheetsByList
 End Sub
 
 Private Sub btnUCase(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call setSheetNameUCase
+    If IsNotOpenWBooks Then Exit Sub
+    Call SetSheetNameUCase
 End Sub
 
 Private Sub btnLCase(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call setSheetNameLCase
+    If IsNotOpenWBooks Then Exit Sub
+    Call SetSheetNameLCase
 End Sub
 
 Private Sub btnAsStrings(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call setSheetNameAsString
+    If IsNotOpenWBooks Then Exit Sub
+    Call SetSheetNameAsString
 End Sub
 
 Private Sub btnWordsUCase(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call setSheetNameAllWorldUCase
+    If IsNotOpenWBooks Then Exit Sub
+    Call SetSheetNameAllWorldUCase
 End Sub
 
 Private Sub btnMenedgerShapes(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMengerShapes.Show
 End Sub
 
 Private Sub btnMenedgerShapesTools(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmMengerShapesTools.Show(0)
 End Sub
 
 Private Sub btnDialogPivotShowPages(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call DialogPivotShowPages
 End Sub
 
 Private Sub btnDialogPivotFieldProperties(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call DialogPivotFieldProperties
 End Sub
 
 Private Sub btnRefreshPivotCachesClearMissingItems(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call RefreshPivotCachesClearMissingItems
 End Sub
 
@@ -259,53 +259,53 @@ End Sub
 
 '--------------------------------------
 Private Sub btnVBAPasswordDelete(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call unProtectVBA
 End Sub
 
 Private Sub btnExcelPasswordDelete(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call delPasswordWBook
+    If IsNotOpenWBooks Then Exit Sub
+    Call DelPasswordWBook
 End Sub
 
 Private Sub btnFileInfo(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmInfoFile.Show
 End Sub
 
 Private Sub btnCleanFormats(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmCleanFormatsWB.Show
 End Sub
 
 Private Sub btnCleanNames(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call DeleteHiddenNames
 End Sub
 
 Private Sub btnCleanLinks(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call ExternalLinkUtility
 End Sub
 
 Private Sub btnExctractingFiles(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call fileExtractorFromExcelFile
+    If IsNotOpenWBooks Then Exit Sub
+    Call FileExtractorFromExcelFile
 End Sub
 
 Private Sub btnAddFilesList(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call addFilesList
+    If IsNotOpenWBooks Then Exit Sub
+    Call AddFilesList
 End Sub
 
 Private Sub btnRenameFilesList(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call moveAndRenameFiles
+    If IsNotOpenWBooks Then Exit Sub
+    Call MoveAndRenameFiles
 End Sub
 
 Private Sub btnCommentsSheet(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call addSheetsComments
+    If IsNotOpenWBooks Then Exit Sub
+    Call AddSheetsComments
 End Sub
 
 Private Sub btnCommentsAdd(control As IRibbonControl)
@@ -313,53 +313,53 @@ Private Sub btnCommentsAdd(control As IRibbonControl)
 End Sub
 
 Private Sub btnCommentsShow(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call showHidenComment(True)
+    If IsNotOpenWBooks Then Exit Sub
+    Call ShowHiddenComment(True)
 End Sub
 
 Private Sub btnCommentsHiden(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call showHidenComment(False)
+    If IsNotOpenWBooks Then Exit Sub
+    Call ShowHiddenComment(False)
 End Sub
 
 Private Sub btnCommentsFontSize(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
-    Call sizeTextComment
+    If IsNotOpenWBooks Then Exit Sub
+    Call SizeTextComment
 End Sub
 
 Private Sub btnAddBackUpFile(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call AddBackupFile
 End Sub
 
 Private Sub btnBackUpSettings(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmOtherToolsBackUpFile.Show
 End Sub
 
 Private Sub btnGroup(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmOtherToolsGoalSeek.Show
 End Sub
 
 Private Sub btnInsertDataUnderColumnOrRow(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmOtherToolsInsertEmptyRows.Show
 End Sub
 
 Private Sub btnRangToJSON(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataToJSON.Show
 End Sub
 
 Private Sub btnRangToCSV(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmDataToCSV.Show
 End Sub
 
-Public Function isNotOpenWBooks() As Boolean
-    isNotOpenWBooks = Workbooks.Count = 0
-    If isNotOpenWBooks Then
+Public Function IsNotOpenWBooks() As Boolean
+    IsNotOpenWBooks = Workbooks.Count = 0
+    If IsNotOpenWBooks Then
         Call MsgBox("Нет открытых книг!", vbCritical)
     End If
 End Function

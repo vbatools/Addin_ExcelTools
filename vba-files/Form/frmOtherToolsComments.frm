@@ -474,7 +474,7 @@ End Sub
 Private Sub txtFileSingle_DropButtonClick()
     Me.Hide
     Dim arr()       As String
-    arr = fileDialogFun(ActiveWorkbook.Path, False, "*.png;*.jpeg;*.jpg;*.gif")
+    arr = FileDialogFun(ActiveWorkbook.Path, False, "*.png;*.jpeg;*.jpg;*.gif")
     If (Not (Not (arr))) > 0 Then
         txtFileSingle.Value = arr(1, 1)
     End If

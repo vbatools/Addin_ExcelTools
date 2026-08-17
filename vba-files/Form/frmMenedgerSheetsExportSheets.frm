@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -39,7 +41,7 @@ Private Sub btnOK_Click()
     End If
 
     If chbParentName.Value Then
-        sPathParent = sPathParent & sGetBaseName(ActiveWorkbook.Name) & Application.PathSeparator
+        sPathParent = sPathParent & GetBaseName(ActiveWorkbook.Name) & Application.PathSeparator
         If Not FileHave(sPathParent, vbDirectory) Then Call MkDir(sPathParent)
     End If
 
@@ -99,13 +101,13 @@ Private Sub btnOK_Click()
     End With
     Call RestoreApplicationSettings
     If iCountFiles > 0 Then Call MsgBox("Выгружено [" & iCountFiles & "] - файлов", vbInformation)
-    If chbOpenPath.Value Then Call openPath(sPathParent)
+    If chbOpenPath.Value Then Call OpenPath(sPathParent)
     Unload Me
 End Sub
 
 Private Sub txtDir_DropButtonClick()
     Me.Hide
-    txtDir.Value = pathDialogFun(txtDir.Value)
+    txtDir.Value = PathDialogFun(txtDir.Value)
     Me.Show
 End Sub
 
@@ -124,7 +126,7 @@ End Sub
 Private Sub SelectFileTypeByExtension(ByVal FilePath As String)
 
     Dim ext         As String
-    ext = LCase$(sGetExtensionName(FilePath))
+    ext = LCase$(GetExtensionName(FilePath))
 
     Select Case ext
         Case "xlsm": optXLSM.Value = True
@@ -155,9 +157,4 @@ Private Sub SaveWBook(ByRef wb As Workbook, ByRef sPathFile As String)
     End Select
     wb.Close True
 End Sub
-
-
-
-
-
 

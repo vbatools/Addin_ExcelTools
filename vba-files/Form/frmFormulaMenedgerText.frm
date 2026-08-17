@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Const sNEW_LINE As String = "|.-.|"
@@ -769,4 +771,3 @@ Private Sub UserForm_Initialize()
         End Select
     End With
 End Sub
-

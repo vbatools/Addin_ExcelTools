@@ -41,7 +41,7 @@ Public Sub RestoreApplicationSettings()
     End With
 End Sub
 
-Public Sub openPath(ByVal defaultPath As String)
+Public Sub OpenPath(ByVal defaultPath As String)
     Dim ActivePath  As String
     ActivePath = """" & defaultPath & """"
     Shell "explorer.exe " & ActivePath, vbNormalFocus
@@ -263,17 +263,17 @@ Public Function CleanFileName(ByVal FileName As String) As String
     CleanFileName = FileName
 
 End Function
-Public Function pathDialogFun(Optional defaultPath As String = vbNullString)
+Public Function PathDialogFun(Optional defaultPath As String = vbNullString)
     With Application.FileDialog(msoFileDialogFolderPicker)
         .ButtonName = "Выбрать"
         .Title = "Выберите папку:"
         .InitialFileName = defaultPath
         If .Show <> -1 Then Exit Function
-        pathDialogFun = .SelectedItems(1)
+        PathDialogFun = .SelectedItems(1)
     End With
 End Function
 
-Public Function fileDialogFun(ByVal sPath As String, _
+Public Function FileDialogFun(ByVal sPath As String, _
         ByRef bMultiSelect As Boolean, _
         Optional sExpansion As String = "*.xlsm;*.xlsb;*.xlsx;*.xls", Optional bShowMsg As Boolean = True) As String()
 
@@ -307,49 +307,49 @@ Public Function fileDialogFun(ByVal sPath As String, _
             arr(i, 1) = VBA.CStr(.SelectedItems.item(i))
         Next
     End With
-    fileDialogFun = arr
+    FileDialogFun = arr
 
     'Для процедуры
     'If (Not (Not (v))) = 0 Then Exit Sub
 End Function
 
-Public Function sGetBaseName(ByVal sPathFile As String) As String
+Public Function GetBaseName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает имя (без расширения) последнего компонента в заданном пути.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
-    sGetBaseName = FSO.GetBaseName(sPathFile)
+    GetBaseName = FSO.GetBaseName(sPathFile)
     Set FSO = Nothing
 End Function
 
-Public Function sGetFileName(ByVal sPathFile As String) As String
+Public Function GetFileName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает имя (с расширением) последнего компонента в заданном пути.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
-    sGetFileName = FSO.getFileName(sPathFile)
+    GetFileName = FSO.GetFileName(sPathFile)
     Set FSO = Nothing
 End Function
 
-Public Function sGetParentFolderName(ByVal sPathFile As String) As String
+Public Function GetParentFolderName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает путь к последнему компоненту в заданном пути (его каталог).
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
-    sGetParentFolderName = FSO.GetParentFolderName(sPathFile)
+    GetParentFolderName = FSO.GetParentFolderName(sPathFile)
     Set FSO = Nothing
 End Function
 
-Public Function sGetExtensionName(ByVal sPathFile As String) As String
+Public Function GetExtensionName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает расширение последнего компонента в заданном пути.
     Dim FSO         As Object
     Set FSO = CreateObject("Scripting.FileSystemObject")
-    sGetExtensionName = FSO.GetExtensionName(sPathFile)
+    GetExtensionName = FSO.GetExtensionName(sPathFile)
     Set FSO = Nothing
 End Function
 
-Public Sub deleteItemInListBox(ByRef listBox As MSForms.listBox)
+Public Sub DeleteItemInListBox(ByRef listBox As MSForms.listBox)
     With listBox
         Dim i       As Long
         For i = .ListCount - 1 To 0 Step -1
@@ -359,13 +359,13 @@ Public Sub deleteItemInListBox(ByRef listBox As MSForms.listBox)
 End Sub
 
 '--------------------------------------------------------------------------------
-' Sub: selectedItemListSheets
+' Sub: SelectedItemListSheets
 ' Purpose: Выполняет фильтрацию элементов списка listSheets на основе шаблона.
 ' Parameters:
 '   sValue - Шаблон для фильтрации (поддерживает символы подстановки Like).
 '   iCol   - Индекс столбца в списке, по которому производится сравнение.
 '--------------------------------------------------------------------------------
-Public Sub selectedItemListSheets(ByRef List As MSForms.listBox, ByRef sValue As String, ByRef iCol As Integer)
+Public Sub SelectedItemListSheets(ByRef List As MSForms.listBox, ByRef sValue As String, ByRef iCol As Integer)
     
     Dim i           As Long
     With List
@@ -477,7 +477,7 @@ Public Function SortArray(SourceArr As Variant, ByVal n As Integer, _
 End Function
 
 '--------------------------------------------------------------------------------
-' Sub: sortColumnList
+' Sub: SortColumnList
 ' Purpose: Сортировка содержимого ListBox по указанному столбцу с переключением направления
 ' Parameters:
 ' lMainList - Ссылка на элемент управления ListBox для сортировки
@@ -486,7 +486,7 @@ End Function
 ' bFlagDigital - Тип сортировки: True - числовая, False - строковая (по умолчанию False)
 ' Returns: Нет
 '--------------------------------------------------------------------------------
-Public Sub sortColumnList(ByRef lMainList As MSForms.listBox, ByRef oLabelBtn As MSForms.Label, _
+Public Sub SortColumnList(ByRef lMainList As MSForms.listBox, ByRef oLabelBtn As MSForms.Label, _
         ByVal iCol As Integer, Optional bFlagDigital As Boolean = False, Optional bFlagCase As Boolean = False)
     Dim arr()       As Variant
     Dim bFlag       As Boolean
@@ -510,10 +510,10 @@ Public Sub sortColumnList(ByRef lMainList As MSForms.listBox, ByRef oLabelBtn As
     End With
 End Sub
 
-Public Function chekProtectStructure() As Boolean
+Public Function CheckProtectStructure() As Boolean
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлен пароль на структуру книги, выполнение операции не возножно!", vbCritical)
-        chekProtectStructure = True
+        CheckProtectStructure = True
     End If
 End Function
 
@@ -647,7 +647,7 @@ Private Sub FillFilesTableRecursive(ByVal currentFolder As Object, ByRef tableAr
     Next subFolder
 End Sub
 
-Public Function saveTextToFile(ByVal txt As String, ByVal FileName As String, Optional ByVal encoding As String = "windows-1251") As Boolean
+Public Function SaveTextToFile(ByVal txt As String, ByVal FileName As String, Optional ByVal encoding As String = "windows-1251") As Boolean
     ' функция сохраняет текст txt в кодировке Charset$ в файл filename$
     ' encoding: koi8-r, ascii, utf-7, utf-8, utf-8noBOM, utf-16, Windows-1251, unicode
     On Error Resume Next: Err.Clear
@@ -688,6 +688,6 @@ Public Function saveTextToFile(ByVal txt As String, ByVal FileName As String, Op
                 .Close
             End With
     End Select
-    saveTextToFile = Err = 0: DoEvents
+    SaveTextToFile = Err = 0: DoEvents
 End Function
 

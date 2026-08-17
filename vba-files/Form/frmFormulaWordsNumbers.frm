@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Const SKOBKIVAL1 As String = "(100,01) סעמ צוכûץ 1 סמעאÿ"
@@ -287,9 +289,4 @@ Private Sub addFormula()
     txtPropis.TEXT = ׁ׃ְּּֿ׀־ָֿׁÜÞ(VBA.CCur(txt), cmbCase.ListIndex, _
             cmbTypeDate.ListIndex, chcDublVal.Value, chcDrobProp.Value, cmbRegistr.ListIndex, cmbSkobki.ListIndex, sFormat)
 End Sub
-
-
-
-
-
 

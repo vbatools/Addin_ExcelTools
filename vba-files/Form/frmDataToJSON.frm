@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -136,7 +138,7 @@ Private Sub btnOK_Click()
         End With
         Call MsgBox("Скопировано в буфер обмена!", vbInformation)
     Else
-        If saveTextToFile(sJSON, ActiveWorkbook.Path & Application.PathSeparator & ActiveWorkbook.Name & "_" & ActiveSheet.Name & ".json", "utf-8") Then
+        If SaveTextToFile(sJSON, ActiveWorkbook.Path & Application.PathSeparator & ActiveWorkbook.Name & "_" & ActiveSheet.Name & ".json", "utf-8") Then
             Call MsgBox("Сохранено в файл!", vbInformation)
         Else
             Call MsgBox("Не удалось сохранить в файл!", vbCritical)

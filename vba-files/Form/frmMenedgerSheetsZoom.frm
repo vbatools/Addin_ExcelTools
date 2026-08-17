@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -48,15 +50,15 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(listSheets, btnSortName, 1, False, True)
+    Call SortColumnList(listSheets, btnSortName, 1, False, True)
 End Sub
 
 Private Sub btnSortNum_Click()
-    Call sortColumnList(listSheets, btnSortNum, 0, True)
+    Call SortColumnList(listSheets, btnSortNum, 0, True)
 End Sub
 
 Private Sub btnSortZoom_Click()
-    Call sortColumnList(listSheets, btnSortZoom, 2, True)
+    Call SortColumnList(listSheets, btnSortZoom, 2, True)
 End Sub
 
 Private Sub listSheets_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
@@ -121,7 +123,3 @@ Private Sub refreshListSheets()
     listSheets.List = arr
     Call RestoreApplicationSettings
 End Sub
-
-
-
-

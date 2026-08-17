@@ -8,7 +8,7 @@ Option Private Module
 '* Created      :   10-06-2026 09:24:42
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-Enum typeCaseString
+Enum TypeCaseString
     tpUCase
     tpLCase
     tpAsString
@@ -20,12 +20,12 @@ End Enum
 ' Purpose: Преобразование регистра строки в соответствии с указанным режимом
 ' Parameters:
 '   - sName (String) - исходная строка
-'   - TypeCase (typeCaseString) - режим преобразования регистра
+'   - TypeCase (TypeCaseString) - режим преобразования регистра
 ' Returns: String - преобразованная строка
 ' Remarks: Поддерживает четыре режима преобразования регистра
 '--------------------------------------------------------------------------------
 
-Public Function caseString(ByVal sName As String, ByVal TypeCase As typeCaseString) As String
+Public Function caseString(ByVal sName As String, ByVal TypeCase As TypeCaseString) As String
     Select Case TypeCase
         Case tpUCase
             caseString = VBA.UCase$(sName)
@@ -227,7 +227,7 @@ Private Function ExtractSheetName(ByVal sFullAddress As String) As String
 End Function
 
 '--------------------------------------------------------------------------------
-' Sub: getSheetsLists
+' Sub: GetSheetsLists
 ' Purpose: Вывод списка имён всех листов книги в активную ячейку
 ' Parameters: Нет
 ' Returns: Ничего. Выводит список в рабочий лист.
@@ -235,7 +235,7 @@ End Function
 '   - Список выводится начиная с активной ячейки вниз по столбцу
 '   - Поддерживает отмену действия (Ctrl+Z)
 '--------------------------------------------------------------------------------
-Public Sub getSheetsLists()
+Public Sub GetSheetsLists()
 
     If ActiveSheet.ProtectContents Then
         Call MsgBox("Лист [" & ActiveSheet.Name & "] - защищен от изменений, снимите пароль!", vbCritical)
@@ -255,12 +255,12 @@ Public Sub getSheetsLists()
     Application.OnUndo "Отменить", "RestoreUndoInfo"
 End Sub
 '--------------------------------------------------------------------------------
-' Sub: setSheetNameUCase
+' Sub: SetSheetNameUCase
 ' Purpose: Преобразование имён всех листов в верхний регистр
 ' Parameters: Нет
 ' Returns: Ничего. Преобразует имена листов.
 '--------------------------------------------------------------------------------
-Public Sub setSheetNameUCase()
+Public Sub SetSheetNameUCase()
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлена защита структуры книги", vbCritical)
         Exit Sub
@@ -271,12 +271,12 @@ Public Sub setSheetNameUCase()
     Next Sh
 End Sub
 '--------------------------------------------------------------------------------
-' Sub: setSheetNameLCase
+' Sub: SetSheetNameLCase
 ' Purpose: Преобразование имён всех листов в нижний регистр
 ' Parameters: Нет
 ' Returns: Ничего. Преобразует имена листов.
 '--------------------------------------------------------------------------------
-Public Sub setSheetNameLCase()
+Public Sub SetSheetNameLCase()
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлена защита структуры книги", vbCritical)
         Exit Sub
@@ -287,12 +287,12 @@ Public Sub setSheetNameLCase()
     Next Sh
 End Sub
 '--------------------------------------------------------------------------------
-' Sub: setSheetNameAsString
+' Sub: SetSheetNameAsString
 ' Purpose: Преобразование имён листов: первая буква заглавная, остальные строчные
 ' Parameters: Нет
 ' Returns: Ничего. Преобразует имена листов.
 '--------------------------------------------------------------------------------
-Public Sub setSheetNameAsString()
+Public Sub SetSheetNameAsString()
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлена защита структуры книги", vbCritical)
         Exit Sub
@@ -303,12 +303,12 @@ Public Sub setSheetNameAsString()
     Next Sh
 End Sub
 '--------------------------------------------------------------------------------
-' Sub: setSheetNameAllWorldUCase
+' Sub: SetSheetNameAllWorldUCase
 ' Purpose: Преобразование имён листов: каждое слово с заглавной буквы
 ' Parameters: Нет
 ' Returns: Ничего. Преобразует имена листов.
 '--------------------------------------------------------------------------------
-Public Sub setSheetNameAllWorldUCase()
+Public Sub SetSheetNameAllWorldUCase()
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлена защита структуры книги", vbCritical)
         Exit Sub

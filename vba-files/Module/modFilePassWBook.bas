@@ -2,7 +2,7 @@ Attribute VB_Name = "modFilePassWBook"
 Option Explicit
 Option Private Module
 
-Public Sub delPasswordWBook()
+Public Sub DelPasswordWBook()
     Dim oForma      As frmOtherToolsDeletePasswordWB
     Set oForma = New frmOtherToolsDeletePasswordWB
     oForma.Show
@@ -23,7 +23,7 @@ Public Sub delPasswordWBook()
     With clsZIP
         If .Initialize(sFullName, True) Then
             If .UnZipFile Then
-                If oForma.lbMsg.Visible Then Call .delPasswordWBook
+                If oForma.lbMsg.Visible Then Call .DelPasswordWBook
                 Dim arr As Variant
                 arr = .getArraySheetsName()
                 If Not IsEmpty(arr) Then

@@ -8,7 +8,7 @@ Option Private Module
 '          объединённой области значением из первой ячейки
 ' Parameters: нет
 '--------------------------------------------------------------------------------
-Public Sub unMergeCells()
+Public Sub UnMergeCells()
 
     Dim targetRange As Range
     Dim currentArea As Range

@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Const FILTER_REVERSE As String = "обратное выделение"
@@ -345,31 +347,31 @@ Private Sub btnDelete_Click()
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(lMainList, btnSortName, 0, False)
+    Call SortColumnList(lMainList, btnSortName, 0, False)
 End Sub
 Private Sub btnSortType_Click()
-    Call sortColumnList(lMainList, btnSortType, 1, False)
+    Call SortColumnList(lMainList, btnSortType, 1, False)
 End Sub
 Private Sub btnSortVisible_Click()
-    Call sortColumnList(lMainList, btnSortVisible, 2, False)
+    Call SortColumnList(lMainList, btnSortVisible, 2, False)
 End Sub
 Private Sub btnSortMacroName_Click()
-    Call sortColumnList(lMainList, btnSortMacroName, 3, False)
+    Call SortColumnList(lMainList, btnSortMacroName, 3, False)
 End Sub
 Private Sub btnSortText_Click()
-    Call sortColumnList(lMainList, btnSortText, 4, False)
+    Call SortColumnList(lMainList, btnSortText, 4, False)
 End Sub
 Private Sub btnSortTop_Click()
-    Call sortColumnList(lMainList, btnSortTop, 5, True)
+    Call SortColumnList(lMainList, btnSortTop, 5, True)
 End Sub
 Private Sub btnSortLeft_Click()
-    Call sortColumnList(lMainList, btnSortLeft, 6, True)
+    Call SortColumnList(lMainList, btnSortLeft, 6, True)
 End Sub
 Private Sub btnSorHeight_Click()
-    Call sortColumnList(lMainList, btnSorHeight, 7, True)
+    Call SortColumnList(lMainList, btnSorHeight, 7, True)
 End Sub
 Private Sub btnSorWidth_Click()
-    Call sortColumnList(lMainList, btnSorWidth, 8, True)
+    Call SortColumnList(lMainList, btnSorWidth, 8, True)
 End Sub
 'end tools
 Private Sub lMainList_Change()
@@ -632,12 +634,4 @@ Private Function getTypeShape(ByVal sMsoType As MsoShapeType) As String
         Case Else: getTypeShape = "Unknown Type"
     End Select
 End Function
-
-
-
-
-
-
-
-
 

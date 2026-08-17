@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Private Const SKOBKI_VAL1 As String = "(01:01:01 один час одна минута одна секунда)"
@@ -169,5 +171,4 @@ Private Sub addFormula()
             cmbRegistr.ListIndex, _
             chcDublVal.Value)
 End Sub
-
 

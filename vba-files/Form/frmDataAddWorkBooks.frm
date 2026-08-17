@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -130,8 +132,8 @@ Private Sub optChoseWB_MouseDown(ByVal Button As Integer, ByVal Shift As Integer
     If IsEmpty(selectedFile) Then Exit Sub
 
     ' --- Обновление полей ---
-    txtWBookName.Value = sGetFileName(CStr(selectedFile))
-    txtPath.Value = sGetParentFolderName(CStr(selectedFile)) & Application.PathSeparator
+    txtWBookName.Value = GetFileName(CStr(selectedFile))
+    txtPath.Value = GetParentFolderName(CStr(selectedFile)) & Application.PathSeparator
 
     ' --- Автовыбор типа файла ---
     Call SelectFileTypeByExtension(CStr(selectedFile))
@@ -264,7 +266,7 @@ End Sub
 Private Sub SelectFileTypeByExtension(ByVal FilePath As String)
 
     Dim ext         As String
-    ext = LCase$(sGetExtensionName(FilePath))
+    ext = LCase$(GetExtensionName(FilePath))
 
     Select Case ext
         Case "xlsm": optXLSM.Value = True
@@ -278,7 +280,7 @@ End Sub
 Private Function SelectFileViaDialog(ByVal initialPath As String) As Variant
 
     Dim arrResult() As String
-    arrResult = fileDialogFun(initialPath, False, , False)
+    arrResult = FileDialogFun(initialPath, False, , False)
 
     If (Not (Not arrResult)) = 0 Then
         SelectFileViaDialog = Empty
@@ -337,7 +339,4 @@ Private Function BuildPath(ByVal folder As String, ByVal FileName As String) As 
     BuildPath = folder & FileName
 
 End Function
-
-
-
 

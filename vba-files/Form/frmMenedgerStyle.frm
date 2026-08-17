@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 '--------------------------------------------------------------------------------
@@ -48,15 +50,15 @@ Private Sub btnDelete_Click()
 End Sub
 
 Private Sub btnSortNum_Click()
-    Call sortColumnList(listNames, btnSortNum, 0, True)
+    Call SortColumnList(listNames, btnSortNum, 0, True)
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(listNames, btnSortName, 1, False)
+    Call SortColumnList(listNames, btnSortName, 1, False)
 End Sub
 
 Private Sub btnSortTypeStyle_Click()
-    Call sortColumnList(listNames, btnSortTypeStyle, 2, False)
+    Call SortColumnList(listNames, btnSortTypeStyle, 2, False)
 End Sub
 
 
@@ -64,13 +66,13 @@ Private Sub cmbFilter_Change()
     With cmbFilter
         If .ListIndex < 0 Then
             If .Value = vbNullString Then
-                Call selectedItemListSheets(listNames, vbNullString, 1)
+                Call SelectedItemListSheets(listNames, vbNullString, 1)
             Else
-                Call selectedItemListSheets(listNames, "*" & .Value & "*", 1)
+                Call SelectedItemListSheets(listNames, "*" & .Value & "*", 1)
             End If
         Else
             ' Оптимизация: Direct access по имени без необходимости предварительной активации
-            Call selectedItemListSheets(listNames, cmbFilter.Value, 1)
+            Call SelectedItemListSheets(listNames, cmbFilter.Value, 1)
         End If
     End With
 End Sub
@@ -164,11 +166,11 @@ Private Sub listFilters_Change()
     With listFilters
         If .ListIndex < 0 Then Exit Sub
         Select Case .Value
-            Case FILTER_ALL: Call selectedItemListSheets(listNames, "*", 1)
-            Case FILTER_NONE: Call selectedItemListSheets(listNames, vbNullString, 1)
+            Case FILTER_ALL: Call SelectedItemListSheets(listNames, "*", 1)
+            Case FILTER_NONE: Call SelectedItemListSheets(listNames, vbNullString, 1)
             Case FILTER_REVERSE: Call reversSelected
-            Case FILTER_SISTEM: Call selectedItemListSheets(listNames, VALUE_SISTEM, 2)
-            Case FILTER_CUSTOM: Call selectedItemListSheets(listNames, VALUE_CUSTOM, 2)
+            Case FILTER_SISTEM: Call SelectedItemListSheets(listNames, VALUE_SISTEM, 2)
+            Case FILTER_CUSTOM: Call SelectedItemListSheets(listNames, VALUE_CUSTOM, 2)
         End Select
     End With
 End Sub

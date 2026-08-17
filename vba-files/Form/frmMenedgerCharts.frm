@@ -71,19 +71,19 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub btnSortNum_Click()
-    Call sortColumnList(listChart, btnSortNum, 0, True)
+    Call SortColumnList(listChart, btnSortNum, 0, True)
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(listChart, btnSortName, 1, False)
+    Call SortColumnList(listChart, btnSortName, 1, False)
 End Sub
 
 Private Sub btnSorChartName_Click()
-    Call sortColumnList(listChart, btnSorChartName, 2, False)
+    Call SortColumnList(listChart, btnSorChartName, 2, False)
 End Sub
 
 Private Sub btnSorChartType_Click()
-    Call sortColumnList(listChart, btnSorChartType, 3, False)
+    Call SortColumnList(listChart, btnSorChartType, 3, False)
 End Sub
 
 Private Sub lbOK_Click()
@@ -127,11 +127,11 @@ Private Sub listFilters_Change()
     With listFilters
         If .ListIndex < 0 Then Exit Sub
         Select Case .Value
-            Case FILTER_ALL: Call selectedItemListSheets(listChart, "*", 1)
-            Case FILTER_NONE: Call selectedItemListSheets(listChart, vbNullString, 1)
+            Case FILTER_ALL: Call SelectedItemListSheets(listChart, "*", 1)
+            Case FILTER_NONE: Call SelectedItemListSheets(listChart, vbNullString, 1)
             Case FILTER_REVERSE: Call reversSelected
             Case Else:
-                If .ListIndex > -1 Then Call selectedItemListSheets(listChart, .List(.ListIndex, 0), 1)
+                If .ListIndex > -1 Then Call SelectedItemListSheets(listChart, .List(.ListIndex, 0), 1)
         End Select
     End With
 End Sub
@@ -169,13 +169,13 @@ Private Sub cmbFilter_Change()
     With cmbFilter
         If .ListIndex < 0 Then
             If .Value = vbNullString Then
-                Call selectedItemListSheets(listChart, vbNullString, 2)
+                Call SelectedItemListSheets(listChart, vbNullString, 2)
             Else
-                Call selectedItemListSheets(listChart, "*" & .Value & "*", 2)
+                Call SelectedItemListSheets(listChart, "*" & .Value & "*", 2)
             End If
         Else
             ' Оптимизация: Direct access по имени без необходимости предварительной активации
-            Call selectedItemListSheets(listChart, cmbFilter.Value, 2)
+            Call SelectedItemListSheets(listChart, cmbFilter.Value, 2)
         End If
     End With
 End Sub
@@ -301,4 +301,3 @@ Private Sub ApplyColorsToChart(ByRef oChart As Chart)
         End If
     Next iSeries
 End Sub
-

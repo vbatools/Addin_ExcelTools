@@ -3,7 +3,7 @@ Option Explicit
 Option Private Module
 
 Private Sub btnCalculationOperations(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     frmFormulaCalculationOperations.Show
 End Sub
 
@@ -15,7 +15,7 @@ End Sub
 ' control - Ribbon object (IRibbonControl)
 '--------------------------------------------------------------------------------
 Private Sub btnCatchError(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     ' Проверка типа выделенного объекта
     If TypeName(Selection) <> "Range" Then
         Call MsgBox("Пожалуйста, выделите диапазон ячеек.", vbExclamation, "Внимание")
@@ -115,26 +115,26 @@ End Sub
 
 
 Private Sub btnAddFormulaPropSumm(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaWordsNumbers.Show
 End Sub
 
 Private Sub btnAddFormulaPropDate(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaWordsDate.Show
 End Sub
 
 Private Sub btnAddFormulaPropTime(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaWordsTime.Show
 End Sub
 
 Private Sub btnAddFormulaPropQRCode(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaQRCode.Show
 End Sub
 
 Private Sub btnAddFileQRCode(control As IRibbonControl)
-    If isNotOpenWBooks Then Exit Sub
+    If IsNotOpenWBooks Then Exit Sub
     Call frmFormulaQRCodeAsFile.Show
 End Sub

@@ -136,7 +136,7 @@ Public Function Initialize(ByVal sPathFile As String, ByVal addBackup As Boolean
     With mFSO
         mFileFolder = .GetParentFolderName(sPathFile)
         mFileExtension = .GetExtensionName(sPathFile)
-        mFileName = .getFileName(sPathFile)
+        mFileName = .GetFileName(sPathFile)
         If mFileName Like "*—*" Then
             mFileName = VBA.Replace(mFileName, "—", "-")
             Name mFileFullName As mFileFolder & Application.PathSeparator & mFileName
@@ -389,11 +389,11 @@ Public Function delPasswordSheet(ByVal idSheet As String) As Boolean
     End If
 End Function
 
-Public Function delPasswordWBook() As Boolean
+Public Function DelPasswordWBook() As Boolean
     Dim sPathXML    As String
     ' Get path to sheet settings file
     sPathXML = GetSettings(ExlFileWorkBook)
-    delPasswordWBook = delXMLNode(sPathXML, "/workbook/workbookProtection")
+    DelPasswordWBook = delXMLNode(sPathXML, "/workbook/workbookProtection")
 End Function
 
 Private Function delXMLNode(ByVal sPathXML As String, ByVal sXPath As String) As Boolean

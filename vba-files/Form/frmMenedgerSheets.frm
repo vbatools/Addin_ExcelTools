@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -84,35 +86,35 @@ End Sub
 ' кнопки инструментов
 '--------------------------------------------------------------------------------
 Private Sub btnContent_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsLinks.Show
     Me.Show
 End Sub
 
 Private Sub btnExport_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsExportSheets.Show
     Me.Show
 End Sub
 
 Private Sub btnFreezePane_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsFreezePane.Show
     Me.Show
 End Sub
 
 Private Sub btnGrouping_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsGroop.Show
     Me.Show
 End Sub
 
 Private Sub btnImport_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsImpotrSheets.Show
     Call refreshForm
@@ -120,14 +122,14 @@ Private Sub btnImport_Click()
 End Sub
 
 Private Sub btnSync_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsZoom.Show
     Me.Show
 End Sub
 
 Private Sub btnSyncSheets_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
 
     Dim Sh          As Object
     Set Sh = ActiveSheet
@@ -178,21 +180,21 @@ Private Sub btnSyncSheets_Click()
 End Sub
 
 Private Sub btnProtect_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsProtected.Show
     Me.Show
 End Sub
 
 Private Sub btnSort_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Me.Hide
     frmMenedgerSheetsSortSheets.Show
     Me.Show
 End Sub
 
 Private Sub btnCopy_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Dim iCopyNumber As Integer
     iCopyNumber = Application.InputBox("Введите количество копий:", "Копирователь листов", Default:=1, Type:=1)
     If iCopyNumber < 1 Then Exit Sub
@@ -222,7 +224,7 @@ End Sub
 
 
 Private Sub btnDelete_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     If MsgBox("Удалить выбранные листы?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
     Dim i           As Long
     Call DisableApplicationSettings
@@ -242,7 +244,7 @@ Private Sub btnDelete_Click()
 End Sub
 
 Private Sub btnShowHide_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Dim i           As Long
     Dim sTypeVisible As String
     Call DisableApplicationSettings
@@ -270,13 +272,13 @@ Private Sub btnShowHide_Click()
 End Sub
 
 Private Sub btnAddNewSheet_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Sheets.Add After:=ActiveSheet
     Call refreshForm
 End Sub
 
 Private Sub btnMoveAsList_Click()
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Dim i           As Long
     Dim shVisible   As XlSheetVisibility
     With listSheets
@@ -311,7 +313,7 @@ Private Sub btnLast_Click()
 End Sub
 
 Private Sub moveItemList(ByRef List As MSForms.listBox, ByVal tpMove As typeMoveItem)
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Dim i           As Long
     Dim Sh          As Variant
     Dim index       As Integer
@@ -417,39 +419,39 @@ End Function
 ' кнопки сортировки
 '--------------------------------------------------------------------------------
 Private Sub btnSortNum_Click()
-    Call sortColumnList(listSheets, btnSortNum, 0, True)
+    Call SortColumnList(listSheets, btnSortNum, 0, True)
 End Sub
 
 Private Sub btnSortName_Click()
-    Call sortColumnList(listSheets, btnSortName, 1, False, True)
+    Call SortColumnList(listSheets, btnSortName, 1, False, True)
 End Sub
 
 Private Sub btnSortType_Click()
-    Call sortColumnList(listSheets, btnSortType, 2)
+    Call SortColumnList(listSheets, btnSortType, 2)
 End Sub
 
 Private Sub btnSortVisible_Click()
-    Call sortColumnList(listSheets, btnSortVisible, 3)
+    Call SortColumnList(listSheets, btnSortVisible, 3)
 End Sub
 
 Private Sub btnSortProtect_Click()
-    Call sortColumnList(listSheets, btnSortProtect, 4)
+    Call SortColumnList(listSheets, btnSortProtect, 4)
 End Sub
 
 Private Sub btnSortRange_Click()
-    Call sortColumnList(listSheets, btnSortRange, 5)
+    Call SortColumnList(listSheets, btnSortRange, 5)
 End Sub
 
 Private Sub btnSortCells_Click()
-    Call sortColumnList(listSheets, btnSortCells, 6, True)
+    Call SortColumnList(listSheets, btnSortCells, 6, True)
 End Sub
 
 Private Sub btnSortInfo_Click()
-    Call sortColumnList(listSheets, btnSortInfo, 8, True)
+    Call SortColumnList(listSheets, btnSortInfo, 8, True)
 End Sub
 
 Private Sub listRegistr_DblClick(ByVal Cancel As MSForms.ReturnBoolean)
-    If chekProtectStructure() Then Exit Sub
+    If CheckProtectStructure() Then Exit Sub
     Dim i           As Long
     Dim sName       As String
     Call DisableApplicationSettings
@@ -480,14 +482,14 @@ Private Sub cmbSheets_Change()
     With cmbSheets
         If .ListIndex < 0 Then
             If .Value = vbNullString Then
-                Call selectedItemListSheets(listSheets, vbNullString, 1)
+                Call SelectedItemListSheets(listSheets, vbNullString, 1)
             Else
-                Call selectedItemListSheets(listSheets, "*" & .Value & "*", 1)
+                Call SelectedItemListSheets(listSheets, "*" & .Value & "*", 1)
             End If
         Else
             ' Оптимизация: Direct access по имени без необходимости предварительной активации
             ActiveWorkbook.Sheets(.Value).Activate
-            Call selectedItemListSheets(listSheets, cmbSheets.Value, 1)
+            Call SelectedItemListSheets(listSheets, cmbSheets.Value, 1)
         End If
     End With
 End Sub
@@ -505,20 +507,20 @@ Private Sub listFilters_Change()
     With listFilters
         If .ListIndex < 0 Then Exit Sub
         Select Case .Value
-            Case FILTER_ALL: Call selectedItemListSheets(listSheets, "*", 1)
-            Case FILTER_NONE: Call selectedItemListSheets(listSheets, vbNullString, 1)
+            Case FILTER_ALL: Call SelectedItemListSheets(listSheets, "*", 1)
+            Case FILTER_NONE: Call SelectedItemListSheets(listSheets, vbNullString, 1)
             Case FILTER_REVERSE: Call reversSelected
-            Case FILTER_VISIBLE: Call selectedItemListSheets(listSheets, VALUE_VISIBLE, 3)
-            Case FILTER_HIDDEN: Call selectedItemListSheets(listSheets, VALUE_HIDDEN, 3)
-            Case FILTER_VERY_HIDDEN: Call selectedItemListSheets(listSheets, VALUE_VERY_HIDDEN, 3)
-            Case FILTER_PROTECTED: Call selectedItemListSheets(listSheets, VALUE_PROTECTED, 4)
-            Case FILTER_UNPROTECTED: Call selectedItemListSheets(listSheets, vbNullString, 4)
-            Case FILTER_EMPTY: Call selectedItemListSheets(listSheets, vbNullString, 6)
-            Case FILTER_NOT_EMPTY: Call selectedItemListSheets(listSheets, "*[1-9]*", 6)
-            Case FILTER_SHEETS: Call selectedItemListSheets(listSheets, VALUE_SHEET_TYPE, 2)
-            Case FILTER_CHARTS: Call selectedItemListSheets(listSheets, VALUE_CHART_TYPE, 2)
-            Case FILTER_TAB_COLOR: Call selectedItemListSheets(listSheets, "*[1-9]*", 9)
-            Case FILTER_TAB_NOT_COLOR: Call selectedItemListSheets(listSheets, 0, 9)
+            Case FILTER_VISIBLE: Call SelectedItemListSheets(listSheets, VALUE_VISIBLE, 3)
+            Case FILTER_HIDDEN: Call SelectedItemListSheets(listSheets, VALUE_HIDDEN, 3)
+            Case FILTER_VERY_HIDDEN: Call SelectedItemListSheets(listSheets, VALUE_VERY_HIDDEN, 3)
+            Case FILTER_PROTECTED: Call SelectedItemListSheets(listSheets, VALUE_PROTECTED, 4)
+            Case FILTER_UNPROTECTED: Call SelectedItemListSheets(listSheets, vbNullString, 4)
+            Case FILTER_EMPTY: Call SelectedItemListSheets(listSheets, vbNullString, 6)
+            Case FILTER_NOT_EMPTY: Call SelectedItemListSheets(listSheets, "*[1-9]*", 6)
+            Case FILTER_SHEETS: Call SelectedItemListSheets(listSheets, VALUE_SHEET_TYPE, 2)
+            Case FILTER_CHARTS: Call SelectedItemListSheets(listSheets, VALUE_CHART_TYPE, 2)
+            Case FILTER_TAB_COLOR: Call SelectedItemListSheets(listSheets, "*[1-9]*", 9)
+            Case FILTER_TAB_NOT_COLOR: Call SelectedItemListSheets(listSheets, 0, 9)
         End Select
     End With
 End Sub
@@ -695,6 +697,4 @@ Private Sub refreshForm()
     shActive.Activate
     Call RestoreApplicationSettings
 End Sub
-
-
 

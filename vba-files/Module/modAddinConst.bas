@@ -43,7 +43,7 @@ Public Function Version(ByVal Parametr As enumParametrVersion, Optional bOnlyVal
                 sRes = sRes & arr(i, 1) & ": " & arr(i, 2)
             Next i
         Case Else:
-            If arr(Parametr, 3) = 1 Then arr(i, 2) = VBA.format$(arr(Parametr, 2), FORMAT_DATE)
+            If arr(Parametr, 3) = 1 Then arr(Parametr, 2) = VBA.format$(arr(Parametr, 2), FORMAT_DATE)
             If bOnlyValue Then
                 sRes = arr(Parametr, 2)
             Else

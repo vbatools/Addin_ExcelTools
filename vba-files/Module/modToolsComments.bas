@@ -2,7 +2,7 @@ Attribute VB_Name = "modToolsComments"
 Option Explicit
 Option Private Module
 
-Public Sub addSheetsComments()
+Public Sub AddSheetsComments()
 
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Включина защита структуры книги!", vbCritical)
@@ -75,7 +75,7 @@ Public Sub addSheetsComments()
     Call RestoreApplicationSettings
 End Sub
 
-Public Sub sizeTextComment()
+Public Sub SizeTextComment()
     Dim sinSize     As Single
     sinSize = Application.InputBox(prompt:="Ведите размер шрифта", Type:=1)
     If sinSize <= 0 Then Exit Sub
@@ -85,7 +85,7 @@ Public Sub sizeTextComment()
     Next oComm
 End Sub
 
-Public Sub showHidenComment(ByVal bShow As Boolean)
+Public Sub ShowHiddenComment(ByVal bShow As Boolean)
     Dim oComm       As Comment
     For Each oComm In ActiveSheet.Comments
         oComm.Visible = bShow

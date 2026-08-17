@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -23,7 +25,7 @@ End Sub
 
 
 Private Sub Label1_Click()
-    'call URLLinks
+    Call URLLinks("https://github.com/vbatools/Addin_ExcelTools")
 End Sub
 
 Private Sub UserForm_Initialize()

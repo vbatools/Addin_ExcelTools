@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 
@@ -148,7 +150,7 @@ End Sub
 
 Private Sub txtPath_DropButtonClick()
     Me.Hide
-    txtPath.Value = pathDialogFun(ActiveWorkbook.Path)
+    txtPath.Value = PathDialogFun(ActiveWorkbook.Path)
     Me.Show
 End Sub
 

@@ -57,7 +57,7 @@ Private Const PATH_WINRAR_X86 As String = "C:\Program Files (x86)\WinRAR\WinRAR.
 ' ============================================
 ' ГЛАВНАЯ ПРОЦЕДУРА ИЗВЛЕЧЕНИЯ ФАЙЛОВ
 ' ============================================
-Public Sub fileExtractorFromExcelFile()
+Public Sub FileExtractorFromExcelFile()
     Dim arrFiles()  As String
     Dim clsZIP      As clsOfficeArchiveManager
     Dim arrFilesTable As Variant
@@ -70,7 +70,7 @@ Public Sub fileExtractorFromExcelFile()
     On Error GoTo ErrorHandler
 
     ' Получаем список файлов через диалог
-    arrFiles = fileDialogFun(ActiveWorkbook.Path, False, TYPE_FILES)
+    arrFiles = FileDialogFun(ActiveWorkbook.Path, False, TYPE_FILES)
     If (Not (Not (arrFiles))) = 0 Then Exit Sub
 
     ' Инициализируем архивный менеджер
@@ -87,7 +87,7 @@ Public Sub fileExtractorFromExcelFile()
 
             ' Создаём папку для извлечённых файлов
             Set oFSO = CreateObject("Scripting.FileSystemObject")
-            sPathExtractFiles = BuildExtractPath(sGetParentFolderName(arrFiles(1, 1)), sGetBaseName(arrFiles(1, 1)))
+            sPathExtractFiles = BuildExtractPath(GetParentFolderName(arrFiles(1, 1)), GetBaseName(arrFiles(1, 1)))
 
             If Not FileHave(sPathExtractFiles, vbDirectory) Then
                 MkDir sPathExtractFiles
@@ -98,10 +98,10 @@ Public Sub fileExtractorFromExcelFile()
             ' Извлекаем файлы
             For lI = 1 To UBound(arrFilesTable, 1)
                 sFullNameFile = arrFilesTable(lI, 2)
-                If VBA.LCase$(sGetExtensionName(sFullNameFile)) = "bin" Then
+                If VBA.LCase$(GetExtensionName(sFullNameFile)) = "bin" Then
                     ConvertBinToFile sFullNameFile, sPathExtractFiles, oFSO
                 Else
-                    Call MoveFile(sFullNameFile, sPathExtractFiles & Application.PathSeparator & sGetFileName(sFullNameFile))
+                    Call MoveFile(sFullNameFile, sPathExtractFiles & Application.PathSeparator & GetFileName(sFullNameFile))
                 End If
             Next lI
         End If
@@ -119,7 +119,7 @@ CleanUp:
 ErrorHandler:
     MsgBox "Ошибка при извлечении файлов:" & vbCrLf & _
             "Номер: " & Err.Number & vbCrLf & _
-            "Описание: " & Err.Description, vbCritical, "fileExtractorFromExcelFile"
+            "Описание: " & Err.Description, vbCritical, "FileExtractorFromExcelFile"
     Resume CleanUp
 End Sub
 

@@ -13,6 +13,8 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
+
+
 Option Explicit
 
 Dim bFlagProtect    As Boolean
@@ -82,8 +84,8 @@ Private Sub btnFixStyles_Click()
     With wbTarget
         ListMain.AddItem "": ListMain.AddItem ""
         ListMain.AddItem "Лечение:"
-        sExt = sGetExtensionName(wbTarget.Name)
-        sNewName = sGetBaseName(wbTarget.Name) & "_CURED." & sExt
+        sExt = GetExtensionName(wbTarget.Name)
+        sNewName = GetBaseName(wbTarget.Name) & "_CURED." & sExt
         ListMain.AddItem "Файл сохраняется под новым именем " & sNewName & " ..."
         Err.Clear
         wbTarget.SaveAs wbTarget.Path & Application.PathSeparator & sNewName
