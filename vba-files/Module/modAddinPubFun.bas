@@ -18,6 +18,13 @@ Option Private Module
 Dim stateCalculation As XlCalculation
 Dim stateReferenceStyle As XlReferenceStyle
 
+'--------------------------------------------------------------------------------
+' Sub: DisableApplicationSettings
+' Purpose:  Отключает обновление экрана и другие настройки приложения для повышения производительности
+'           во время выполнения макросов. Сохраняет текущие настройки для последующего восстановления.
+' Remarks:  Эта процедура должна использоваться совместно с RestoreApplicationSettings для
+'           корректного восстановления настроек приложения после завершения операций.
+'--------------------------------------------------------------------------------
 Public Sub DisableApplicationSettings()
     If Workbooks.Count = 0 Then Exit Sub
     With Application
@@ -30,6 +37,12 @@ Public Sub DisableApplicationSettings()
     End With
 End Sub
 
+'--------------------------------------------------------------------------------
+' Sub: RestoreApplicationSettings
+' Purpose:  Восстанавливает настройки приложения, которые были изменены DisableApplicationSettings.
+' Remarks:  Эта процедура должна вызываться после DisableApplicationSettings для восстановления
+'           нормального поведения Excel после выполнения макросов.
+'--------------------------------------------------------------------------------
 Public Sub RestoreApplicationSettings()
     If Workbooks.Count = 0 Then Exit Sub
     With Application
@@ -41,6 +54,13 @@ Public Sub RestoreApplicationSettings()
     End With
 End Sub
 
+'--------------------------------------------------------------------------------
+' Sub: OpenPath
+' Purpose:  Открывает указанную папку в проводнике Windows
+' Parameters:
+'   defaultPath - Путь к папке, которую нужно открыть
+' Remarks:  Использует Shell для запуска проводника Windows с указанным путем
+'--------------------------------------------------------------------------------
 Public Sub OpenPath(ByVal defaultPath As String)
     Dim ActivePath  As String
     ActivePath = """" & defaultPath & """"
@@ -49,10 +69,10 @@ End Sub
 
 '--------------------------------------------------------------------------------
 ' Function: WorkbookIsOpen
-' Purpose: Проверяет, открыта ли книга с указанным именем
+' Purpose:  Проверяет, открыта ли книга с указанным именем
 ' Parameters:
 '   wbName - Имя книги (без пути)
-' Returns: Boolean - True если книга открыта
+' Returns:  Boolean - True если книга открыта
 '--------------------------------------------------------------------------------
 Public Function WorkbookIsOpen(ByVal wbName As String) As Boolean
     Dim wb          As Workbook
@@ -65,12 +85,12 @@ Public Function WorkbookIsOpen(ByVal wbName As String) As Boolean
 End Function
 
 '--------------------------------------------------------------------------------
-' Function: SheetExists
-' Purpose: Проверяет наличие листа в указанной книге
+' Function: HaveSheetInFile
+' Purpose:  Проверяет наличие листа в указанной книге
 ' Parameters:
 '   wb - Ссылка на книгу
 '   sheetName - Имя листа
-' Returns: Boolean - True если лист существует
+' Returns:  Boolean - True если лист существует
 '--------------------------------------------------------------------------------
 Public Function HaveSheetInFile(ByRef wb As Workbook, ByVal sheetName As String) As Boolean
     Dim ws          As Worksheet
@@ -86,9 +106,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Sub: ConfigureDropButton
-' Purpose: Настраивает отображение кнопки выпадающего списка для TextBox
+' Purpose:  Настраивает отображение кнопки выпадающего списка для TextBox
 ' Parameters:
 '   txtBox - Ссылка на элемент управления TextBox
+' Remarks:  Устанавливает стиль кнопки выпадающего списка и режим отображения
 '--------------------------------------------------------------------------------
 Public Sub ConfigureDropButton(ByRef txtBox As MSForms.TextBox)
     If txtBox Is Nothing Then Exit Sub
@@ -99,12 +120,19 @@ Public Sub ConfigureDropButton(ByRef txtBox As MSForms.TextBox)
     End With
 End Sub
 
+'--------------------------------------------------------------------------------
+' Sub: CenterUserForm
+' Purpose:  Центрирует форму относительно главного окна Excel
+' Parameters:
+'   frm - Ссылка на форму, которую нужно центрировать
+' Remarks:  Также обеспечивает, что форма не будет расположена за пределами экрана
+'--------------------------------------------------------------------------------
 Public Sub CenterUserForm(ByRef frm As Object)
     With frm
         .StartUpPosition = 0
         .Left = Application.Left + (Application.Width - .Width) \ 2
         .Top = Application.Top + (Application.Height - .Height) \ 2
-        
+
         ' Защита от отрицательных координат
         If .Left < 0 Then .Left = 0
         If .Top < 0 Then .Top = 0
@@ -172,6 +200,12 @@ Public Sub RestrictNavigationKeys(ByRef KeyCode As MSForms.ReturnInteger, ByRef 
     End Select
 End Sub
 
+'--------------------------------------------------------------------------------
+' Sub: ValidateNumericKey
+' Purpose: Проверяет ввод в текстовое поле, разрешая только цифры.
+' Parameters:
+'   KeyAscii - Код нажатой клавиши (модифицируется для блокировки)
+'--------------------------------------------------------------------------------
 Public Sub ValidateNumericKey(ByRef KeyAscii As MSForms.ReturnInteger)
     If KeyAscii < 48 Or KeyAscii > 57 Then KeyAscii = 0
 End Sub
@@ -263,6 +297,13 @@ Public Function CleanFileName(ByVal FileName As String) As String
     CleanFileName = FileName
 
 End Function
+'--------------------------------------------------------------------------------
+' Function: PathDialogFun
+' Purpose: Открывает диалог выбора папки и возвращает выбранный путь.
+' Parameters:
+'   defaultPath - Начальный путь для диалога (по умолчанию vbNullString)
+' Returns: String - Путь к выбранной папке или vbNullString, если выбор отменен
+'--------------------------------------------------------------------------------
 Public Function PathDialogFun(Optional defaultPath As String = vbNullString)
     With Application.FileDialog(msoFileDialogFolderPicker)
         .ButtonName = "Выбрать"
@@ -273,11 +314,21 @@ Public Function PathDialogFun(Optional defaultPath As String = vbNullString)
     End With
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: FileDialogFun
+' Purpose: Открывает диалог выбора файлов и возвращает массив путей к выбранным файлам.
+' Parameters:
+'   sPath - Начальный путь для диалога
+'   bMultiSelect - Разрешить множественный выбор файлов
+'   sExpansion - Фильтр расширений файлов (по умолчанию "*.xlsm;*.xlsb;*.xlsx;*.xls")
+'   bShowMsg - Показывать сообщение об ошибке, если файлы не выбраны (по умолчанию True)
+' Returns: String() - Массив путей к выбранным файлам или пустой массив, если выбор отменен
+'--------------------------------------------------------------------------------
 Public Function FileDialogFun(ByVal sPath As String, _
         ByRef bMultiSelect As Boolean, _
         Optional sExpansion As String = "*.xlsm;*.xlsb;*.xlsx;*.xls", Optional bShowMsg As Boolean = True) As String()
 
-    If sPath = vbNullString Or Not (Dir(sPath, vbDirectory) <> vbNullString) Then sPath = ThisWorkbook.Path
+    If sPath = vbNullString Or Not (Dir(sPath, vbDirectory) <> vbNullString) Then sPath = ActiveWorkbook.Path
 
     Dim oFd         As FileDialog
     Set oFd = Application.FileDialog(msoFileDialogFilePicker)
@@ -313,6 +364,13 @@ Public Function FileDialogFun(ByVal sPath As String, _
     'If (Not (Not (v))) = 0 Then Exit Sub
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: GetBaseName
+' Purpose: Возвращает имя файла без расширения из указанного пути.
+' Parameters:
+'   sPathFile - Путь к файлу
+' Returns: String - Имя файла без расширения
+'--------------------------------------------------------------------------------
 Public Function GetBaseName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает имя (без расширения) последнего компонента в заданном пути.
@@ -322,6 +380,13 @@ Public Function GetBaseName(ByVal sPathFile As String) As String
     Set FSO = Nothing
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: GetFileName
+' Purpose: Возвращает имя файла с расширением из указанного пути.
+' Parameters:
+'   sPathFile - Путь к файлу
+' Returns: String - Имя файла с расширением
+'--------------------------------------------------------------------------------
 Public Function GetFileName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает имя (с расширением) последнего компонента в заданном пути.
@@ -331,6 +396,13 @@ Public Function GetFileName(ByVal sPathFile As String) As String
     Set FSO = Nothing
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: GetParentFolderName
+' Purpose: Возвращает путь к родительской папке из указанного пути.
+' Parameters:
+'   sPathFile - Путь к файлу или папке
+' Returns: String - Путь к родительской папке
+'--------------------------------------------------------------------------------
 Public Function GetParentFolderName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает путь к последнему компоненту в заданном пути (его каталог).
@@ -340,6 +412,13 @@ Public Function GetParentFolderName(ByVal sPathFile As String) As String
     Set FSO = Nothing
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: GetExtensionName
+' Purpose: Возвращает расширение файла из указанного пути.
+' Parameters:
+'   sPathFile - Путь к файлу
+' Returns: String - Расширение файла
+'--------------------------------------------------------------------------------
 Public Function GetExtensionName(ByVal sPathFile As String) As String
     'sPathFile - строка, путь.
     'возвращает расширение последнего компонента в заданном пути.
@@ -349,6 +428,12 @@ Public Function GetExtensionName(ByVal sPathFile As String) As String
     Set FSO = Nothing
 End Function
 
+'--------------------------------------------------------------------------------
+' Sub: DeleteItemInListBox
+' Purpose: Удаляет выделенные элементы из ListBox.
+' Parameters:
+'   listBox - Ссылка на элемент управления ListBox
+'--------------------------------------------------------------------------------
 Public Sub DeleteItemInListBox(ByRef listBox As MSForms.listBox)
     With listBox
         Dim i       As Long
@@ -357,13 +442,13 @@ Public Sub DeleteItemInListBox(ByRef listBox As MSForms.listBox)
         Next i
     End With
 End Sub
-
 '--------------------------------------------------------------------------------
 ' Sub: SelectedItemListSheets
 ' Purpose: Выполняет фильтрацию элементов списка listSheets на основе шаблона.
 ' Parameters:
-'   sValue - Шаблон для фильтрации (поддерживает символы подстановки Like).
-'   iCol   - Индекс столбца в списке, по которому производится сравнение.
+'   List - Ссылка на элемент управления ListBox
+'   sValue - Шаблон для фильтрации (поддерживает символы подстановки Like)
+'   iCol   - Индекс столбца в списке, по которому производится сравнение
 '--------------------------------------------------------------------------------
 Public Sub SelectedItemListSheets(ByRef List As MSForms.listBox, ByRef sValue As String, ByRef iCol As Integer)
     
@@ -379,6 +464,14 @@ goExitSub:
     On Error GoTo 0
 End Sub
 
+'--------------------------------------------------------------------------------
+' Function: FileHave
+' Purpose: Проверяет существование файла или папки по указанному пути.
+' Parameters:
+'   Path - Путь к файлу или папке
+'   fileAttribute - Тип объекта для проверки (vbDirectory для папки, vbNormal для файла)
+' Returns: Boolean - True, если объект существует
+'--------------------------------------------------------------------------------
 Public Function FileHave(ByVal Path As String, ByVal fileAttribute As VbFileAttribute) As Boolean
     Dim FSO         As Object
 
@@ -510,6 +603,12 @@ Public Sub SortColumnList(ByRef lMainList As MSForms.listBox, ByRef oLabelBtn As
     End With
 End Sub
 
+'--------------------------------------------------------------------------------
+' Function: CheckProtectStructure
+' Purpose: Проверяет, защищена ли структура активной книги, и выводит сообщение об ошибке, если защищена.
+
+' Returns: Boolean - True, если структура книги защищена
+'--------------------------------------------------------------------------------
 Public Function CheckProtectStructure() As Boolean
     If ActiveWorkbook.ProtectStructure Then
         Call MsgBox("Установлен пароль на структуру книги, выполнение операции не возножно!", vbCritical)
@@ -517,6 +616,13 @@ Public Function CheckProtectStructure() As Boolean
     End If
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: GetColorFromDialog
+' Purpose: Открывает диалог выбора цвета и возвращает выбранный цвет.
+' Parameters:
+'   defaultColor - Цвет по умолчанию для диалога (по умолчанию 255 - синий)
+' Returns: Long - Цвет в формате RGB или -1, если выбор отменен
+'--------------------------------------------------------------------------------
 Public Function GetColorFromDialog(Optional defaultColor As Long = 255) As Long
     Const COLOR_INDEX As Long = 56
     Dim originalColor As Long
@@ -538,6 +644,14 @@ Public Function GetColorFromDialog(Optional defaultColor As Long = 255) As Long
     ActiveWorkbook.Colors(COLOR_INDEX) = originalColor
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: MoveFile
+' Purpose: Копирует файл из одного места в другое (фактически перемещает).
+' Parameters:
+'   OldFile - Путь к исходному файлу
+'   NewPathFile - Путь к новому местоположению файла
+' Returns: String - Пустая строка при успешном выполнении, сообщение об ошибке при неудаче
+'--------------------------------------------------------------------------------
 Public Function MoveFile(OldFile As String, NewPathFile As String) As String
     'Перемещение файлов
     Dim objFSO As Object, objFile As Object
@@ -549,6 +663,12 @@ Public Function MoveFile(OldFile As String, NewPathFile As String) As String
     MoveFile = vbNullString
 End Function
 
+'--------------------------------------------------------------------------------
+' Sub: URLLinks
+' Purpose: Открывает указанный URL в браузере по умолчанию.
+' Parameters:
+'   url_str - URL для открытия
+'--------------------------------------------------------------------------------
 Public Sub URLLinks(ByVal url_str As String)
     On Error GoTo ErrorHandler
 
@@ -566,7 +686,13 @@ ErrorHandler:
     Err.Clear
 End Sub
 
-' Main function: Returns a two-dimensional array with file information
+'--------------------------------------------------------------------------------
+' Function: GetFilesTable
+' Purpose: Возвращает двумерный массив с информацией о файлах в указанной папке и её подпапках.
+' Parameters:
+'   folderPath - Путь к папке для сканирования
+' Returns: Variant - Двумерный массив (имя, путь, размер, дата изменения) или пустой массив, если файлы не найдены
+'--------------------------------------------------------------------------------
 Function GetFilesTable(ByVal folderPath As String) As Variant
     Dim FSO         As Object
     Dim folder      As Object
@@ -612,7 +738,13 @@ Function GetFilesTable(ByVal folderPath As String) As Variant
     Set FSO = Nothing
 End Function
 
-' Helper function: Recursive file count
+'--------------------------------------------------------------------------------
+' Function: CountFilesRecursive
+' Purpose: Рекурсивно подсчитывает количество файлов в папке и её подпапках.
+' Parameters:
+'   currentFolder - Объект папки для подсчёта
+' Returns: Long - Общее количество файлов
+'--------------------------------------------------------------------------------
 Private Function CountFilesRecursive(ByVal currentFolder As Object) As Long
     Dim subFolder   As Object
     Dim lCount      As Long
@@ -626,7 +758,14 @@ Private Function CountFilesRecursive(ByVal currentFolder As Object) As Long
     CountFilesRecursive = lCount
 End Function
 
-' Helper procedure: Recursive array filling
+'--------------------------------------------------------------------------------
+' Sub: FillFilesTableRecursive
+' Purpose: Рекурсивно заполняет двумерный массив информацией о файлах в папке и её подпапках.
+' Parameters:
+'   currentFolder - Объект папки для обработки
+'   tableArray - Двумерный массив для заполнения
+'   currentRow - Текущий индекс строки для вставки данных
+'--------------------------------------------------------------------------------
 Private Sub FillFilesTableRecursive(ByVal currentFolder As Object, ByRef tableArray As Variant, ByRef currentRow As Long)
     Dim subFolder   As Object
     Dim file        As Object

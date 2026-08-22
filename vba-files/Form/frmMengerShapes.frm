@@ -480,7 +480,9 @@ Private Sub refreshMainList()
                 arr(3, i) = "скрыт"
                 arrFilter(2, 2) = arrFilter(2, 2) + 1
             End If
+            On Error Resume Next
             arr(4, i) = .OnAction
+            On Error GoTo 0
             If .OnAction <> vbNullString Then
                 arr(11, i) = 1
                 arrFilter(2, 3) = arrFilter(2, 3) + 1

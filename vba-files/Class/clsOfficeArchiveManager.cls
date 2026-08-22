@@ -322,7 +322,7 @@ Public Function delPasswordSheet(ByVal idSheet As String) As Boolean
     Dim i As Long, k As Long
 
     ' Искомые фрагменты как обычные строки
-    Const TARGET_START As String = "<sheetProtection algorithmName="
+    Const TARGET_START As String = "<sheetProtection "
     Const TARGET_END As String = "/>"
 
     fNum = FreeFile()

@@ -704,7 +704,7 @@ Public Function CREATE_QR(ByVal TEXT_STR As String, _
     Dim MyCell      As Range
     Set MyCell = Application.Caller
     Dim sPath       As String
-    sPath = ThisWorkbook.Path & Application.PathSeparator & "QR.emf"
+    sPath = ActiveWorkbook.Path & Application.PathSeparator & "QR.emf"
     Call SavePicture(QRCodegenBarcode(TEXT_STR, QR_COLOR, 120, QR_TYPE, QR_ERROR, VERSION_MIN, VERSION_MAX, QRCodegenMask_AUTO, True), sPath)
     On Error Resume Next
     ActiveSheet.Pictures("My_QR_" & MyCell.Address(False, False)).Delete

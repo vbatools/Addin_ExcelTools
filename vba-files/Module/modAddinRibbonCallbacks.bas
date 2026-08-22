@@ -71,7 +71,7 @@ Private Sub btnNewStream(control As IRibbonControl)
     Dim App         As Application
     Set App = CreateObject("Excel.Application")
     App.Visible = True
-    Call App.Workbooks.Open(FileName:=ThisWorkbook.FullName, ReadOnly:=True)
+    Call App.Workbooks.Open(FileName:=ActiveWorkbook.FullName, ReadOnly:=True)
 End Sub
 
 Private Sub btnOpenFolder(control As IRibbonControl)
