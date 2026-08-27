@@ -31,13 +31,13 @@
 **ExcelTools** - это профессиональная надстройка Excel VBA, предоставляющая обширный набор инструментов для автоматизации рутинных задач в Excel. Включает 100+ инструментов: формулы, манипуляции с данными, управление листами, файловые операции, диаграммы, фигуры и многое другое.
 
 <p align="center">
-  <img src="./img/excel_tools_main_panel.png" alt="Главная панель управления" border="1">
+  <img src="./img/excel_tools_main_panel.svg" alt="Главная панель управления" border="1">
   <br>
   <em>Главная панель управления</em>
 </p>
 
 <p align="center">
-  <img src="./img/excel_tools_other_panel.png" alt="Прочие инструменты" border="1">
+  <img src="./img/excel_tools_other_panel.svg" alt="Прочие инструменты" border="1">
   <br>
   <em>Прочие инструменты управления</em>
 </p>
@@ -52,7 +52,7 @@
 4. На ленте инструментов появятся две вкладки: **EXCELToolsГлавная** и **EXCELToolsПрочие**.
 
 <p align="center">
-  <img src="./img/installation.png" alt="Установка надстройки" border="1">
+  <img src="./img/installation.svg" alt="Установка надстройки" border="1">
   <br>
   <em>Установка надстройки</em>
 </p>
