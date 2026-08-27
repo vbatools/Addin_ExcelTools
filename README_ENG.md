@@ -31,13 +31,13 @@
 **ExcelTools** is a professional Excel VBA add-in that provides a comprehensive set of tools for automating routine tasks in Excel. It includes 100+ tools: formulas, data manipulation, sheet management, file operations, charts, shapes, and much more.
 
 <p align="center">
-  <img src="./img/excel_tools_main_panel.svg" alt="Main Control Panel" border="1">
+  <img src="./img/excel_tools_main_panel.png" alt="Main Control Panel" border="1">
   <br>
   <em>Main Control Panel</em>
 </p>
 
 <p align="center">
-  <img src="./img/excel_tools_other_panel.svg" alt="Other Tools" border="1">
+  <img src="./img/excel_tools_other_panel.png" alt="Other Tools" border="1">
   <br>
   <em>Other Management Tools</em>
 </p>
@@ -52,7 +52,7 @@
 4. Two tabs will appear on the ribbon: **EXCELToolsMain** and **EXCELToolsOther**.
 
 <p align="center">
-  <img src="./img/installation.svg" alt="Add-in Installation" border="1">
+  <img src="./img/installation.png" alt="Add-in Installation" border="1">
   <br>
   <em>Add-in Installation</em>
 </p>
