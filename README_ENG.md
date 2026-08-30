@@ -22,6 +22,7 @@
 
 * [📋 Description](#-description)
 * [🚀 Installation](#-installation)
+* [❓ Frequently Asked Questions](#-frequently-asked-questions)
 * [🧰 Tools and Functions List](#-tools-and-functions-list)
 
 ---
@@ -56,6 +57,26 @@
   <br>
   <em>Add-in Installation</em>
 </p>
+
+---
+
+## ❓ Frequently Asked Questions
+
+**Q:** Macros don't work  
+**A:** Check that macros are enabled in the Trust Center:
+1. Open **File** → **Options** → **Trust Center**
+2. Click **Trust Center Settings**
+3. Go to **Macro Settings**
+4. Select **Enable all macros** or **Disable all macros with notification**
+
+**Q:** Add-in doesn't load when Excel starts  
+**A:** Go to **File** → **Options** → **Add-ins** → In the "Manage" field select **Excel Add-ins** → Click **Go** → Check the box next to "EXCELTools"
+
+**Q:** How to uninstall the add-in?  
+**A:** Open **File** → **Options** → **Add-ins** → In the "Manage" field select **Excel Add-ins** → **Go** → Uncheck "EXCELTools" → Click **OK**
+
+**Q:** VBA project password?  
+**A:** Password: `1` (the code is open; the password only protects against accidental changes)
 
 ---
 
