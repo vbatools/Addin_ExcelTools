@@ -71,6 +71,3 @@ InstallationAdd_Err:
         MsgBox Err.Description, vbCritical
     End If
 End Sub
-
-
-

@@ -72,7 +72,4 @@ Public Sub RefreshPivotCachesClearMissingItems()
                 vbInformation + vbOKOnly, _
                 "Успешное выполнение"
     End If
-
 End Sub
-
-

@@ -363,10 +363,3 @@ Public Function IsNotOpenWBooks() As Boolean
         Call MsgBox("Нет открытых книг!", vbCritical)
     End If
 End Function
-
-
-
-
-
-
-

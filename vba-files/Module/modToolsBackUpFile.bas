@@ -8,6 +8,14 @@ Public Const NAME_PROP_VERSION_DATE As String = "version_date"
 Public Const NAME_PROP_VERSION_DATE_ADD As String = "version_date_add"
 Public Const NAME_PATH As String = "versions_file"
 
+'--------------------------------------------------------------------------------
+' Sub: AddBackupFile
+' Purpose:  Создает резервную копию активной книги с инкрементом версии
+'   - Читает настройки пути и версии из пользовательских свойств книги
+'   - Автоматически увеличивает номер версии
+'   - Опционально добавляет дату к имени файла
+'   - Сохраняет текущую книгу и перемещает ее в папку резервных копий
+'--------------------------------------------------------------------------------
 Public Sub AddBackupFile()
     Dim sPath       As String
     Dim sVersion    As String
@@ -40,7 +48,7 @@ Public Sub AddBackupFile()
         If MoveFile(sOldWB, sPath) <> vbNullString Then
             Call MsgBox("Не удалось создать резервную копию!", vbExclamation)
         Else
-            Call MsgBox("Копия создан, версия: " & sVersion, vbInformation)
+            Call MsgBox("Копия создана, версия: " & sVersion, vbInformation)
         End If
     End With
     Call RestoreApplicationSettings

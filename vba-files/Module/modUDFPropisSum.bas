@@ -367,6 +367,3 @@ Public Function AddRegistr(ByVal txt As String, ByVal Registr As Integer) As Str
     End If
     AddRegistr = txt
 End Function
-
-
-

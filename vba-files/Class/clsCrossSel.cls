@@ -300,4 +300,3 @@ Private Function GetUsedRange(ByVal ws As Worksheet) As Range
 ErrorHandler:
     Set GetUsedRange = ws.UsedRange
 End Function
-

@@ -188,4 +188,3 @@ Public Function ДАТАПРОПИСЬЮ(ByVal Дата As Date, _
     ДАТАПРОПИСЬЮ = AddRegistr(LETTERS, РЕГИСТР)
 
 End Function
-

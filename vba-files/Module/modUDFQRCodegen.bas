@@ -1749,6 +1749,3 @@ Private Function pvPointsInLine(uA As POINTAPI, uB As POINTAPI, ByVal lX As Long
         pvPointsInLine = (uA.x - lX) * (uA.y - lY) = (lX - uB.x) * (lY - uB.y)
     End If
 End Function
-
-
-

@@ -318,6 +318,3 @@ Public Sub SetSheetNameAllWorldUCase()
         Sh.Name = caseString(Sh.Name, tpAllWorldUCase)
     Next Sh
 End Sub
-
-
-

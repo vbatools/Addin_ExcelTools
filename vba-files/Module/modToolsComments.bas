@@ -2,6 +2,14 @@ Attribute VB_Name = "modToolsComments"
 Option Explicit
 Option Private Module
 
+'--------------------------------------------------------------------------------
+' Sub: AddSheetsComments
+' Purpose:  Собирает все комментарии из листов книги и создает сводный лист
+'   - Проверяет защиту структуры книги
+'   - Удаляет старый лист с комментариями (если существует)
+'   - Создает новый лист "Комментарии" с таблицей
+'   - Заполняет таблицу: номер, лист, адрес, автор, текст, гиперссылка
+'--------------------------------------------------------------------------------
 Public Sub AddSheetsComments()
 
     If ActiveWorkbook.ProtectStructure Then
@@ -67,7 +75,7 @@ Public Sub AddSheetsComments()
         .Range("A1:F1").AutoFilter
 
         If i = 2 Then
-            Call MsgBox("В текущей книге примечаний нет!", vbInformation, "Собщение:")
+            Call MsgBox("В текущей книге примечаний нет!", vbInformation, "Сообщение:")
             ShKomm.Delete
         End If
     End With
@@ -91,7 +99,3 @@ Public Sub ShowHiddenComment(ByVal bShow As Boolean)
         oComm.Visible = bShow
     Next oComm
 End Sub
-
-
-
-

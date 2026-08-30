@@ -2,6 +2,14 @@ Attribute VB_Name = "modFilePassWBook"
 Option Explicit
 Option Private Module
 
+'--------------------------------------------------------------------------------
+' Sub: DelPasswordWBook
+' Purpose:  Удаляет пароли защиты книги и листов через манипуляцию ZIP-архивом
+'   - Открывает диалог выбора книги для снятия защиты
+'   - Распаковывает файл как ZIP-архив
+'   - Удаляет элементы защиты из XML-структуры
+'   - Запаковывает файл обратно и открывает его
+'--------------------------------------------------------------------------------
 Public Sub DelPasswordWBook()
     Dim oForma      As frmOtherToolsDeletePasswordWB
     Set oForma = New frmOtherToolsDeletePasswordWB

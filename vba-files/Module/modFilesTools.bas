@@ -2,6 +2,14 @@ Attribute VB_Name = "modFilesTools"
 Option Explicit
 Option Private Module
 
+'--------------------------------------------------------------------------------
+' Sub: AddFilesList
+' Purpose:  Создает список файлов с подробной информацией в новом листе книги
+'   - Открывает диалог выбора файлов
+'   - Собирает расширенные свойства файлов (размер, даты, автор и т.д.)
+'   - Создает новый лист с таблицей информации о файлах
+'   - Добавляет колонки для переименования и перемещения файлов
+'--------------------------------------------------------------------------------
 Public Sub AddFilesList()
     Dim rng         As Range
     Dim arrPath()   As String
@@ -84,6 +92,14 @@ AddFileNewName_Err:
     MsgBox Err.Description & vbCrLf & "в VBAProject.D_Macros.LoadFileName " & vbCrLf & "в строке " & Erl, vbExclamation + vbOKOnly, "Ошибка:"
 End Sub
 
+'--------------------------------------------------------------------------------
+' Sub: MoveAndRenameFiles
+' Purpose:  Переименовывает и перемещает файлы по списку из таблицы
+'   - Читает данные из выбранного диапазона (путь, расширение, имя)
+'   - Создает новые папки при необходимости
+'   - Переименовывает файлы согласно указанному новому имени
+'   - Перемещает файлы в указанные папки
+'--------------------------------------------------------------------------------
 'Переименовывание файлов по списку
 Public Sub MoveAndRenameFiles()
     Dim rng         As Range
@@ -113,7 +129,7 @@ Public Sub MoveAndRenameFiles()
         Dim sNewPath As String
         sNewPath = Application.PathSeparator & "new_" & VBA.Replace(VBA.Replace(VBA.Now(), ":", "."), " ", "_") & Application.PathSeparator
 
-        'переношу и переименовую файлы
+        'переношу и переименову файлы
         On Error Resume Next
         For i = n To .Rows.Count
             If .Cells(i, 1) <> vbNullString And .Cells(i, 2) <> vbNullString And .Cells(i, 3) <> vbNullString Then

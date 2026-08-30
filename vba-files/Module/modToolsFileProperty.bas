@@ -14,6 +14,13 @@ Public Function GetOneCustomProp(ByRef wb As Workbook, ByVal NameProp As String)
     On Error GoTo 0
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: getFilePropertiesCustomList
+' Purpose:  Возвращает массив со списком всех пользовательских свойств книги
+' Parameters:
+'   wb - Ссылка на книгу (Workbook)
+' Returns: Variant - Двумерный массив (номер, имя, значение) или пустой массив
+'--------------------------------------------------------------------------------
 Public Function getFilePropertiesCustomList(ByRef wb As Workbook) As Variant
     Dim i           As Long
     Dim iCount      As Long
@@ -33,6 +40,13 @@ Public Function getFilePropertiesCustomList(ByRef wb As Workbook) As Variant
     getFilePropertiesCustomList = arr
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: getFilePropertiesList
+' Purpose:  Возвращает массив со списком всех встроенных свойств книги
+' Parameters:
+'   wb - Ссылка на книгу (Workbook)
+' Returns: Variant - Двумерный массив (номер, имя, значение) или пустой массив
+'--------------------------------------------------------------------------------
 Public Function getFilePropertiesList(ByRef wb As Workbook) As Variant
     Dim i           As Long
     Dim iCount      As Long
@@ -70,6 +84,13 @@ endfun:
     On Error GoTo 0
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: delFilePropertiesCustomAll
+' Purpose:  Удаляет все пользовательские свойства из книги
+' Parameters:
+'   wb - Ссылка на книгу (Workbook)
+' Returns: Byte - Количество удаленных свойств
+'--------------------------------------------------------------------------------
 Public Function delFilePropertiesCustomAll(ByRef wb As Workbook) As Byte
     Dim i           As Long
     Dim iCount      As Long
@@ -86,6 +107,13 @@ Public Function delFilePropertiesCustomAll(ByRef wb As Workbook) As Byte
     delFilePropertiesCustomAll = k
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: delFilePropertiesAll
+' Purpose:  Очищает все встроенные свойства книги (устанавливает пустые значения)
+' Parameters:
+'   wb - Ссылка на книгу (Workbook)
+' Returns: Long - Количество очищенных свойств
+'--------------------------------------------------------------------------------
 Public Function delFilePropertiesAll(ByRef wb As Workbook) As Long
     Dim i           As Long
     Dim iCount      As Long
@@ -106,6 +134,14 @@ Public Function delFilePropertiesAll(ByRef wb As Workbook) As Long
     delFilePropertiesAll = k
 End Function
 
+'--------------------------------------------------------------------------------
+' Function: delFilePropertyCustom
+' Purpose:  Удаляет указанное пользовательское свойство из книги
+' Parameters:
+'   wb - Ссылка на книгу (Workbook)
+'   nameProperty - Имя удаляемого свойства (String)
+' Returns: Boolean - True, если свойство найдено и удалено
+'--------------------------------------------------------------------------------
 Public Function delFilePropertyCustom(ByRef wb As Workbook, ByVal nameProperty As String) As Boolean
     Dim i           As Long
     Dim iCount      As Long

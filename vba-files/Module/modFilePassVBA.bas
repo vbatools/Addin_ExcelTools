@@ -21,6 +21,13 @@ Dim OriginBytes(0 To 11) As Byte
 Dim pFunc           As LongPtr
 Dim Flag            As Boolean
 
+'--------------------------------------------------------------------------------
+' Sub: unProtectVBA
+' Purpose:  Удаляет пароли защиты VBA проектов из открытых книг
+'   - Использует хукирование API функции DialogBoxParamA
+'   - Модифицирует память процесса для обхода защиты
+'   - Восстанавливает оригинальный код после выполнения
+'--------------------------------------------------------------------------------
 Public Sub unProtectVBA()
     If unProtectVBAProjects Then
         Call MsgBox("Пароли проекта VBA удалены!", vbInformation)
@@ -29,12 +36,14 @@ Public Sub unProtectVBA()
     End If
 End Sub
 
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Function   : fHook - remove passwords from VBA projects
-'* Created    : 23-03-2023 09:25
-'* Author     : VBATools
-'* Copyright  : Apache License
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'--------------------------------------------------------------------------------
+' Function: unProtectVBAProjects
+' Purpose:  Устанавливает хук на функцию DialogBoxParamA для обхода защиты VBA
+'   - Получает адрес функции DialogBoxParamA в user32.dll
+'   - Заменяет первые байты функции на переход к своей реализации
+'   - Сохраняет оригинальные байты для последующего восстановления
+' Returns: Boolean - True, если хук успешно установлен
+'--------------------------------------------------------------------------------
 Private Function unProtectVBAProjects() As Boolean
     Dim TmpBytes(0 To 11) As Byte
     Dim p As LongPtr, osi As Byte

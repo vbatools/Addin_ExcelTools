@@ -304,4 +304,3 @@ Private Sub SetValueTextBox()
     End With
     Set FrmCalendar = Nothing
 End Sub
-

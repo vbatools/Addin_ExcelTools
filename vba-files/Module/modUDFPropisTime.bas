@@ -184,4 +184,3 @@ Public Function ВРЕМЯПРОПИСЬЮ(ByVal Время As Date, _
 
     ВРЕМЯПРОПИСЬЮ = AddRegistr(LETTERS, РЕГИСТР)
 End Function
-

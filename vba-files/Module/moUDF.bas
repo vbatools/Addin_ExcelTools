@@ -1,7 +1,7 @@
 Attribute VB_Name = "moUDF"
 Option Explicit
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Module       :   modUserDefinedFunction - User-defined functions with dual naming (Cyrillic + English)
+'* Module       :   moUDF - Пользовательские функции с двойным именованием (кириллица + латиница)
 '* Author       :   VBATools
 '* Copyright    :   Apache License
 '* Created      :   23-06-2026 09:37:09
@@ -9,18 +9,18 @@ Option Explicit
 
 
 ' ============================================================================
-' SECTION 1: TEXT AND STRING PROCESSING
+' РАЗДЕЛ 1: ОБРАБОТКА ТЕКСТА И СТРОК
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
 ' Function: REPLACE_CHARS / ЗАМЕНИТЬ_СИМВОЛЫ
-' Purpose: Performs character-by-character replacement in a string
+' Purpose:  Посимвольная замена символов в строке
 ' Parameters:
-' TEXT_STR - Source string for processing
-' CHARS_FIND - String of characters to search for
-' CHARS_REPLACE - String of characters to replace with
-' CASE_SENSITIVE - Case sensitivity (False by default)
-' Returns: String - Transformed string
+'   TEXT_STR - Исходная строка для обработки (String)
+'   CHARS_FIND - Строка символов для поиска (String)
+'   CHARS_REPLACE - Строка символов для замены (String)
+'   CASE_SENSITIVE - Учитывать регистр (False по умолчанию) (Boolean)
+' Returns: String - Преобразованная строка
 '--------------------------------------------------------------------------------
 Public Function REPLACE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_FIND As String, ByVal CHARS_REPLACE As String, Optional CASE_SENSITIVE As Boolean = False) As String
     Dim iLen        As Integer
@@ -49,19 +49,19 @@ Public Function REPLACE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_FIND As Stri
     REPLACE_CHARS = sResult
 End Function
 
-Public Function ЗАМЕНИТЬ_СИМВОЛЫ(ByVal СТРОКА As String, ByVal СИМВОЛЫ_НАЙТИ As String, ByVal СИМВОЛЫ_ЗАМЕНИТЬ As String, Optional УЧИТАТЬ_РЕГИСТР As Boolean = False) As String
-    ЗАМЕНИТЬ_СИМВОЛЫ = REPLACE_CHARS(СТРОКА, СИМВОЛЫ_НАЙТИ, СИМВОЛЫ_ЗАМЕНИТЬ, УЧИТАТЬ_РЕГИСТР)
+Public Function ЗАМЕНИТЬ_СИМВОЛЫ(ByVal СТРОКА As String, ByVal СИМВОЛЫ_НАЙТИ As String, ByVal СИМВОЛЫ_ЗАМЕНИТЬ As String, Optional УЧИТЫВАТЬ_РЕГИСТР As Boolean = False) As String
+    ЗАМЕНИТЬ_СИМВОЛЫ = REPLACE_CHARS(СТРОКА, СИМВОЛЫ_НАЙТИ, СИМВОЛЫ_ЗАМЕНИТЬ, УЧИТЫВАТЬ_РЕГИСТР)
 End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TEXT_LEFT / ЛЕВО_ТЕКСТ
-' Purpose: Extracts text to the left of the specified delimiter occurrence
+' Purpose:  Извлекает текст слева от указанного разделителя
 ' Parameters:
-' TEXT_STR - Source string
-' DELIMITER - Delimiter character
-' DELIMITER_NUM - Ordinal number of delimiter (1 by default)
-' COMPARE_MODE - Comparison mode (0 - binary, 1 - text)
-' Returns: String - Text to the left of delimiter
+'   TEXT_STR - Исходная строка (String)
+'   Delimiter - Символ-разделитель (String)
+'   DELIMITER_NUM - Порядковый номер разделителя (1 по умолчанию) (Integer)
+'   COMPARE_MODE - Режим сравнения (0 - двоичный, 1 - текстовый) (Byte)
+' Returns: String - Текст слева от разделителя
 '--------------------------------------------------------------------------------
 Public Function TEXT_LEFT(ByVal TEXT_STR As String, ByVal Delimiter As String, Optional DELIMITER_NUM As Integer = 1, Optional COMPARE_MODE As Byte = 0) As String
     Dim i           As Integer
@@ -87,12 +87,12 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TEXT_BETWEEN / МЕЖДУ_ТЕКСТ
-' Purpose: Extracts text between left and right delimiters
+' Purpose:  Извлекает текст между левым и правым разделителями
 ' Parameters:
-' TEXT_STR - Source string
-' LEFT_DELIM - Left boundary for extraction
-' RIGHT_DELIM - Right boundary for extraction
-' Returns: String - Text between delimiters
+'   TEXT_STR - Исходная строка (String)
+'   LEFT_DELIM - Левая граница для извлечения (String)
+'   RIGHT_DELIM - Правая граница для извлечения (String)
+' Returns: String - Текст между разделителями
 '--------------------------------------------------------------------------------
 Public Function TEXT_BETWEEN(ByVal TEXT_STR As String, ByVal LEFT_DELIM As String, ByVal RIGHT_DELIM As String) As String
     Dim sResult     As String
@@ -111,13 +111,13 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: FIND_REPLACE / НАЙТИ_ЗАМЕНИТЬ
-' Purpose: Find and replace text in string
+' Purpose:  Поиск и замена текста в строке
 ' Parameters:
-' TEXT_STR - Source string
-' FIND_STR - Text to find
-' REPLACE_STR - Text to replace with
-' REPLACE_COUNT - Number of replacements (-1 for all)
-' Returns: String - Modified string
+'   TEXT_STR - Исходная строка (String)
+'   FIND_STR - Текст для поиска (String)
+'   REPLACE_STR - Текст для замены (String)
+'   REPLACE_COUNT - Количество замен (-1 для всех) (Integer)
+' Returns: String - Измененная строка
 '--------------------------------------------------------------------------------
 Public Function FIND_REPLACE(ByVal TEXT_STR As String, _
         ByVal FIND_STR As String, _
@@ -137,14 +137,14 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TEXT_RIGHT / ПРАВО_ТЕКСТ
-' Purpose: Extracts text to the right of the specified delimiter occurrence
-'          (search is performed from right to left)
+' Purpose:  Извлекает текст справа от указанного разделителя
+'           (поиск выполняется справа налево)
 ' Parameters:
-' TEXT_STR - Source string
-' DELIMITER - Delimiter character
-' DELIMITER_NUM - Ordinal number of delimiter from right (1 by default)
-' COMPARE_MODE - Comparison mode (0 - binary, 1 - text)
-' Returns: String - Text to the right of delimiter
+'   TEXT_STR - Исходная строка (String)
+'   Delimiter - Символ-разделитель (String)
+'   DELIMITER_NUM - Порядковый номер разделителя справа (1 по умолчанию) (Integer)
+'   COMPARE_MODE - Режим сравнения (0 - двоичный, 1 - текстовый) (Byte)
+' Returns: String - Текст справа от разделителя
 '--------------------------------------------------------------------------------
 Public Function TEXT_RIGHT(ByVal TEXT_STR As String, ByVal Delimiter As String, Optional DELIMITER_NUM As Integer = 1, Optional COMPARE_MODE As Byte = 0) As String
     Dim i           As Integer
@@ -169,13 +169,13 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: SPLIT_STRING / РАЗБИТЬ_СТРОКУ
-' Purpose: Splits string by delimiter and returns specified element
+' Purpose:  Разбивает строку по разделителю и возвращает указанный элемент
 ' Parameters:
-' TEXT_STR - Source string
-' DELIMITER - Delimiter character (space by default)
-' ELEMENT_NUM - Element number to return (1 by default)
-' LIMIT - Maximum number of splits (-1 for all)
-' Returns: String - Specified element from split array
+'   TEXT_STR - Исходная строка (String)
+'   Delimiter - Символ-разделитель (пробел по умолчанию) (String)
+'   ELEMENT_NUM - Номер возвращаемого элемента (1 по умолчанию) (Integer)
+'   LIMIT - Максимальное количество разбиений (-1 для всех) (Integer)
+' Returns: String - Указанный элемент из массива разбиения
 '--------------------------------------------------------------------------------
 Public Function SPLIT_STRING(ByVal TEXT_STR As String, _
         Optional Delimiter As String = " ", _
@@ -195,11 +195,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: CONCAT_MULTI / СЦЕПИТЬ_МУЛЬТИ
-' Purpose: Combines values from multiple ranges with specified delimiter
+' Purpose:  Объединяет значения из нескольких диапазонов с указанным разделителем
 ' Parameters:
-' DELIMITER - Delimiter character between values
-' RANGES - Array of ranges to combine (ParamArray)
-' Returns: String - Combined string
+'   Delimiter - Символ-разделитель между значениями (String)
+'   RANGES - Массив диапазонов для объединения (ParamArray)
+' Returns: String - Объединенная строка
 '--------------------------------------------------------------------------------
 Public Function CONCAT_MULTI(ByVal Delimiter As String, ParamArray RANGES() As Variant) As String
     Dim arr         As Variant
@@ -221,11 +221,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: TEXT_MATCHES_PATTERN / ТЕКСТ_СООТВЕТСТВУЕТ_ШАБЛОНУ
-' Purpose: Checks if text matches a pattern (Like operator)
+' Purpose:  Проверяет соответствие текста шаблону (оператор Like)
 ' Parameters:
-' TEXT_STR - Source string
-' PATTERN - Pattern to match (supports wildcards * ? # [])
-' Returns: Boolean - True if text matches pattern
+'   TEXT_STR - Исходная строка (String)
+'   PATTERN - Шаблон для проверки (поддерживает wildcards * ? # []) (String)
+' Returns: Boolean - True, если текст соответствует шаблону
 '--------------------------------------------------------------------------------
 Public Function TEXT_MATCHES_PATTERN(ByVal TEXT_STR As String, ByVal PATTERN As String) As Boolean
     TEXT_MATCHES_PATTERN = TEXT_STR Like PATTERN
@@ -234,20 +234,19 @@ End Function
 Public Function ТЕКСТ_СООТВЕТСТВУЕТ_ШАБЛОНУ(ByVal ТЕКСТ As String, ByVal ШАБЛОН As String) As Boolean
     ТЕКСТ_СООТВЕТСТВУЕТ_ШАБЛОНУ = TEXT_MATCHES_PATTERN(ТЕКСТ, ШАБЛОН)
 End Function
-
 '--------------------------------------------------------------------------------
-' Function: TRANSLIT
-' Purpose: Преобразует кириллический текст в латиницу согласно выбранному стандарту.
-'          Поддерживает обработку окончаний и контекстозависимую замену символов.
+' Function: TRANSLIT / ТРАНСЛИТ
+' Purpose:  Преобразует кириллический текст в латиницу согласно выбранному стандарту.
+'           Поддерживает обработку окончаний и контекстозависимую замену символов.
 ' Parameters:
-'   sText        - String. Исходный текст для конвертации.
-'   iStandard    - Integer (Optional). Код стандарта транслитерации (по умолчанию 0).
-'                  0 - Общепринятый стандарт (с заменой "ый" -> "iy").
-'                  1 - ИКАО (ICAO Doc 9303, загранпаспорт).
-'                  2 - ГОСТ 7.79-2000 (ISO 9, с контекстной заменой "Ц").
-'                  3 - BGN/PCGN.
-'                  4 - BGN/PCGN (с заменой окончаний "ий"/"ый" -> "y").
-' Returns: String - Строка с преобразованным текстом.
+'   sText - Исходный текст для конвертации (String)
+'   iStandard - Код стандарта транслитерации (по умолчанию 0) (Integer)
+'               0 - Общепринятый стандарт (с заменой "ый" -> "iy")
+'               1 - ИКАО (ICAO Doc 9303, загранпаспорт)
+'               2 - ГОСТ 7.79-2000 (ISO 9, с контекстной заменой "Ц")
+'               3 - BGN/PCGN
+'               4 - BGN/PCGN (с заменой окончаний "ий"/"ый" -> "y")
+' Returns: String - Строка с преобразованным текстом
 '--------------------------------------------------------------------------------
 Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Integer = 0) As String
     Dim sRusAlphabet As String
@@ -258,55 +257,44 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
     Dim sNextChar As String
     Dim bIsUpper As Boolean
     
-    ' Базовый алфавит
     sRusAlphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
     
-    ' Инициализация массивов замен в зависимости от стандарта
     Select Case iStandard
-        Case 0 ' Общепринятый
+        Case 0
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "sch", "", "y", "", "e", "u", "ya")
-        Case 1 ' ИКАО (ICAO)
+        Case 1
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "ie", "y", "", "e", "iu", "ia")
-        Case 2 ' ГОСТ 7.79-2000 (ISO 9)
+        Case 2
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "j", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "x", "cz", "ch", "sh", "shh", """", "y'", "'", "e'", "yu", "ya")
-        Case 3 ' BGN/PCGN
+        Case 3
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y", "", "e", "yu", "ya")
-        Case 4 ' BGN/PCGN с заменой окончаний
+        Case 4
             vEngMap = Array("a", "b", "v", "g", "d", "e", "yo", "zh", "z", "i", "y", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "shch", "", "y", "", "e", "yu", "ya")
         Case Else
-            ' По умолчанию Standard 0
             vEngMap = Array("a", "b", "v", "g", "d", "e", "e", "zh", "z", "i", "i", "k", "l", "m", "n", "o", "p", "r", "s", "t", "u", "f", "kh", "ts", "ch", "sh", "sch", "", "y", "", "e", "u", "ya")
     End Select
     
-    ' Основной цикл обработки символов
     For i = 1 To Len(sText)
         sCharIn = Mid(sText, i, 1)
-        
-        ' Поиск символа в русском алфавите (без учета регистра для поиска)
         iIndex = InStr(1, sRusAlphabet, sCharIn, vbTextCompare)
         
         If iIndex > 0 Then
-            ' Символ найден - берем базовую замену
             sCharOut = vEngMap(iIndex - 1)
             
-            ' --- Специфическая логика для Стандарта 2 (ГОСТ) ---
             If iStandard = 2 Then
-                ' Буква "ц" заменяется на "c", если за ней следуют e, i, y, j. Иначе "cz".
                 If (LCase(sCharIn) = "ц") Then
                     If i < Len(sText) Then
                         sNextChar = LCase(Mid(sText, i + 1, 1))
-                        If InStr(1, "еийюяei", sNextChar) > 0 Then
-                            sCharOut = "c"
+                        If InStr(1, "еийэюя", sNextChar) > 0 Then
+                            sCharOut = "с"
                         End If
                     End If
                 End If
             End If
             
-            ' Определение регистра исходного символа
             bIsUpper = (StrComp(sCharIn, UCase(sCharIn), vbBinaryCompare) = 0) And (StrComp(sCharIn, LCase(sCharIn), vbBinaryCompare) <> 0)
             
             If bIsUpper Then
-                ' Формируем верхний регистр для замены (Только первая буква заглавная)
                 If Len(sCharOut) > 0 Then
                     sCharOut = UCase(Left(sCharOut, 1)) & LCase(Mid(sCharOut, 2))
                 End If
@@ -315,27 +303,22 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
             End If
             
         Else
-            ' Символ не найден (латиница, цифры, знаки) - оставляем как есть
             sCharOut = sCharIn
         End If
         
         sResult = sResult & sCharOut
     Next i
     
-    ' --- Пост-обработка окончаний (специфика Standard 0, 4) ---
     If iStandard = 0 Then
-        ' Замена "ый" на "iy"
         sResult = Replace(sResult, "yy ", "iy ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi ", "iy ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi.", "iy.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yi,", "iy,", 1, -1, vbTextCompare)
         
-        ' Проверка конца строки
         If Right(sResult, 2) = "yi" Then sResult = Left(sResult, Len(sResult) - 2) & "iy"
         If Right(sResult, 2) = "YI" Then sResult = Left(sResult, Len(sResult) - 2) & "IY"
         
     ElseIf iStandard = 4 Then
-        ' Замена "ий" и "ый" на "y"
         sResult = Replace(sResult, "iy ", "y ", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "iy.", "y.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "iy,", "y,", 1, -1, vbTextCompare)
@@ -344,7 +327,6 @@ Public Function TRANSLIT(ByVal sText As String, Optional ByVal iStandard As Inte
         sResult = Replace(sResult, "yy.", "y.", 1, -1, vbTextCompare)
         sResult = Replace(sResult, "yy,", "y,", 1, -1, vbTextCompare)
         
-        ' Проверка конца строки
         If Right(sResult, 2) = "iy" Then sResult = Left(sResult, Len(sResult) - 2) & "y"
         If Right(sResult, 2) = "yy" Then sResult = Left(sResult, Len(sResult) - 2) & "y"
         
@@ -362,12 +344,12 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: REMOVE_CHARS / УДАЛИТЬ_СИМВОЛЫ
-' Purpose: Removes specified characters from a string
+' Purpose:  Удаляет указанные символы из строки
 ' Parameters:
-' TEXT_STR - Source string
-' CHARS_REMOVE - String with characters to remove
-' CASE_SENSITIVE - Case sensitivity (False by default)
-' Returns: String - Cleaned string
+'   TEXT_STR - Исходная строка (String)
+'   CHARS_REMOVE - Строка с символами для удаления (String)
+'   CASE_SENSITIVE - Учитывать регистр (False по умолчанию) (Boolean)
+' Returns: String - Очищенная строка
 '--------------------------------------------------------------------------------
 Public Function REMOVE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_REMOVE As String, Optional CASE_SENSITIVE As Boolean = False) As String
     Dim i           As Integer
@@ -381,20 +363,19 @@ Public Function REMOVE_CHARS(ByVal TEXT_STR As String, ByVal CHARS_REMOVE As Str
     REMOVE_CHARS = sResult
 End Function
 
-Public Function УДАЛИТЬ_СИМВОЛЫ(ByVal СТРОКА As String, ByVal СИМВОЛЫ_УДАЛИТЬ As String, Optional УЧИТАТЬ_РЕГИСТР As Boolean = False) As String
-    УДАЛИТЬ_СИМВОЛЫ = REMOVE_CHARS(СТРОКА, СИМВОЛЫ_УДАЛИТЬ, УЧИТАТЬ_РЕГИСТР)
+Public Function УДАЛИТЬ_СИМВОЛЫ(ByVal СТРОКА As String, ByVal СИМВОЛЫ_УДАЛИТЬ As String, Optional УЧИТЫВАТЬ_РЕГИСТР As Boolean = False) As String
+    УДАЛИТЬ_СИМВОЛЫ = REMOVE_CHARS(СТРОКА, СИМВОЛЫ_УДАЛИТЬ, УЧИТЫВАТЬ_РЕГИСТР)
 End Function
-
 ' ============================================================================
-' SECTION 2: DATA EXTRACTION FROM CELLS
+' РАЗДЕЛ 2: ИЗВЛЕЧЕНИЕ ДАННЫХ ИЗ ЯЧЕЕК
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
 ' Function: GET_COMMENT / ПОЛУЧКОММЕНТ
-' Purpose: Returns comment text from a cell
+' Purpose:  Возвращает текст комментария из ячейки
 ' Parameters:
-' CELL - Range object (single cell)
-' Returns: String - Comment text or empty string
+'   cell - Диапазон (одна ячейка) (Range)
+' Returns: String - Текст комментария или пустая строка
 '--------------------------------------------------------------------------------
 Public Function GET_COMMENT(cell As Range) As String
     On Error Resume Next
@@ -407,10 +388,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: GET_TEXT / ПОЛУЧТЕКСТ
-' Purpose: Extracts only text characters (letters) from cell
+' Purpose:  Извлекает только текстовые символы (буквы) из ячейки
 ' Parameters:
-' CELL - Range object (single cell)
-' Returns: String - Text characters only
+'   cell - Диапазон (одна ячейка) (Range)
+' Returns: String - Только текстовые символы
 '--------------------------------------------------------------------------------
 Public Function GET_TEXT(cell As Range) As String
     Dim LenStr      As Long
@@ -432,10 +413,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: GET_NUMBER / ПОЛУЧЧИСЛО
-' Purpose: Extracts only numeric characters from cell
+' Purpose:  Извлекает только числовые символы из ячейки
 ' Parameters:
-' CELL - Range object (single cell)
-' Returns: String - Numeric characters only
+'   cell - Диапазон (одна ячейка) (Range)
+' Returns: String - Только числовые символы
 '--------------------------------------------------------------------------------
 Public Function GET_NUMBER(cell As Range) As String
     Dim LenStr      As Long
@@ -453,10 +434,10 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: FORMULA_TEXT / ТЕКСТФОРМУЛЫ
-' Purpose: Returns formula from cell as text
+' Purpose:  Возвращает формулу из ячейки как текст
 ' Parameters:
-' CELL - Range object (single cell)
-' Returns: String - Formula text
+'   cell - Диапазон (одна ячейка) (Range)
+' Returns: String - Текст формулы
 '--------------------------------------------------------------------------------
 Public Function FORMULA_TEXT(cell As Range) As String
     FORMULA_TEXT = cell.formula
@@ -467,16 +448,16 @@ Public Function ТЕКСТФОРМУЛЫ(ByVal ЯЧЕЙКА As Range) As String
 End Function
 
 ' ============================================================================
-' SECTION 3: FORMATTING OPERATIONS (FILL AND FONT COLOR)
+' РАЗДЕЛ 3: ОПЕРАЦИИ ФОРМАТИРОВАНИЯ (ЦВЕТ ЗАЛИВКИ И ШРИФТА)
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
 ' Function: SUM_BY_COLOR / СУММЗАЛИВКА
-' Purpose: Sums values in cells with specified fill color
+' Purpose:  Суммирует значения в ячейках с указанным цветом заливки
 ' Parameters:
-' RANGE_DATA - Range to sum
-' COLOR_SAMPLE - Cell with sample fill color
-' Returns: Double - Sum of matching cells
+'   RANGE_DATA - Диапазон для суммирования (Range)
+'   COLOR_SAMPLE - Ячейка с образцом цвета заливки (Range)
+' Returns: Double - Сумма совпадающих ячеек
 '--------------------------------------------------------------------------------
 Public Function SUM_BY_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Double
     Dim sinSum      As Double
@@ -498,11 +479,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: SUM_BY_FONT_COLOR / СУММШРИФТ
-' Purpose: Sums values in cells with specified font color
+' Purpose:  Суммирует значения в ячейках с указанным цветом шрифта
 ' Parameters:
-' RANGE_DATA - Range to sum
-' COLOR_SAMPLE - Cell with sample font color
-' Returns: Double - Sum of matching cells
+'   RANGE_DATA - Диапазон для суммирования (Range)
+'   COLOR_SAMPLE - Ячейка с образцом цвета шрифта (Range)
+' Returns: Double - Сумма совпадающих ячеек
 '--------------------------------------------------------------------------------
 Public Function SUM_BY_FONT_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Double
     Dim sinSum      As Double
@@ -524,11 +505,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: COUNT_BY_COLOR / СЧЕТЗАЛИВКА
-' Purpose: Counts cells with specified fill color
+' Purpose:  Подсчитывает ячейки с указанным цветом заливки
 ' Parameters:
-' RANGE_DATA - Range to count
-' COLOR_SAMPLE - Cell with sample fill color
-' Returns: Long - Count of matching cells
+'   RANGE_DATA - Диапазон для подсчета (Range)
+'   COLOR_SAMPLE - Ячейка с образцом цвета заливки (Range)
+' Returns: Long - Количество совпадающих ячеек
 '--------------------------------------------------------------------------------
 Public Function COUNT_BY_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Long
     Dim lResult     As Long
@@ -550,11 +531,11 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: COUNT_BY_FONT_COLOR / СЧЕТШРИФТ
-' Purpose: Counts cells with specified font color
+' Purpose:  Подсчитывает ячейки с указанным цветом шрифта
 ' Parameters:
-' RANGE_DATA - Range to count
-' COLOR_SAMPLE - Cell with sample font color
-' Returns: Long - Count of matching cells
+'   RANGE_DATA - Диапазон для подсчета (Range)
+'   COLOR_SAMPLE - Ячейка с образцом цвета шрифта (Range)
+' Returns: Long - Количество совпадающих ячеек
 '--------------------------------------------------------------------------------
 Public Function COUNT_BY_FONT_COLOR(RANGE_DATA As Range, COLOR_SAMPLE As Range) As Long
     Dim lResult     As Long
@@ -573,15 +554,14 @@ End Function
 Public Function СЧЕТШРИФТ(ByVal ДИАПАЗОН As Range, ByVal ПРИМЕР_ШРИФТА As Range) As Long
     СЧЕТШРИФТ = COUNT_BY_FONT_COLOR(ДИАПАЗОН, ПРИМЕР_ШРИФТА)
 End Function
-
 ' ============================================================================
-' SECTION 4: INFORMATION FUNCTIONS (WORKBOOK, SHEET, USER)
+' РАЗДЕЛ 4: ИНФОРМАЦИОННЫЕ ФУНКЦИИ (КНИГА, ЛИСТ, ПОЛЬЗОВАТЕЛЬ)
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
 ' Function: WORKBOOK_NAME / ИМЯКНИГИ
-' Purpose: Returns active workbook name
-' Returns: String - Workbook name
+' Purpose:  Возвращает имя активной книги
+' Returns: String - Имя книги
 '--------------------------------------------------------------------------------
 Public Function WORKBOOK_NAME() As String
     WORKBOOK_NAME = ActiveWorkbook.Name
@@ -593,8 +573,8 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: SHEET_NAME / ИМЯЛИСТА
-' Purpose: Returns active sheet name
-' Returns: String - Sheet name
+' Purpose:  Возвращает имя активного листа
+' Returns: String - Имя листа
 '--------------------------------------------------------------------------------
 Public Function SHEET_NAME() As String
     SHEET_NAME = ActiveSheet.Name
@@ -606,8 +586,8 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: USER_NAME / ИМЯПОЛЬЗОВАТЕЛЯ
-' Purpose: Returns current Windows user name
-' Returns: String - User name
+' Purpose:  Возвращает имя текущего пользователя Windows
+' Returns: String - Имя пользователя
 '--------------------------------------------------------------------------------
 Public Function USER_NAME() As String
     USER_NAME = Environ("UserName")
@@ -619,8 +599,8 @@ End Function
 
 '--------------------------------------------------------------------------------
 ' Function: WORKBOOK_FULL_PATH / ПОЛНЫЙПУТЬКНИГИ
-' Purpose: Returns full path to active workbook
-' Returns: String - Full path
+' Purpose:  Возвращает полный путь к активной книге
+' Returns: String - Полный путь
 '--------------------------------------------------------------------------------
 Public Function WORKBOOK_FULL_PATH() As String
     WORKBOOK_FULL_PATH = ActiveWorkbook.FullName
@@ -631,28 +611,28 @@ Public Function ПОЛНЫЙПУТЬКНИГИ() As String
 End Function
 
 ' ============================================================================
-' SECTION 5: DATA VALIDATION AND ANALYSIS
+' РАЗДЕЛ 5: ВАЛИДАЦИЯ И АНАЛИЗ ДАННЫХ
 ' ============================================================================
 
-'------------------------------------------------------------------------------
+'--------------------------------------------------------------------------------
 ' Function: hasIs
-' Purpose:  Base helper function for pattern matching (case-insensitive)
+' Purpose:  Базовая вспомогательная функция для проверки по шаблону (без учета регистра)
 ' Parameters:
-'   sText   - String to check
-'   sMaska  - Pattern mask for Like operator
-' Returns: Boolean - True if pattern matches
-'------------------------------------------------------------------------------
+'   sText - Строка для проверки (String)
+'   sMaska - Маска шаблона для оператора Like (String)
+' Returns: Boolean - True, если шаблон совпадает
+'--------------------------------------------------------------------------------
 Public Function hasIs(sText As String, ByVal sMaska As String) As Boolean
     hasIs = UCase(sText) Like sMaska
 End Function
 
-'------------------------------------------------------------------------------
+'--------------------------------------------------------------------------------
 ' Function: HAS_LATIN / ЕЛАТИН
-' Purpose:  Checks if string contains Latin characters
+' Purpose:  Проверяет наличие латинских символов в строке
 ' Parameters:
-'   CELL - String to check
-' Returns:  Boolean - True if Latin characters found
-'------------------------------------------------------------------------------
+'   cell - Строка для проверки (String)
+' Returns: Boolean - True, если латинские символы найдены
+'--------------------------------------------------------------------------------
 Public Function HAS_LATIN(cell As String) As Boolean
     Const MASKA     As String = "*[ABCDEFGHIJKLMNOPQRSTUVWXYZ]*"
     HAS_LATIN = hasIs(cell, MASKA)
@@ -662,13 +642,13 @@ Public Function ЕЛАТИН(ByVal ЯЧЕЙКА As String) As Boolean
     ЕЛАТИН = HAS_LATIN(ЯЧЕЙКА)
 End Function
 
-'------------------------------------------------------------------------------
+'--------------------------------------------------------------------------------
 ' Function: HAS_CYRILLIC / ЕКИРИЛЛ
-' Purpose:  Checks if string contains Cyrillic characters
+' Purpose:  Проверяет наличие кириллических символов в строке
 ' Parameters:
-'   CELL - String to check
-' Returns:  Boolean - True if Cyrillic characters found
-'------------------------------------------------------------------------------
+'   cell - Строка для проверки (String)
+' Returns: Boolean - True, если кириллические символы найдены
+'--------------------------------------------------------------------------------
 Public Function HAS_CYRILLIC(cell As String) As Boolean
     Const MASKA     As String = "*[АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ]*"
     HAS_CYRILLIC = hasIs(cell, MASKA)
@@ -679,21 +659,21 @@ Public Function ЕКИРИЛЛ(ByVal ЯЧЕЙКА As String) As Boolean
 End Function
 
 ' ============================================================================
-' SECTION 6: QR CODE GENERATION
-' Note: Requires QRCodegen library reference
+' РАЗДЕЛ 6: ГЕНЕРАЦИЯ QR-КОДА
+' Note: Требуется ссылка на библиотеку QRCodegen
 ' ============================================================================
 
 '--------------------------------------------------------------------------------
 ' Function: CREATE_QR / СОЗДАТЬ_QR
-' Purpose: Generates QR code image in cell and returns source text
-' Dependencies: QRCodegen library (QRCodegenEcc enum, QRCodegenBarcode function)
+' Purpose:  Генерирует изображение QR-кода в ячейке и возвращает исходный текст
+' Dependencies: Библиотека QRCodegen (enum QRCodegenEcc, функция QRCodegenBarcode)
 ' Parameters:
-' TEXT_STR - Text to encode in QR code
-' QR_COLOR - QR code color (black by default)
-' QR_SIZE - QR code size in pixels (200 by default)
-' QR_TYPE - QR code type flag
-' QR_ERROR - Error correction level (QRCodegenEcc_LOW by default)
-' Returns: String - Source text (QR code displayed as image in cell)
+'   TEXT_STR - Текст для кодирования в QR-коде (String)
+'   QR_COLOR - Цвет QR-кода (по умолчанию черный) (OLE_COLOR)
+'   QR_SIZE - Размер QR-кода в пикселях (200 по умолчанию) (Integer)
+'   QR_TYPE - Флаг типа QR-кода (Boolean)
+'   QR_ERROR - Уровень коррекции ошибок (QRCodegenEcc_LOW по умолчанию) (QRCodegenEcc)
+' Returns: String - Исходный текст (QR-код отображается как изображение в ячейке)
 '--------------------------------------------------------------------------------
 Public Function CREATE_QR(ByVal TEXT_STR As String, _
         Optional QR_COLOR As OLE_COLOR = vbBlack, _
@@ -728,6 +708,3 @@ Public Function СОЗДАТЬ_QR(ByVal ТЕКСТ As String, _
 
     СОЗДАТЬ_QR = CREATE_QR(ТЕКСТ, ЦВЕТ_QR, РАЗМЕР_QR, ТИП_QR, ОШИБКА_QR)
 End Function
-
-
-

@@ -52,6 +52,3 @@ Public Function Version(ByVal Parametr As enumParametrVersion, Optional bOnlyVal
     End Select
     Version = sRes
 End Function
-
-
-

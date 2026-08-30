@@ -1,20 +1,21 @@
 Attribute VB_Name = "modClearStylesDeleteLinksFile"
 Option Explicit
 Option Private Module
-' Global variable to store the report workbook
+' Глобальная переменная для хранения книги отчета
 Dim g_ResultBook    As Workbook
 
-' Constants for report formatting
+' Константы для форматирования отчета
 Private Const COLOR_HEADER_BG As Long = 12611584
 Private Const COLOR_HEADER_TEXT As Long = 16777215
 Private Const COLOR_SUBHEADER_BG As Long = 16247773
 
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Sub        : ExternalLinkUtility - Entry point. Main procedure for searching links.
-'* Created    : 16-06-2023 15:07
-'* Author     : VBATools (Refactored)
-'* Copyright  : Apache License
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'--------------------------------------------------------------------------------
+' Sub: ExternalLinkUtility
+' Purpose:  Главная процедура поиска и анализа внешних ссылок в активной книге
+'   - Инициализирует отчет о внешних ссылках
+'   - Запускает проверку всех листов и элементов книги
+'   - Выводит результаты в новую книгу с форматированным отчетом
+'--------------------------------------------------------------------------------
 Public Sub ExternalLinkUtility()
     On Error GoTo ErrorHandler
 
@@ -34,22 +35,28 @@ ErrorHandler:
     Resume CleanUp
 End Sub
 
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Function   : OutputLinkInfo - Output information to report
-'* Created    : 16-06-2023 15:10
-'* Argument(s): typ (Type), wbk (Workbook path), wsh (Sheet), loc (Location),
-'*              adr (Address), fml (Formula), txt (Note)
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'--------------------------------------------------------------------------------
+' Function: OutputLinkInfo
+' Purpose:  Выводит информацию о найденной ссылке в отчет
+' Parameters:
+'   typ - Тип ссылки (формула, фигура, условное форматирование и т.д.)
+'   wbk - Путь к книге
+'   wsh - Имя листа
+'   loc - Расположение (имя объекта)
+'   adr - Адрес ячейки
+'   fml - Формула или ссылка
+'   txt - Инструкция по исправлению
+'--------------------------------------------------------------------------------
 Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal wsh As String, _
         ByVal loc As String, ByVal adr As String, ByVal fml As String, _
         ByVal txt As String)
     Static resultLn As Long
 
-    ' Initialize report workbook on first call
+    ' Инициализация книги отчета при первом вызове
     If g_ResultBook Is Nothing Then
         Set g_ResultBook = Workbooks.Add
         With g_ResultBook.Worksheets.item(1)
-            ' Report header
+            ' Заголовок отчета
             With .Range("A1:F1")
                 .Value = "Отчет о внешних ссылках"
                 .Font.Bold = True
@@ -59,7 +66,7 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
                 .Merge
             End With
 
-            ' Column headers
+            ' Заголовки колонок
             .Range("A2").Value = "Тип"
             .Range("B2").Value = "Книга"
             .Range("C2").Value = "Лист"
@@ -72,7 +79,7 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
                 .Font.Bold = True
             End With
 
-            ' Configure column widths
+            ' Настройка ширины колонок
             .Columns("A").ColumnWidth = 22
             .Columns("B").ColumnWidth = 15
             .Columns("C").ColumnWidth = 28
@@ -80,13 +87,13 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
             .Columns("E").ColumnWidth = 60
             .Columns("F").ColumnWidth = 60
 
-            ' Add filter
+            ' Добавление фильтра
             .Range("A2:F2").AutoFilter
         End With
         resultLn = 2
     End If
 
-    ' Write data
+    ' Запись данных
     resultLn = resultLn + 1
     With g_ResultBook.Worksheets.item(1)
         .Range("A" & resultLn).Value = typ
@@ -94,21 +101,23 @@ Private Function OutputLinkInfo(ByVal typ As String, ByVal wbk As String, ByVal 
         .Range("C" & resultLn).Value = wsh
         .Range("D" & resultLn).Value = loc
 
-        ' Add hyperlink, if possible
+        ' Добавление гиперссылки, если возможно
         If (Len(adr) > 0) And (Len(Dir(wbk)) > 0) Then
             .Hyperlinks.Add .Range("D" & resultLn), wbk, "'" & wsh & "'!" & adr, "Перейти:", loc
         End If
 
-        ' Add apostrophe to display formula as text
+        ' Добавление апострофа для отображения формулы как текста
         .Range("E" & resultLn).Value = "'" & fml
         .Range("F" & resultLn).Value = txt
     End With
 End Function
 
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-'* Sub         : ReportExternalLinks - Main logic for searching links in workbook
-'* Argument(s): wkbk - Workbook to check
-'* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+'--------------------------------------------------------------------------------
+' Sub: ReportExternalLinks
+' Purpose:  Основная логика поиска внешних ссылок в книге
+' Parameters:
+'   wkbk - Книга для проверки
+'--------------------------------------------------------------------------------
 Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     Dim wksht       As Excel.Worksheet
     Dim numLinks    As Long
@@ -117,40 +126,40 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     Call DisableApplicationSettings
 
     ' ==========================================
-    ' WORKSHEET-LEVEL CHECK
+    ' ПРОВЕРКА НА УРОВНЕ ЛИСТОВ
     ' ==========================================
     For Each wksht In wkbk.Worksheets
 
-        ' 1. Search for links in cell formulas
-        ' Optimization: Use Find instead of iterating through all cells
+        ' 1. Поиск ссылок в формулах ячеек
+        ' Оптимизация: используется Find вместо перебора всех ячеек
         Call CheckCellFormulas(wksht, wkbk, numLinks)
 
-        ' 2. Search for links in shapes
+        ' 2. Поиск ссылок в фигурах
         Call CheckShapeLinks(wksht, wkbk, numLinks)
 
-        ' 3. Search for links in conditional formatting
+        ' 3. Поиск ссылок в условном форматировании
         Call CheckConditionalFormatting(wksht, wkbk, numLinks)
 
-        ' 4. Search for links in charts
+        ' 4. Поиск ссылок в диаграммах
         Call CheckChartLinks(wksht, wkbk, numLinks)
 
-        ' 5. Search for links in pivot tables
+        ' 5. Поиск ссылок в сводных таблицах
         Call CheckPivotTableLinks(wksht, wkbk, numLinks)
 
-        ' 6. Search for links in data validation
+        ' 6. Поиск ссылок в проверке данных
         Call CheckDataValidationLinks(wksht, wkbk, numLinks)
 
     Next wksht
 
     ' ==========================================
-    ' WORKBOOK-LEVEL CHECK
+    ' ПРОВЕРКА НА УРОВНЕ КНИГИ
     ' ==========================================
 
-    ' 7. Search and clean up links in named ranges
+    ' 7. Поиск и очистка ссылок в именованных диапазонах
     Call CheckNamedRangeLinks(wkbk, numLinks)
 
     ' ==========================================
-    ' COMPLETION AND REPORT
+    ' ЗАВЕРШЕНИЕ И ОТЧЕТ
     ' ==========================================
     Call RestoreApplicationSettings
 
@@ -160,15 +169,15 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     Else
         Dim msg     As String
         msg = "Проверка завершена:" & vbCrLf & vbCrLf
-        ' If broken links were deleted, numLinks includes the final deletion record,
-        ' so we display numLinks - 1 for found links if delCt > 0
-        ' In the current logic, deleted links are added to the counter inside CheckNamedRangeLinks
+        ' Если удалены неработающие ссылки, numLinks включает запись об удалении,
+        ' поэтому отображаем numLinks - 1 для найденных ссылок, если delCt > 0
+        ' В текущей логике удаленные ссылки добавляются к счетчику внутри CheckNamedRangeLinks
         MsgBox msg & numLinks & " обнаружены проблемы.", vbExclamation
     End If
 End Sub
 
 ' ==========================================
-' HELPER CHECK PROCEDURES
+' ВСПОМОГАТЕЛЬНЫЕ ПРОЦЕДУРЫ ПРОВЕРКИ
 ' ==========================================
 
 Private Sub CheckCellFormulas(wksht As Worksheet, wkbk As Workbook, ByRef numLinks As Long)
@@ -186,7 +195,7 @@ Private Sub CheckCellFormulas(wksht As Worksheet, wkbk As Workbook, ByRef numLin
             On Error Resume Next
             fml = foundCell.formula
             If Err.Number = 0 Then
-                ' Checking for ".xl" helps avoid false positives on text like "[Text]"
+                ' Проверка на ".xl" помогает избежать ложных срабатываний на тексте типа "[Текст]"
                 If InStr(1, fml, ".xl", vbTextCompare) > 0 Then
                     numLinks = numLinks + 1
                     Call OutputLinkInfo("Формула", _
@@ -229,7 +238,7 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
         End If
         On Error GoTo 0
 
-        ' Check grouped shapes
+        ' Проверка сгруппированных фигур
         If shp.Type = msoGroup Then
             For Each subshp In shp.GroupItems
                 On Error Resume Next
@@ -357,7 +366,7 @@ Private Sub CheckDataValidationLinks(wksht As Worksheet, wkbk As Workbook, ByRef
         Next cell
     End If
 
-    ' Output results for data validation
+    ' Вывод результатов для проверки данных
     For Each key In dataValExtLinkRanges.Keys
         contiguousAddresses = VBA.Split(dataValExtLinkRanges(key).Address, ",")
         For i = 0 To UBound(contiguousAddresses)
@@ -398,12 +407,12 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
     If iCount > 0 Then
         For nameCnt = iCount To 1 Step -1
             If InStr(wkbk.Names(nameCnt).RefersTo, "[") <> 0 Then
-                ' Delete broken links (#REF!)
+                ' Удаление неработающих ссылок (#REF!)
                 If InStr(wkbk.Names(nameCnt).RefersTo, "#REF!") <> 0 Then
                     wkbk.Names(nameCnt).Delete
                     delCt = delCt + 1
                 Else
-                    ' Check if file exists
+                    ' Проверка существования файла
                     startPos = VBA.InStr(1, wkbk.Names(nameCnt).RefersTo, "='")
                     If startPos > 0 Then
                         endPos = VBA.InStr(startPos, wkbk.Names(nameCnt).RefersTo, "]")
@@ -415,7 +424,7 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
                                 wkbk.Names(nameCnt).Delete
                                 delCt = delCt + 1
                             Else
-                                ' File exists, but link is external
+                                ' Файл существует, но ссылка внешняя
                                 wkbk.Names(nameCnt).Visible = True
                                 numLinks = numLinks + 1
                                 Call OutputLinkInfo("Именованный диапазон", _
@@ -435,7 +444,7 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
 
     Set FSO = Nothing
 
-    ' Report on deleted names
+    ' Отчет об удаленных именах
     If delCt > 0 Then
         numLinks = numLinks + 1
         Call OutputLinkInfo("Именованный диапазон", _
@@ -447,6 +456,4 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
                 "Количество удаленных именованных диапазонов с неработающими ссылками. Файл: " & Dir(wkbk.FullName))
     End If
 End Sub
-
-
 

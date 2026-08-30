@@ -945,4 +945,3 @@ Private Sub WaitForProcess(ByVal lProcessId As Long)
     Set oProcesses = Nothing
     Set oWMI = Nothing
 End Sub
-
