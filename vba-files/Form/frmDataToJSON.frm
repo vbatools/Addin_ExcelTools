@@ -71,7 +71,7 @@ Private Sub btnOK_Click()
     jCount = UBound(arrData, 2)
 
     ' Формирование заголовков (если есть)
-    If chbHaveTitle.Value Then
+    If chbHaveTitle.Value And iCount > 1 Then
         ReDim arrVal(1 To jCount) As String
         fItem = 2    ' Данные начинаются со второй строки
 

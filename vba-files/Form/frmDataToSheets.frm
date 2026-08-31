@@ -73,6 +73,10 @@ Private Sub btnOK_Click()
     ' --- Проверка целевого диапазона ---
     On Error Resume Next
     Set rngTarget = Range(arrData(1, 2))
+    If Err.Number <> 0 Then
+        Call MsgBox(Err.Description, vbCritical)
+        GoTo CleanUp
+    End If
     On Error GoTo 0
 
     If Not IsArray(arrData) Then

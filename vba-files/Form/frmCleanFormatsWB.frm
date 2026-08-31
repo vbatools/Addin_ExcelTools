@@ -45,21 +45,21 @@ Private Sub btnDiagnostic_Click()
             End If
         Next objSH
 
-        listMain.AddItem "": listMain.AddItem ""
-        listMain.AddItem "Диагностика:"
-        listMain.AddItem "Именованных диапазонов " & vbTab & vbTab & vbTab & CStr(.Names.Count) & vbTab & " шт."
-        listMain.AddItem "Стилей " & vbTab & vbTab & vbTab & vbTab & vbTab & CStr(.Styles.Count) & vbTab & " шт."
+        ListMain.AddItem "": ListMain.AddItem ""
+        ListMain.AddItem "Диагностика:"
+        ListMain.AddItem "Именованных диапазонов " & vbTab & vbTab & vbTab & CStr(.Names.Count) & vbTab & " шт."
+        ListMain.AddItem "Стилей " & vbTab & vbTab & vbTab & vbTab & vbTab & CStr(.Styles.Count) & vbTab & " шт."
         If iProtectSheets > 0 Then
-            listMain.AddItem ""
-            listMain.AddItem "Включена защита листов паролем" & vbTab & vbTab & CStr(iProtectSheets) & vbTab & " шт."
-            listMain.AddItem "Необходимо снять ПАРОЛИ со всех листов!"
+            ListMain.AddItem ""
+            ListMain.AddItem "Включена защита листов паролем" & vbTab & vbTab & CStr(iProtectSheets) & vbTab & " шт."
+            ListMain.AddItem "Необходимо снять ПАРОЛИ со всех листов!"
             bFlagProtect = True
         End If
-        listMain.AddItem ""
+        ListMain.AddItem ""
         If .Names.Count + .Styles.Count > 500 Then
-            listMain.AddItem "Рекомендовано лечение. Нажмите кнопку ""Лечить"""
+            ListMain.AddItem "Рекомендовано лечение. Нажмите кнопку ""Лечить"""
         Else
-            listMain.AddItem "Лечение не требуется"
+            ListMain.AddItem "Лечение не требуется"
         End If
     End With
 End Sub
@@ -82,35 +82,35 @@ Private Sub btnFixStyles_Click()
     Dim iKey        As Integer
 
     With wbTarget
-        listMain.AddItem "": listMain.AddItem ""
-        listMain.AddItem "Лечение:"
+        ListMain.AddItem "": ListMain.AddItem ""
+        ListMain.AddItem "Лечение:"
         sExt = GetExtensionName(wbTarget.Name)
         sNewName = GetBaseName(wbTarget.Name) & "_CURED." & sExt
-        listMain.AddItem "Файл сохраняется под новым именем " & sNewName & " ..."
+        ListMain.AddItem "Файл сохраняется под новым именем " & sNewName & " ..."
         Err.Clear
         wbTarget.SaveAs wbTarget.Path & Application.PathSeparator & sNewName
         If Err = 0 Then
-            listMain.AddItem "Сохранение прошло успешно."
+            ListMain.AddItem "Сохранение прошло успешно."
 
-            listMain.AddItem ""
+            ListMain.AddItem ""
             iKey = MsgBox("Предпринимаем попытку удалить избыточные стили?", vbCritical + vbQuestion + vbYesNo, "Подтверждение операции")
             If iKey = vbYes Then
-                listMain.AddItem "Удаление избыточных стилей..."
+                ListMain.AddItem "Удаление избыточных стилей..."
                 Call DeleteStyles
             End If
 
             iKey = MsgBox("Предпринимаем попытку удалить избыточные именованные диапазоны?", vbCritical + vbQuestion + vbYesNo, "Подтверждение операции")
             If iKey = vbYes Then
-                listMain.AddItem ""
-                listMain.AddItem "Удаление избыточных именованных диапазонов..."
+                ListMain.AddItem ""
+                ListMain.AddItem "Удаление избыточных именованных диапазонов..."
                 Call DeleteNames
             End If
-            listMain.AddItem ""
+            ListMain.AddItem ""
             wbTarget.Save
-            listMain.AddItem "Файл сохранен."
+            ListMain.AddItem "Файл сохранен."
         Else
-            listMain.AddItem "Возникла ошибка: " & Err.Description
-            listMain.AddItem "Лечение отменено."
+            ListMain.AddItem "Возникла ошибка: " & Err.Description
+            ListMain.AddItem "Лечение отменено."
         End If
     End With
 
@@ -140,11 +140,11 @@ Private Sub DeleteStyles()
             End If
         Next
     End With
-    listMain.AddItem "Результаты:"
-    listMain.AddItem vbTab & "Успешно удалено " & vbTab & vbTab & vbTab & vbTab & vbTab & SuccessCount & vbTab & " шт."
-    listMain.AddItem vbTab & "Ошибка при попытке удаления " & vbTab & vbTab & vbTab & FailedCount & vbTab & " шт."
-    listMain.AddItem vbTab & "Пропушены встроенные стили " & vbTab & vbTab & vbTab & BuiltInCount & vbTab & " шт."
-    listMain.AddItem vbTab & "Удалено " & format(CDbl(SuccessCount / TotalCount), "0.0%")
+    ListMain.AddItem "Результаты:"
+    ListMain.AddItem vbTab & "Успешно удалено " & vbTab & vbTab & vbTab & vbTab & vbTab & SuccessCount & vbTab & " шт."
+    ListMain.AddItem vbTab & "Ошибка при попытке удаления " & vbTab & vbTab & vbTab & FailedCount & vbTab & " шт."
+    ListMain.AddItem vbTab & "Пропушены встроенные стили " & vbTab & vbTab & vbTab & BuiltInCount & vbTab & " шт."
+    ListMain.AddItem vbTab & "Удалено " & format(CDbl(SuccessCount / TotalCount), "0.0%")
     Application.StatusBar = ""
 End Sub
 
@@ -167,10 +167,10 @@ Private Sub DeleteNames()
             End If
         Next
     End With
-    listMain.AddItem "Результаты:"
-    listMain.AddItem vbTab & "Успешно удалено " & vbTab & vbTab & vbTab & vbTab & vbTab & SuccessCount & vbTab & " шт."
-    listMain.AddItem vbTab & "Ошибка при попытке удаления " & vbTab & vbTab & vbTab & FailedCount & vbTab & " шт."
-    listMain.AddItem vbTab & "Удалено " & format(CDbl(SuccessCount / TotalCount), "0.0%")
+    ListMain.AddItem "Результаты:"
+    ListMain.AddItem vbTab & "Успешно удалено " & vbTab & vbTab & vbTab & vbTab & vbTab & SuccessCount & vbTab & " шт."
+    ListMain.AddItem vbTab & "Ошибка при попытке удаления " & vbTab & vbTab & vbTab & FailedCount & vbTab & " шт."
+    ListMain.AddItem vbTab & "Удалено " & format(CDbl(SuccessCount / TotalCount), "0.0%")
     Application.StatusBar = ""
 End Sub
 

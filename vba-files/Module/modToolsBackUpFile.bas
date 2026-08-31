@@ -34,6 +34,7 @@ Public Sub AddBackupFile()
     End If
     Dim sExtension  As String
     Call DisableApplicationSettings
+    
     With ActiveWorkbook
         sOldWB = .FullName
         sExtension = GetExtensionName(.Name)

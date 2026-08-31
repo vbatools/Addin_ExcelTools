@@ -123,8 +123,6 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     Dim numLinks    As Long
     numLinks = 0
 
-    Call DisableApplicationSettings
-
     ' ==========================================
     ' ПРОВЕРКА НА УРОВНЕ ЛИСТОВ
     ' ==========================================
@@ -161,7 +159,6 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     ' ==========================================
     ' ЗАВЕРШЕНИЕ И ОТЧЕТ
     ' ==========================================
-    Call RestoreApplicationSettings
 
     If numLinks <= 0 Then
         MsgBox "Проверка завершена:" & vbCrLf & vbCrLf & _

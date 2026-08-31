@@ -73,6 +73,8 @@ Private Sub btnOK_Click()
 
     ' --- Инициализация ---
     Call DisableApplicationSettings
+    
+    On Error GoTo CleanUp
 
     Set excelApp = New Excel.Application
     excelApp.DisplayAlerts = False
@@ -109,7 +111,8 @@ Private Sub btnOK_Click()
 
         Call UpdateProgress(i / iCount)
     Next i
-
+    
+CleanUp:
     ' --- Завершение ---
     If Not targetBook Is Nothing Then targetBook.Close True
     If Not excelApp Is Nothing Then

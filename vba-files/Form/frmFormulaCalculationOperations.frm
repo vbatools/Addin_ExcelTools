@@ -80,15 +80,14 @@ Private Sub btnOK_Click()
 
     For i = 1 To iCount
         For j = 1 To jCount
-            ' Нормализация десятичного разделителя
-            If Application.DecimalSeparator = "," Then
-                arr(i, j) = VBA.Replace(arr(i, j), ".", ",")
-            Else
-                arr(i, j) = VBA.Replace(arr(i, j), ",", ".")
-            End If
-
             ' Применение операции к числовым значениям
             If IsNumeric(arr(i, j)) Then
+                ' Нормализация десятичного разделителя
+                If Application.DecimalSeparator = "," Then
+                    arr(i, j) = VBA.Replace(arr(i, j), ".", ",")
+                Else
+                    arr(i, j) = VBA.Replace(arr(i, j), ",", ".")
+                End If
                 Select Case True
                     Case optRound.Value
                         arr(i, j) = VBA.Round(arr(i, j), VBA.Abs(VBA.Fix(snVal)))

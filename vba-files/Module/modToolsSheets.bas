@@ -176,11 +176,10 @@ Public Sub AddSheetsByList()
         ' Создание листа, если имя не пустое и лист не существует
         If sSheetName <> vbNullString Then
             If Not HaveSheetInFile(ActiveWorkbook, sSheetName) Then
-                On Error Resume Next
                 Worksheets(sTemplateSheet).Copy After:=Worksheets(Worksheets.Count)
-                If Err.Number = 0 Then
-                    ActiveSheet.Name = sSheetName
-                Else
+                On Error Resume Next
+                ActiveSheet.Name = sSheetName
+                If Err.Number <> 0 Then
                     Application.DisplayAlerts = False
                     ActiveSheet.Delete
                     Application.DisplayAlerts = True

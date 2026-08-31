@@ -29,7 +29,10 @@ Public Sub AddSheetsComments()
         result = MsgBox("Старый лист с комментариями будет удален." _
                 & vbCrLf & "Хотите продолжить?" _
                 , vbYesNo Or vbQuestion Or vbDefaultButton2, "Список комментариев")
-        If result = vbNo Then Exit Sub
+        If result = vbNo Then
+            Call RestoreApplicationSettings
+            Exit Sub
+        End If
         ActiveWorkbook.Sheets("Комментарии").Delete
     End If
 

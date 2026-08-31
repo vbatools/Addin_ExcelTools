@@ -523,7 +523,7 @@ Public Function SortArray(SourceArr As Variant, ByVal n As Integer, _
         Optional bFlagSortAs As Boolean = True, _
         Optional bFlagDigital As Boolean = False, _
         Optional bFlagCase As Boolean = False) As Variant
-    Dim Check As Boolean, iCount As Integer, jCount As Integer
+    Dim Check As Boolean, iCount As Long, jCount As Long
     Dim sVal1       As Variant
     Dim sVal2       As Variant
 

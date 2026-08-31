@@ -51,7 +51,7 @@ Private Sub loadDataToList()
     Set wb = Workbooks(cmbMain.Value)
     lbMsg.Visible = wb.ProtectStructure
 
-    With listMain
+    With ListMain
         .Clear
         For Each Sh In wb.Worksheets
             .AddItem Sh.Name

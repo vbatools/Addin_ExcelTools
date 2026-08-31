@@ -17,7 +17,6 @@ Attribute VB_Exposed = False
 
 Option Explicit
 
-
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 ' UserForm     :   frmDataUniqueValues - создание книг Excel
 ' Author       :   VBATools
@@ -204,7 +203,9 @@ Private Function GetNamesArray(ByRef arrNames As Variant) As Boolean
 
     ' --- Нормализация до массива ---
     If Not IsArray(arrNames) Then
-        arrNames = Array(arrNames)
+        ReDim arr(1 To 1, 1 To 1) As String
+        arr(1, 1) = arrNames
+        arrNames = arr
     End If
 
     ' --- Удаление пустых значений ---
@@ -314,16 +315,15 @@ Private Function FilterNonEmpty(ByVal arr As Variant) As Variant
     ReDim result(LBound(arr) To UBound(arr))
 
     For i = LBound(arr) To UBound(arr)
-        If Not IsEmpty(arr(i)) And Len(Trim$(CStr(arr(i)))) > 0 Then
-            result(Count) = arr(i)
+        If Not IsEmpty(arr(i, 1)) And Len(Trim$(CStr(arr(i, 1)))) > 0 Then
             Count = Count + 1
+            result(Count) = arr(i, 1)
         End If
     Next i
 
     If Count = 0 Then
         FilterNonEmpty = Array()
     Else
-        ReDim Preserve result(0 To Count - 1)
         FilterNonEmpty = result
     End If
 

@@ -180,7 +180,7 @@ Private Sub btnOK_Click()
                     shCurent.Copy After:=wbAct.Sheets(wbAct.Sheets.Count)
                 End If
             End If
-            lbProgress.Width = i / iCount * listWBooks.Width
+            If iCount > 0 Then lbProgress.Width = i / iCount * listWBooks.Width
             Me.Repaint
         Next i
     End With

@@ -27,7 +27,10 @@ Public Sub AddFilesList()
     Call DisableApplicationSettings
 
     arrPath = FileDialogFun(ActiveWorkbook.Path, True, "*.*")
-    If (Not (Not (arrPath))) = 0 Then Exit Sub
+    If (Not (Not (arrPath))) = 0 Then
+        RestoreApplicationSettings
+        Exit Sub
+    End If
     arrVal = Array("Размер файла:", "Тип:", "Дата изменения:", "Дата создания:", "Дата открытия:", "Дата изменения:", "Атрибуты:", "Тип:", "Ключевые слова:", "Оценка:", "Автор:", "Название:", "Тема:", "Категории:", "Комментарий:", "Авторские права:", "Размеры:", "Организация:", "Имя программы:", "Состояние содержимого:", "Язык:")
     arrValNum = Array(1, 2, 3, 4, 5, 128, 6, 11, 18, 19, 20, 21, 22, 23, 24, 25, 31, 33, 35, 126, 185)
     jCount = UBound(arrValNum)

@@ -96,11 +96,11 @@ Public Property Let ForeColorDayYes(ByVal Color As XlRgbColor)
     mForeColorDayYes = Color
 End Property
 
-Public Property Get NolorMove() As XlRgbColor
-    NolorMove = mColorMove
+Public Property Get ColorMove() As XlRgbColor
+    ColorMove = mColorMove
 End Property
 
-Public Property Let NolorMove(ByVal Color As XlRgbColor)
+Public Property Let ColorMove(ByVal Color As XlRgbColor)
     mColorMove = Color
 End Property
 
@@ -176,7 +176,7 @@ Public Sub AddDatePicker(ByRef TextBox As MSForms.TextBox, _
         Optional VisibleBtn As Boolean = True, _
         Optional ForeColorTitle As XlRgbColor = &H80&, _
         Optional IconCode As enIconCalendar = enIconCalendar.icCalendar, _
-        Optional NolorSelectedDate As XlRgbColor = 12632319, _
+        Optional ColorSelectedDate As XlRgbColor = 12632319, _
         Optional ColorMove As XlRgbColor = 14737632, _
         Optional ForeColorDayYes As XlRgbColor = rgbBlack, _
         Optional ForeColorDayNo As XlRgbColor = 8421504)
@@ -194,7 +194,7 @@ Public Sub AddDatePicker(ByRef TextBox As MSForms.TextBox, _
 
     mForeColorTitle = ForeColorTitle
     mFormatDate = VBA.LCase$(FormatDate)
-    mColorSelectedDate = NolorSelectedDate
+    mColorSelectedDate = ColorSelectedDate
     mColorMove = ColorMove
     mForeColorDayYes = ForeColorDayYes
     mForeColorDayNo = ForeColorDayNo

@@ -314,7 +314,6 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
                         Dim arrDate As Variant
                         Dim sVal As String
                         sVal = VBA.Trim$(arrRes(i, j))
-                        sVal = VBA.Split(sVal, ".")
                         sVal = VBA.Replace(sVal, ",", ".")
                         sVal = VBA.Replace(sVal, "/", ".")
                         sVal = VBA.Replace(sVal, "\", ".")
@@ -352,7 +351,7 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
                     Case optFixEngLattersRus.Value
                         If arrRes(i, j) Like "*[" & ENG & "]*" Then
                             For k = 1 To VBA.Len(arrRes(i, j))
-                                sChr = VBA.Mid$(arrRes(i, j), i, 1)
+                                sChr = VBA.Mid$(arrRes(i, j), k, 1)
                                 If sChr Like "[" & ENG & "]" Then
                                     arrRes(i, j) = VBA.Replace(arrRes(i, j), sChr, VBA.Mid$(RUS, VBA.InStr(1, ENG, sChr), 1))
                                 End If
@@ -361,7 +360,7 @@ Private Function fixCharts(ByVal arr As Variant, ByVal bFormuls As Boolean, ByRe
                     Case optFixRusLattersEng.Value
                         If arrRes(i, j) Like "*[" & RUS & "]*" Then
                             For k = 1 To VBA.Len(arrRes(i, j))
-                                sChr = VBA.Mid$(arrRes(i, j), i, 1)
+                                sChr = VBA.Mid$(arrRes(i, j), k, 1)
                                 If sChr Like "[" & RUS & "]" Then
                                     arrRes(i, j) = VBA.Replace(arrRes(i, j), sChr, VBA.Mid$(ENG, VBA.InStr(1, RUS, sChr), 1))
                                 End If

@@ -406,7 +406,7 @@ Private Sub listFilters_Change()
     Dim byCol       As Byte
     Dim sFilter     As String
     Dim arr()       As String
-
+    If listFilters.ListIndex < 0 Then Exit Sub
     sFilter = listFilters.List(listFilters.ListIndex, 0)
     byCol = 1
     Select Case sFilter
