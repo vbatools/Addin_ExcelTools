@@ -419,7 +419,7 @@ Private Function insertCharts(ByVal arr As Variant, ByVal bFormuls As Boolean) A
                     Case optInsertTextPosion.Value
                         If iPos = 0 Then GoTo skipeValue
                         If iPos > VBA.Len(arrRes(i, j)) Then iPos = VBA.Len(arrRes(i, j))
-                        arrRes(i, j) = VBA.Left$(arrRes(i, j), iPos) & sText & VBA.Right$(arrRes(i, j), VBA.Len(arrRes(i, j)) - iPos + 1)
+                        arrRes(i, j) = VBA.Left$(arrRes(i, j), iPos) & sText & VBA.Right$(arrRes(i, j), VBA.Len(arrRes(i, j)) - iPos)
                     Case optInsertUntilTextChr.Value
 
                         If sBefore = vbNullString Then GoTo skipeValue
