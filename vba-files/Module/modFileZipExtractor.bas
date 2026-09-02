@@ -723,10 +723,10 @@ Private Function UnpackZip(ByVal sZipPath As String, _
     ' Копируем все файлы из архива
     oDestFolder.CopyHere oItems, 4 + 16    ' Скрытое + Да для всех
 
-    ' Ожидание завершения распаковки
-    Call WaitForExtraction(sDestFolder, oItems.Count, oFSO)
-
-    UnpackZip = True
+    ' Ожидание завершения распаковки; успех только если реально дождались
+    If WaitForExtraction(sDestFolder, oItems.Count, oFSO) Then
+        UnpackZip = True
+    End If
 
 CleanUp:
     Set oItems = Nothing
@@ -748,7 +748,6 @@ Private Function UnpackRar(ByVal sRarPath As String, _
     Dim sExePath    As String
     Dim sDestFolder As String
     Dim sCmd        As String
-    Dim lResult     As Long
 
     On Error GoTo ErrorHandler
 
@@ -779,15 +778,8 @@ Private Function UnpackRar(ByVal sRarPath As String, _
     ' Формируем командную строку
     sCmd = """" & sExePath & """ x -y -o+ """ & sRarPath & """ """ & sDestFolder & """"
 
-    ' Выполняем распаковку
-    lResult = Shell(sCmd, vbHide)
-
-    ' Ожидание завершения (простейший вариант)
-    Call Sleep(500)
-    Call WaitForProcess(lResult)
-
-    ' Проверяем результат
-    UnpackRar = True
+    ' Выполняем распаковку синхронно и проверяем код завершения
+    UnpackRar = RunArchiverAndWait(sCmd, sRarPath)
 
     Exit Function
 
@@ -804,7 +796,6 @@ Private Function Unpack7z(ByVal s7zPath As String, _
     Dim sExePath    As String
     Dim sDestFolder As String
     Dim sCmd        As String
-    Dim lResult     As Long
 
     On Error GoTo ErrorHandler
 
@@ -831,15 +822,8 @@ Private Function Unpack7z(ByVal s7zPath As String, _
     ' Формируем командную строку
     sCmd = """" & sExePath & """ x -y -o""" & sDestFolder & """ """ & s7zPath & """"
 
-    ' Выполняем распаковку
-    lResult = Shell(sCmd, vbHide)
-
-    ' Ожидание завершения
-    Call Sleep(500)
-    Call WaitForProcess(lResult)
-
-    ' Проверяем результат
-    Unpack7z = True
+    ' Выполняем распаковку синхронно и проверяем код завершения
+    Unpack7z = RunArchiverAndWait(sCmd, s7zPath)
 
     Exit Function
 
@@ -892,56 +876,75 @@ End Function
 
 ' ============================================
 ' ОЖИДАНИЕ ЗАВЕРШЕНИЯ РАСПАКОВКИ (Shell.Application)
+' Возвращает: True - ожидаемое число элементов появилось, False - таймаут
 ' ============================================
-Private Sub WaitForExtraction(ByVal sFolderPath As String, _
+Private Function WaitForExtraction(ByVal sFolderPath As String, _
         ByVal lExpectedCount As Long, _
-        ByRef oFSO As Object)
+        ByRef oFSO As Object) As Boolean
     Dim lTimeout    As Long
-    Dim lFileCount  As Long
+    Dim lItemCount  As Long
     Dim oFolder     As Object
 
     lTimeout = 0
 
     Do While lTimeout < 30000    ' Максимум 30 секунд
+        lItemCount = 0
         On Error Resume Next
         Set oFolder = oFSO.GetFolder(sFolderPath)
-        lFileCount = oFolder.Files.Count
+        If Not oFolder Is Nothing Then
+            ' oItems.Count в zip включает и папки - считаем и файлы, и подпапки
+            lItemCount = oFolder.Files.Count + oFolder.SubFolders.Count
+        End If
+        Set oFolder = Nothing
         On Error GoTo 0
 
-        If lFileCount >= lExpectedCount Then Exit Do
+        If lItemCount >= lExpectedCount Then
+            WaitForExtraction = True
+            Exit Function
+        End If
 
         Call Sleep(100)
         lTimeout = lTimeout + 100
         Call VBA.DoEvents
     Loop
-End Sub
+
+    WaitForExtraction = False
+End Function
 
 ' ============================================
-' ОЖИДАНИЕ ЗАВЕРШЕНИЯ ВНЕШНЕГО ПРОЦЕССА
+' СИНХРОННЫЙ ЗАПУСК АРХИВАТОРА С ПОЛУЧЕНИЕМ КОДА ЗАВЕРШЕНИЯ
+' Возвращает: True - распаковка успешна (код 0 или 1), False - ошибка
+' Коды завершения 7-Zip и WinRAR: 0 - успех, 1 - предупреждения, ?2 - фатальная ошибка
 ' ============================================
-Private Sub WaitForProcess(ByVal lProcessId As Long)
-    Dim oWMI        As Object
-    Dim oProcess    As Object
-    Dim oProcesses  As Object
-    Dim lTimeout    As Long
+Private Function RunArchiverAndWait(ByVal sCmd As String, ByVal sArchivePath As String) As Boolean
+    Dim oWsh        As Object
+    Dim oExec       As Object
+    Dim lExitCode   As Long
 
-    On Error Resume Next
+    On Error GoTo ErrorHandler
 
-    Set oWMI = GetObject("winmgmts:\\.\root\cimv2")
+    RunArchiverAndWait = False
 
-    lTimeout = 0
+    Set oWsh = CreateObject("WScript.Shell")
+    Set oExec = oWsh.Exec(sCmd)
 
-    Do While lTimeout < 60000    ' Максимум 60 секунд
-        Set oProcesses = oWMI.ExecQuery( _
-                "SELECT * FROM Win32_Process WHERE ProcessId = " & lProcessId)
+    ' ReadAll дожидается закрытия потока вывода, т.е. завершения процесса,
+    ' и заодно не даёт процессу заблокироваться на переполнении буфера (>4 КБ)
+    oExec.StdOut.ReadAll
 
-        If oProcesses.Count = 0 Then Exit Do
+    lExitCode = oExec.ExitCode
 
-        Call Sleep(200)
-        lTimeout = lTimeout + 200
-        Call VBA.DoEvents
-    Loop
+    If lExitCode <= 1 Then
+        RunArchiverAndWait = True
+    Else
+        Debug.Print "Ошибка распаковки, код " & lExitCode & ": " & sArchivePath
+    End If
 
-    Set oProcesses = Nothing
-    Set oWMI = Nothing
-End Sub
+CleanUp:
+    Set oExec = Nothing
+    Set oWsh = Nothing
+    Exit Function
+
+ErrorHandler:
+    Resume CleanUp
+End Function
