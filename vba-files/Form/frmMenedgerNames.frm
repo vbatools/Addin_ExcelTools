@@ -219,7 +219,7 @@ Private Sub refreshForm()
                 arrNames(i, 6) = "#NAME?"
             Else
                 On Error Resume Next
-                Select Case .RefersToRange.TEXT
+                Select Case .RefersToRange.Text
                     Case "#NAME?", "#ИМЯ?"
                         arrNames(i, 6) = "#NAME?"
                 End Select

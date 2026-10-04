@@ -67,11 +67,19 @@ Private Sub btnReferenceStyle(control As IRibbonControl)
 End Sub
 
 Private Sub btnNewStream(control As IRibbonControl)
+    Dim sPath       As String
+    sPath = ActiveWorkbook.FullName
+
+    If Dir(ActiveWorkbook.FullName, vbNormal) = vbNullString Then
+        Call MsgBox("Книга не сохранена, не возможно ее открыть в новом потоке!", vbExclamation)
+        Exit Sub
+    End If
+
     If MsgBox("Запустить в новом потоке?", vbYesNo + vbQuestion) = vbNo Then Exit Sub
     Dim App         As Application
     Set App = CreateObject("Excel.Application")
     App.Visible = True
-    Call App.Workbooks.Open(FileName:=ActiveWorkbook.FullName, ReadOnly:=True)
+    Call App.Workbooks.Open(FileName:=sPath, ReadOnly:=True)
 End Sub
 
 Private Sub btnOpenFolder(control As IRibbonControl)

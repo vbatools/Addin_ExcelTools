@@ -13,8 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 
 Private Const FILTER_REVERSE As String = "обратное выделение"
@@ -33,7 +31,7 @@ Private Sub btnAddText_Click()
         For i = 0 To .ListCount - 1
             If .Selected(i) Then
                 On Error Resume Next
-                ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.TEXT = sNewName
+                ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.Text = sNewName
                 On Error GoTo 0
                 bFlafMsg = True
             End If
@@ -60,7 +58,7 @@ Private Sub btnAppendText_Click()
         For i = 0 To .ListCount - 1
             If .Selected(i) Then
                 On Error Resume Next
-                ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.TEXT = ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.TEXT & sNewName
+                ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.Text = ActiveSheet.Shapes.Range(.List(i, 0)).TextFrame2.TextRange.Text & sNewName
                 On Error GoTo 0
                 bFlafMsg = True
             End If
@@ -483,7 +481,7 @@ Private Sub refreshMainList()
             On Error Resume Next
             arr(4, i) = .OnAction
             On Error GoTo 0
-            If .OnAction <> vbNullString Then
+            If arr(4, i) <> vbNullString Then
                 arr(11, i) = 1
                 arrFilter(2, 3) = arrFilter(2, 3) + 1
             Else
@@ -492,7 +490,7 @@ Private Sub refreshMainList()
             End If
 
             On Error Resume Next
-            arr(5, i) = VBA.Left(.TextFrame2.TextRange.TEXT, 50)
+            arr(5, i) = VBA.Left(.TextFrame2.TextRange.Text, 50)
             On Error GoTo 0
 
             arr(6, i) = VBA.Round(.Top, 3)

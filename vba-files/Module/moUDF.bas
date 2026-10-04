@@ -204,12 +204,15 @@ End Function
 Public Function CONCAT_MULTI(ByVal Delimiter As String, ParamArray RANGES() As Variant) As String
     Dim arr         As Variant
     Dim item        As Variant
+    Dim item2       As Variant
     Dim sResult     As String
 
     For Each arr In RANGES
         For Each item In arr
-            If sResult <> vbNullString Then sResult = sResult & Delimiter
-            sResult = sResult & item
+            For Each item2 In item
+                If sResult <> vbNullString Then sResult = sResult & Delimiter
+                sResult = sResult & item2
+            Next item2
         Next item
     Next arr
     CONCAT_MULTI = sResult
@@ -379,7 +382,7 @@ End Function
 '--------------------------------------------------------------------------------
 Public Function GET_COMMENT(cell As Range) As String
     On Error Resume Next
-    GET_COMMENT = cell.Comment.TEXT
+    GET_COMMENT = cell.Comment.Text
 End Function
 
 Public Function ПОЛУЧКОММЕНТ(ByVal ЯЧЕЙКА As Range) As String

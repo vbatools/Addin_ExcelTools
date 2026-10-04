@@ -108,10 +108,6 @@ Private Sub cmbWB_Change()
     Call refreshForm
 End Sub
 
-Private Sub Label20_Click()
-
-End Sub
-
 '--------------------------------------------------------------------------------
 ' Sub: UserForm_Initialize
 ' Purpose: Инициализация формы при запуске. Настраивает расположение, наполняет

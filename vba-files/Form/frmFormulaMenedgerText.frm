@@ -682,12 +682,12 @@ Public Sub replaceFotn(ByRef oCell As Range, ByVal sValFinde As String, ByVal sV
         iCount = .ChildNodes.Length
         If iCount = 0 Then Exit Sub
         For i = 0 To iCount - 1
-            sText = .ChildNodes(i).TEXT
+            sText = .ChildNodes(i).Text
             If VBA.InStr(1, sText, sValFinde) > 0 Then
                 Dim oXMLDataNodeF As MSXML2.IXMLDOMNode
                 Dim oXMLDataNodeF1 As MSXML2.IXMLDOMNode
                 Set oXMLDataNodeF = findeLastChildNode(.ChildNodes(i), oXMLDataNodeF1)
-                oXMLDataNodeF1.TEXT = VBA.Replace(sText, sValFinde, sValReplace)
+                oXMLDataNodeF1.Text = VBA.Replace(sText, sValFinde, sValReplace)
             End If
         Next i
     End With

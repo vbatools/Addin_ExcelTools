@@ -18,8 +18,6 @@ Private Const COLOR_SUBHEADER_BG As Long = 16247773
 '--------------------------------------------------------------------------------
 Public Sub ExternalLinkUtility()
     On Error GoTo ErrorHandler
-
-    Call DisableApplicationSettings
     Call ReportExternalLinks(ActiveWorkbook)
 
 CleanUp:
@@ -126,6 +124,7 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
     ' ==========================================
     ' ПРОВЕРКА НА УРОВНЕ ЛИСТОВ
     ' ==========================================
+    Call DisableApplicationSettings
     For Each wksht In wkbk.Worksheets
 
         ' 1. Поиск ссылок в формулах ячеек
@@ -155,6 +154,7 @@ Private Sub ReportExternalLinks(wkbk As Excel.Workbook)
 
     ' 7. Поиск и очистка ссылок в именованных диапазонах
     Call CheckNamedRangeLinks(wkbk, numLinks)
+    Call RestoreApplicationSettings
 
     ' ==========================================
     ' ЗАВЕРШЕНИЕ И ОТЧЕТ
@@ -195,13 +195,14 @@ Private Sub CheckCellFormulas(wksht As Worksheet, wkbk As Workbook, ByRef numLin
                 ' Проверка на ".xl" помогает избежать ложных срабатываний на тексте типа "[Текст]"
                 If InStr(1, fml, ".xl", vbTextCompare) > 0 Then
                     numLinks = numLinks + 1
+                    foundCell.Value2 = foundCell.Value2
                     Call OutputLinkInfo("Формула", _
                             wkbk.FullName, _
                             wksht.Name, _
                             "Cell " & foundCell.Address(False, False), _
                             foundCell.Address, _
                             fml, _
-                            "Отредактируйте ссылку на этом листе.")
+                            "Была удалена формула со ссылкой")
                 End If
             Else
                 Err.Clear
@@ -225,13 +226,28 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
         fml = shp.DrawingObject.formula
         If Err.Number = 0 And InStr(fml, "[") <> 0 Then
             numLinks = numLinks + 1
+            Dim sVal As String
+            sVal = shp.DrawingObject.Text
+            shp.DrawingObject.formula = vbNullString
+            shp.DrawingObject.Text = sVal
             Call OutputLinkInfo("Фигура/объект", _
                     wkbk.FullName, _
                     wksht.Name, _
                     shp.Name, _
                     shp.TopLeftCell.Address & ":" & shp.BottomRightCell.Address, _
                     fml, _
-                    "Удалить ссылку. Ссылку можно изменить через меню Excel. Удалить объект.")
+                    "Удалена ссылка")
+        End If
+        If Err.Number = 0 And shp.OnAction Like "'*'!*" Then
+            numLinks = numLinks + 1
+            Call OutputLinkInfo("Фигура/объект", _
+                    wkbk.FullName, _
+                    wksht.Name, _
+                    shp.Name, _
+                    shp.OnAction, _
+                    shp.OnAction, _
+                    "Была удалена ссылка на макрос")
+            shp.OnAction = vbNullString
         End If
         On Error GoTo 0
 
@@ -242,13 +258,16 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
                 fml = subshp.DrawingObject.formula
                 If Err.Number = 0 And InStr(fml, "[") <> 0 Then
                     numLinks = numLinks + 1
+                    sVal = subshp.DrawingObject.Text
+                    subshp.DrawingObject.formula = vbNullString
+                    subshp.DrawingObject.Text = sVal
                     Call OutputLinkInfo("Фигура/объект", _
                             wkbk.FullName, _
                             wksht.Name, _
                             subshp.Name & " (часть группы '" & shp.Name & "')", _
                             subshp.TopLeftCell.Address & ":" & subshp.BottomRightCell.Address, _
                             fml, _
-                            "Удалить ссылку. Ссылку можно изменить через меню Excel. Удалить объект.")
+                            "Удалена ссылка")
                 End If
                 On Error GoTo 0
             Next subshp
@@ -257,11 +276,14 @@ Private Sub CheckShapeLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks
 End Sub
 
 Private Sub CheckConditionalFormatting(wksht As Worksheet, wkbk As Workbook, ByRef numLinks As Long)
-    Dim cForm       As Object
+    Dim cForm       As FormatCondition
     Dim fml         As String
-
-    For Each cForm In wksht.Cells.FormatConditions
+    Dim i As Long
+    Dim iCount  As Long
+    iCount = wksht.Cells.FormatConditions.Count
+    For i = iCount To 1 Step -1
         On Error Resume Next
+        Set cForm = wksht.Cells.FormatConditions(i)
         fml = cForm.Formula1
         If Err.Number = 0 And InStr(fml, "[") <> 0 Then
             numLinks = numLinks + 1
@@ -272,10 +294,11 @@ Private Sub CheckConditionalFormatting(wksht As Worksheet, wkbk As Workbook, ByR
                     cForm.AppliesTo.Address, _
                     fml, _
                     "Ссылка найдена в режиме условного форматирования. Excel часто не отображает ее в интерфейсе." & _
-                    "Рекомендуется удалить условное форматирование для этих ячеек или заменить его правилом без ссылок.")
+                    " Удалено")
+            cForm.Delete
         End If
         On Error GoTo 0
-    Next cForm
+    Next i
 End Sub
 
 Private Sub CheckChartLinks(wksht As Worksheet, wkbk As Workbook, ByRef numLinks As Long)
@@ -358,6 +381,7 @@ Private Sub CheckDataValidationLinks(wksht As Worksheet, wkbk As Workbook, ByRef
                 Else
                     Set dataValExtLinkRanges.item(key) = cell
                 End If
+                cell.Validation.Delete
             End If
             On Error GoTo 0
         Next cell
@@ -380,7 +404,7 @@ Private Sub CheckDataValidationLinks(wksht As Worksheet, wkbk As Workbook, ByRef
                     place, _
                     contiguousAddresses(i), _
                     VBA.CStr(key), _
-                    "Ссылка найдена в разделе проверка данных (Data -> Проверка данных). Измените источник.")
+                    "Ссылка найдена в разделе проверка данных (Data -> Проверка данных). Удалена.")
         Next i
     Next key
 
@@ -453,4 +477,6 @@ Private Sub CheckNamedRangeLinks(wkbk As Workbook, ByRef numLinks As Long)
                 "Количество удаленных именованных диапазонов с неработающими ссылками. Файл: " & Dir(wkbk.FullName))
     End If
 End Sub
+
+
 

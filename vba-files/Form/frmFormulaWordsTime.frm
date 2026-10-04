@@ -28,7 +28,7 @@ End Sub
 
 Private Sub btnOK_Click()
     Dim MayTime     As Date
-    MayTime = VBA.TimeSerial(txtHour.TEXT, txtMinute.TEXT, txtSecond.TEXT)
+    MayTime = VBA.TimeSerial(txtHour.Text, txtMinute.Text, txtSecond.Text)
 
     With activeCell
         .FormulaR1C1 = "=ВРЕМЯПРОПИСЬЮ(" & VBA.Chr$(34) & MayTime & VBA.Chr$(34) & "," & cmbTypeDate.ListIndex + 1 & "," & _
@@ -47,12 +47,12 @@ Private Sub btnOK_Click()
 End Sub
 
 Private Sub btnSetTimeNow_Click()
-    txtHour.TEXT = Hour(Time)
-    spHour.Value = VBA.Val(txtHour.TEXT)
-    txtMinute.TEXT = Minute(Time)
-    spMinute.Value = VBA.Val(txtMinute.TEXT)
-    txtSecond.TEXT = Second(Time)
-    spSecond.Value = VBA.Val(txtSecond.TEXT)
+    txtHour.Text = Hour(Time)
+    spHour.Value = VBA.Val(txtHour.Text)
+    txtMinute.Text = Minute(Time)
+    spMinute.Value = VBA.Val(txtMinute.Text)
+    txtSecond.Text = Second(Time)
+    spSecond.Value = VBA.Val(txtSecond.Text)
     Call addFormula
 End Sub
 
@@ -82,7 +82,7 @@ Private Sub spHour_Change()
             Case 24: .Value = 0
             Case -1: .Value = 23
         End Select
-        txtHour.TEXT = .Value
+        txtHour.Text = .Value
     End With
     Call addFormula
 End Sub
@@ -93,7 +93,7 @@ Private Sub spMinute_Change()
             Case 60: .Value = 0
             Case -1: .Value = 59
         End Select
-        txtMinute.TEXT = .Value
+        txtMinute.Text = .Value
     End With
     Call addFormula
 End Sub
@@ -104,7 +104,7 @@ Private Sub spSecond_Change()
             Case 60: .Value = 0
             Case -1: .Value = 59
         End Select
-        txtSecond.TEXT = .Value
+        txtSecond.Text = .Value
     End With
     Call addFormula
 End Sub
@@ -148,23 +148,23 @@ Private Sub UserForm_Initialize()
     Dim MayHour     As Byte
     Dim MayMinut    As Byte
     MayHour = VBA.Hour(Time)
-    txtHour.TEXT = MayHour
+    txtHour.Text = MayHour
     spHour.Value = MayHour
     MayMinut = VBA.Minute(Time)
-    txtMinute.TEXT = MayMinut
+    txtMinute.Text = MayMinut
     spMinute.Value = MayMinut
     MayHour = VBA.Second(Time)
-    txtSecond.TEXT = MayHour
+    txtSecond.Text = MayHour
     spSecond.Value = MayHour
 
     Call addFormula
 End Sub
 
 Private Sub addFormula()
-    If txtHour.TEXT = vbNullString Or txtMinute.TEXT = vbNullString Or txtSecond.TEXT = vbNullString Then Exit Sub
+    If txtHour.Text = vbNullString Or txtMinute.Text = vbNullString Or txtSecond.Text = vbNullString Then Exit Sub
     Dim MayTime     As Date
-    MayTime = format(TimeSerial(txtHour.TEXT, txtMinute.TEXT, txtSecond.TEXT), "h:m:s")
-    txtPropis.TEXT = ВРЕМЯПРОПИСЬЮ(MayTime, _
+    MayTime = format(TimeSerial(txtHour.Text, txtMinute.Text, txtSecond.Text), "h:m:s")
+    txtPropis.Text = ВРЕМЯПРОПИСЬЮ(MayTime, _
             cmbTypeDate.ListIndex + 1, _
             cmbSkobki.ListIndex, _
             chcSkobki.Value, _

@@ -294,10 +294,10 @@ Public Function getArraySheetsName() As Variant
     ' Iterate through only real sheet nodes
     For i = 0 To iCount - 1
         With oXMLNodeList(i).Attributes
-            arr(i + 1, 1) = .getNamedItem("name").TEXT
-            arr(i + 1, 2) = .getNamedItem("sheetId").TEXT
-            arr(i + 1, 3) = .getNamedItem("r:id").TEXT
-            arr(i + 1, 4) = oXMLDocRel.SelectSingleNode("//Relationship[@Id='" & arr(i + 1, 3) & "']").Attributes.getNamedItem("Target").TEXT
+            arr(i + 1, 1) = .getNamedItem("name").Text
+            arr(i + 1, 2) = .getNamedItem("sheetId").Text
+            arr(i + 1, 3) = .getNamedItem("r:id").Text
+            arr(i + 1, 4) = oXMLDocRel.SelectSingleNode("//Relationship[@Id='" & arr(i + 1, 3) & "']").Attributes.getNamedItem("Target").Text
         End With
     Next i
     getArraySheetsName = arr
@@ -481,8 +481,8 @@ Public Function getPathVBAProject() As String
 
         ' Check for Nothing prevents error 91 if attribute is missing
         If Not attrType Is Nothing And Not attrTarget Is Nothing Then
-            If attrType.TEXT Like "*/vbaProject" Then
-                getPathVBAProject = GetSettings(FolderXl) & attrTarget.TEXT
+            If attrType.Text Like "*/vbaProject" Then
+                getPathVBAProject = GetSettings(FolderXl) & attrTarget.Text
                 Exit Function
             End If
         End If

@@ -33,7 +33,7 @@ Private Sub btnOK_Click()
     Dim txt         As Variant
     Dim sFormat     As String
 
-    txt = txtValue.TEXT
+    txt = txtValue.Text
     txt = Replace(txt, " ", vbNullString)
     If chcTysych Then
         If txt Like "*,*" Then
@@ -201,7 +201,7 @@ Private Sub txtValue_KeyPress(ByVal KeyAscii As MSForms.ReturnInteger)
             If txtValue.MaxLength = MAXLENGS Or txtValue.MaxLength = MAXLENGS + 1 Then txtValue.MaxLength = MAXLENGS + 5
             '------------если нужен дефис (минус перед числом), раскоментируйте код---------------
         Case 45
-            If InStr(1, txtValue.TEXT, "-") Then KeyAscii = 0    'второй минус нельзя
+            If InStr(1, txtValue.Text, "-") Then KeyAscii = 0    'второй минус нельзя
             If txtValue.SelStart Then KeyAscii = 0    'минус допустим только перед числом
             '-------------------------------------------------------------------------------------
         Case Else
@@ -274,7 +274,7 @@ Private Sub addFormula()
 
     Dim txt         As String
     Dim sFormat     As String
-    txt = txtValue.TEXT
+    txt = txtValue.Text
     txt = Replace(txt, " ", vbNullString)
     If chcTysych Then
         If txt Like "*,*" Then
@@ -286,7 +286,7 @@ Private Sub addFormula()
         sFormat = "0"
     End If
     If txt = vbNullString Then txt = 0
-    txtPropis.TEXT = СУММАПРОПИСЬЮ(VBA.CCur(txt), cmbCase.ListIndex, _
+    txtPropis.Text = СУММАПРОПИСЬЮ(VBA.CCur(txt), cmbCase.ListIndex, _
             cmbTypeDate.ListIndex, chcDublVal.Value, chcDrobProp.Value, cmbRegistr.ListIndex, cmbSkobki.ListIndex, sFormat)
 End Sub
 

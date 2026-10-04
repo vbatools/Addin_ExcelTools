@@ -231,7 +231,7 @@ Public Sub ValidateRealNumericKey(ByRef txtBox As MSForms.TextBox, ByRef KeyAsci
     ' Обработка десятичного разделителя
     If KeyAscii = Asc(".") Or KeyAscii = Asc(",") Then
         ' Если разделитель уже есть или строка пуста - блокируем ввод
-        If InStr(1, txtBox.TEXT, ".") > 0 Or Len(txtBox.TEXT) = 0 Then
+        If InStr(1, txtBox.Text, ".") > 0 Or Len(txtBox.Text) = 0 Then
             KeyAscii = 0
             ' Если введена запятая - конвертируем код символа в точку
         ElseIf KeyAscii = Asc(",") Then
@@ -244,7 +244,7 @@ Public Sub ValidateRealNumericKey(ByRef txtBox As MSForms.TextBox, ByRef KeyAsci
     If bIsNegative Then
         If KeyAscii = Asc("-") Then
             ' Блокируем, если минус уже есть или курсор стоит не в начале
-            If Left(txtBox.TEXT, 1) <> "-" And txtBox.SelStart = 0 Then Exit Sub
+            If Left(txtBox.Text, 1) <> "-" And txtBox.SelStart = 0 Then Exit Sub
         End If
     End If
 

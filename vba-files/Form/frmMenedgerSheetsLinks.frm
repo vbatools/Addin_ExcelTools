@@ -13,8 +13,6 @@ Attribute VB_GlobalNameSpace = False
 Attribute VB_Creatable = False
 Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
-
-
 Option Explicit
 
 
@@ -24,8 +22,6 @@ Option Explicit
 '* Copyright    :   Apache License
 '* Created      :   17-06-2026 15:56:21
 '* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-
-
 
 Private Sub btnCancel_Click()
     Unload Me
@@ -103,10 +99,6 @@ Private Sub btnOK_Click()
         lColor = Sheets(arrRes(i, 2)).Tab.Color
         If lColor > 0 Then Sh.Cells(i + 1, 2).Interior.Color = lColor
     Next i
-
-
-
-
     Unload Me
 End Sub
 

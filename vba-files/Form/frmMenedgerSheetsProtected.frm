@@ -45,9 +45,9 @@ Private Sub btnSetPass_Click()
                 Set Sh = ActiveWorkbook.Sheets(.List(i, 1))
                 Select Case TypeName(Sh)
                     Case "Chart"
-                        Sh.Protect Password:=txtPasword.TEXT, DrawingObjects:=Not chDrawing.Value, Contents:=True, Scenarios:=chScenarios.Value
+                        Sh.Protect Password:=txtPasword.Text, DrawingObjects:=Not chDrawing.Value, Contents:=True, Scenarios:=chScenarios.Value
                     Case Else
-                        Sh.Protect Password:=txtPasword.TEXT, DrawingObjects:=Not chDrawing.Value, Contents:=True, Scenarios:=chScenarios.Value, AllowFormattingCells:=chFormatCells.Value, _
+                        Sh.Protect Password:=txtPasword.Text, DrawingObjects:=Not chDrawing.Value, Contents:=True, Scenarios:=chScenarios.Value, AllowFormattingCells:=chFormatCells.Value, _
                                 AllowFormattingColumns:=chFormattingColumns.Value, AllowFormattingRows:=chFormattingRows.Value, AllowInsertingColumns:=chInsertingColumns.Value, AllowInsertingRows:=chInsertingRows.Value, _
                                 AllowInsertingHyperlinks:=chInsertingHyperlinks.Value, AllowDeletingColumns:=chDeletingColumns.Value, AllowDeletingRows:=chDeletingRows.Value, AllowSorting:=chSort.Value, AllowFiltering:=chAutoFilter.Value, AllowUsingPivotTables:=chUsingPivotTables.Value
                         If (Not chBlockCells.Value) And chUnBlockCells.Value Then Sh.EnableSelection = xlUnlockedCells

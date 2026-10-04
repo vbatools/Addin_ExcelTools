@@ -47,14 +47,14 @@ Public Sub AddFilesList()
         .Cells(1, j + 4).AddComment
         .Cells(1, j + 4).Comment.Visible = False
         .Cells(1, j + 4).Comment.Shape.DrawingObject.Font.Size = 14
-        .Cells(1, j + 4).Comment.TEXT TEXT:="Переименование файлов" & vbNewLine & "Если не нужно переименовывать то оставить пустым!" & vbNewLine & vbNewLine & "При пустом названии файла и имени пути, файл будет скопирован в новую папку по умолчанию, без переименования!"
+        .Cells(1, j + 4).Comment.Text Text:="Переименование файлов" & vbNewLine & "Если не нужно переименовывать то оставить пустым!" & vbNewLine & vbNewLine & "При пустом названии файла и имени пути, файл будет скопирован в новую папку по умолчанию, без переименования!"
         .Cells(1, j + 4).Comment.Shape.ScaleWidth 3, msoFalse, msoScaleFromTopLeft
         .Cells(1, j + 4).Comment.Shape.ScaleHeight 2.5, msoFalse, msoScaleFromTopLeft
         .Cells(1, j + 5).Value = "Переместить файл в папку:"
         .Cells(1, j + 5).AddComment
         .Cells(1, j + 5).Comment.Visible = False
         .Cells(1, j + 5).Comment.Shape.DrawingObject.Font.Size = 14
-        .Cells(1, j + 5).Comment.TEXT TEXT:="Перемещение файла в папку" & vbNewLine & "Если не нужно перемещать то оставить пустым!" & vbNewLine & "Для Пустых будет создана новая папка по умолчанию!"
+        .Cells(1, j + 5).Comment.Text Text:="Перемещение файла в папку" & vbNewLine & "Если не нужно перемещать то оставить пустым!" & vbNewLine & "Для Пустых будет создана новая папка по умолчанию!"
         .Cells(1, j + 5).Comment.Shape.ScaleWidth 3, msoFalse, msoScaleFromTopLeft
         .Cells(1, j + 5).Comment.Shape.ScaleHeight 2.5, msoFalse, msoScaleFromTopLeft
         .Cells(1, j + 6).Value = "Переместить файл в папку:"

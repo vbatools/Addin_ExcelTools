@@ -23,7 +23,7 @@ Private Sub btnCancel_Click()
 End Sub
 
 Private Sub btnOK_Click()
-    If txtMain.TEXT = vbNullString Then
+    If txtMain.Text = vbNullString Then
         Me.Hide
         Call MsgBox("Не задан текст для QR кода!", vbCritical, "Ошибка:")
         Me.Show
@@ -54,7 +54,7 @@ Private Sub lbFrontColor_Click()
     lSeletedColor = GetColorFromDialog()
     If lSeletedColor = -1 Then Exit Sub
     lbFrontColor.BackColor = lSeletedColor
-    txtFrontColor.TEXT = VBA.Right$("000000" & VBA.Hex(lSeletedColor), 6)
+    txtFrontColor.Text = VBA.Right$("000000" & VBA.Hex(lSeletedColor), 6)
 End Sub
 
 Private Sub txtFrontColor_DropButtonClick()
@@ -64,7 +64,7 @@ Private Sub txtFrontColor_DropButtonClick()
     If sAddress <> vbNullString Then
         sAddress = VBA.Split(sAddress, ":")(0)
         lbFrontColor.BackColor = Range(sAddress).Interior.Color
-        txtFrontColor.TEXT = VBA.Right$("000000" & VBA.Hex(lbFrontColor.BackColor), 6)
+        txtFrontColor.Text = VBA.Right$("000000" & VBA.Hex(lbFrontColor.BackColor), 6)
     End If
     Me.Show
 End Sub
@@ -106,7 +106,7 @@ Private Sub UserForm_Initialize()
     Call CenterUserForm(Me)
     
     Dim i           As Integer
-    txtFrontColor.TEXT = "000000"
+    txtFrontColor.Text = "000000"
     For i = 1 To 10
         If i = 10 Then
             cmbSize.AddItem 1000
@@ -126,5 +126,5 @@ Private Sub UserForm_Initialize()
     Call ConfigureDropButton(txtMain)
     Call ConfigureDropButton(txtFrontColor)
     Call ConfigureDropButton(txtCell)
-    txtCell.TEXT = activeCell.Address
+    txtCell.Text = activeCell.Address
 End Sub

@@ -41,7 +41,7 @@ Private Sub moveShape(ByVal ShiftMove As Integer, ByVal bHorizont As Boolean)
     Dim i           As Long
     Dim oChart      As ChartObject
     Dim snShag      As Single
-    snShag = VBA.CSng(VBA.Replace(txtShag.TEXT, ".", ","))
+    snShag = VBA.CSng(VBA.Replace(txtShag.Text, ".", ","))
     If snShag = 0 Then Exit Sub
     With listChart
         For i = 0 To .ListCount - 1

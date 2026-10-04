@@ -118,7 +118,7 @@ End Sub
 Private Sub UserForm_Initialize()
     ' Центрирование формы
     Call CenterUserForm(Me)
-    txtDir.Value = ThisWorkbook.Path
+    txtDir.Value = ActiveWorkbook.Path
     Call ConfigureDropButton(txtDir)
     Call SelectFileTypeByExtension(ActiveWorkbook.Name)
 End Sub

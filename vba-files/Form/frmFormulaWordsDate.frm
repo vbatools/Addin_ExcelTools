@@ -176,12 +176,12 @@ End Sub
 Private Sub addFormula()
 
     If cmbCase.ListIndex < 0 Or cmbTypeDate.ListIndex < 0 Or cmbRegistr.ListIndex < 0 _
-            Or cmbSkobki.ListIndex < 0 Or txtValue.TEXT = vbNullString Then Exit Sub
+            Or cmbSkobki.ListIndex < 0 Or txtValue.Text = vbNullString Then Exit Sub
 
     Dim dtDate      As Date
-    dtDate = VBA.CDate(txtValue.TEXT)
+    dtDate = VBA.CDate(txtValue.Text)
 
-    txtPropis.TEXT = ДАТАПРОПИСЬЮ(dtDate, _
+    txtPropis.Text = ДАТАПРОПИСЬЮ(dtDate, _
             cmbCase.ListIndex, _
             cmbTypeDate.ListIndex, _
             cmbSkobki.ListIndex, _
